@@ -27,6 +27,22 @@ public class TestFileInfo {
 		boolean d = fileInfoServiceImpl.deleteFileInfoById(3);
 		logger.info(d + "========d=======");
 		
+
+		logger.info(d + "========d=======");
+
+		logger.info(d + "========d=======");
+
+		logger.info(d + "========d=======");
+
+		logger.info(d + "========d=======");
+
+		logger.info(d + "========d=======");
+
+		logger.info(d + "========d=======");
+
+		logger.info(d + "========d=======");
+		
+		
 	}
 
 
