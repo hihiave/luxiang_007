@@ -6,8 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>文件信息</title>
 </head>
-<body>
-${fileInfo.fileName}
-<p></p>
-${fileInfo.fileAuthor}
+<body>${fileInfo.fileName}
 </body>
+</html>

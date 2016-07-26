@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qmd.dao.FileInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.qmd.model.FileInfo" >
+    <id column="file_id" property="fileId" jdbcType="INTEGER" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="file_author" property="fileAuthor" jdbcType="VARCHAR" />
+    <result column="file_upload_time" property="fileUploadTime" jdbcType="INTEGER" />
+    <result column="file_keywords" property="fileKeywords" jdbcType="VARCHAR" />
+    <result column="file_category" property="fileCategory" jdbcType="VARCHAR" />
+    <result column="file_desc" property="fileDesc" jdbcType="VARCHAR" />
+    <result column="file_check" property="fileCheck" jdbcType="CHAR" />
+    <result column="file_is_visible" property="fileIsVisible" jdbcType="CHAR" />
+    <result column="file_download_count" property="fileDownloadCount" jdbcType="INTEGER" />
+    <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
+    <result column="file_status" property="fileStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    file_id, file_name, file_author, file_upload_time, file_keywords, file_category, 
+    file_desc, file_check, file_is_visible, file_download_count, file_url, file_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from File
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByFileName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from File
+    where file_name=#{fileName,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectCountByFileCategory" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(*)
+    from File
+    where file_category=#{fileCategory,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from File
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qmd.model.FileInfo" >
+    insert into File (file_id, file_name, file_author, 
+      file_upload_time, file_keywords, file_category, 
+      file_desc, file_check, file_is_visible, 
+      file_download_count, file_url, file_status
+      )
+    values (#{fileId,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, #{fileAuthor,jdbcType=VARCHAR}, 
+      #{fileUploadTime,jdbcType=INTEGER}, #{fileKeywords,jdbcType=VARCHAR}, #{fileCategory,jdbcType=VARCHAR}, 
+      #{fileDesc,jdbcType=VARCHAR}, #{fileCheck,jdbcType=CHAR}, #{fileIsVisible,jdbcType=CHAR}, 
+      #{fileDownloadCount,jdbcType=INTEGER}, #{fileUrl,jdbcType=VARCHAR}, #{fileStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qmd.model.FileInfo" >
+    insert into File
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fileId != null" >
+        file_id,
+      </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="fileAuthor != null" >
+        file_author,
+      </if>
+      <if test="fileUploadTime != null" >
+        file_upload_time,
+      </if>
+      <if test="fileKeywords != null" >
+        file_keywords,
+      </if>
+      <if test="fileCategory != null" >
+        file_category,
+      </if>
+      <if test="fileDesc != null" >
+        file_desc,
+      </if>
+      <if test="fileCheck != null" >
+        file_check,
+      </if>
+      <if test="fileIsVisible != null" >
+        file_is_visible,
+      </if>
+      <if test="fileDownloadCount != null" >
+        file_download_count,
+      </if>
+      <if test="fileUrl != null" >
+        file_url,
+      </if>
+      <if test="fileStatus != null" >
+        file_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fileId != null" >
+        #{fileId,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileAuthor != null" >
+        #{fileAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUploadTime != null" >
+        #{fileUploadTime,jdbcType=INTEGER},
+      </if>
+      <if test="fileKeywords != null" >
+        #{fileKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="fileCategory != null" >
+        #{fileCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="fileDesc != null" >
+        #{fileDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fileCheck != null" >
+        #{fileCheck,jdbcType=CHAR},
+      </if>
+      <if test="fileIsVisible != null" >
+        #{fileIsVisible,jdbcType=CHAR},
+      </if>
+      <if test="fileDownloadCount != null" >
+        #{fileDownloadCount,jdbcType=INTEGER},
+      </if>
+      <if test="fileUrl != null" >
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fileStatus != null" >
+        #{fileStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qmd.model.FileInfo" >
+    update File
+    <set >
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileAuthor != null" >
+        file_author = #{fileAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUploadTime != null" >
+        file_upload_time = #{fileUploadTime,jdbcType=INTEGER},
+      </if>
+      <if test="fileKeywords != null" >
+        file_keywords = #{fileKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="fileCategory != null" >
+        file_category = #{fileCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="fileDesc != null" >
+        file_desc = #{fileDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fileCheck != null" >
+        file_check = #{fileCheck,jdbcType=CHAR},
+      </if>
+      <if test="fileIsVisible != null" >
+        file_is_visible = #{fileIsVisible,jdbcType=CHAR},
+      </if>
+      <if test="fileDownloadCount != null" >
+        file_download_count = #{fileDownloadCount,jdbcType=INTEGER},
+      </if>
+      <if test="fileUrl != null" >
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fileStatus != null" >
+        file_status = #{fileStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qmd.model.FileInfo" >
+    update File
+    set file_name = #{fileName,jdbcType=VARCHAR},
+      file_author = #{fileAuthor,jdbcType=VARCHAR},
+      file_upload_time = #{fileUploadTime,jdbcType=INTEGER},
+      file_keywords = #{fileKeywords,jdbcType=VARCHAR},
+      file_category = #{fileCategory,jdbcType=VARCHAR},
+      file_desc = #{fileDesc,jdbcType=VARCHAR},
+      file_check = #{fileCheck,jdbcType=CHAR},
+      file_is_visible = #{fileIsVisible,jdbcType=CHAR},
+      file_download_count = #{fileDownloadCount,jdbcType=INTEGER},
+      file_url = #{fileUrl,jdbcType=VARCHAR},
+      file_status = #{fileStatus,jdbcType=INTEGER}
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateFileStatusByCategory" parameterType="java.lang.String">
+    update File
+    set file_status=0
+    where file_category=#{fileCategory,jdbcType=VARCHAR}
+  </update>
+  
+  
+</mapper>

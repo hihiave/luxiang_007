@@ -3,6 +3,7 @@ package com.test.model;
 import java.util.Date;
 
 public class UserInfo {
+
 	private Integer userId;
 
 	private String userName;
@@ -42,4 +43,5 @@ public class UserInfo {
 	public void setUserBirth(Date userBirth) {
 		this.userBirth = userBirth;
 	}
+
 }

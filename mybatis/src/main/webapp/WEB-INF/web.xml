@@ -6,7 +6,7 @@
 	<display-name>lu xiang</display-name>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:test/applicationContext.xml</param-value>
+		<param-value>classpath:qmd/applicationContext.xml</param-value>
 	</context-param>
 
 	<filter>
