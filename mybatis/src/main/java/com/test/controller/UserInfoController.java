@@ -11,8 +11,7 @@ import com.test.serviceimpl.UserInfoServiceImpl;
 
 @Controller
 @RequestMapping("/haha")
-public class UserInfoContorl {
-
+public class UserInfoController {
 	@Autowired
 	UserInfoServiceImpl userInfoServiceImpl;
 
@@ -26,5 +25,4 @@ public class UserInfoContorl {
 		return "showUser";
 
 	}
-
 }

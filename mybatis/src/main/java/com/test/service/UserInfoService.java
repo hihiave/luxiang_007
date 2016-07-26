@@ -24,4 +24,5 @@ public interface UserInfoService {
 	 * @return 一个boolean，true表示添加成功，false表示添加失败
 	 */
 	public boolean addUserInfo(UserInfo userInfo);
+
 }

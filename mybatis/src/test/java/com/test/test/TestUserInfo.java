@@ -27,7 +27,7 @@ public class TestUserInfo {
 	public void TestGetUserInfoById() {
 		logger.info("=========TestGetUserInfoById===========");
 		UserInfo userInfo = userInfoServiceImpl.getUserInfoById(1001);
-		
+
 		logger.info("==========" + userInfo.getUserName() + "=====");
 	}
 

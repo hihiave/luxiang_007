@@ -6,9 +6,9 @@
 	<display-name>lu xiang</display-name>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:lx/applicationContext.xml</param-value>
+		<param-value>classpath:test/applicationContext.xml</param-value>
 	</context-param>
-	
+
 	<filter>
 		<description>字符集过滤器</description>
 		<filter-name>encodingFilter</filter-name>
