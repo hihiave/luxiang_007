@@ -1,5 +1,7 @@
 package com.lyr.test;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,15 +25,75 @@ public class TestUserInfo {
 		userInfoServiceImpl = app.getBean(UserInfoServiceImpl.class);
 	}
 	
+	
+	
 	@Test
-	public void TestGetUserInfoById(){
-		UserInfo userInfo = userInfoServiceImpl.getUserInfoById(1);
-		System.out.println("==========" + userInfo.getUserName() + "=========");
-		
-		System.out.println("=================");
-		System.out.println("==============");
-		System.out.println("=================");
-		System.out.println("==============");
-		
+	public void DeleteByUserId() {
+		System.out.print("=====This is deletByPrimaryKey=====");
+		int flag = userInfoServiceImpl.deleteByPrimaryKey(1001);
+		System.out.println("==========" + flag + "=========");
 	}
+	
+	
+	@Test
+	public void InsertUserInfo() {
+		System.out.print("=====This is insert=====");
+		UserInfo userinfo=new UserInfo();
+		userinfo.setUserName("general");
+		int flag=userInfoServiceImpl.insert(userinfo);
+		System.out.println("==========" + flag + "=========");
+	}
+	
+	
+	@Test
+	public void SelectByUserId(){
+		System.out.print("=====This is selectByPrimaryKey=====");
+		UserInfo userInfo = userInfoServiceImpl.selectByUserId(1);
+		System.out.println("==========" + userInfo.getUserName() + "=========");
+	}
+
+	
+	@Test
+	public void SelectByUserName(){
+		System.out.print("=====This is selectByUserName=====");
+		UserInfo userInfo = userInfoServiceImpl.selectByUserName("liyuran");
+		System.out.println("==========" + userInfo.getUserPassword() + "=========");
+	}
+	
+	
+	@Test
+	public void DeleteByUserName(){
+		System.out.print("=====This is deleteByUserName=====");
+		int flag = userInfoServiceImpl.deleteByUserName("crazy");
+		System.out.println("==========" + flag + "=========");
+	}
+	
+	
+	@Test
+	public void UpdateUserCheckByUserId(){
+		System.out.print("=====This is updateUserCheckByUserId=====");
+		int flag=userInfoServiceImpl.updateUserCheckByUserId(4, 1);
+				System.out.println("==========" + flag + "=========");		
+	}
+	
+	
+	@Test
+	public void SelectUser(){
+		System.out.print("=====This is selectUser=====");
+		List<UserInfo> userInfo = userInfoServiceImpl.selectUser();
+				System.out.println("==========" + userInfo.get(0).getUserName() + "=========");		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -31,18 +31,12 @@
   <!--注册用户  -->
   <insert id="insert" parameterType="com.lyr.model.UserInfo" useGeneratedKeys="true"  keyProperty="user_id">
     insert into UserInfo ( user_name, user_password, 
-      user_role, user_check, user_register_time, 
+      user_role, user_check,  
       user_status)
     values ( #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
-      #{userRole,jdbcType=VARCHAR}, #{userCheck,jdbcType=INTEGER}, #{userRegisterTime,jdbcType=INTEGER}, 
+      #{userRole,jdbcType=VARCHAR}, #{userCheck,jdbcType=INTEGER}, 
       #{userStatus,jdbcType=INTEGER})
   </insert>
-  
-  <!-- 删除用户 -->
-  <delete id="delete" parameterType="java.lang.String">
-  delete from UserInfo
-  where user_Name=#{userName,jdbcType=VARCHAR}  
-  </delete>
   
   <!-- 插入 -->
   <insert id="insertSelective" parameterType="com.lyr.model.UserInfo">
@@ -132,5 +126,40 @@
       user_status = #{userStatus,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+  
+  <!-- 删除用户 -->
+  <delete id="deleteByUserName" parameterType="java.lang.String">
+  delete from UserInfo
+  where user_Name=#{userName,jdbcType=VARCHAR}  
+  </delete>
+  
+  <!-- 根据用户名查询用户 -->
+  <select id="selectByUserName"  parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select
+  <include refid="Base_Column_List" />
+  	from UserInfo
+  	where user_name=#{userName,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 更改用户状态 -->
+  <update id="updateUserCheckByUserId" parameterType="com.lyr.model.UserInfo">
+		update UserInfo
+		set user_check = #{userCheck,jdbcType=INTEGER}
+		where user_id = #{userId,jdbcType=INTEGER}
+	</update>
+	
+	<!-- 查询所有用户 -->
+	<select id="selectUser" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from UserInfo
+		order by user_id 
+	</select>
+	
+	
+  
+  
+  
+  
   
 </mapper>
