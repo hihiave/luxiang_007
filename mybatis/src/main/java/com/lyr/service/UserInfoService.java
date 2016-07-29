@@ -75,6 +75,14 @@ public interface UserInfoService {
 	List<UserInfo> selectUser();
 	 
 	
+	/**
+	 * @author 栗雨然
+	 * @param userInfo
+	 * @param oldPassword
+	 * @param newPassword
+	 * @return 0为操作失败；1为操作成功
+	 */
+	int updateUserPassword(UserInfo userInfo,String oldPassword,String newPassword);
 	
 	
 	
