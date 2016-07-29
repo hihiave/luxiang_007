@@ -46,9 +46,9 @@ public interface UserInfoService {
 	/**
 	 * @author 栗雨然
 	 * @param userName
-	 * @return UserInfo
+	 * @return List<UserInfo>
 	 */
-	 UserInfo selectByUserName(String userName);
+	 List<UserInfo> selectByUserName(String userName);
 	
 	
 	/**
@@ -73,7 +73,7 @@ public interface UserInfoService {
 	 * @return 所有用户信息
 	 */
 	List<UserInfo> selectUser();
-	
+	 
 	
 	
 	

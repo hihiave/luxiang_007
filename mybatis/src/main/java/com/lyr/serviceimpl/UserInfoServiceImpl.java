@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.lyr.dao.UserInfoMapper;
 import com.lyr.model.UserInfo;
 import com.lyr.service.UserInfoService;
+import com.lyr.util.StringUtil;
 
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
@@ -66,8 +67,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	
 	@Override
-	public UserInfo selectByUserName(String userName){
-		return userInfoMapper.selectByUserName(userName);
+	public List<UserInfo> selectByUserName(String userName){
+		if(!StringUtil.isEmpty(userName)){
+			return userInfoMapper.selectByUserName(userName);
+		}else{
+			return selectUser();
+		}
 	}
 	
 	

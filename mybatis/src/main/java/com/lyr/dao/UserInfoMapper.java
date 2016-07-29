@@ -16,14 +16,18 @@ public interface UserInfoMapper {
     int updateByPrimaryKeySelective(UserInfo record);
 
     int updateByPrimaryKey(UserInfo record);
+    
+    
+    //栗雨然
 
     int deleteByUserName(String userName);
     
-    UserInfo selectByUserName(String userName);
+    List<UserInfo> selectByUserName(String userName);
     
     int updateUserCheckByUserId(UserInfo record);
     
     List<UserInfo> selectUser();
+
     
     
     

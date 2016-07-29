@@ -56,8 +56,8 @@ public class TestUserInfo {
 	@Test
 	public void SelectByUserName(){
 		System.out.print("=====This is selectByUserName=====");
-		UserInfo userInfo = userInfoServiceImpl.selectByUserName("liyuran");
-		System.out.println("==========" + userInfo.getUserPassword() + "=========");
+		List<UserInfo> userInfo = userInfoServiceImpl.selectByUserName("");
+		System.out.println("==========" + userInfo.get(3).getUserName() + "=========");
 	}
 	
 	
