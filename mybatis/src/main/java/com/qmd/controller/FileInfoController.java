@@ -22,6 +22,7 @@ public class FileInfoController {
 		FileInfo fileInfo = fileInfoServiceImpl.getFileInfoById(fileId);
 		request.setAttribute("fileInfo", fileInfo);
 		return "showFileInfo";
+		//System.out.println;
 	}
 
 }

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -7,11 +7,16 @@
   
   <body>
 
- <form  name="form1" method="post" action="FileUploadServlet">
-        上传用户：<input type="text" name="username"><br/>
-        上传文件1：<input type="file" name="file1"><br/>
-        上传文件2：<input type="file" name="file2"><br/>
-        <input type="submit" value="提交">
-    </form>
+ <form  name="form1" method="post" enctype="multipart/form-data" action="/mybatis/FileUploadController">
+ <input type="text" id="filetype1" name="filetype1" >文件种类
+<input type="text" id="author" name="author">作者
+ <input type="file" id="file1" name="file1">
+ <p></p>
+ <input type="text" id="filetype2" name="filetype2" >文件种类
+<input type="text" id="author" name="author">作者
+ <input type="file" id="file2" name="file2">
+ <p></p>
+ <input type="submit" id="提交">
+ </form>
   </body>
 </html>

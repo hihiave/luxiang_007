@@ -22,13 +22,12 @@ public class FileInfoServiceImpl implements FileInfoService {
 	public boolean deleteFileInfoById(int fileId) {
 		boolean flag = false;
 		if (fileInfoMapper.deleteByPrimaryKey(fileId) == 1)
-			flag = true;// TODO Auto-generated method stub
+			flag = true;
 		return flag;
 	}
 
 	@Override
-	public boolean addFileInfo(FileInfo fileInfo) {// TODO Auto-generated method
-													// stub
+	public boolean addFileInfo(FileInfo fileInfo){
 		int i = fileInfoMapper.insert(fileInfo);
 		System.out.println("_____" + i + "----");
 		return true;
@@ -36,20 +35,19 @@ public class FileInfoServiceImpl implements FileInfoService {
 
 	@Override
 	public FileInfo getFileInfoByName(String fileName) {
-		// TODO Auto-generated method stub
 		return fileInfoMapper.selectByFileName(fileName);
 	}
 
 	@Override
 	public int getFileInfoCountByCategory(String fileCategory) {
 		int count = fileInfoMapper.selectCountByFileCategory(fileCategory);
-		System.out.println(count);// TODO Auto-generated method stub
+		System.out.println(count);
 		return count;
 	}
 
 	@Override
 	public boolean updateFileInfoById(FileInfo fileInfo) {
-		int temp = 0;// TODO Auto-generated method stub
+		int temp = 0;
 		temp = fileInfoMapper.updateByPrimaryKey(fileInfo);
 		if (temp == 1)
 			return true;
