@@ -21,5 +21,4 @@ public interface FileInfoMapper {
     
     int updateFileStatusByCategory(String fileCategory);
     
-    
 }
