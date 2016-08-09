@@ -19,6 +19,41 @@
     file_id, file_name, file_author, file_upload_time, file_keywords, file_category, 
     file_desc, file_check, file_is_visible, file_download_count, file_url, file_status
   </sql>
+  <sql id="Show_Column_List">
+  	file_name, file_author, file_upload_time, file_category, file_download_count
+  </sql>
+  
+  <select id="selectFileByFileAuthor" resultMap="BaseResultMap">
+  	select 
+	<include refid="Show_Column_List" />
+  	from File where file_author like CONCAT(CONCAT('%',#{fileAuthor},'%'))
+  </select>
+  
+  <select id="selectFileByFileCategory" resultMap="BaseResultMap">
+  	select 
+	<include refid="Show_Column_List" />
+  	from File where file_category = #{fileCategory,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <!-- <select id="selectFileByKeywords" resultMap="BaseResultMap">
+        <foreach collection="keywords" item="keyword" index="index"
+            open="(" close=")" separator=",">
+           select * from File e where e.file_keywords like CONCAT(CONCAT('%',#{index},'%'))
+        </foreach>
+  </select> -->
+  
+ <!--  <select id="selectFileByKeywords" resultMap="BaseResultMap">
+  	select * from File e where e.file_id in
+        <foreach collection="keywords" item="keyword" index="index"
+            open="(" close=")" separator=",">
+            
+            select file_id from File where file_keywords like CONCAT(CONCAT('%',#{keyword},'%'))
+            
+        </foreach>
+  </select> -->
+  
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

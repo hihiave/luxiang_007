@@ -2,7 +2,8 @@ package com.lyr.test;
 
 import java.security.MessageDigest;
 
-public class TestMD5 {   
+public class TestMD5 {
+	
 	 // MD5加码。32位   
 	 public static String MD5(String inStr) {   
 	  MessageDigest md5 = null;   

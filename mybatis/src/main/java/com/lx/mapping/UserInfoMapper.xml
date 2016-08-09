@@ -14,17 +14,34 @@
     user_id, user_name, user_password, user_role, user_check, user_register_time, user_status
   </sql>
 
-
-  <select id="selectAllUserInfoByLikeUserName" resultMap="BaseResultMap">
-  select * from UserInfo where user_name like #{userName}
+  <!--*********用于处理一些业务逻辑的方法*********-->
+  <update id="updateUsersCheck" >
+  	UPDATE UserInfo set user_check = '1' where user_name in
+  		<foreach collection="userNames" item="userName" index="index" open="(" close=")" separator=",">
+  			#{userName}
+  		</foreach>
+  </update>
+  <select id="checkLogin" resultType="java.lang.String" parameterType="java.lang.String">
+    select user_password from UserInfo where user_name = #{userName,jdbcType=VARCHAR} limit 1
   </select>
-  
+  <select id="selectUserByIsPass" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	select user_name, user_register_time from UserInfo where user_check = #{checkType,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllUserInfoByLikeUserName" resultMap="BaseResultMap">
+  	select user_name from UserInfo where user_name like CONCAT(CONCAT('%',#{user_name},'%')) and user_check = '1'
+  </select>
   <delete id="deleteByUserName" parameterType="java.lang.String">
-  delete from UserInfo where user_name = #{userName,jdbcType=VARCHAR}
+  	delete from UserInfo where user_name = #{userName,jdbcType=VARCHAR}
   </delete>
+  <update id="updateUserPassword">
+  	update UserInfo set user_password = #{newPwd,jdbcType=VARCHAR} 
+  	where user_name = #{userName,jdbcType=VARCHAR} 
+  </update>
   
-  
-  
+  <!--*********用于获取一些智能下拉提示*********-->
+  <select id="getUserNames" resultType="java.lang.String" parameterType="java.lang.String">
+  	select user_name from UserInfo where user_name like CONCAT(CONCAT(#{user_name},'%'))
+  </select>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

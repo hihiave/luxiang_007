@@ -6,26 +6,77 @@ import com.lx.model.UserInfo;
 
 public interface UserInfoService {
 	
+	/** 管理员添加一个用户，指定其用户名即可
+	 * @author luxiang
+	 * @param userName
+	 * @return boolean，true表示添加成功，false表示添加失败
+	 */
+	public boolean addUserInfo(String userName);
+	
+	/** 用户自己注册一个账号
+	 * @author luxiang
+	 * @param userName
+	 * @param userPassword
+	 * @return boolean，true表示注册成功，等待审核。false表示注册失败
+	 */
+	public boolean registerUserInfo(String userName, String userPassword);
+	
+	/** 通过用户名批量审核通过
+	 * @author luxiang
+	 * @param userNames
+	 * @return boolean，true表示审核通过成功，false表示审核通过失败
+	 */
+	public boolean updateUsersCheck(String... userNames);
+	
+	/** 通过用户名和密码验证用户登录
+	 * @author luxiang
+	 * @param userName
+	 * @param userPassword
+	 * @return boolean，true表示登录成功，false表示登录失败
+	 */
+	public boolean checkLogin(String userName, String userPassword);
+	
+	/** 通过用户名审核是否通过查询用户
+	 * @author luxiang
+	 * @param checkType
+	 * @return 一个用户对象列表 UserInfo
+	 */
+	public List<UserInfo> selectUserByIsPass(int checkType);
+	
 	/** 通过用户名模糊查询所有用户，比如，查“三”，找到“李三”，“张三”
 	 * @author luxiang
 	 * @param userName
 	 * @return 一个用户对象列表 UserInfo
 	 */
-	List<UserInfo> selectAllUserInfoByLikeUserName(String userName);
+	public List<UserInfo> selectAllUserInfoByLikeUserName(String userName);
 
-	/**
+	/** 通过用户名删除一个用户
 	 * @author luxiang
 	 * @param userName
-	 * @return 一个boolean，true表示删除成功，false表示删除失败
+	 * @return boolean，true表示删除成功，false表示删除失败
 	 */
-	boolean delByUserName(String userName);
+	public boolean delByUserName(String userName);
 
-	
-	/**
+	/** 重置用户密码为123456
 	 * @author luxiang
-	 * @param userInfo对象
-	 * @return 一个boolean，true表示添加成功，false表示添加失败
+	 * @param userName
+	 * @return boolean，true表示重置成功，false表示重置失败
 	 */
-	public boolean addUserInfo(UserInfo userInfo);
+	public boolean resetPassword(String userName);
 
+	/** 用户修改密码
+	 * @author luxiang
+	 * @param userName
+	 * @param oldPwd
+	 * @param newPwd
+	 * @return boolean，true表示修改密码成功，false表示修改密码失败
+	 */
+	public boolean alterPassword(String userName, String oldPwd, String newPwd);
+	
+	/** 通过用户名获取一些智能下拉提示
+	 * @author luxiang
+	 * @param userName
+	 * @return 用户名列表List<String>
+	 */
+	List<String> getUserNames(String userName);
 }
