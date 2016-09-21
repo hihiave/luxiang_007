@@ -6,6 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>我的第一个网站</title>
 </head>
-<body>${userInfo.userPassword}
+<body>${userInfo.userName}
 </body>
 </html>
