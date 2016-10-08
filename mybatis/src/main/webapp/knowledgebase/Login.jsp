@@ -20,14 +20,14 @@
 		background-color: white;
 	}
 	.login-mid{
-		background: url(/mybatis/knowledgebase/img/img_4.jpg) center center no-repeat #fff;
+		background: url(../knowledgebase/img/img_4.jpg) center center no-repeat #fff;
 		height: 480px;
 		min-width: 1200px;
 	}
 	.biao1{
 		width: 250px;
 		height: auto;
-		background-image:url(/mybatis/knowledgebase/img/white.png);
+		background-image:url(../knowledgebase/img/white.png);
 		border-radius: 5px;
 		padding: 22px 30px;
 		position: absolute;
@@ -53,7 +53,7 @@
 }
 .footer span.footerText {
 	font-size: 14px;
-	font-family: ;
+
 	color: #606060;
 	display: inline-block;
 }
