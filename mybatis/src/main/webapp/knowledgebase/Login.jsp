@@ -65,7 +65,6 @@ margin-bottom: 10px;
 .loginform.loginusername input[type="text"], .loginform.loginpassword input[type="password"] {
 	width: 100%;
 	border: none;
-	
 	border: 1px solid #ffffff;
 	padding: 8px 0px 8px 5px;
 	
