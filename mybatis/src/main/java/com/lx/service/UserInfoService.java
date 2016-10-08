@@ -36,12 +36,18 @@ public interface UserInfoService {
 	 */
 	public boolean checkLogin(String userName, String userPassword);
 	
-	/** 通过用户名审核是否通过查询用户
+	/** 通过审核是否通过查询用户
 	 * @author luxiang
 	 * @param checkType
 	 * @return 一个用户对象列表 UserInfo
 	 */
 	public List<UserInfo> selectUserByIsPass(int checkType);
+	
+	/** 获取未通过审核的用户的数量
+	 * @author luxiang
+	 * @return int
+	 */
+	public int getCountWithNotPass();
 	
 	/** 通过用户名模糊查询所有用户，比如，查“三”，找到“李三”，“张三”
 	 * @author luxiang
