@@ -12,19 +12,36 @@ import com.lx.model.UserInfo;
 import com.lx.serviceimpl.UserInfoServiceImpl;
 
 @Controller
-@RequestMapping("/qw")
+@RequestMapping("/UserInfoController")
 public class UserInfoController {
 
 	@Autowired
 	UserInfoServiceImpl userInfoServiceImpl;
 
-	@RequestMapping("/tt")
-	public String dd(String userName, HttpServletRequest request) {
-		List<UserInfo> userInfos = userInfoServiceImpl.selectAllUserInfoByLikeUserName(userName);
-		UserInfo userInfo = userInfos.get(0);
-		request.setAttribute("userInfo", userInfo);
+	@RequestMapping("/login")
+	public String login(String name , HttpServletRequest request) {
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		
+		System.out.println("======username=====" + username );
+		System.out.println("======password=====" + password );
+		
+		//List<UserInfo> userInfos = userInfoServiceImpl.selectAllUserInfoByLikeUserName(userName);
+		//UserInfo userInfo = userInfos.get(0);
+		//request.setAttribute("userInfo", userInfo);
 		
 		return "showUser";
 	}
+	
 
+	// @RequestMapping("/login")
+	// public String login(String userName, HttpServletRequest request) {
+	// List<UserInfo> userInfos =
+	// userInfoServiceImpl.selectAllUserInfoByLikeUserName(userName);
+	// UserInfo userInfo = userInfos.get(0);
+	// request.setAttribute("userInfo", userInfo);
+	//
+	// return "showUser";
+	// }
+	
 }
