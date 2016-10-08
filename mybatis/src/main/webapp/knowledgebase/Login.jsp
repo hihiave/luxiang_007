@@ -119,7 +119,7 @@ body {
 		<div class="login-mid">
 	
 			<div class="biao1" >
-			<form action="/mybatis/Loginservlet" method="post">
+			<form action="/mybatis/UserInfoController/login.do" method="post">
 				 <div class="name1">用户平台登录</div>
 				 <div class="loginform loginusername" style="margin-top:5px;margin-bottom:5px;">
 				 	<input type="text" id="username" name="username" placeholder="请输入用户名">
