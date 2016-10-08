@@ -26,7 +26,7 @@ public class UserInfoController {
 		System.out.println("======username=====" + username );
 		System.out.println("======password=====" + password );
 		System.out.println("======name=====" + name );
-		System.out.println("======*************===");
+		System.out.println("======**************===");
 		//List<UserInfo> userInfos = userInfoServiceImpl.selectAllUserInfoByLikeUserName(userName);
 		//UserInfo userInfo = userInfos.get(0);
 		//request.setAttribute("userInfo", userInfo);
