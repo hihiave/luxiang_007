@@ -18,10 +18,9 @@ public class UserInfoController {
 	@RequestMapping("/hehe")
 	public String showUserInfo(int userId, HttpServletRequest request) {
 		System.out.println("================");
-
+        System.out.println("****************");
 		UserInfo userInfo = userInfoServiceImpl.getUserInfoById(userId);
 		request.setAttribute("userInfo", userInfo);
-
 		return "showUser";
 
 	}
