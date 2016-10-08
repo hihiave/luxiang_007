@@ -76,11 +76,10 @@ http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		<!-- <property name="mapperLocations" value="classpath:com/lx/mapping/*.xml"/> -->
 	</bean>
 
+	<!-- 自动扫描mapper -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.test.dao" />
 		<!-- <property name="basePackage" value="com.lx.dao" /> -->
-		
-		
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 

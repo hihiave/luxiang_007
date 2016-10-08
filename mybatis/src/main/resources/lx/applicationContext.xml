@@ -76,8 +76,6 @@ http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.lx.dao" />
-		
-		
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
