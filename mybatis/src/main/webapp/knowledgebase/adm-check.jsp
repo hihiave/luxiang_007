@@ -1,25 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    
-<%
-        if(session.getAttribute("username")!=null){
-%>
-  
-<%
-	}
-	else
-	{
-%>
-	<script language="javascript">         
+<%--<%--%>
+        <%--if(session.getAttribute("username")!=null){--%>
+<%--%>--%>
+  <%----%>
+<%--<%--%>
+	<%--}--%>
+	<%--else--%>
+	<%--{--%>
+<%--%>--%>
+	<%--<script language="javascript">         --%>
 
-		alert("请先登录!");         
+		<%--alert("请先登录!");         --%>
 
-		top.location='Login.jsp';  
+		<%--top.location='Login.jsp';  --%>
 
-	</script>
-<%
-	}
-%>
+	<%--</script>--%>
+<%--<%--%>
+	<%--}--%>
+<%--%>--%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
 <html> 
@@ -57,7 +57,51 @@ else{
 		ckbs[i].checked=false;
 	}
 }
-} 
+}
+$(function(){
+    $(".onLiClick").each(function(){
+        $(this).click(function(){
+            //alert("1");
+            var ulid = $(this).attr("ulid");
+            //alert("ulid=" + ulid);
+            if(ulid != "user-info-ul"){
+                //alert("!=");
+                $("#user-info-ul").find("li").each(function () {
+                    //alert("2");
+                    //alert($(this).attr('class'));
+                    $(this).removeClass("active");
+                });
+            }
+            if(ulid != "user-manage-ul"){
+                //alert("!=");
+                $("#user-manage-ul").find("li").each(function () {
+                    //alert("3");
+                    //alert($(this).attr('class'));
+                    $(this).removeClass("active");
+                });
+            }
+            if(ulid != "source-manag-ul"){
+                //alert("!=");
+                $("#source-manag-ul").find("li").each(function () {
+                    //alert("4");
+                    //alert($(this).attr('class'));
+                    $(this).removeClass("active");
+                });
+            }
+            if(ulid != "system-manage-ul"){
+                //alert("!=");
+                $("#system-manage-ul").find("li").each(function () {
+                    //alert("5");
+                    //alert($(this).attr('class'));
+                    $(this).removeClass("active");
+                });
+            }
+
+
+        });
+    });
+})
+
 </script>
 </head>
 <body>
@@ -104,74 +148,90 @@ else{
 			<hr>
 			<div class="row" style="margin-left:80px;">
 				<div class="col-md-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
-					<ul class="nav nav-pills nav-stacked" >
-				     <li class="active"><a href="/mybatis/knowledgebase/adm-personal.jsp">个人中心</a></li>
-		
-		 			</ul>
-		 			<ul class="nav nav-pills nav-stacked">
-				     <li class="active"><a href="##">用户管理</a></li>
-				 	<li><a href="/mybatis/knowledgebase/adm-inquire.jsp">用户查询</a></li>
-				 	<li><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核</a></li>
-		 			</ul>
-		 			<ul class="nav nav-pills nav-stacked">
-				     <li class="active"><a href="##">资源管理</a></li>
-				     <li><a href="/mybatis/knowledgebase/adm-private.jsp">私有文件</a></li>
-				     <li><a href="/mybatis/knowledgebase/adm-public.jsp">公有文件</a></li>
-				 	<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
-				 	<li><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
-				 	<li><a href="##">类别管理</a></li>
-				 	<li><a href="##">资源审核</a></li>
-		 			</ul>
-		 			<ul class="nav nav-pills nav-stacked">
-				     <li class="active"><a href="##">系统管理</a></li>
-				 	<li><a href="##">数据还原</a></li>
-				 	<li><a href="##">数据备份</a></li>
-		 			</ul>
+                    <div class="panel panel-info" >
+                        <div class="panel-heading">
+                            <h4 class="panel-title"> <a data-toggle="collapse"  data-parent="#accordion" href="#user-info">个人中心</a> </h4>
+                        </div>
+                        <div id="user-info" class="panel-collapse collapse in ">
+                            <div class="panel-body" style="padding: 6px 15px;">
+                                <ul id="user-info-ul" class="nav nav-pills nav-stacked"
+                                    style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                    <li class="onLiClick" ulid="user-info-ul"><a href="#person-info-tab" data-toggle="tab" >个人信息</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-info" >
+                        <div class="panel-heading">
+                            <h4 class="panel-title"> <a data-toggle="collapse"  data-parent="#accordion" href="#user-manage">用户管理</a> </h4>
+                        </div>
+                        <div id="user-manage" class="panel-collapse collapse in ">
+                            <div class="panel-body" style="padding: 6px 15px;">
+                                <ul id="user-manage-ul" class="nav nav-pills nav-stacked"
+                                    style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                    <li class="onLiClick" ulid="user-manage-ul"><a href="#user-query-tab" data-toggle="tab" >用户查询</a></li>
+                                    <li class="onLiClick" ulid="user-manage-ul"><a href="#user-check-tab" data-toggle="tab" >用户审核</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-info" >
+                        <div class="panel-heading">
+                            <h4 class="panel-title"> <a data-toggle="collapse"  data-parent="#accordion" href="#source-manage">资源管理</a> </h4>
+                        </div>
+                        <div id="source-manage" class="panel-collapse collapse in ">
+                            <div class="panel-body" style="padding: 6px 15px;">
+                                <ul id="source-manag-ul" class="nav nav-pills nav-stacked"
+                                    style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                    <li class="onLiClick" ulid="source-manag-ul"><a href="#private-file-tab" data-toggle="tab" >私有文件</a></li>
+                                    <li class="onLiClick" ulid="source-manag-ul"><a href="#public-file-tab" data-toggle="tab" >公有文件</a></li>
+                                    <li class="onLiClick" ulid="source-manag-ul"><a href="#my-download-tab" data-toggle="tab" >我的下载</a></li>
+                                    <li class="onLiClick" ulid="source-manag-ul"><a href="#file-update-tab" data-toggle="tab" >文件上传</a></li>
+                                    <li class="onLiClick" ulid="source-manag-ul"><a href="#sort-manage-tab" data-toggle="tab" >类别管理</a></li>
+                                    <li class="onLiClick" ulid="source-manag-ul"><a href="#source-check-tab" data-toggle="tab" >资源审核</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-info" >
+                        <div class="panel-heading">
+                            <h4 class="panel-title"> <a data-toggle="collapse"  data-parent="#accordion" href="#system-manage">系统管理</a> </h4>
+                        </div>
+                        <div id="system-manage" class="panel-collapse collapse in ">
+                            <div class="panel-body" style="padding: 6px 15px;">
+                                <ul id="system-manage-ul" class="nav nav-pills nav-stacked"
+                                    style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                    <li class="onLiClick" ulid="system-manage-ul"><a href="#data-return-tab" data-toggle="tab" >数据还原</a></li>
+                                    <li class="onLiClick" ulid="system-manage-ul"><a href="#data-backup-tab" data-toggle="tab" >数据备份</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
  				</div>
 			 	<div class="col-md-8" style="margin-left:50px;">
-			 		
-			 	<div class="panel panel-primary" style="height:625px;">
-			 			<div class="panel-heading">
-			 				<h3 class="panel-title">用户审核</h3>	
-			 			</div>
-			 			<div class="panel-body" style="padding-top:0px;">
-			 				<table class="table table-striped">
-			 					<thead>
-			 						<tr>
-			 							<th style="padding-left: 28px;border-bottom-width: 2px;padding-bottom: 4px;width: 78px;"><label class="checkbox"><input type="checkbox" id="selAll" onclick="selectAll()">全选 </label></th>
-			 							<th style="padding-bottom:15px;">用户名</th>
-			 							<th style="padding-bottom:15px;">审核状态</th>
-			 							<th style="width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#tongguo">通过</button></th>
-			 							<th style="width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#jujue">拒绝</button></th>
-			 						</tr>
-			 					</thead>
-			 					<tbody id="list">
-			 						<tr>
-			 							<td style="padding-top:15px;"><label><input type="checkbox" name="checkAll"></label></td>
-			 							<td style="padding-top:15px;">哈利路亚</td>
-			 							<td style="padding-top:15px;padding-left:15px;">待审核</td>
-			 							<td><button class="btn btn-primary">通过</button></td>
-			 							<td><button class="btn btn-primary">拒绝</button></td>
-			 						</tr>
-			 						<tr>
-			 							<td style="padding-top:15px;"><label><input type="checkbox" name="checkAll"></label></td>
-			 							<td style="padding-top:15px;">哈利路亚</td>
-			 							<td style="padding-top:15px;padding-left:15px;">待审核</td>
-			 							<td><button class="btn btn-primary">通过</button></td>
-			 							<td><button class="btn btn-primary">拒绝</button></td>
-			 						</tr>
-			 						<tr>
-			 							<td style="padding-top:15px;"><label><input type="checkbox" name="checkAll"></label></td>
-			 							<td style="padding-top:15px;">哈利路亚</td>
-			 							<td style="padding-top:15px;padding-left:15px;">待审核</td>
-			 							<td><button class="btn btn-primary">通过</button></td>
-			 							<td><button class="btn btn-primary">拒绝</button></td>
-			 						</tr>
+                    <div id="myTab"  class="tab-content">
 
-			 					</tbody>
-			 				</table>
-			 			</div>
-					</div>
+                        <%@include file="person_info_tab.jsp"%>
+                        <%@include file="user_query_tab.jsp"%>
+                        <%@include file="user_check_tab.jsp"%>
+                        <%@include file="private_file_tab.jsp"%>
+                        <%@include file="public_file_tab.jsp"%>
+                        <%@include file="download_tab.jsp"%>
+                        <%@include file="upload_tab.jsp"%>
+                        <div class="tab-pane fade" id="sort-manage-tab">
+                            <h1>XXXbbb</h1>
+                        </div>
+                        <div class="tab-pane fade" id="source-check-tab">
+                            <h1>XXXddd</h1>
+                        </div>
+                        <div class="tab-pane fade" id="data-return-tab">
+                            <h1>XXXnnn</h1>
+                        </div>
+                        <div class="tab-pane fade" id="data-backup-tab">
+                            <h1>XXXqqq</h1>
+                        </div>
+                    </div>
 				</div>
 
 
@@ -180,43 +240,8 @@ th.btn-primary{
 	width: 116px;
 }
 </style>
-<div class="modal fade" id="tongguo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-       
-        <h4 class="modal-title" id="myModalLabel">提示</h4>
-      </div>
-      <div class="modal-body">
-        用户已通过审核！
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-      </div>
-    </div>
-  </div>
-</div>	
-</div>
 
 
-
-<div class="modal fade" id="jujue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-       
-        <h4 class="modal-title" id="myModalLabel">提示</h4>
-      </div>
-      <div class="modal-body">
-        用户未通过审核!
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-      </div>
-    </div>
-  </div>
-</div>	
-</div>
 
 <style type="text/css">
 	.modal{margin-top: 20%;}
@@ -230,22 +255,24 @@ th.btn-primary{
 		font-size: 15px;
 
 	}
-.footer {
-	height: 60px;
-	background-color: #e1e1e1;
-	width: 1423px;
-	text-align: center;
-	margin-top: 20px;
-	line-height: 60px;
+    .footer {
+        position: absolute;
+        top: 94%;
+        height: 6%;
+        background-color: #e1e1e1;
+        width: 100%;
 
-	}
-	.footer span.footerText {
-		font-size: 14px;
-		font-family: ;
-		color: #606060;
-		display: inline-block;
-	}
+        text-align: center;
+        min-width: 1190px;
+    }
+
+    .footer span.footerText {
+        font-size: 14px;
+        margin-top: 0.5%;
+        color: #606060;
+        display: inline-block;
+    }
 </style>
-<div class="footer"> <span class="footerText">Copyright © 1956-2016 电子科技大学</span> </div>
+<%--<div class="footer"> <span class="footerText">Copyright © 1956-2016 电子科技大学</span> </div>--%>
 </body>
 </html>

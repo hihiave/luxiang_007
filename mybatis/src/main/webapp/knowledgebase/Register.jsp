@@ -3,9 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/mybatis/knowledgebase/css/bootstrap.min.css">
-<script src="/mybatis/knowledgebase/js/jquery.min.js"></script>
-<script src="/mybatis/knowledgebase/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../knowledgebase/css/bootstrap.min.css">
+<script src="../knowledgebase/js/jquery.min.js"></script>
+<script src="../knowledgebase/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
 	.login{
@@ -19,18 +19,18 @@
 		background-color: white;
 	}
 	.login-mid{
-		background: url(/mybatis/knowledgebase/img/img_4.jpg) center center no-repeat #fff;
+		background: url(../knowledgebase/img/img_4.jpg) center center no-repeat #fff;
 		height: 480px;
 		min-width: 1200px;
 	}
 	.biao2{
 		width: 250px;
 		height: 325px;
-		background-image:url(/mybatis/knowledgebase/img/white.png);
+		background-image:url(../knowledgebase/img/white.png);
 		border-radius: 5px;
 		padding: 22px 30px;
 		position: absolute;
-		right: 150px;
+		right: 15%;
 		margin-top:80px;
 	}
 	.name2{
@@ -42,20 +42,22 @@
 		margin-bottom: 10px;
 	}
     .footer {
-	height: 60px;
-	background-color: #e1e1e1;
-	width: 100%;
-	text-align: center;
-	margin-top: 20px;
-	line-height: 60px;
-	min-width: 1190px;
-}
-.footer span.footerText {
-	font-size: 14px;
-	font-family: ;
-	color: #606060;
-	display: inline-block;
-}
+        position: absolute;
+        top: 94%;
+        height: 6%;
+        background-color: #e1e1e1;
+        width: 100%;
+
+        text-align: center;
+        min-width: 1190px;
+    }
+
+    .footer span.footerText {
+        font-size: 14px;
+        margin-top: 0.5%;
+        color: #606060;
+        display: inline-block;
+    }
 .loginform{
 line-height: 18px;
 margin-bottom: 10px;
@@ -143,7 +145,7 @@ body {
 				<div id="repasswordspan" style="height:16px"></div>
 				<div class="button-group" style="margin-top:5px;">
 				<input type="button" class="btn btn-primary" id="register" value="注册" >
-				<a href="/mybatis/knowledgebase/Login.jsp"><input type="button" class="btn btn-primary" value="取消" style="float:right;"></a>
+				<a href="../knowledgebase/Login.jsp"><input type="button" class="btn btn-primary" value="取消" style="float:right;"></a>
 				</div>
 			</form>
      		</div>
