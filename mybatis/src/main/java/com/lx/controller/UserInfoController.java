@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lx.model.UserInfo;
 import com.lx.serviceimpl.UserInfoServiceImpl;
@@ -19,21 +20,13 @@ public class UserInfoController {
 	UserInfoServiceImpl userInfoServiceImpl;
 
 	@RequestMapping("/login")
-	public String login(String name , HttpServletRequest request) {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+	public String login(String username, String password) {
+		System.out.println("======username=====" + username);
+		System.out.println("======password=====" + password);
 		
-		System.out.println("======username=====" + username );
-		System.out.println("======password=====" + password );
-		System.out.println("======name=====" + name );
-		System.out.println("======**************===");
-		//List<UserInfo> userInfos = userInfoServiceImpl.selectAllUserInfoByLikeUserName(userName);
-		//UserInfo userInfo = userInfos.get(0);
-		//request.setAttribute("userInfo", userInfo);
-		
+
 		return "showUser";
 	}
-	
 
 	// @RequestMapping("/login")
 	// public String login(String userName, HttpServletRequest request) {
@@ -44,5 +37,5 @@ public class UserInfoController {
 	//
 	// return "showUser";
 	// }
-	
+
 }

@@ -66,7 +66,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return userInfoMapper.selectUserByIsPass(checkType);
 	}
 
-	public int getCountByNotPass() {
+	@Override
+	public int getCountWithNotPass() {
 		return selectUserByIsPass(MacroEnum.KUserCheckType.not_pass).size();
 	}
 
@@ -110,4 +111,5 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public List<String> getUserNames(String userName) {
 		return userInfoMapper.getUserNames(userName);
 	}
+
 }

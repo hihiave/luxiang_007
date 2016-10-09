@@ -25,7 +25,9 @@
     select user_password from UserInfo where user_name = #{userName,jdbcType=VARCHAR} limit 1
   </select>
   <select id="selectUserByIsPass" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-  	select user_name, user_register_time from UserInfo where user_check = #{checkType,jdbcType=INTEGER}
+  	select user_name, user_register_time 
+  	from UserInfo 
+  	where user_check = #{checkType,jdbcType=INTEGER}
   </select>
   <select id="selectAllUserInfoByLikeUserName" resultMap="BaseResultMap">
   	select user_name from UserInfo where user_name like CONCAT(CONCAT('%',#{user_name},'%')) and user_check = '1'
