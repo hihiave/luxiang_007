@@ -99,5 +99,9 @@ public class UserInfoController {
 	//
 	// return "showUser";
 	// }
+	public void test(){
+		System.out.println("=======================");
+	}
+	
 
 }
