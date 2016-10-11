@@ -36,21 +36,24 @@ public class UserInfoController {
 		System.out.println("======password=====" + password);
 		if (userInfoService.checkLogin(username, password)) {
 			httpSession.setAttribute("flag", true);
-			return "knowledgebase/public_file_tab";
+			return "knowledgebase/adm-check";
+		}else{
+			httpSession.setAttribute("flag", false);
+			return "knowledgebase/Login";
 		}
 		
-		return "redirect:/UserInfoController/ddd.do";
+		//return "redirect:/UserInfoController/ddd.do";
 	}
 
-	@RequestMapping("/ddd")
-	public void ddd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<UserInfo> userInfos = userInfoService.selectAllUserInfoByLikeUserName("李");
-
-		request.setAttribute("UserInfo", userInfos);
-		request.getRequestDispatcher("../knowledgebase/adm-inquire.jsp").forward(request, response);
-		
-		//"/mybatis/UserInfoController/ddd.do";
-	}
+//	@RequestMapping("/ddd")
+//	public void ddd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		List<UserInfo> userInfos = userInfoService.selectAllUserInfoByLikeUserName("李");
+//
+//		request.setAttribute("UserInfo", userInfos);
+//		request.getRequestDispatcher("../knowledgebase/adm-inquire.jsp").forward(request, response);
+//		
+//		//"/mybatis/UserInfoController/ddd.do";
+//	}
 
 	// @RequestMapping("/login")
 	// public String login(String userName, HttpServletRequest request) {
