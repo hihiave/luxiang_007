@@ -1,25 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    <%-- <%
+    <%
         if(session.getAttribute("username")!=null){
 %>
-  
+
 <%
 	}
 	else
 	{
 %>
-	<script language="javascript">         
-
-		alert("请先登录!");         
-
-		top.location='/mybatis/knowledgebase/Login.jsp';  
-
+	<script language="javascript">
+		alert("请先登录!");
+		top.location='Login.jsp';
 	</script>
 <%
 	}
-%> --%>
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
 <html> 
 <head>
@@ -40,86 +36,22 @@
 .container{
 width: 1320px !important;
 }
-.tbody th{
-padding-bottom:3px;
-padding-top:3px;
-width:116px;
-}
-.table thead tr { 
-display:block; 
-} 
-.table tbody { 
-display: block; 
-height: 500px; 
-overflow: auto; 
-} 
-.table th { 
-width:104px; 
-} 
-.table td { 
-width:104px; 
-}
 </style>
-<!--  <script type="text/javascript">
-function deleteuser(num){
-	if(confirm("确认删除该用户吗?")){
-		return true;
-	}
-	else
-		return false;
-}
 
-function resetpsw(num){
-	if(confirm("确认重置用户密码吗?")){
-		return true;
-	}
-	else
-		return false;
-}
-</script>-->
-<script type="text/javascript">
-	window.onload=function(){
-		
-		var btnobj=document.getElementById("btnclick");
-		var username1obj=document.getElementById("username1");
-		var spanusernameobj=document.getElementById("spanusername");
-		btnobj.onclick=checkname;
-		spanusernameobj.innerHTML="";
-		function checkname(){
-			if (username1obj.value.length==0) {
-				var msg="<font color='red' size='1px'>用户名不能为空!</font>";
-				spanusernameobj.innerHTML=msg;
-				return false;
-			}
-			else{
-				return true;
-			}
-			
-		}
-	
-	}
-</script>
-<!-- <script type="text/javascript">
-var queren=document.getElementById("queren");
-queren.addEventListener(type, listener, useCapture)
-
-</script>
--->
 </head>
 <body>
 
 <div style="margin:10px 20px;">
-	<button type="button" class="btn btn-md btn-default" onclick="return confirm('确认退出吗?');"
-	style="border:0px;float:right;" data-toggle="tooltip" data-placement="bottom" title="退出登录">
- 		<a href="/mybatis/Quitservlet"><span class="glyphicon glyphicon-off"></span>&nbsp;退出</a>
+	<button type="button" class="btn btn-md btn-default" style="border:0px;float:right;" data-toggle="tooltip" data-placement="bottom" title="退出登录">
+ 		<span class="glyphicon glyphicon-off"></span>&nbsp;退出
 	</button>
 	<button type="button" class="btn btn-md btn-default" style="border:0px;float:right;" data-toggle="tooltip" data-placement="bottom" title="个人中心">
- 		<a href="/mybatis/knowledgebase/adm-personal.jsp"><span class="glyphicon glyphicon-user"></span>&nbsp;首页</a>
+ 		<span class="glyphicon glyphicon-user"></span>&nbsp;首页
 	</button>
 </div>
 <div class="container">
 			<div class="row" style="text-align:center;margin:40px auto;">
-				<img src="/mybatis/knowledgebase/img/img_3.jpg" width="725px" height="220px">
+				<img src="/mybatis/knowledgebase/img/img_3.jpg" width="725px" height="80px">
 			</div>
 			<div class="row" style="margin:0px ">
 				<div class="col-md-3" style="width:283px;margin-right:16px;"> 
@@ -157,7 +89,7 @@ queren.addEventListener(type, listener, useCapture)
 		 			</ul>
 		 			<ul class="nav nav-pills nav-stacked">
 				     <li class="active"><a href="##">用户管理</a></li>
-				 	<li><a href="/mybatis/Listservlet">用户查询</a></li>
+				 	<li><a href="##">用户查询</a></li>
 				 	<li><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核</a></li>
 		 			</ul>
 		 			<ul class="nav nav-pills nav-stacked">
@@ -166,8 +98,8 @@ queren.addEventListener(type, listener, useCapture)
 				     <li><a href="/mybatis/knowledgebase/adm-public.jsp">公有文件</a></li>
 				 	<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
 				 	<li><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
-				 	<li><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
-				 	<li><a href="/mybatis/knowledgebase/adm-checkr.jsp">资源审核</a></li>
+				 	<li><a href="##">类别管理</a></li>
+				 	<li><a href="##">资源审核</a></li>
 		 			</ul>
 		 			<ul class="nav nav-pills nav-stacked">
 				     <li class="active"><a href="##">系统管理</a></li>
@@ -181,54 +113,51 @@ queren.addEventListener(type, listener, useCapture)
 						<div class="panel-heading" >
 							<h3 class="panel-title">用户查询</h3>
 						</div>
-						<div class="panel-body" >
+						<div class="panel-body">
 							<table class="table table-striped">
 							<thead>
-							<tr>
-							<th style="font-size:16px;padding-bottom:10px;">编号</th>
-							<th style="font-size:16px;padding-bottom:10px;">用户名</th>
-							<th><input type="text" style="height:34px;width:273px;"></th>
-							<th><button class="btn btn-info">搜索用户</button></th>
-							<th><button class="btn btn-info" data-toggle="modal" 
-							data-target="#tianjia">添加用户</button></th>
+							<tr >
+							<th style="font-size:16px;"></th>
+							<th style="font-size:16px;">用户名</th>
+							<th style="padding-bottom:5px;padding-top:0px;width:285px;"><input type="text" id="search-in" name="" style="height:34px;width:273px;"></th>
+							<th style="padding-bottom:5px;padding-top:0px;width:116px;"><button class="btn btn-info" id="search-user">搜索用户</button></th>
+							<th style="padding-bottom:5px;padding-top:0px;width:116px;"><button class="btn btn-info" data-toggle="modal" data-target="#tianjia">添加用户</button></th>
 							</tr>
 							</thead>
-							
-							<tbody>
-							<c:forEach var="user" items="${UserInfo}">
+							<tbody id="search_result">
 							<tr>
-						
-							
-							<td>${user.userName}</td>
-							<td style="width:289px;"></td>
-							<th><a href="/mybatis/Deleteuser?username=${user.userName}">
-							<button class="btn btn-primary"
-							 onclick="return confirm('确认删除该用户吗?');">删除用户</button></a></th>
-							<th><a href="/mybatis/Resetpsw?username=${user.userName}">
-							<button class="btn btn-primary"  id="${user.userName}"
-							onclick="return confirm('确认重置用户密码吗?');">重置密码</button></a></th>
-							
-							
+							<td>1</td>
+							<td id="name1">张三</td>
+							<td></td>
+							<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#shanchu">删除用户</button></th>
+							<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#chongzhi">重置密码</button></th>
 							</tr>
-							</c:forEach>
-							
-							
+							<tr>
+							<td>2</td>
+							<td id="name2">李四</td>
+							<td></td>
+							<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">删除用户</button></th>
+							<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">重置密码</button></th>
+							</tr>
+							</tr>
+							<tr>
+							<td>3</td>
+							<td id="name3">王五</td>
+							<td></td>
+							<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">删除用户</button></th>
+							<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">重置密码</button></th>
+							</tr>
 							</tbody>
-						
 							</table>
 						</div>	
 				</div>
 			
 </div>
+            </div>
+</div>
 
 
-
-
-
-<!-- 
-data-toggle="modal" data-target="#shanchu"
-data-toggle="modal" data-target="#reset"
- <div class="modal fade" id="shanchu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="shanchu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -236,19 +165,17 @@ data-toggle="modal" data-target="#reset"
         <h4 class="modal-title" id="myModalLabel">提示</h4>
       </div>
       <div class="modal-body">
-        	确认删除该用户吗?
+        确认删除该用户吗?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <input type="submit" class="btn btn-primary " id="" value="确认">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
       </div>
     </div>
   </div>
 </div>	
-</div>
 
-
-<div class="modal fade" id="reset" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="chongzhi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -260,21 +187,18 @@ data-toggle="modal" data-target="#reset"
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">否</button>
-        <input type="submit" class="btn btn-primary " id="" value="是">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">是</button>
       </div>
     </div>
   </div>
 </div>	
-</div>
 
-
--->
-<div class="modal fade" id="tianjia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="tianjia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-add">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
        
-        <h4 class="modal-title" id="myModalLabel">输入用户信息</h4>
+        <h4 class="modal-title" id="myModalLabel-add">输入用户信息</h4>
       </div>
       <div class="modal-body">
         <ul style="padding-left:0px;">
@@ -285,12 +209,79 @@ data-toggle="modal" data-target="#reset"
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <input type="submit" class="btn btn-primary" id="btnclick" value="确认">
+        <button type="button" class="btn btn-primary " id="btnclick" >确认</button>
       </div>
     </div>
   </div>
-</div>	
 </div>
+                <script type="text/javascript">
+                    window.onload = function () {
+                        var btnobj = document.getElementById("btnclick");
+                        var username1obj = document.getElementById("username1");
+                        var spanusernameobj = document.getElementById("spanusername");
+//                        btnobj.onclick = checkname;
+//                        function checkname() {
+//                            if (username1obj.value.length == 0) {
+//                                var msg = "<font color='red' size='1px'>用户名不能为空!</font>";
+//                            }
+//                            else {
+//                                var msg = null;
+//                            }
+//                            spanusernameobj.innerHTML = msg;
+//                            return;
+//                        }
+                    }
+                </script>
+                <script type="text/javascript">
+                    $(function () {
+                        $("#btnclick").click(function () {
+                            if($("#username1").val() != null) {
+                                $.ajax(
+                                        {
+                                            type:'post',
+                                            url:"/mybatis/UserInfoController/adm-adduser.do",
+                                            data:{username:$("#username1").val()}
+                                        }
+                                )
+                            }
+                        })
+                    });
+                    $(function () {
+                        $("#search-user").click(function () {
+                            if($("#search-in").val() != "") {
+                                console.log("sssssss"+$("#search-in").val());
+                                $.ajax(
+                                        {
+                                            type:'post',
+                                            url:"/mybatis/UserInfoController/inquire.do",
+                                            data:{username_search:$("#search-in").val()},
+                                            dataType:"json",
+                                            success:function(data){
+                                                $("#search_result>tr").remove();
+//                                                console.log(data["UserInfo_search"]);
+                                                var searchuser = data["UserInfo_search"];
+                                                console.log(searchuser.length);
+                                                console.log(searchuser[0].userName);
+                                                for(var i = 0; i < searchuser.length; i++){
+                                                    var tr_begin = "<tr>";
+                                                    var tr_end = "</tr>";
+                                                    var td_1 = "<td>"+(i+1)+"</td>";
+                                                    var td_2 = "<td>"+searchuser[i].userName+"</td>"
+                                                    var td_3 = "<td></td>";
+                                                    var td_4 = "<td style='padding-bottom:3px;padding-top:3px;width:116px;'>"+"<button class='btn btn-primary'>删除用户</button>"+"</td>";
+                                                    var td_5 = "<td style='padding-bottom:3px;padding-top:3px;width:116px;'>"+"<button class='btn btn-primary'>重置密码</button>"+"</td>";
+                                                    var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
+                                                    $("#search_result").append(content);
+                                                }
+                                            }
+                                        }
+                                )
+                            }else{
+                                alert("nullccc");
+                            }
+                        })
+                    });
+                </script>
 
 <style type="text/css">
 	.modal{margin-top:20%;}
@@ -302,23 +293,23 @@ data-toggle="modal" data-target="#reset"
 	}
 	#username1,#password1{
 		font-size: 15px;
-
 	}
-.footer {
-	height: 60px;
-	background-color: #e1e1e1;
-	width:100%;
-	text-align: center;
-	margin-top: 20px;
-	line-height: 60px;
-
-	}
-	.footer span.footerText {
-		font-size: 14px;
-		color: #606060;
-		display: inline-block;
-	}
+    .footer {
+        position: absolute;
+        top: 94%;
+        height: 6%;
+        background-color: #e1e1e1;
+        width: 100%;
+        text-align: center;
+        min-width: 1190px;
+    }
+    .footer span.footerText {
+        font-size: 14px;
+        margin-top: 0.5%;
+        color: #606060;
+        display: inline-block;
+    }
 </style>
-<div class="footer"> <span class="footerText">Copyright © 1956-2016 电子科技大学</span> </div>
+<%--<div class="footer"> <span class="footerText">Copyright © 1956-2016 电子科技大学</span> </div>--%>
 </body>
 </html>
