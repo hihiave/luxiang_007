@@ -100,7 +100,7 @@ public class UserInfoController {
 	// return "showUser";
 	// }
 	public void test(){
-		System.out.println("=======================");
+		System.out.println("=========wqewq==============");
 	}
 	
 
