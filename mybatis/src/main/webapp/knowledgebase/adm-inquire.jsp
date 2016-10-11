@@ -260,29 +260,26 @@ width: 1320px !important;
                                             type:'post',
                                             url:"/mybatis/UserInfoController/inquire.do",
                                             data:{username_search:$("#search-in").val()},
+                                            dataType:"json",
                                             success:function(data){
                                                 $("#search_result>tr").remove();
+//                                                console.log(data["UserInfo_search"]);
+                                                var searchuser = data["UserInfo_search"];
 
-                                                console.log(data);
-                                                console.log(typeof(data));
-                                                console.log(data["UserInfo_search"]);
-                                                var name = data["UserInfo_search"];
-                                                var searchuser = data.UserInfo_search;
-                                                <%--var ssss = "<%session.getAttribute("UserInfo");%>";--%>
-                                                <%--console.log(ssss.length);--%>
-//                                                console.log(searchuser[0].userName);
-                                                console.log(searchuser);
-//                                                for(var i = 0; i < searchuser.length; i++){
-//                                                    var tr_begin = "<tr>";
-//                                                    var tr_end = "</tr>";
-//                                                    var td_1 = "<td>"+(i+1)+"</td>";
-//                                                    var td_2 = "<td>"+searchuser[i].userName+"</td>"
-//                                                    var td_3 = "<td></td>";
-//                                                    var td_4 = "<td style='padding-bottom:3px;padding-top:3px;width:116px;'>"+"<button class='btn btn-primary'>删除用户</button>"+"</td>";
-//                                                    var td_5 = "<td style='padding-bottom:3px;padding-top:3px;width:116px;'>"+"<button class='btn btn-primary'>重置密码</button>"+"</td>";
-//                                                    var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
-//                                                    $("#serach_result").append(content);
-//                                                }
+                                                console.log(searchuser.length);
+                                                console.log(searchuser[0].userName);
+
+                                                for(var i = 0; i < searchuser.length; i++){
+                                                    var tr_begin = "<tr>";
+                                                    var tr_end = "</tr>";
+                                                    var td_1 = "<td>"+(i+1)+"</td>";
+                                                    var td_2 = "<td>"+searchuser[i].userName+"</td>"
+                                                    var td_3 = "<td></td>";
+                                                    var td_4 = "<td style='padding-bottom:3px;padding-top:3px;width:116px;'>"+"<button class='btn btn-primary'>删除用户</button>"+"</td>";
+                                                    var td_5 = "<td style='padding-bottom:3px;padding-top:3px;width:116px;'>"+"<button class='btn btn-primary'>重置密码</button>"+"</td>";
+                                                    var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
+                                                    $("#search_result").append(content);
+                                                }
                                             }
                                         }
                                 )
