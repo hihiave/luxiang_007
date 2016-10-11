@@ -10,8 +10,11 @@
 	{
 %>
 	<script language="javascript">
+
 		alert("请先登录!");
+
 		top.location='Login.jsp';
+
 	</script>
 <%
 	}
@@ -36,6 +39,7 @@
 .container{
 width: 1320px !important;
 }
+
 </style>
 
 </head>
@@ -243,6 +247,7 @@ width: 1320px !important;
                                             data:{username:$("#username1").val()}
                                         }
                                 )
+
                             }
                         })
                     });
@@ -260,8 +265,10 @@ width: 1320px !important;
                                                 $("#search_result>tr").remove();
 //                                                console.log(data["UserInfo_search"]);
                                                 var searchuser = data["UserInfo_search"];
+
                                                 console.log(searchuser.length);
                                                 console.log(searchuser[0].userName);
+
                                                 for(var i = 0; i < searchuser.length; i++){
                                                     var tr_begin = "<tr>";
                                                     var tr_end = "</tr>";
@@ -276,6 +283,7 @@ width: 1320px !important;
                                             }
                                         }
                                 )
+
                             }else{
                                 alert("nullccc");
                             }
@@ -293,6 +301,7 @@ width: 1320px !important;
 	}
 	#username1,#password1{
 		font-size: 15px;
+
 	}
     .footer {
         position: absolute;
@@ -300,9 +309,11 @@ width: 1320px !important;
         height: 6%;
         background-color: #e1e1e1;
         width: 100%;
+
         text-align: center;
         min-width: 1190px;
     }
+
     .footer span.footerText {
         font-size: 14px;
         margin-top: 0.5%;
