@@ -1,25 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    
-<%--<%--%>
-        <%--if(session.getAttribute("username")!=null){--%>
-<%--%>--%>
-  <%----%>
-<%--<%--%>
-	<%--}--%>
-	<%--else--%>
-	<%--{--%>
-<%--%>--%>
-	<%--<script language="javascript">         --%>
+<%
+        if(session.getAttribute("username")!=null){
+            System.out.println("ssssssssssssssssss"+session.getAttribute("username"));
+%>
 
-		<%--alert("请先登录!");         --%>
+<%
+	}
+	else
+	{
+%>
+	<script language="javascript">
 
-		<%--top.location='Login.jsp';  --%>
+		alert("请先登录!");
 
-	<%--</script>--%>
-<%--<%--%>
-	<%--}--%>
-<%--%>--%>
+		top.location='Login.jsp';
+
+	</script>
+<%
+	}
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
 <html> 
@@ -58,49 +59,7 @@ else{
 	}
 }
 }
-$(function(){
-    $(".onLiClick").each(function(){
-        $(this).click(function(){
-            //alert("1");
-            var ulid = $(this).attr("ulid");
-            //alert("ulid=" + ulid);
-            if(ulid != "user-info-ul"){
-                //alert("!=");
-                $("#user-info-ul").find("li").each(function () {
-                    //alert("2");
-                    //alert($(this).attr('class'));
-                    $(this).removeClass("active");
-                });
-            }
-            if(ulid != "user-manage-ul"){
-                //alert("!=");
-                $("#user-manage-ul").find("li").each(function () {
-                    //alert("3");
-                    //alert($(this).attr('class'));
-                    $(this).removeClass("active");
-                });
-            }
-            if(ulid != "source-manag-ul"){
-                //alert("!=");
-                $("#source-manag-ul").find("li").each(function () {
-                    //alert("4");
-                    //alert($(this).attr('class'));
-                    $(this).removeClass("active");
-                });
-            }
-            if(ulid != "system-manage-ul"){
-                //alert("!=");
-                $("#system-manage-ul").find("li").each(function () {
-                    //alert("5");
-                    //alert($(this).attr('class'));
-                    $(this).removeClass("active");
-                });
-            }
 
-
-        });
-    });
-})
 
 </script>
 </head>
@@ -116,7 +75,7 @@ $(function(){
 </div>
 <div class="container">
 			<div class="row" style="text-align:center;margin:40px auto;">
-				<img src="/mybatis/knowledgebase/img/img_3.jpg" width="725px" height="220px">
+				<img src="/mybatis/knowledgebase/img/img_3.jpg" width="725px" height="80px">
 			</div>
 			<div class="row" style="margin:0px">
 				<div class="col-md-3" style="width:283px;margin-right:16px;"> 
@@ -148,93 +107,102 @@ $(function(){
 			<hr>
 			<div class="row" style="margin-left:80px;">
 				<div class="col-md-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
-                    <div class="panel panel-info" >
-                        <div class="panel-heading">
-                            <h4 class="panel-title"> <a data-toggle="collapse"  data-parent="#accordion" href="#user-info">个人中心</a> </h4>
-                        </div>
-                        <div id="user-info" class="panel-collapse collapse in ">
-                            <div class="panel-body" style="padding: 6px 15px;">
-                                <ul id="user-info-ul" class="nav nav-pills nav-stacked"
-                                    style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                    <li class="onLiClick" ulid="user-info-ul"><a href="#person-info-tab" data-toggle="tab" >个人信息</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-info" >
-                        <div class="panel-heading">
-                            <h4 class="panel-title"> <a data-toggle="collapse"  data-parent="#accordion" href="#user-manage">用户管理</a> </h4>
-                        </div>
-                        <div id="user-manage" class="panel-collapse collapse in ">
-                            <div class="panel-body" style="padding: 6px 15px;">
-                                <ul id="user-manage-ul" class="nav nav-pills nav-stacked"
-                                    style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                    <li class="onLiClick" ulid="user-manage-ul"><a href="#user-query-tab" data-toggle="tab" >用户查询</a></li>
-                                    <li class="onLiClick" ulid="user-manage-ul"><a href="#user-check-tab" data-toggle="tab" >用户审核</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-info" >
-                        <div class="panel-heading">
-                            <h4 class="panel-title"> <a data-toggle="collapse"  data-parent="#accordion" href="#source-manage">资源管理</a> </h4>
-                        </div>
-                        <div id="source-manage" class="panel-collapse collapse in ">
-                            <div class="panel-body" style="padding: 6px 15px;">
-                                <ul id="source-manag-ul" class="nav nav-pills nav-stacked"
-                                    style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                    <li class="onLiClick" ulid="source-manag-ul"><a href="#private-file-tab" data-toggle="tab" >私有文件</a></li>
-                                    <li class="onLiClick" ulid="source-manag-ul"><a href="#public-file-tab" data-toggle="tab" >公有文件</a></li>
-                                    <li class="onLiClick" ulid="source-manag-ul"><a href="#my-download-tab" data-toggle="tab" >我的下载</a></li>
-                                    <li class="onLiClick" ulid="source-manag-ul"><a href="#file-update-tab" data-toggle="tab" >文件上传</a></li>
-                                    <li class="onLiClick" ulid="source-manag-ul"><a href="#sort-manage-tab" data-toggle="tab" >类别管理</a></li>
-                                    <li class="onLiClick" ulid="source-manag-ul"><a href="#source-check-tab" data-toggle="tab" >资源审核</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-info" >
-                        <div class="panel-heading">
-                            <h4 class="panel-title"> <a data-toggle="collapse"  data-parent="#accordion" href="#system-manage">系统管理</a> </h4>
-                        </div>
-                        <div id="system-manage" class="panel-collapse collapse in ">
-                            <div class="panel-body" style="padding: 6px 15px;">
-                                <ul id="system-manage-ul" class="nav nav-pills nav-stacked"
-                                    style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                    <li class="onLiClick" ulid="system-manage-ul"><a href="#data-return-tab" data-toggle="tab" >数据还原</a></li>
-                                    <li class="onLiClick" ulid="system-manage-ul"><a href="#data-backup-tab" data-toggle="tab" >数据备份</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <ul class="nav nav-pills nav-stacked" >
+                        <li class="active"><a href="/mybatis/knowledgebase/adm-personal.jsp">个人中心</a></li>
+
+                    </ul>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><a href="##">用户管理</a></li>
+                        <li><a href="/mybatis/knowledgebase/adm-inquire.jsp">用户查询</a></li>
+                        <li><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核</a></li>
+                    </ul>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><a href="##">资源管理</a></li>
+                        <li><a href="/mybatis/knowledgebase/adm-private.jsp">私有文件</a></li>
+                        <li><a href="/mybatis/knowledgebase/adm-public.jsp">公有文件</a></li>
+                        <li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
+                        <li><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
+                        <li><a href="##">类别管理</a></li>
+                        <li><a href="##">资源审核</a></li>
+                    </ul>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><a href="##">系统管理</a></li>
+                        <li><a href="##">数据还原</a></li>
+                        <li><a href="##">数据备份</a></li>
+                    </ul>
 
  				</div>
 			 	<div class="col-md-8" style="margin-left:50px;">
-                    <div id="myTab"  class="tab-content">
+                    <div class="panel panel-primary" style="height:625px;">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">用户审核</h3>
+                        </div>
+                        <div class="panel-body" style="padding-top:0px;">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th style="padding-left: 28px;border-bottom-width: 2px;padding-bottom: 4px;width: 78px;"><label class="checkbox"><input type="checkbox" id="selAll" onclick="selectAll()">全选 </label></th>
+                                    <th style="padding-bottom:15px;">用户名</th>
+                                    <th style="padding-bottom:15px;">审核状态</th>
+                                    <th style="width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#tongguo">通过</button></th>
+                                    <th style="width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#jujue">拒绝</button></th>
+                                </tr>
+                                </thead>
+                                <tbody id="list">
+                                <tr>
+                                    <td style="padding-top:15px;"><label><input type="checkbox" name="checkAll"></label></td>
+                                    <td style="padding-top:15px;">哈利路亚</td>
+                                    <td style="padding-top:15px;padding-left:15px;">待审核</td>
+                                    <td><button class="btn btn-primary">通过</button></td>
+                                    <td><button class="btn btn-primary">拒绝</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top:15px;"><label><input type="checkbox" name="checkAll"></label></td>
+                                    <td style="padding-top:15px;">哈利路亚</td>
+                                    <td style="padding-top:15px;padding-left:15px;">待审核</td>
+                                    <td><button class="btn btn-primary">通过</button></td>
+                                    <td><button class="btn btn-primary">拒绝</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top:15px;"><label><input type="checkbox" name="checkAll"></label></td>
+                                    <td style="padding-top:15px;">哈利路亚</td>
+                                    <td style="padding-top:15px;padding-left:15px;">待审核</td>
+                                    <td><button class="btn btn-primary">通过</button></td>
+                                    <td><button class="btn btn-primary">拒绝</button></td>
+                                </tr>
 
-                        <%@include file="person_info_tab.jsp"%>
-                        <%@include file="user_query_tab.jsp"%>
-                        <%@include file="user_check_tab.jsp"%>
-                        <%@include file="private_file_tab.jsp"%>
-                        <%@include file="public_file_tab.jsp"%>
-                        <%@include file="download_tab.jsp"%>
-                        <%@include file="upload_tab.jsp"%>
-                        <div class="tab-pane fade" id="sort-manage-tab">
-                            <h1>XXXbbb</h1>
-                        </div>
-                        <div class="tab-pane fade" id="source-check-tab">
-                            <h1>XXXddd</h1>
-                        </div>
-                        <div class="tab-pane fade" id="data-return-tab">
-                            <h1>XXXnnn</h1>
-                        </div>
-                        <div class="tab-pane fade" id="data-backup-tab">
-                            <h1>XXXqqq</h1>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 				</div>
+                <div class="modal fade" id="changepsw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-person">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
 
+                                <h4 class="modal-title" id="myModalLabel-person">修改密码</h4>
+                            </div>
+                            <div class="modal-body">
+                                <ul style="padding-left:0px;">
+                                    <li><input type="password" placeholder="请输入原密码" class="form-control" id="oldpsw"></li>
+                                    <div id="spanusername" style="margin-left:6px;margin-bottom:10px;height:6px;"></div>
+                                    <li><input type="password"  id="password1" class="form-control" placeholder="请输入新密码"></li>
+                                    <div id="spanpsw" style="margin-left:6px;margin-bottom:10px;height:6px;"></div>
+                                    <li><input type="password"  id="password2" class="form-control"  placeholder="请再次输入新密码"></li>
+                                    <div id="spanrepsw" style="margin-left:6px;margin-bottom:10px;height:6px;"></div>
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary " id="btnclick" data-dismiss="">确认</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+            </div>
+    </div>
 <style type="text/css">
 th.btn-primary{
 	width: 116px;

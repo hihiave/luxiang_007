@@ -129,7 +129,7 @@ body {
 		<div class="login-mid">
 	
 			<div class="biao2 container" >
-			<form>
+			<form action="/mybatis/UserInfoController/regist.do" method="post">
 				 <div class="name2">用户注册</div>
 				 <div class="loginform loginusername" style="margin-bottom:5px;margin-top:5px;">
 				 	<input type="text"  id="username1" placeholder="请输入用户名">
@@ -152,6 +152,5 @@ body {
 		</div>
 	</div>
 	<div class="footer"> <span class="footerText">Copyright © 1956-2016 电子科技大学</span> </div>
-
 </body>
 </html>
