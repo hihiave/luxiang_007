@@ -13,14 +13,16 @@ public class MacroEnum {
 	 * 用户是否通过审核
 	 */
 	public interface KUserCheckType {
-		public static final int pass = 1;
-		public static final int not_pass = 0;
+		public static final int PASS = 1;
+		public static final int NOTPASS = 0;
 	}
 
 	/**
 	 * 消息类型
 	 */
 	public enum KMessageType {
-		OldPwdErr, AlterErr
+		loginSuccess, // 登录成功
+		loginFail, // 登录失败（用户名或密码错误）
+		checkNotPass // 审核未通过
 	}
 }

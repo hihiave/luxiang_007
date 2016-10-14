@@ -21,7 +21,7 @@ public interface UserInfoMapper {
 
 	//*********用于处理一些业务逻辑的方法
 	int updateUsersCheck(@Param("userNames") String... userNames);
-	String checkLogin(String userName);
+	UserInfo checkLogin(String userName);
 	List<UserInfo> selectUserByIsPass(int checkType);
 	List<UserInfo> selectAllUserInfoByLikeUserName(String userName);
 	int deleteByUserName(String userName);

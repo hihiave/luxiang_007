@@ -2,6 +2,7 @@ package com.lx.service;
 
 import java.util.List;
 
+import com.lx.macrofiles.MacroEnum.KMessageType;
 import com.lx.model.UserInfo;
 
 public interface UserInfoService {
@@ -32,9 +33,9 @@ public interface UserInfoService {
 	 * @author luxiang
 	 * @param userName
 	 * @param userPassword
-	 * @return boolean，true表示登录成功，false表示登录失败
+	 * @return KMessageType 消息类型，请查看枚举
 	 */
-	public boolean checkLogin(String userName, String userPassword);
+	public KMessageType checkLogin(String userName, String userPassword);
 	
 	/** 通过审核是否通过查询用户
 	 * @author luxiang
@@ -75,9 +76,16 @@ public interface UserInfoService {
 	 * @param userName
 	 * @param oldPwd
 	 * @param newPwd
-	 * @return boolean，true表示修改密码成功，false表示修改密码失败
+	 * @return boolean，true表示修改密码成功，false表示旧密码不对，修改密码失败
 	 */
 	public boolean alterPassword(String userName, String oldPwd, String newPwd);
+	
+	/** 检查用户名是否存在
+	 * @author luxiang
+	 * @param userName
+	 * @return boolean，true表示用户名已经存在，false表示用户名不存在
+	 */
+	public boolean checkUserIsExist(String userName);
 	
 	/** 通过用户名获取一些智能下拉提示
 	 * @author luxiang

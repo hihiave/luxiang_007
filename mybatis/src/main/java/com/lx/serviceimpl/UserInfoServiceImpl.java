@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
 import com.lx.dao.UserInfoMapper;
 import com.lx.macrofiles.MacroEnum;
+import com.lx.macrofiles.MacroEnum.KMessageType;
 import com.lx.model.UserInfo;
 import com.lx.service.UserInfoService;
 import com.lx.tool.ToolDate;
@@ -34,12 +36,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public boolean addUserInfo(String userName) {
-		return insertUserInfo(userName, ToolEncryption.EncryptMD5("123456"), MacroEnum.KUserCheckType.pass);
+		return insertUserInfo(userName, ToolEncryption.EncryptMD5("123456"), MacroEnum.KUserCheckType.PASS);
 	}
 
 	@Override
 	public boolean registerUserInfo(String userName, String userPassword) {
-		return insertUserInfo(userName, ToolEncryption.EncryptMD5(userPassword), MacroEnum.KUserCheckType.not_pass);
+		return insertUserInfo(userName, ToolEncryption.EncryptMD5(userPassword), MacroEnum.KUserCheckType.NOTPASS);
 	}
 
 	@Override
@@ -51,14 +53,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return flag;
 	}
 
-	@Override
-	public boolean checkLogin(String userName, String userPassword) {
-		boolean flag = false;
-		String pwd = userInfoMapper.checkLogin(userName);
-		if (pwd.equals(ToolEncryption.EncryptMD5(userPassword))) {
-			flag = true;
+	public KMessageType checkLogin(String userName, String userPassword) {
+		UserInfo userInfo = userInfoMapper.checkLogin(userName);
+		if (userInfo != null && userInfo.getUserPassword().equals(ToolEncryption.EncryptMD5(userPassword))) {
+			if (userInfo.getUserCheck() == 1) {
+				return KMessageType.loginSuccess; // 登录成功
+			}
+			return KMessageType.checkNotPass; // 审核未通过
 		}
-		return flag;
+		return KMessageType.loginFail;// 登录失败
 	}
 
 	@Override
@@ -68,7 +71,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public int getCountWithNotPass() {
-		return selectUserByIsPass(MacroEnum.KUserCheckType.not_pass).size();
+		return selectUserByIsPass(MacroEnum.KUserCheckType.NOTPASS).size();
 	}
 
 	@Override
@@ -97,14 +100,22 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	public boolean alterPassword(String userName, String oldPwd, String newPwd) {
 		boolean flag = false;
-		if (checkLogin(userName, oldPwd)) {
+		UserInfo userInfo = userInfoMapper.checkLogin(userName);
+		if (userInfo.getUserPassword().equals(oldPwd)) {
 			if (userInfoMapper.updateUserPassword(userName, ToolEncryption.EncryptMD5(newPwd)) == 1) {
 				flag = true;
 			}
-		} else {
-			System.out.println("旧密码不对");
 		}
 		return flag;
+	}
+
+	@Override
+	public boolean checkUserIsExist(String userName) {
+		UserInfo userInfo = userInfoMapper.checkLogin(userName);
+		if (userInfo != null) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override

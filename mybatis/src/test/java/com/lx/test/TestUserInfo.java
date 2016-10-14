@@ -10,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSON;
 import com.lx.macrofiles.MacroEnum;
+import com.lx.macrofiles.MacroEnum.KMessageType;
 import com.lx.model.UserInfo;
 import com.lx.service.UserInfoService;
 import com.lx.serviceimpl.UserInfoServiceImpl;
@@ -45,13 +46,13 @@ public class TestUserInfo {
 
 	@Test
 	public void TestCheckLogin() {
-		boolean da = userInfoService.checkLogin("QQQQQQQQ", "123456");
-		logger.info("===LOL  da====" + da + "==");
+		KMessageType messageType = userInfoService.checkLogin("luxiang", "123456");
+		logger.info("===LOL  da====" + messageType + "==");
 	}
 
 	@Test
 	public void TestSelectUserByIsPass() {
-		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(MacroEnum.KUserCheckType.not_pass);
+		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(MacroEnum.KUserCheckType.NOTPASS);
 		logger.info("===A====" + userInfos.isEmpty() + "==");
 		logger.info("===B=====" + userInfos.size() + "==");
 		logger.info("===HH=====" + JSON.toJSONString(userInfos.get(1)) + "==");
@@ -93,6 +94,15 @@ public class TestUserInfo {
 		logger.info("===alterPassword====" + d + "==");
 	}
 
+	@Test
+	public void TestCheckUserIsExist() {
+		boolean d = userInfoService.checkUserIsExist("luxiang11");
+		
+		logger.info("===CheckUserIsExist====" + d + "==");
+	}
+	
+	
+	
 	@Test
 	public void TestGetUserNames() {
 		List<String> userNames = userInfoService.getUserNames("李");

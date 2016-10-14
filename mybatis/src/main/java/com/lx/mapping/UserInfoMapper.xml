@@ -21,8 +21,10 @@
   			#{userName}
   		</foreach>
   </update>
-  <select id="checkLogin" resultType="java.lang.String" parameterType="java.lang.String">
-    select user_password from UserInfo where user_name = #{userName,jdbcType=VARCHAR} limit 1
+  <select id="checkLogin" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select * 
+    from UserInfo 
+    where user_name = #{userName,jdbcType=VARCHAR} limit 1
   </select>
   <select id="selectUserByIsPass" resultMap="BaseResultMap" parameterType="java.lang.Integer">
   	select user_name, user_register_time 
@@ -39,7 +41,7 @@
   	update UserInfo set user_password = #{newPwd,jdbcType=VARCHAR} 
   	where user_name = #{userName,jdbcType=VARCHAR} 
   </update>
-  
+
   <!--*********用于获取一些智能下拉提示*********-->
   <select id="getUserNames" resultType="java.lang.String" parameterType="java.lang.String">
   	select user_name from UserInfo where user_name like CONCAT(CONCAT(#{user_name},'%'))
