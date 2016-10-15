@@ -18,6 +18,7 @@ http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 
 	<!-- 自动扫描(自动注入) -->
 	<context:component-scan base-package="com.lx.serviceimpl" />
+	<context:component-scan base-package="com.qmd.serviceimpl" />
 
 	<!-- JNDI方式配置数据源 -->
 	<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> 
@@ -71,11 +72,11 @@ http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-		<property name="mapperLocations" value="classpath:com/lx/mapping/*.xml"/>
+		<property name="mapperLocations" value="classpath:com/lx/mapping/*.xml,classpath:com/qmd/mapping/*.xml"/>
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.lx.dao" />
+		<property name="basePackage" value="com.lx.dao,com.qmd.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
