@@ -15,7 +15,7 @@
   </sql>
 
   <!--*********用于处理一些业务逻辑的方法*********-->
-  <update id="updateUsersCheck" >
+  <update id="updateUsersCheck">
   	UPDATE UserInfo set user_check = '1' where user_name in
   		<foreach collection="userNames" item="userName" index="index" open="(" close=")" separator=",">
   			#{userName}

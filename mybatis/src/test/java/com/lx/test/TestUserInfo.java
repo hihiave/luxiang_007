@@ -29,7 +29,7 @@ public class TestUserInfo {
 
 	@Test
 	public void TestAddUserInfo() {
-		boolean d = userInfoService.addUserInfo("QQQQQQQQ");
+		boolean d = userInfoService.addUserInfo("dddddddffdd");
 		logger.info("===你你你你你==" + d);
 	}
 
@@ -40,7 +40,7 @@ public class TestUserInfo {
 
 	@Test
 	public void TestUpdateUsersCheck() {
-		boolean d = userInfoService.updateUsersCheck("皇上", "李嘻嘻", "李百度", "爹欧尼");
+		boolean d = userInfoService.updateUsersCheck("rr", "ee");
 		logger.info("批量审核通过=" + d);
 	}
 
@@ -59,11 +59,11 @@ public class TestUserInfo {
 		logger.info("===E=====" + userInfos.get(2) + "==");
 		logger.info("==============haha=============");
 	}
-	
+
 	@Test
-	public void TestGetCountWithNotPass(){
+	public void TestGetCountWithNotPass() {
 		int i = userInfoService.getCountWithNotPass();
-	
+
 		logger.info("=======TestGetCountWithNotPass=====" + i);
 	}
 
@@ -97,12 +97,10 @@ public class TestUserInfo {
 	@Test
 	public void TestCheckUserIsExist() {
 		boolean d = userInfoService.checkUserIsExist("luxiang11");
-		
+
 		logger.info("===CheckUserIsExist====" + d + "==");
 	}
-	
-	
-	
+
 	@Test
 	public void TestGetUserNames() {
 		List<String> userNames = userInfoService.getUserNames("李");
