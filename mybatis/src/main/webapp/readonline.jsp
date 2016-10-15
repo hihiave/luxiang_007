@@ -6,7 +6,7 @@
   </head>
   <body>
   
- <form name="form3" method="post" action="/mybatis/ReadOnlineController" >
+ <form name="form3" method="post" action="/mybatis/DocConverterController" >
 <input type= "text" name="filename" id="filename">
  
 <input type="submit" name="submit" value="查看"> 

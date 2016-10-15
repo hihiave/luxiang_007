@@ -39,6 +39,16 @@
     where file_category=#{fileCategory,jdbcType=VARCHAR}
   </select>
   
+  
+  <select id="selectByCategory" resultMap="BaseResultMap" parameterType="java.lang.String">
+   select 
+   <include refid="Base_Column_List" />
+   from File
+   where file_category=#{fileCategory,jdbcType=VARCHAR}
+  </select>
+
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from File
     where file_id = #{fileId,jdbcType=INTEGER}

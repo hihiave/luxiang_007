@@ -1,5 +1,7 @@
 package com.qmd.dao;
 
+import java.util.List;
+
 import com.qmd.model.FileInfo;
 
 public interface FileInfoMapper {
@@ -13,6 +15,8 @@ public interface FileInfoMapper {
     
     FileInfo selectByFileName(String fileName);
     
+    List<FileInfo> selectByCategory(String fileCategory);
+    
     int selectCountByFileCategory(String fileCategory);
 
     int updateByPrimaryKeySelective(FileInfo record);
@@ -20,5 +24,6 @@ public interface FileInfoMapper {
     int updateByPrimaryKey(FileInfo record);
     
     int updateFileStatusByCategory(String fileCategory);
+    
     
 }

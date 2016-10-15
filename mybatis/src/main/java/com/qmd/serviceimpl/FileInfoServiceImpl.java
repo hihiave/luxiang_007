@@ -1,5 +1,7 @@
 package com.qmd.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +65,11 @@ public class FileInfoServiceImpl implements FileInfoService {
 			return true;
 		else
 			return false;
+	}
+
+	@Override
+	public List<FileInfo> getFileInfoByCategory(String fileCategory) {
+		return fileInfoMapper.selectByCategory(fileCategory);
 	}
 
 }

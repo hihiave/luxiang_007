@@ -1,5 +1,7 @@
 package com.qmd.service;
 
+import java.util.List;
+
 import com.qmd.model.FileInfo;
 
 public interface FileInfoService {
@@ -53,6 +55,13 @@ public interface FileInfoService {
 	 * @return  boolean值 true代表更新成功
 	 */
     public boolean updateFileStatusByFileCategory(String fileCategory);
+    
+    /**
+     * @author 米登
+     * @param String 文件种类
+     * @return FileInfo 类型的文件信息
+     */
+   public List<FileInfo> getFileInfoByCategory(String fileCategory);
 }
 
 
