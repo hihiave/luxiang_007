@@ -29,7 +29,7 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	@Override
-	public boolean addFileInfo(FileInfo fileInfo){
+	public boolean addFileInfo(FileInfo fileInfo) {
 		int i = fileInfoMapper.insert(fileInfo);
 		System.out.println("_____" + i + "----");
 		return true;

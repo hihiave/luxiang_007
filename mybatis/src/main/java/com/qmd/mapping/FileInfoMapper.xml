@@ -48,7 +48,6 @@
   </select>
 
   
-  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from File
     where file_id = #{fileId,jdbcType=INTEGER}

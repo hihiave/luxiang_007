@@ -20,7 +20,6 @@
     where category_id = #{categoryId,jdbcType=INTEGER}
   </delete>
   
-  
   <insert id="insert" parameterType="com.qmd.model.Category" >
     insert into Category (category_id, category_name, category_status
       )

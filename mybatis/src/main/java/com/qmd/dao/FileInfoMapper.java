@@ -5,25 +5,24 @@ import java.util.List;
 import com.qmd.model.FileInfo;
 
 public interface FileInfoMapper {
-    int deleteByPrimaryKey(Integer fileId);
+	int deleteByPrimaryKey(Integer fileId);
 
-    int insert(FileInfo record);
+	int insert(FileInfo record);
 
-    int insertSelective(FileInfo record);
+	int insertSelective(FileInfo record);
 
-    FileInfo selectByPrimaryKey(Integer fileId);
-    
-    FileInfo selectByFileName(String fileName);
-    
-    List<FileInfo> selectByCategory(String fileCategory);
-    
-    int selectCountByFileCategory(String fileCategory);
+	FileInfo selectByPrimaryKey(Integer fileId);
 
-    int updateByPrimaryKeySelective(FileInfo record);
+	FileInfo selectByFileName(String fileName);
 
-    int updateByPrimaryKey(FileInfo record);
-    
-    int updateFileStatusByCategory(String fileCategory);
-    
-    
+	List<FileInfo> selectByCategory(String fileCategory);
+
+	int selectCountByFileCategory(String fileCategory);
+
+	int updateByPrimaryKeySelective(FileInfo record);
+
+	int updateByPrimaryKey(FileInfo record);
+
+	int updateFileStatusByCategory(String fileCategory);
+
 }
