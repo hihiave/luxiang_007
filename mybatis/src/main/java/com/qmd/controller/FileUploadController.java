@@ -23,114 +23,123 @@ import com.qmd.model.FileInfo;
  */
 public class FileUploadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FileUploadController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public FileUploadController() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
-		String   savePath="G:/Users";
-		System.out.println("+++=+=========");	
-		
-		String message=" "; //消息提示
-//		String savePath=defaultPath+category;
-//		System.out.println(savePath);
-//		
-//		String savePath=this.getServletContext().getRealPath("/WEB-INF/upload");// TODO Auto-generated method stub
-//		String tempPath=this.getServletContext().getRealPath("/WEB-INF/temp");
-		
-		String tempPath="G:/temp";
-		File tempFile=new File(tempPath);
-		if(!tempFile.exists()){
-			System.out.println(tempPath+"临时目录不存在，需要创建");
-			tempFile.mkdir();//创建临时目录//
+		String savePath = "G:/Users";
+		System.out.println("+++=+=========");
+
+		String message = " "; // 消息提示
+		// String savePath=defaultPath+category;
+		// System.out.println(savePath);
+		//
+		// String
+		// savePath=this.getServletContext().getRealPath("/WEB-INF/upload");//
+		// TODO Auto-generated method stub
+		// String
+		// tempPath=this.getServletContext().getRealPath("/WEB-INF/temp");
+
+		String tempPath = "G:/temp";
+		File tempFile = new File(tempPath);
+		if (!tempFile.exists()) {
+			System.out.println(tempPath + "临时目录不存在，需要创建");
+			tempFile.mkdir();// 创建临时目录//
 		}
-//		
-//		
-		try{
-			DiskFileItemFactory factory=new DiskFileItemFactory();//创建DiskFileItemFactory工厂
-			factory.setSizeThreshold(1024*100);//设置工厂缓冲区大小，默认是10KB 这里设为100KB
-			factory.setRepository(tempFile);//设置上传时生成的临时文件的保存目录
-			ServletFileUpload upload=new ServletFileUpload(factory);//创建文件上传解析器
+		//
+		//
+		try {
+			DiskFileItemFactory factory = new DiskFileItemFactory();// 创建DiskFileItemFactory工厂
+			factory.setSizeThreshold(1024 * 100);// 设置工厂缓冲区大小，默认是10KB 这里设为100KB
+			factory.setRepository(tempFile);// 设置上传时生成的临时文件的保存目录
+			ServletFileUpload upload = new ServletFileUpload(factory);// 创建文件上传解析器
 			upload.setHeaderEncoding("UTF-8");
-			if(!ServletFileUpload.isMultipartContent(request)){
-				return;	
+			if (!ServletFileUpload.isMultipartContent(request)) {
+				return;
 			}
-			upload.setFileSizeMax(1024*1024);//单个文件的最大大小 这里是1M
-			upload.setSizeMax(1024*1024*10);//文件总大小 这里设为10M
-			List<FileItem> list=upload.parseRequest(request);//用ServletFileUpload解析上传数据 返回一个List<FileItem>集合 每一个FileItem对应一个Form表单的输入项
+			upload.setFileSizeMax(1024 * 1024);// 单个文件的最大大小 这里是1M
+			upload.setSizeMax(1024 * 1024 * 10);// 文件总大小 这里设为10M
+			List<FileItem> list = upload.parseRequest(request);// 用ServletFileUpload解析上传数据
+																// 返回一个List<FileItem>集合
+																// 每一个FileItem对应一个Form表单的输入项
 			System.out.println(list.size());
-			for(FileItem item:list){
-				
-				//如果fileitem中封装的是普通输入项的数据
-				if(item.isFormField()){
-					String name=item.getFieldName();
-					String value=item.getString("UTF-8");
-					System.out.println(name+"="+value);
-				}
-				else{//如果fileitem中封装的是上传文件
-					String fileName=item.getName();
-					if(fileName==null||fileName.trim().equals("")){
+			for (FileItem item : list) {
+
+				// 如果fileitem中封装的是普通输入项的数据
+				if (item.isFormField()) {
+					String name = item.getFieldName();
+					String value = item.getString("UTF-8");
+					System.out.println(name + "=" + value);
+				} else {// 如果fileitem中封装的是上传文件
+					String fileName = item.getName();
+					if (fileName == null || fileName.trim().equals("")) {
 						continue;
 					}
-					//注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的，//
-					//如：  c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt处理获取到的上传文件的文件名的路径部分，只保留文件名部分
-//					fileName=fileName.substring(fileName.lastIndexOf("\\")+1);
-					
-					int index=fileName.lastIndexOf(".");
-					String fileExtName=fileName.substring(index+1);
-					System.out.println("上传文件的扩展名是"+fileExtName);
-					//获取item中上传文件的输入流
-					InputStream in=item.getInputStream();
-					//创建一个文件输出流
-					FileOutputStream out=new FileOutputStream(savePath+"/"+fileName);
-					//创建一个缓存区
-					byte buffer[]=new byte[1024];
-					//建立一个标志判断输入流中的数据是否已经读完
-					int len=0;
-					//循环将输入流读入到缓冲区当中，(len=in.read(buffer))>0就表示in里面还有数据
-					while((len=in.read(buffer))>0){
+					// 注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的，//
+					// 如：
+					// c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt处理获取到的上传文件的文件名的路径部分，只保留文件名部分
+					// fileName=fileName.substring(fileName.lastIndexOf("\\")+1);
+
+					int index = fileName.lastIndexOf(".");
+					String fileExtName = fileName.substring(index + 1);
+					System.out.println("上传文件的扩展名是" + fileExtName);
+					// 获取item中上传文件的输入流
+					InputStream in = item.getInputStream();
+					// 创建一个文件输出流
+					FileOutputStream out = new FileOutputStream(savePath + "/" + fileName);
+					// 创建一个缓存区
+					byte buffer[] = new byte[1024];
+					// 建立一个标志判断输入流中的数据是否已经读完
+					int len = 0;
+					// 循环将输入流读入到缓冲区当中，(len=in.read(buffer))>0就表示in里面还有数据
+					while ((len = in.read(buffer)) > 0) {
 						out.write(buffer, 0, len);
 					}
 					in.close();
 					out.close();
 					item.delete();
-					message="文件上传成功！";
+					message = "文件上传成功！";
 				}
 			}
-		}catch(FileUploadBase.FileSizeLimitExceededException e){
+		} catch (FileUploadBase.FileSizeLimitExceededException e) {
 			e.printStackTrace();
 			request.setAttribute("message", "单个文件超出最大值");
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 			return;
-		}catch(FileUploadBase.SizeLimitExceededException e){
+		} catch (FileUploadBase.SizeLimitExceededException e) {
 			e.printStackTrace();
 			request.setAttribute("message", "上传文件的总大小超出最大值");
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 			return;
-		}catch(Exception e){
-			message="文件上传失败";
+		} catch (Exception e) {
+			message = "文件上传失败";
 			e.printStackTrace();
 		}
 		request.setAttribute("message", message);
 		request.getRequestDispatcher("/message.jsp").forward(request, response);
-		//System.out.println;
+		// System.out.println;
 	}
 
 }
