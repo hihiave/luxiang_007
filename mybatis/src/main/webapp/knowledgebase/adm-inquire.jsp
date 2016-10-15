@@ -1,5 +1,8 @@
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
     <%
         if(session.getAttribute("username")!=null){
 %>
@@ -27,6 +30,7 @@
 <script src="/mybatis/knowledgebase/js/bootstrap.min.js"></script>
 <script src="/mybatis/knowledgebase/js/html5shiv.min.js"></script>
 <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
+<script src="/mybatis/knowledgebase/js/adm_inquire.js"></script>
 
 <style type="text/css">
 .nav{
@@ -44,6 +48,13 @@ width: 1320px !important;
 
 </head>
 <body>
+
+<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
+                   url="jdbc:mysql://123.207.84.55:3306/knowledge?useUnicode=true&characterEncoding=utf-8"
+                   user="root"  password="luxiang"/>
+<sql:query dataSource="${snapshot}" var="result">
+    SELECT * from UserInfo where user_check=1;
+</sql:query>
 
 <div style="margin:10px 20px;">
 	<button type="button" class="btn btn-md btn-default" style="border:0px;float:right;" data-toggle="tooltip" data-placement="bottom" title="退出登录">
@@ -124,36 +135,59 @@ width: 1320px !important;
 							<th style="font-size:16px;"></th>
 							<th style="font-size:16px;">用户名</th>
 							<th style="padding-bottom:5px;padding-top:0px;width:285px;"><input type="text" id="search-in" name="" style="height:34px;width:273px;"></th>
-							<th style="padding-bottom:5px;padding-top:0px;width:116px;"><button class="btn btn-info" id="search-user">搜索用户</button></th>
+							<th style="padding-bottom:5px;padding-top:0px;width:116px;"><button class="btn btn-info" id="search-user" onclick="searchuser()" >搜索用户</button></th>
 							<th style="padding-bottom:5px;padding-top:0px;width:116px;"><button class="btn btn-info" data-toggle="modal" data-target="#tianjia">添加用户</button></th>
 							</tr>
 							</thead>
 							<tbody id="search_result">
-							<tr>
-							<td>1</td>
-							<td id="name1">张三</td>
-							<td></td>
-							<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#shanchu">删除用户</button></th>
-							<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#chongzhi">重置密码</button></th>
-							</tr>
-							<tr>
-							<td>2</td>
-							<td id="name2">李四</td>
-							<td></td>
-							<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">删除用户</button></th>
-							<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">重置密码</button></th>
-							</tr>
-							</tr>
-							<tr>
-							<td>3</td>
-							<td id="name3">王五</td>
-							<td></td>
-							<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">删除用户</button></th>
-							<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">重置密码</button></th>
-							</tr>
+                            <c:forEach var="row" items="${result.rows}" varStatus="status">
+                                <tr>
+                                    <td><c:out value="${status.index+1}"/></td>
+                                    <td class="Name"><c:out value="${row.user_name}"/></td>
+                                    <td></td>
+                                    <td style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="" onclick="deleteUser(this)">删除用户</button></td>
+                                    <td style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="" onclick="user_selected(this)">重置密码</button></td>
+
+                                </tr>
+                            </c:forEach>
+
+							<%--<tr>--%>
+							<%--<td>1</td>--%>
+							<%--<td id="name1">张三</td>--%>
+							<%--<td></td>--%>
+							<%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#shanchu">删除用户</button></th>--%>
+							<%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#chongzhi">重置密码</button></th>--%>
+							<%--</tr>--%>
+							<%--<tr>--%>
+							<%--<td>2</td>--%>
+							<%--<td id="name2">李四</td>--%>
+							<%--<td></td>--%>
+							<%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">删除用户</button></th>--%>
+							<%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">重置密码</button></th>--%>
+							<%--</tr>--%>
+							<%--</tr>--%>
+							<%--<tr>--%>
+							<%--<td>3</td>--%>
+							<%--<td id="name3">王五</td>--%>
+							<%--<td></td>--%>
+							<%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">删除用户</button></th>--%>
+							<%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">重置密码</button></th>--%>
+							<%--</tr>--%>
 							</tbody>
 							</table>
-						</div>	
+						</div>
+
+                        <div style="margin-top: -20px;float: right;">
+                            <ul class="pagination">
+                                <li><a href="#">&laquo;</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li ><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </div>
 				</div>
 			
 </div>
@@ -161,37 +195,37 @@ width: 1320px !important;
 </div>
 
 
-<div class="modal fade" id="shanchu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="shanchu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_delete">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
        
-        <h4 class="modal-title" id="myModalLabel">提示</h4>
+        <h4 class="modal-title" id="myModalLabel_delete">提示</h4>
       </div>
       <div class="modal-body">
-        确认删除该用户吗?
+        <p id="adm_delete"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="delete_ok(this)">确认</button>
       </div>
     </div>
   </div>
 </div>	
 
-<div class="modal fade" id="chongzhi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="chongzhi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_resetpsw">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
        
-        <h4 class="modal-title" id="myModalLabel">提示</h4>
+        <h4 class="modal-title" id="myModalLabel_resetpsw">提示</h4>
       </div>
       <div class="modal-body">
-        是否重置该用户密码?
+        <p id="reset_user_password"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">否</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">是</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="resetUserPassword(this)">是</button>
       </div>
     </div>
   </div>
@@ -213,83 +247,11 @@ width: 1320px !important;
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary " id="btnclick" >确认</button>
+        <button type="button" class="btn btn-primary " id="btnclick" onclick="admadduser()" >确认</button>
       </div>
     </div>
   </div>
 </div>
-                <script type="text/javascript">
-                    window.onload = function () {
-                        var btnobj = document.getElementById("btnclick");
-                        var username1obj = document.getElementById("username1");
-                        var spanusernameobj = document.getElementById("spanusername");
-//                        btnobj.onclick = checkname;
-//                        function checkname() {
-//                            if (username1obj.value.length == 0) {
-//                                var msg = "<font color='red' size='1px'>用户名不能为空!</font>";
-//                            }
-//                            else {
-//                                var msg = null;
-//                            }
-//                            spanusernameobj.innerHTML = msg;
-//                            return;
-//                        }
-                    }
-                </script>
-                <script type="text/javascript">
-                    $(function () {
-                        $("#btnclick").click(function () {
-                            if($("#username1").val() != null) {
-                                $.ajax(
-                                        {
-                                            type:'post',
-                                            url:"/mybatis/UserInfoController/adm-adduser.do",
-                                            data:{username:$("#username1").val()}
-                                        }
-                                )
-
-                            }
-                        })
-                    });
-                    $(function () {
-                        $("#search-user").click(function () {
-                            if($("#search-in").val() != "") {
-                                console.log("sssssss"+$("#search-in").val());
-                                $.ajax(
-                                        {
-                                            type:'post',
-                                            url:"/mybatis/UserInfoController/inquire.do",
-                                            data:{username_search:$("#search-in").val()},
-                                            dataType:"json",
-                                            success:function(data){
-                                                $("#search_result>tr").remove();
-//                                                console.log(data["UserInfo_search"]);
-                                                var searchuser = data["UserInfo_search"];
-
-                                                console.log(searchuser.length);
-                                                console.log(searchuser[0].userName);
-
-                                                for(var i = 0; i < searchuser.length; i++){
-                                                    var tr_begin = "<tr>";
-                                                    var tr_end = "</tr>";
-                                                    var td_1 = "<td>"+(i+1)+"</td>";
-                                                    var td_2 = "<td>"+searchuser[i].userName+"</td>"
-                                                    var td_3 = "<td></td>";
-                                                    var td_4 = "<td style='padding-bottom:3px;padding-top:3px;width:116px;'>"+"<button class='btn btn-primary'>删除用户</button>"+"</td>";
-                                                    var td_5 = "<td style='padding-bottom:3px;padding-top:3px;width:116px;'>"+"<button class='btn btn-primary'>重置密码</button>"+"</td>";
-                                                    var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
-                                                    $("#search_result").append(content);
-                                                }
-                                            }
-                                        }
-                                )
-
-                            }else{
-                                alert("nullccc");
-                            }
-                        })
-                    });
-                </script>
 
 <style type="text/css">
 	.modal{margin-top:20%;}

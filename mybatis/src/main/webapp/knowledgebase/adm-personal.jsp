@@ -48,6 +48,7 @@ width: 1320px !important;
 		var psw1obj=document.getElementById("password1");
 		var psw2obj=document.getElementById("password2");
 		var btnobj=document.getElementById("btnclick");
+        var username = '<%=session.getAttribute("username")%>';
 		var oldpsw='<%=session.getAttribute("password")%>';
 		oldpswobj.onblur=checkoldpsw;
 		psw1obj.onblur=checkpsw;
@@ -81,6 +82,22 @@ width: 1320px !important;
 			}
 			else{
 	 			var msg="";
+                $.ajax(
+                        {
+                            type:'post',
+                            url:"/mybatis/UserInfoController/alterpsw.do",
+                            data:{"username":username,"oldpassword":oldpsw,"newpassword":psw1obj.value},
+                            dataType:"json",
+                            success:function(data){
+                                var result = data["flag"];
+                                if(result){
+                                    alert("修改密码成功！");
+                                }else{
+                                    alert("修改密码失败");
+                                }
+                            }
+                        }
+                )
 	 		}
 			var span=document.getElementById("spanrepsw");
 			span.innerHTML=msg;
@@ -179,8 +196,34 @@ width: 1320px !important;
 			 				</div>
 						</div>	
 				</div>
-			
+            </div>
+        </div>
+    <div class="modal fade" id="changepsw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+                </div>
+                <div class="modal-body">
+                    <ul style="padding-left:0px;">
+                        <li><input type="password" placeholder="请输入原密码" class="form-control" id="oldpsw"></li>
+                        <div id="spanusername" style="margin-left:6px;margin-bottom:10px;height:6px;"></div>
+                        <li><input type="password"  id="password1" class="form-control" placeholder="请输入新密码"></li>
+                        <div id="spanpsw" style="margin-left:6px;margin-bottom:10px;height:6px;"></div>
+                        <li><input type="password"  id="password2" class="form-control"  placeholder="请再次输入新密码"></li>
+                        <div id="spanrepsw" style="margin-left:6px;margin-bottom:10px;height:6px;"></div>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary " id="btnclick" data-dismiss="">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 
 
 

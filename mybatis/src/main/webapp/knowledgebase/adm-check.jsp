@@ -1,3 +1,5 @@
+<%--<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>--%>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    
@@ -30,6 +32,7 @@
 <script src="/mybatis/knowledgebase/js/bootstrap.min.js"></script>
 <script src="/mybatis/knowledgebase/js/html5shiv.min.js"></script>
 <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
+<script src="/mybatis/knowledgebase/js/adm_check.js"></script>
 
 <style type="text/css">
 .nav{
@@ -44,26 +47,33 @@ width: 1320px !important;
 }
 
 </style>
-<script type="text/javascript">
-function selectAll() { 
-var ckbs=document.getElementsByName("checkAll");
-var cka=document.getElementById("selAll");
-if (cka.checked==true) {
-	for (var i = 0; i < ckbs.length; i++) {
-		ckbs[i].checked=true;
-	}
-}
-else{
-	for (var i = 0; i < ckbs.length; i++) {
-		ckbs[i].checked=false;
-	}
-}
-}
+<%--<script type="text/javascript">--%>
+<%--function selectAll() { --%>
+<%--var ckbs=document.getElementsByName("checkAll");--%>
+<%--var cka=document.getElementById("selAll");--%>
+<%--if (cka.checked==true) {--%>
+	<%--for (var i = 0; i < ckbs.length; i++) {--%>
+		<%--ckbs[i].checked=true;--%>
+	<%--}--%>
+<%--}--%>
+<%--else{--%>
+	<%--for (var i = 0; i < ckbs.length; i++) {--%>
+		<%--ckbs[i].checked=false;--%>
+	<%--}--%>
+<%--}--%>
+<%--}--%>
 
 
-</script>
+<%--</script>--%>
 </head>
 <body>
+
+<%--<sql:setDataSource var="snapshot_check" driver="com.mysql.jdbc.Driver"--%>
+                   <%--url="jdbc:mysql://123.207.84.55:3306/knowledge?useUnicode=true&characterEncoding=utf-8"--%>
+                   <%--user="root"  password="luxiang"/>--%>
+<%--<sql:query dataSource="${snapshot_check}" var="check_result">--%>
+    <%--SELECT * from UserInfo where user_check != 1;--%>
+<%--</sql:query>--%>
 
 <div style="margin:10px 20px;">
 	<button type="button" class="btn btn-md btn-default" style="border:0px;float:right;" data-toggle="tooltip" data-placement="bottom" title="退出登录">
@@ -144,62 +154,73 @@ else{
                                     <th style="padding-left: 28px;border-bottom-width: 2px;padding-bottom: 4px;width: 78px;"><label class="checkbox"><input type="checkbox" id="selAll" onclick="selectAll()">全选 </label></th>
                                     <th style="padding-bottom:15px;">用户名</th>
                                     <th style="padding-bottom:15px;">审核状态</th>
-                                    <th style="width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#tongguo">通过</button></th>
+                                    <th style="width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#tongguo" onclick="check_all_pick(this)">通过</button></th>
                                     <th style="width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#jujue">拒绝</button></th>
                                 </tr>
                                 </thead>
-                                <tbody id="list">
-                                <tr>
-                                    <td style="padding-top:15px;"><label><input type="checkbox" name="checkAll"></label></td>
-                                    <td style="padding-top:15px;">哈利路亚</td>
-                                    <td style="padding-top:15px;padding-left:15px;">待审核</td>
-                                    <td><button class="btn btn-primary">通过</button></td>
-                                    <td><button class="btn btn-primary">拒绝</button></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-top:15px;"><label><input type="checkbox" name="checkAll"></label></td>
-                                    <td style="padding-top:15px;">哈利路亚</td>
-                                    <td style="padding-top:15px;padding-left:15px;">待审核</td>
-                                    <td><button class="btn btn-primary">通过</button></td>
-                                    <td><button class="btn btn-primary">拒绝</button></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-top:15px;"><label><input type="checkbox" name="checkAll"></label></td>
-                                    <td style="padding-top:15px;">哈利路亚</td>
-                                    <td style="padding-top:15px;padding-left:15px;">待审核</td>
-                                    <td><button class="btn btn-primary">通过</button></td>
-                                    <td><button class="btn btn-primary">拒绝</button></td>
-                                </tr>
+                                <tbody id="check_result">
+                                <%--<c:forEach var="row_check" items="${check_result.rows}" varStatus="status">--%>
+                                    <%--<tr>--%>
+                                        <%--<td style="padding-top:15px;"><input type="checkbox" name="checkAll"></td>--%>
+                                        <%--<td class="Name" style="padding-top:15px;"><c:out value="${row_check.user_name}"/></td>--%>
+                                        <%--<td style="padding-top:15px;padding-left:15px;">待审核</td>--%>
+                                        <%--<td><button class="btn btn-primary" onclick="check_one_pick(this)">通过</button></td>--%>
+                                        <%--<td><button class="btn btn-primary">拒绝</button></td>--%>
+
+                                    <%--</tr>--%>
+                                <%--</c:forEach>--%>
+
+                                <%--<tr>--%>
+                                    <%--<td style="padding-top:15px;"><label><input type="checkbox" name="checkAll"></label></td>--%>
+                                    <%--<td style="padding-top:15px;">哈利路亚</td>--%>
+                                    <%--<td style="padding-top:15px;padding-left:15px;">待审核</td>--%>
+                                    <%--<td><button class="btn btn-primary">通过</button></td>--%>
+                                    <%--<td><button class="btn btn-primary">拒绝</button></td>--%>
+                                <%--</tr>--%>
+                                <%--<tr>--%>
+                                    <%--<td style="padding-top:15px;"><label><input type="checkbox" name="checkAll"></label></td>--%>
+                                    <%--<td style="padding-top:15px;">哈利路亚</td>--%>
+                                    <%--<td style="padding-top:15px;padding-left:15px;">待审核</td>--%>
+                                    <%--<td><button class="btn btn-primary">通过</button></td>--%>
+                                    <%--<td><button class="btn btn-primary">拒绝</button></td>--%>
+                                <%--</tr>--%>
+                                <%--<tr>--%>
+                                    <%--<td style="padding-top:15px;"><label><input type="checkbox" name="checkAll"></label></td>--%>
+                                    <%--<td style="padding-top:15px;">哈利路亚</td>--%>
+                                    <%--<td style="padding-top:15px;padding-left:15px;">待审核</td>--%>
+                                    <%--<td><button class="btn btn-primary">通过</button></td>--%>
+                                    <%--<td><button class="btn btn-primary">拒绝</button></td>--%>
+                                <%--</tr>--%>
 
                                 </tbody>
                             </table>
                         </div>
                     </div>
 				</div>
-                <div class="modal fade" id="changepsw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-person">
-                    <div class="modal-dialog modal-sm" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
+                <%--<div class="modal fade" id="changepsw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-person">--%>
+                    <%--<div class="modal-dialog modal-sm" role="document">--%>
+                        <%--<div class="modal-content">--%>
+                            <%--<div class="modal-header">--%>
 
-                                <h4 class="modal-title" id="myModalLabel-person">修改密码</h4>
-                            </div>
-                            <div class="modal-body">
-                                <ul style="padding-left:0px;">
-                                    <li><input type="password" placeholder="请输入原密码" class="form-control" id="oldpsw"></li>
-                                    <div id="spanusername" style="margin-left:6px;margin-bottom:10px;height:6px;"></div>
-                                    <li><input type="password"  id="password1" class="form-control" placeholder="请输入新密码"></li>
-                                    <div id="spanpsw" style="margin-left:6px;margin-bottom:10px;height:6px;"></div>
-                                    <li><input type="password"  id="password2" class="form-control"  placeholder="请再次输入新密码"></li>
-                                    <div id="spanrepsw" style="margin-left:6px;margin-bottom:10px;height:6px;"></div>
-                                </ul>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                <button type="button" class="btn btn-primary " id="btnclick" data-dismiss="">确认</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                <%--<h4 class="modal-title" id="myModalLabel-person">修改密码</h4>--%>
+                            <%--</div>--%>
+                            <%--<div class="modal-body">--%>
+                                <%--<ul style="padding-left:0px;">--%>
+                                    <%--<li><input type="password" placeholder="请输入原密码" class="form-control" id="oldpsw"></li>--%>
+                                    <%--<div id="spanusername" style="margin-left:6px;margin-bottom:10px;height:6px;"></div>--%>
+                                    <%--<li><input type="password"  id="password1" class="form-control" placeholder="请输入新密码"></li>--%>
+                                    <%--<div id="spanpsw" style="margin-left:6px;margin-bottom:10px;height:6px;"></div>--%>
+                                    <%--<li><input type="password"  id="password2" class="form-control"  placeholder="请再次输入新密码"></li>--%>
+                                    <%--<div id="spanrepsw" style="margin-left:6px;margin-bottom:10px;height:6px;"></div>--%>
+                                <%--</ul>--%>
+                            <%--</div>--%>
+                            <%--<div class="modal-footer">--%>
+                                <%--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>--%>
+                                <%--<button type="button" class="btn btn-primary " id="btnclick" data-dismiss="">确认</button>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
 
             </div>
     </div>

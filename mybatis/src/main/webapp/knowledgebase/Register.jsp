@@ -82,43 +82,43 @@ body {
 }
 </style>
 
-<script type="text/javascript">
- window.onload=function(){
- 	var usernameobj=document.getElementById("username1");
- 	var passwordobj=document.getElementById("password1");
- 	var repasswordobj=document.getElementById("password2");
- 	var registerobj=document.getElementById("register");
- 	passwordobj.onblur=checkpassword;
- 	registerobj.onclick=check;
-  	function checkpassword(){
- 		if (passwordobj.value.length==0) {
- 			var msg="<font color='red' size='2px'>密码不能为空!</font>";
- 		}
- 		else if (passwordobj.value.length<6&&passwordobj.value.length>0) {
- 			var msg="<font color='red' size='2px'>密码应大于六位数！</font>";
- 		}
- 		else{
- 			var msg="";
- 		}
- 		var span=document.getElementById("passwordspan");
- 		span.innerHTML=msg;
- 		return ;
- 	}
- 	function check(){
- 		if (passwordobj.value!=repasswordobj.value) {
- 			var msg="<font color='red' size='2px' >两次输入密码不一致！</font>";
- 			var span=document.getElementById("repasswordspan");
- 			span.innerHTML=msg;
- 		}
- 		else if (usernameobj.value.length==0) {
- 			alert("用户名不能为空！");
- 		}
- 		else{
- 			alert("信息已提交，等待管理员审核");
- 		}
- 	}
- }
-</script>
+<%--<script type="text/javascript">--%>
+ <%--window.onload=function(){--%>
+ 	<%--var usernameobj=document.getElementById("username1");--%>
+ 	<%--var passwordobj=document.getElementById("password1");--%>
+ 	<%--var repasswordobj=document.getElementById("password2");--%>
+ 	<%--var registerobj=document.getElementById("register");--%>
+ 	<%--passwordobj.onblur=checkpassword;--%>
+ 	<%--registerobj.onclick=check;--%>
+  	<%--function checkpassword(){--%>
+ 		<%--if (passwordobj.value.length==0) {--%>
+ 			<%--var msg="<font color='red' size='2px'>密码不能为空!</font>";--%>
+ 		<%--}--%>
+ 		<%--else if (passwordobj.value.length<6&&passwordobj.value.length>0) {--%>
+ 			<%--var msg="<font color='red' size='2px'>密码应大于六位数！</font>";--%>
+ 		<%--}--%>
+ 		<%--else{--%>
+ 			<%--var msg="";--%>
+ 		<%--}--%>
+ 		<%--var span=document.getElementById("passwordspan");--%>
+ 		<%--span.innerHTML=msg;--%>
+ 		<%--return ;--%>
+ 	<%--}--%>
+ 	<%--function check(){--%>
+ 		<%--if (passwordobj.value!=repasswordobj.value) {--%>
+ 			<%--var msg="<font color='red' size='2px' >两次输入密码不一致！</font>";--%>
+ 			<%--var span=document.getElementById("repasswordspan");--%>
+ 			<%--span.innerHTML=msg;--%>
+ 		<%--}--%>
+ 		<%--else if (usernameobj.value.length==0) {--%>
+ 			<%--alert("用户名不能为空！");--%>
+ 		<%--}--%>
+ 		<%--else{--%>
+ 			<%--alert("信息已提交，等待管理员审核");--%>
+ 		<%--}--%>
+ 	<%--}--%>
+ <%--}--%>
+<%--</script>--%>
 </head>
 <body>
 	
@@ -129,28 +129,74 @@ body {
 		<div class="login-mid">
 	
 			<div class="biao2 container" >
-			<form action="/mybatis/UserInfoController/regist.do" method="post">
+
 				 <div class="name2">用户注册</div>
 				 <div class="loginform loginusername" style="margin-bottom:5px;margin-top:5px;">
-				 	<input type="text"  id="username1" placeholder="请输入用户名">
+				 	<input type="text"  id="username1" name="username1" placeholder="请输入用户名">
 				 </div>
-				 <div style="height:16px" ></div>
+				 <div style="height:16px" id="username_span" ></div>
 				 <div class="loginform loginpassword" style="margin-bottom:5px;margin-top:5px;">
-				 	<input type="password"    id="password1" placeholder="请输入密码">
+				 	<input type="password"    id="password1" name="password1" placeholder="请输入密码">
 				 </div>
-				 <div id="passwordspan" style="height:16px" ></div>
+				 <div id="passwor1_span" style="height:16px" ></div>
 				 <div class="loginform loginpassword" style="margin-bottom:5px;margin-top:5px;">
-				 	<input type="password"    id="password2" placeholder="请再次输入密码">
+				 	<input type="password"    id="password2" name="password2" placeholder="请再次输入密码">
 				 </div>
-				<div id="repasswordspan" style="height:16px"></div>
+				<div id="password2_span" style="height:16px"></div>
 				<div class="button-group" style="margin-top:5px;">
 				<input type="button" class="btn btn-primary" id="register" value="注册" >
 				<a href="../knowledgebase/Login.jsp"><input type="button" class="btn btn-primary" value="取消" style="float:right;"></a>
 				</div>
-			</form>
+
      		</div>
 		</div>
 	</div>
 	<div class="footer"> <span class="footerText">Copyright © 1956-2016 电子科技大学</span> </div>
+    <script type="text/javascript">
+        $(function(){
+            $("#register").click(function(){
+                var username1 = $("#username1").val();
+                var password1 = $("#password1").val();
+                var password2 = $("#password2").val();
+                if(username1 == ""){
+                    $("#username_span").html("<font color='red' size='2px'>用户名不能为空!</font>");
+                    return;
+                }else{
+                    $("#username_span").html("");
+                }
+                if(password1.length < 6 && password1.length > 0){
+                    $("#password1_span").html("<font color='red' size='2px'>密码长度不能小于六位数!</font>");
+                    return;
+                }else{
+                    $("#password1_span").html("");
+                }
+                if(password1 == ""){
+                    $("#password1_span").html("<font color='red' size='2px'>密码不能为空!</font>");
+                    return
+                }else{
+                    $("#password1_span").html("");
+                }
+                if(password1 != password2){
+                    $("#password2_span").html("<font color='red' size='2px'>两次密码不一致!</font>");
+                    return;
+                }else{
+                    $("#password2_span").html("");
+                }
+                $.ajax({
+                    type:'post',
+                    url:"/mybatis/UserInfoController/regist.do",
+                    dataType:'json',
+                    data:{"username1":username1,"password1":password1},
+                    success:function(data){
+                        if(!data["check"]){
+                            alert("注册信息提交审核!");
+                        }else{
+                            alert("用户名已存在!");
+                        }
+                    }
+                })
+            })
+        })
+    </script>
 </body>
 </html>
