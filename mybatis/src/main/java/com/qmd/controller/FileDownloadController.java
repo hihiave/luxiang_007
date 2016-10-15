@@ -2,53 +2,34 @@ package com.qmd.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class FileDownloadController
- */
-public class FileDownloadController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public FileDownloadController() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+@Controller
+@RequestMapping("/FileDownloadController")
+public class FileDownloadController {
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("/fileDownload")
+	protected void fileDownload(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		// 得到下载的文件名
 		String fileName = request.getParameter("filename");
+
+		
 		// fileName=new String(fileName.getBytes("ISO8859_1"),"UTF-8");
 		System.out.println(fileName);
-		// 获取文件的路径
-		String filePath = "G:/Users";
+
+		/* 获取文件的路径 */
+		String filePath = "F:/Users";
 		File file = new File(filePath);
 		if (!file.exists()) {
 			request.setAttribute("message", "资源不存在");

@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,41 +14,25 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.qmd.model.FileInfo;
+@Controller
+@RequestMapping("/FileUploadController")
+public class FileUploadController {
 
-/**
- * Servlet implementation class FileUploadController
- */
-public class FileUploadController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public FileUploadController() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping("/fileUpload")
+	public void fileUpload(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
-		String savePath = "G:/Users";
+		// 上传的地址
+		String savePath = "F:/Users";
+		File saveFile = new File(savePath);
+		if (!saveFile.exists()) {
+			saveFile.mkdirs();
+		}
+
 		System.out.println("+++=+=========");
 
 		String message = " "; // 消息提示
@@ -62,7 +45,7 @@ public class FileUploadController extends HttpServlet {
 		// String
 		// tempPath=this.getServletContext().getRealPath("/WEB-INF/temp");
 
-		String tempPath = "G:/temp";
+		String tempPath = "F:/temp";
 		File tempFile = new File(tempPath);
 		if (!tempFile.exists()) {
 			System.out.println(tempPath + "临时目录不存在，需要创建");
@@ -100,9 +83,16 @@ public class FileUploadController extends HttpServlet {
 					// 注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的，//
 					// 如：
 					// c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt处理获取到的上传文件的文件名的路径部分，只保留文件名部分
-					// fileName=fileName.substring(fileName.lastIndexOf("\\")+1);
 
+					fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
+					
 					int index = fileName.lastIndexOf(".");
+					String realName=fileName.substring(0, index); //文件名
+					
+					System.out.println("=======fileName========="  + fileName);
+					System.out.println("=======realName========="  + realName);
+					
+					
 					String fileExtName = fileName.substring(index + 1);
 					System.out.println("上传文件的扩展名是" + fileExtName);
 					// 获取item中上传文件的输入流

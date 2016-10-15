@@ -7,7 +7,7 @@
   
   <body>
 
- <form  name="form1" method="post" enctype="multipart/form-data" action="/mybatis/FileUploadController">
+ <form  name="form1" method="post" enctype="multipart/form-data" action="/mybatis/FileUploadController/fileUpload.do">
  <input type="text" id="filetype1" name="filetype1" >文件种类
 <input type="text" id="author" name="author">作者
  <input type="file" id="file1" name="file1">
