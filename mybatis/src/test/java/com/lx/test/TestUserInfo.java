@@ -40,7 +40,7 @@ public class TestUserInfo {
 
 	@Test
 	public void TestSelectUserByUserName() {
-		UserInfo userInfo = userInfoService.selectUserByUserName("luxiangdd");
+		UserInfo userInfo = userInfoService.selectUserByUserName("luxiangd");
 		logger.info("===userInfo==" + JSON.toJSONString(userInfo));
 	}
 

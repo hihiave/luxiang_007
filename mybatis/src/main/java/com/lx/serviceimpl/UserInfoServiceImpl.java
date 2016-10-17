@@ -128,5 +128,4 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public List<String> getUserNames(String userName) {
 		return userInfoMapper.getUserNames(userName);
 	}
-
 }
