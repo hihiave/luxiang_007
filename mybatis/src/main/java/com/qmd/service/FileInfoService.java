@@ -6,10 +6,10 @@ import com.qmd.model.FileInfo;
 
 public interface FileInfoService {
 
-	/**
+	/** 通过文件fileId查询文件
 	 * @author 米登
-	 * @param FileId
-	 * @return 一个文件信息对象fileInfo
+	 * @param fileId
+	 * @return 一个文件信息FileInfo
 	 */
 	public FileInfo getFileInfoById(int fileId);
 

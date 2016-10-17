@@ -22,6 +22,13 @@ public interface UserInfoService {
 	 */
 	public boolean registerUserInfo(String userName, String userPassword);
 	
+	/** 通过用户名查找一个用户
+	 * @author luxiang
+	 * @param userName
+	 * @return UserInfo
+	 */
+	public UserInfo selectUserByUserName(String userName);
+	
 	/** 通过用户名批量审核通过
 	 * @author luxiang
 	 * @param userNames

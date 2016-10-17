@@ -39,6 +39,12 @@ public class TestUserInfo {
 	}
 
 	@Test
+	public void TestSelectUserByUserName() {
+		UserInfo userInfo = userInfoService.selectUserByUserName("luxiangdd");
+		logger.info("===userInfo==" + JSON.toJSONString(userInfo));
+	}
+
+	@Test
 	public void TestUpdateUsersCheck() {
 		boolean d = userInfoService.updateUsersCheck("rr", "ee");
 		logger.info("批量审核通过=" + d);

@@ -45,6 +45,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
+	public UserInfo selectUserByUserName(String userName) {
+		return userInfoMapper.checkLogin(userName);
+	}
+
+	@Override
 	public boolean updateUsersCheck(String... userNames) {
 		boolean flag = false;
 		if (userNames.length == userInfoMapper.updateUsersCheck(userNames)) {
