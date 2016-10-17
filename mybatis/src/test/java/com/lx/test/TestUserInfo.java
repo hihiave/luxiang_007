@@ -90,13 +90,13 @@ public class TestUserInfo {
 
 	@Test
 	public void TestResetPassword() {
-		boolean d = userInfoService.resetPassword("你你你你你");
+		boolean d = userInfoService.resetPassword("q1111");
 		logger.info("===resetPassword====" + d + "==");
 	}
 
 	@Test
 	public void TestAlterPassword() {
-		boolean d = userInfoService.alterPassword("QQQQQQQQ", "123456", "nihao");
+		boolean d = userInfoService.alterPassword("wusongze", "123456", "456789");
 		logger.info("===alterPassword====" + d + "==");
 	}
 

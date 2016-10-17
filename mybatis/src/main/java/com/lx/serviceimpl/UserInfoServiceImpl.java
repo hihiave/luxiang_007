@@ -106,7 +106,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public boolean alterPassword(String userName, String oldPwd, String newPwd) {
 		boolean flag = false;
 		UserInfo userInfo = userInfoMapper.checkLogin(userName);
-		if (userInfo.getUserPassword().equals(oldPwd)) {
+		String temp = ToolEncryption.EncryptMD5(oldPwd);
+		if (userInfo.getUserPassword().equals(temp)) {
 			if (userInfoMapper.updateUserPassword(userName, ToolEncryption.EncryptMD5(newPwd)) == 1) {
 				flag = true;
 			}
