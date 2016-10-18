@@ -58,7 +58,7 @@ public class TestUserInfo {
 
 	@Test
 	public void TestSelectUserByIsPass() {
-		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(MacroEnum.KUserCheckType.NOTPASS);
+		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(MacroEnum.KCheckType.NOTPASS);
 		logger.info("===A====" + userInfos.isEmpty() + "==");
 		logger.info("===B=====" + userInfos.size() + "==");
 		logger.info("===HH=====" + JSON.toJSONString(userInfos.get(1)) + "==");

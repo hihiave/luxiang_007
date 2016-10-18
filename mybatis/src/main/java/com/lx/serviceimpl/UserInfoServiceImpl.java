@@ -36,12 +36,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public boolean addUserInfo(String userName) {
-		return insertUserInfo(userName, ToolEncryption.EncryptMD5("123456"), MacroEnum.KUserCheckType.PASS);
+		return insertUserInfo(userName, ToolEncryption.EncryptMD5("123456"), MacroEnum.KCheckType.PASS);
 	}
 
 	@Override
 	public boolean registerUserInfo(String userName, String userPassword) {
-		return insertUserInfo(userName, ToolEncryption.EncryptMD5(userPassword), MacroEnum.KUserCheckType.NOTPASS);
+		return insertUserInfo(userName, ToolEncryption.EncryptMD5(userPassword), MacroEnum.KCheckType.NOTPASS);
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public int getCountWithNotPass() {
-		return selectUserByIsPass(MacroEnum.KUserCheckType.NOTPASS).size();
+		return selectUserByIsPass(MacroEnum.KCheckType.NOTPASS).size();
 	}
 
 	@Override

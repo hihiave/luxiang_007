@@ -12,7 +12,7 @@ public class MacroEnum {
 	/**
 	 * 审核类型
 	 */
-	public interface KUserCheckType {
+	public interface KCheckType {
 		public static final int PASS = 1;
 		public static final int NOTPASS = 0;
 	}
