@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+
 @Controller
 @RequestMapping("/UserInfoController")
 public class UserInfoController {
@@ -38,13 +39,17 @@ public class UserInfoController {
 		System.out.println("======username=====" + username);
 		System.out.println("======password=====" + password);
         MacroEnum.KMessageType result = userInfoService.checkLogin(username, password);
+        UserInfo userInfo = userInfoService.selectUserByUserName(username);
         String str_result = "";
         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"+result);
         Map<String ,Object> map = new HashMap<String, Object>();
 		if (result == MacroEnum.KMessageType.loginSuccess) {
             str_result = "LoginSuccess";
+            httpSession.setAttribute("userinfo",userInfo);
             httpSession.setAttribute("username",username);
-            httpSession.setAttribute("password",password);
+            httpSession.setAttribute("time",userInfo.getUserRegisterTime());
+            httpSession.setAttribute("userrole",userInfo.getUserRole());
+//            httpSession.setAttribute("password",password);
 //			httpSession.setAttribute("flag", true);
             map.put("data",str_result);
 			return map;
@@ -78,13 +83,22 @@ public class UserInfoController {
         return map;
     }
 
-    @RequestMapping("/adm-adduser")
-    public String admadduser(String username, HttpServletRequest request){
+    @RequestMapping(value = "/adm-adduser" , method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> admadduser(String username, HttpServletRequest request){
         System.out.println(username+"-------___________");
-        if (userInfoService.addUserInfo(username)){
-            return "knowledgebase/adm-inquire";
+        boolean check_result = userInfoService.checkUserIsExist(username);
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (!check_result){
+            if (userInfoService.addUserInfo(username)){
+                map.put("flag","chenggong");
+                return map;
+            }
+            map.put("flag","shibai");
+            return map;
         }
-        return null;
+        map.put("flag","cunzai");
+        return map;
     }
 
 //    @RequestMapping(value="get_export_select_info", method= RequestMethod.POST)
@@ -108,6 +122,17 @@ public class UserInfoController {
 
 	}
 
+    @RequestMapping(value = "/Is_pass", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> is_pass(HttpSession httpSession,HttpServletRequest httpServletRequest) {
+
+        List<UserInfo> userInfos = userInfoService.selectUserByIsPass(1);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("UserInfo_check", userInfos);
+        return map;
+
+    }
+
 
     @RequestMapping(value = "/check", method = RequestMethod.POST)
     @ResponseBody
@@ -121,7 +146,12 @@ public class UserInfoController {
     @RequestMapping(value = "/alterpsw" ,method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> alterpassword(String username,String oldpassword,String newpassword,HttpServletRequest httpServletRequest){
-        boolean result = userInfoService.alterPassword(username,oldpassword,newpassword);
+        System.out.println("修改的用户"+username);
+        System.out.println("修改的用户"+oldpassword);
+        System.out.println("修改的用户"+newpassword);
+        boolean result = false;
+        result = userInfoService.alterPassword(username,oldpassword,newpassword);
+        System.out.println("修改的用户"+result);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("flag",result);
         return map;
@@ -163,13 +193,31 @@ public class UserInfoController {
 
     @RequestMapping(value = "/check_pass_user",method = RequestMethod.POST,produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public Map<String, Object> checkpassuser(String check_user_array, HttpServletRequest httpServletRequest) {
-        System.out.println("传入数据========="+check_user_array);
+    public Map<String, Object> checkpassuser(String[] check_user_array, HttpServletRequest httpServletRequest) {
+        System.out.println("传入数据========="+check_user_array.toString());
         boolean result = userInfoService.updateUsersCheck(check_user_array);
         System.out.println("审核结果========" + result);
 //        boolean result = userInfoService.delByUserName(select_username);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("flag",result);
+        return map;
+    }
+    /**
+     * 获取当前用户密码，用于修改密码
+     */
+    @RequestMapping(value = "/get_psw",method = RequestMethod.POST,produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public Map<String ,Object> get_psw(String username,String oldpassword,HttpServletRequest httpServletRequest){
+        System.out.println("++++++++"+username);
+        System.out.println("!!!!!!!!"+oldpassword);
+        MacroEnum.KMessageType result = userInfoService.checkLogin(username, oldpassword);
+        Map<String,Object> map = new HashMap<String, Object>();
+        if (result == MacroEnum.KMessageType.loginSuccess){
+            map.put("flag",true);
+        }else {
+            map.put("flag",false);
+        }
+
         return map;
     }
 

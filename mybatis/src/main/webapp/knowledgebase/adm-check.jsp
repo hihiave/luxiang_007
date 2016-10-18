@@ -154,7 +154,7 @@ width: 1320px !important;
                                     <th style="padding-left: 28px;border-bottom-width: 2px;padding-bottom: 4px;width: 78px;"><label class="checkbox"><input type="checkbox" id="selAll" onclick="selectAll()">全选 </label></th>
                                     <th style="padding-bottom:15px;">用户名</th>
                                     <th style="padding-bottom:15px;">审核状态</th>
-                                    <th style="width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#tongguo" onclick="check_all_pick(this)">通过</button></th>
+                                    <th style="width:116px;"><button class="btn btn-primary"  onclick="check_all_pick(this)">通过</button></th>
                                     <th style="width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#jujue">拒绝</button></th>
                                 </tr>
                                 </thead>
@@ -197,30 +197,41 @@ width: 1320px !important;
                         </div>
                     </div>
 				</div>
-                <%--<div class="modal fade" id="changepsw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-person">--%>
-                    <%--<div class="modal-dialog modal-sm" role="document">--%>
-                        <%--<div class="modal-content">--%>
-                            <%--<div class="modal-header">--%>
+                <div class="modal fade" id="pass_check" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-person_ok">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
 
-                                <%--<h4 class="modal-title" id="myModalLabel-person">修改密码</h4>--%>
-                            <%--</div>--%>
-                            <%--<div class="modal-body">--%>
-                                <%--<ul style="padding-left:0px;">--%>
-                                    <%--<li><input type="password" placeholder="请输入原密码" class="form-control" id="oldpsw"></li>--%>
-                                    <%--<div id="spanusername" style="margin-left:6px;margin-bottom:10px;height:6px;"></div>--%>
-                                    <%--<li><input type="password"  id="password1" class="form-control" placeholder="请输入新密码"></li>--%>
-                                    <%--<div id="spanpsw" style="margin-left:6px;margin-bottom:10px;height:6px;"></div>--%>
-                                    <%--<li><input type="password"  id="password2" class="form-control"  placeholder="请再次输入新密码"></li>--%>
-                                    <%--<div id="spanrepsw" style="margin-left:6px;margin-bottom:10px;height:6px;"></div>--%>
-                                <%--</ul>--%>
-                            <%--</div>--%>
-                            <%--<div class="modal-footer">--%>
-                                <%--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>--%>
-                                <%--<button type="button" class="btn btn-primary " id="btnclick" data-dismiss="">确认</button>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
+                                <h4 class="modal-title" id="myModalLabel-person_ok">通过审核</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p id="check_info">确定通过选中的用户么？</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary " id="pass_click" data-dismiss="modal" onclick="pass_info_ok()">确认</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="pass_remind" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-person_remind">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <h4 class="modal-title" id="myModalLabel-person_remind">提示</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p id="remind_info"></p>
+                            </div>
+                            <div class="modal-footer">
+
+                                <button type="button" class="btn btn-primary "  data-dismiss="modal" >确认</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
     </div>

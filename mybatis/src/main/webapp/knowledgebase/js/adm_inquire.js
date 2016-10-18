@@ -1,4 +1,31 @@
-
+//页面加载完毕加载表格
+$(function(){
+    get_all_is_ckeck();
+})
+//获取全部通过用户
+function get_all_is_ckeck(){
+    $.ajax({
+        type:'post',
+        url:"/mybatis/UserInfoController/Is_pass.do",
+        dataType:"json",
+        success:function get_all_check_user(data){
+            var _table = $("#search_result>tr");
+            _table.remove();
+            var all_pass_user = data["UserInfo_check"];
+            for(var i = 0;i < all_pass_user.length;i++){
+                var tr_begin = "<tr>";
+                var tr_end = "</tr>";
+                var td_1 = "<td>"+(i+1)+"</td>";
+                var td_2 = "<td class='Name'>"+all_pass_user[i].userName+"</td>"
+                var td_3 = "<td></td>";
+                var td_4 = "<td style='padding-bottom:3px;padding-top:3px;width:116px;'>"+"<button class='btn btn-primary' data-toggle='modal' data-target='' onclick='deleteUser(this)'>删除用户</button>"+"</td>";
+                var td_5 = "<td style='padding-bottom:3px;padding-top:3px;width:116px;'>"+"<button class='btn btn-primary' data-toggle='modal' data-target='' onclick='user_selected(this)' >重置密码</button>"+"</td>";
+                var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
+                $("#search_result").append(content);
+            }
+        }
+    })
+}
 /**
  * wsz
  * 管理员添加用户
@@ -11,7 +38,21 @@ function admadduser(){
                 {
                     type:'post',
                     url:"/mybatis/UserInfoController/adm-adduser.do",
-                    data:{username:username}
+                    data:{username:username},
+                    dataType:'json',
+                    success:function(data){
+                        if(data["flag"] == "chenggong"){
+                            $("#add_user_result").html("添加用户成功");
+                            $("#tianjia_result").modal('show');
+                            get_all_is_ckeck();
+                        }else if(data["flag"] == "shibai"){
+                            $("#add_user_result").html("添加用户失败");
+                            $("#tianjia_result").modal('show');
+                        }else if(data["flag"] == "cunzai"){
+                            $("#add_user_result").html("该用户名已存在");
+                            $("#tianjia_result").modal('show');
+                        }
+                    }
                 }
             )
 
@@ -133,9 +174,9 @@ function delete_ok(obj){
             dataType:"json",
             success:function(data){
                 console.log(data["flag"]);
-                if(data){
+                if(data["flag"]==true){
 
-                    alert("删除成功！");
+                    get_all_is_ckeck();
                 }
             }
         }

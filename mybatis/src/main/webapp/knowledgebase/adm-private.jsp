@@ -128,7 +128,7 @@ width: 1320px !important;
 			 							<td style="padding-top:15px;">第八次人民代表大会</td>
 			 							<td style="padding-top:15px;">2016-8-1</td>
 			 							<td><button class="btn btn-primary" data-toggle="modal" data-target="#download">下载</button></td>
-			 							<td><a href="preview.html"><button class="btn btn-primary">预览</button></a></td>
+			 							<td><a href="##"><button class="btn btn-primary">预览</button></a></td>
 			 						</tr>
 			 						<tr>
 			 							<td style="padding-top:15px;">第N次人民代表大会</td>

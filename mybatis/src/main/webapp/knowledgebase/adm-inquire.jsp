@@ -1,5 +1,5 @@
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>--%>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -49,12 +49,12 @@ width: 1320px !important;
 </head>
 <body>
 
-<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
-                   url="jdbc:mysql://123.207.84.55:3306/knowledge?useUnicode=true&characterEncoding=utf-8"
-                   user="root"  password="luxiang"/>
-<sql:query dataSource="${snapshot}" var="result">
-    SELECT * from UserInfo where user_check=1;
-</sql:query>
+<%--<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"--%>
+                   <%--url="jdbc:mysql://123.207.84.55:3306/knowledge?useUnicode=true&characterEncoding=utf-8"--%>
+                   <%--user="root"  password="luxiang"/>--%>
+<%--<sql:query dataSource="${snapshot}" var="result">--%>
+    <%--SELECT * from UserInfo where user_check=1;--%>
+<%--</sql:query>--%>
 
 <div style="margin:10px 20px;">
 	<button type="button" class="btn btn-md btn-default" style="border:0px;float:right;" data-toggle="tooltip" data-placement="bottom" title="退出登录">
@@ -140,16 +140,16 @@ width: 1320px !important;
 							</tr>
 							</thead>
 							<tbody id="search_result">
-                            <c:forEach var="row" items="${result.rows}" varStatus="status">
-                                <tr>
-                                    <td><c:out value="${status.index+1}"/></td>
-                                    <td class="Name"><c:out value="${row.user_name}"/></td>
-                                    <td></td>
-                                    <td style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="" onclick="deleteUser(this)">删除用户</button></td>
-                                    <td style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="" onclick="user_selected(this)">重置密码</button></td>
+                            <%--<c:forEach var="row" items="${result.rows}" varStatus="status">--%>
+                                <%--<tr>--%>
+                                    <%--<td><c:out value="${status.index+1}"/></td>--%>
+                                    <%--<td class="Name"><c:out value="${row.user_name}"/></td>--%>
+                                    <%--<td></td>--%>
+                                    <%--<td style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="" onclick="deleteUser(this)">删除用户</button></td>--%>
+                                    <%--<td style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="" onclick="user_selected(this)">重置密码</button></td>--%>
 
-                                </tr>
-                            </c:forEach>
+                                <%--</tr>--%>
+                            <%--</c:forEach>--%>
 
 							<%--<tr>--%>
 							<%--<td>1</td>--%>
@@ -247,10 +247,28 @@ width: 1320px !important;
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary " id="btnclick" onclick="admadduser()" >确认</button>
+        <button type="button" class="btn btn-primary " id="btnclick" onclick="admadduser()" data-dismiss="modal" >确认</button>
       </div>
     </div>
   </div>
+</div>
+
+<div class="modal fade" id="tianjia_result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-add-result">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel-add-result">提示信息</h4>
+            </div>
+            <div class="modal-body">
+                <p id="add_user_result"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary " data-dismiss="modal" >确认</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <style type="text/css">

@@ -45,7 +45,7 @@ function selectAll() {
     }
     else{
         for (var i = 0; i < ckbs.length; i++) {
-            ckbs[i].checked = true;
+            ckbs[i].checked = false;
         }
     }
 };
@@ -59,6 +59,28 @@ function select_one(obj) {
 }
 //审核选中的用户（多个用户）
 function check_all_pick(obj){
+    var check_num_1 = 0;
+    $("input[name=checkAll]").each(function(){
+        if($(this).is(':checked')){
+            check_num_1 += 1;
+        }
+    });
+    if(check_num_1 > 0){
+        $(obj).attr({"data-toggle":"modal","data-target":"#pass_check"});
+        $("#check_info").html("确认全部通过所选的用户么？");
+        $("#check_info").removeClass();
+        //$("#check_info").addClass(check_one_user);
+        $("#pass_click").removeAttr("onclick_name");
+        $("#pass_click").attr("onclick_name","pass_all");
+    }else{
+        $(obj).attr({"data-toggle":"modal","data-target":"#pass_remind"});
+        $("#remind_info").html("请选择要通过的用户");
+    }
+
+
+}
+//确认通过选中的用户
+function pass_all_selected(){
     var check_num = 0;
     $("input[name=checkAll]").each(function(){
         if($(this).is(':checked')){
@@ -78,7 +100,8 @@ function check_all_pick(obj){
         type:'post',
         url:"/mybatis/UserInfoController/check_pass_user.do",
         dataType:"json",
-        data:{"check_user_array":check_array.toString()},
+        traditional:true,
+        data:{"check_user_array":check_array},
         success:function(data){
             get_all_user_is_check();
         }
@@ -87,12 +110,23 @@ function check_all_pick(obj){
 //审核选中的用户（单个用户）
 function check_one_pick(obj){
     var check_one_user = $(obj).parent().siblings()[1].innerHTML;
-    //console.log(check_one_user);
+    $(obj).attr({"data-toggle":"modal","data-target":"#pass_check"});
+    $("#check_info").html("确认通过  "+check_one_user+"  么？");
+    $("#check_info").removeClass();
+    $("#check_info").addClass(check_one_user);
+    $("#pass_click").removeAttr("onclick_name");
+    $("#pass_click").attr("onclick_name","pass_one");
+
+}
+
+//确认通过单个用户
+function pass_one_selected(){
+    var check_user = $("#check_info").attr("class");
     $.ajax({
         type:'post',
         url:"/mybatis/UserInfoController/check_pass_user.do",
         dataType:"json",
-        data:{"check_user_array":check_one_user},
+        data:{"check_user_array":check_user},
         success:function(data){
             if(data){
                 get_all_user_is_check();
@@ -101,3 +135,12 @@ function check_one_pick(obj){
     })
 }
 
+//确认通过按钮
+function pass_info_ok(){
+    var btn_info = $("#pass_click").attr("onclick_name");
+    if(btn_info == "pass_one"){
+        pass_one_selected();
+    }else if(btn_info == "pass_all"){
+        pass_all_selected();
+    }
+}
