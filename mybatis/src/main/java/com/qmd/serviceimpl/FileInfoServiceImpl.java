@@ -37,14 +37,19 @@ public class FileInfoServiceImpl implements FileInfoService {
 
 	@Override
 	public FileInfo getFileInfoByName(String fileName) {
-		return fileInfoMapper.selectByFileName(fileName);
+		return null;
+		
+		//return fileInfoMapper.selectByFileName(fileName);
 	}
 
 	@Override
 	public int getFileInfoCountByCategory(String fileCategory) {
-		int count = fileInfoMapper.selectCountByFileCategory(fileCategory);
-		System.out.println(count);
-		return count;
+		return 0;
+		
+		
+//		int count = fileInfoMapper.selectCountByFileCategory(fileCategory);
+//		System.out.println(count);
+//		return count;
 	}
 
 	@Override
@@ -59,17 +64,19 @@ public class FileInfoServiceImpl implements FileInfoService {
 
 	@Override
 	public boolean updateFileStatusByFileCategory(String fileCategory) {
-		int temp = fileInfoMapper.updateFileStatusByCategory(fileCategory);
-		System.out.println(temp);
-		if (temp >= 0)
-			return true;
-		else
-			return false;
+		return false;
+//		int temp = fileInfoMapper.updateFileStatusByCategory(fileCategory);
+//		System.out.println(temp);
+//		if (temp >= 0)
+//			return true;
+//		else
+//			return false;
 	}
 
 	@Override
 	public List<FileInfo> getFileInfoByCategory(String fileCategory) {
-		return fileInfoMapper.selectByCategory(fileCategory);
+		return null;
+		//return fileInfoMapper.selectByCategory(fileCategory);
 	}
 
 }

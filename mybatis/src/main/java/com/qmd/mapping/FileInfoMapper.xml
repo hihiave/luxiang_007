@@ -9,7 +9,7 @@
     <result column="file_keywords" property="fileKeywords" jdbcType="VARCHAR" />
     <result column="file_category" property="fileCategory" jdbcType="VARCHAR" />
     <result column="file_desc" property="fileDesc" jdbcType="VARCHAR" />
-    <result column="file_check" property="fileCheck" jdbcType="CHAR" />
+    <result column="file_check" property="fileCheck" jdbcType="INTEGER" />
     <result column="file_is_visible" property="fileIsVisible" jdbcType="CHAR" />
     <result column="file_download_count" property="fileDownloadCount" jdbcType="INTEGER" />
     <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
@@ -25,29 +25,6 @@
     from File
     where file_id = #{fileId,jdbcType=INTEGER}
   </select>
-  
-  <select id="selectByFileName" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from File
-    where file_name=#{fileName,jdbcType=VARCHAR}
-  </select>
-  
-  <select id="selectCountByFileCategory" resultType="java.lang.Integer" parameterType="java.lang.String">
-    select count(*)
-    from File
-    where file_category=#{fileCategory,jdbcType=VARCHAR}
-  </select>
-  
-  
-  <select id="selectByCategory" resultMap="BaseResultMap" parameterType="java.lang.String">
-   select 
-   <include refid="Base_Column_List" />
-   from File
-   where file_category=#{fileCategory,jdbcType=VARCHAR}
-  </select>
-
-  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from File
     where file_id = #{fileId,jdbcType=INTEGER}
@@ -60,7 +37,7 @@
       )
     values (#{fileId,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, #{fileAuthor,jdbcType=VARCHAR}, 
       #{fileUploadTime,jdbcType=INTEGER}, #{fileKeywords,jdbcType=VARCHAR}, #{fileCategory,jdbcType=VARCHAR}, 
-      #{fileDesc,jdbcType=VARCHAR}, #{fileCheck,jdbcType=CHAR}, #{fileIsVisible,jdbcType=CHAR}, 
+      #{fileDesc,jdbcType=VARCHAR}, #{fileCheck,jdbcType=INTEGER}, #{fileIsVisible,jdbcType=CHAR}, 
       #{fileDownloadCount,jdbcType=INTEGER}, #{fileUrl,jdbcType=VARCHAR}, #{fileStatus,jdbcType=INTEGER}
       )
   </insert>
@@ -127,7 +104,7 @@
         #{fileDesc,jdbcType=VARCHAR},
       </if>
       <if test="fileCheck != null" >
-        #{fileCheck,jdbcType=CHAR},
+        #{fileCheck,jdbcType=INTEGER},
       </if>
       <if test="fileIsVisible != null" >
         #{fileIsVisible,jdbcType=CHAR},
@@ -165,7 +142,7 @@
         file_desc = #{fileDesc,jdbcType=VARCHAR},
       </if>
       <if test="fileCheck != null" >
-        file_check = #{fileCheck,jdbcType=CHAR},
+        file_check = #{fileCheck,jdbcType=INTEGER},
       </if>
       <if test="fileIsVisible != null" >
         file_is_visible = #{fileIsVisible,jdbcType=CHAR},
@@ -190,19 +167,11 @@
       file_keywords = #{fileKeywords,jdbcType=VARCHAR},
       file_category = #{fileCategory,jdbcType=VARCHAR},
       file_desc = #{fileDesc,jdbcType=VARCHAR},
-      file_check = #{fileCheck,jdbcType=CHAR},
+      file_check = #{fileCheck,jdbcType=INTEGER},
       file_is_visible = #{fileIsVisible,jdbcType=CHAR},
       file_download_count = #{fileDownloadCount,jdbcType=INTEGER},
       file_url = #{fileUrl,jdbcType=VARCHAR},
       file_status = #{fileStatus,jdbcType=INTEGER}
     where file_id = #{fileId,jdbcType=INTEGER}
   </update>
-  
-  <update id="updateFileStatusByCategory" parameterType="java.lang.String">
-    update File
-    set file_status=0
-    where file_category=#{fileCategory,jdbcType=VARCHAR}
-  </update>
-  
-  
 </mapper>

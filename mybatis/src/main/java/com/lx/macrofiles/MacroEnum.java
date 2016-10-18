@@ -10,7 +10,7 @@ public class MacroEnum {
 	}
 
 	/**
-	 * 用户是否通过审核
+	 * 审核类型
 	 */
 	public interface KUserCheckType {
 		public static final int PASS = 1;

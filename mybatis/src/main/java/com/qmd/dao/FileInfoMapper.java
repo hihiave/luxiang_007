@@ -1,28 +1,17 @@
 package com.qmd.dao;
 
-import java.util.List;
-
 import com.qmd.model.FileInfo;
 
 public interface FileInfoMapper {
-	int deleteByPrimaryKey(Integer fileId);
+    int deleteByPrimaryKey(Integer fileId);
 
-	int insert(FileInfo record);
+    int insert(FileInfo record);
 
-	int insertSelective(FileInfo record);
+    int insertSelective(FileInfo record);
 
-	FileInfo selectByPrimaryKey(Integer fileId);
+    FileInfo selectByPrimaryKey(Integer fileId);
 
-	FileInfo selectByFileName(String fileName);
+    int updateByPrimaryKeySelective(FileInfo record);
 
-	List<FileInfo> selectByCategory(String fileCategory);
-
-	int selectCountByFileCategory(String fileCategory);
-
-	int updateByPrimaryKeySelective(FileInfo record);
-
-	int updateByPrimaryKey(FileInfo record);
-
-	int updateFileStatusByCategory(String fileCategory);
-
+    int updateByPrimaryKey(FileInfo record);
 }
