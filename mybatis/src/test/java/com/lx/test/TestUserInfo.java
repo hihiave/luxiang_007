@@ -75,11 +75,10 @@ public class TestUserInfo {
 
 	@Test
 	public void TestSelectAllUserInfoByLikeUserName() {
-		List<UserInfo> userInfos = userInfoService.selectAllUserInfoByLikeUserName("发改委");
+		List<UserInfo> userInfos = userInfoService.selectAllUserInfoByLikeUserName("");
 		logger.info("===A====" + userInfos.isEmpty() + "==");
 		logger.info("===B=====" + userInfos.size() + "==");
-		logger.info("===C=====" + userInfos.get(1).getUserPassword() + "==");
-		logger.info("===HH=====" + JSON.toJSONString(userInfos.get(1)) + "==");
+		logger.info("===HH=====" + JSON.toJSONString(userInfos) + "==");
 		logger.info("==============haha=============");
 	}
 

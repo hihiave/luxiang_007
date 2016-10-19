@@ -27,6 +27,7 @@ public class FileInfoController {
 		
 		
 		request.setAttribute("fileInfo", fileInfo);
+		
 		return "showFileInfo";
 		// System.out.println;
 	}
