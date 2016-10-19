@@ -1,6 +1,6 @@
-package com.qmd.dao;
+package com.lx.dao;
 
-import com.qmd.model.Category;
+import com.lx.model.Category;
 
 public interface CategoryMapper {
 	int deleteByPrimaryKey(Integer categoryId);

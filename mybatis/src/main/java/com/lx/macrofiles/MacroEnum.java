@@ -15,6 +15,9 @@ public class MacroEnum {
 	public interface KCheckType {
 		public static final int PASS = 1;
 		public static final int NOTPASS = 0;
+
+		public static final String PUBLICFILE = "public";
+		public static final String PRIVATEFILE = "private";
 	}
 
 	/**

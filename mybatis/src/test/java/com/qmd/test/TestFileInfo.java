@@ -1,50 +1,39 @@
 package com.qmd.test;
 
 import org.apache.log4j.Logger;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.qmd.model.FileInfo;
-import com.qmd.serviceimpl.FileInfoServiceImpl;
+import com.lx.model.FileInfo;
+import com.lx.service.FileInfoService;
+import com.lx.serviceimpl.FileInfoServiceImpl;
 
 public class TestFileInfo {
-	
+
+	@Autowired
+	FileInfoService fileInfoService;
+
 	private Logger logger = Logger.getLogger(TestFileInfo.class);
-	
-	@Test
-	public void TestFileInfo(){
 
-		FileInfoServiceImpl fileInfoServiceImpl ;
-		
-		ApplicationContext app = new ClassPathXmlApplicationContext("classpath:qmd/applicationContext.xml");
-		fileInfoServiceImpl = app.getBean(FileInfoServiceImpl.class);
-		
-		FileInfo fileInfo = fileInfoServiceImpl.getFileInfoById(1);
-		
-		logger.info(fileInfo.getFileName() + "===============");
-		
-		boolean d = fileInfoServiceImpl.deleteFileInfoById(3);
-		logger.info(d + "========d=======");
-		
-
-		logger.info(d + "========d=======");
-
-		logger.info(d + "========d=======");
-
-		logger.info(d + "========d=======");
-
-		logger.info(d + "========d=======");
-
-		logger.info(d + "========d=======");
-
-		logger.info(d + "========d=======");
-
-		logger.info(d + "========d=======");
-		
-		
+	@Before
+	public void init() {
+		ApplicationContext app = new ClassPathXmlApplicationContext("classpath:lx/applicationContext.xml");
+		fileInfoService = app.getBean(FileInfoServiceImpl.class);
 	}
 
+	@Test
+	public void TestAddFileInfo() {
+		logger.info("===============TestAddFileInfo=============");
+		FileInfo fileInfo = new FileInfo();
+		fileInfo.setFileName("西游记");
+		fileInfo.setFileAuthor("luxiang");
+		fileInfo.setFileUploadTime(0);
+		boolean d = fileInfoService.addFileInfo(fileInfo);
+		logger.info("===============" + d);
 
+	}
 
 }

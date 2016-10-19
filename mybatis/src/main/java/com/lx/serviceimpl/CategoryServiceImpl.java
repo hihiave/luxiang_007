@@ -1,6 +1,5 @@
-package com.qmd.serviceimpl;
+package com.lx.serviceimpl;
 
 public class CategoryServiceImpl {
 
-	
 }

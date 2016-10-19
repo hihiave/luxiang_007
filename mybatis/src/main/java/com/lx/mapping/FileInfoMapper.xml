@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.qmd.dao.FileInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.qmd.model.FileInfo" >
+<mapper namespace="com.lx.dao.FileInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lx.model.FileInfo" >
     <id column="file_id" property="fileId" jdbcType="INTEGER" />
     <result column="file_name" property="fileName" jdbcType="VARCHAR" />
     <result column="file_author" property="fileAuthor" jdbcType="VARCHAR" />
@@ -19,6 +19,8 @@
     file_id, file_name, file_author, file_upload_time, file_keywords, file_category, 
     file_desc, file_check, file_is_visible, file_download_count, file_url, file_status
   </sql>
+  
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -29,7 +31,7 @@
     delete from File
     where file_id = #{fileId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.qmd.model.FileInfo" >
+  <insert id="insert" parameterType="com.lx.model.FileInfo" >
     insert into File (file_id, file_name, file_author, 
       file_upload_time, file_keywords, file_category, 
       file_desc, file_check, file_is_visible, 
@@ -41,7 +43,7 @@
       #{fileDownloadCount,jdbcType=INTEGER}, #{fileUrl,jdbcType=VARCHAR}, #{fileStatus,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.qmd.model.FileInfo" >
+  <insert id="insertSelective" parameterType="com.lx.model.FileInfo" >
     insert into File
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="fileId != null" >
@@ -120,7 +122,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qmd.model.FileInfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.lx.model.FileInfo" >
     update File
     <set >
       <if test="fileName != null" >
@@ -159,7 +161,7 @@
     </set>
     where file_id = #{fileId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.qmd.model.FileInfo" >
+  <update id="updateByPrimaryKey" parameterType="com.lx.model.FileInfo" >
     update File
     set file_name = #{fileName,jdbcType=VARCHAR},
       file_author = #{fileAuthor,jdbcType=VARCHAR},

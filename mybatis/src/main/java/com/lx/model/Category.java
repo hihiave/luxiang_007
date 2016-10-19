@@ -1,4 +1,4 @@
-package com.qmd.model;
+package com.lx.model;
 
 public class Category {
 	private Integer categoryId;

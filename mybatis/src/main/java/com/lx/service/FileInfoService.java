@@ -1,12 +1,21 @@
-package com.qmd.service;
+package com.lx.service;
 
 import java.util.List;
 
-import com.qmd.model.FileInfo;
+import com.lx.model.FileInfo;
 
 public interface FileInfoService {
 
-	/** 通过文件fileId查询文件
+	/** 添加一个文件信息，必须指定文件名
+	 * @author 米登
+	 * @param FileInfo
+	 * @return boolean，true表示添加成功，false表示添加失败
+	 */
+	public boolean addFileInfo(FileInfo fileInfo);
+
+	/**
+	 * 通过文件fileId查询文件
+	 * 
 	 * @author 米登
 	 * @param fileId
 	 * @return 一个文件信息FileInfo
@@ -19,14 +28,6 @@ public interface FileInfoService {
 	 * @return 一个Boolean值 true代表删除成功 false代表删除失败
 	 */
 	public boolean deleteFileInfoById(int fileId);
-
-	/**
-	 * @author 米登
-	 * @param FileInfo对象
-	 * @return 一个Boolean值 true代表添加成功 false代表添加失败
-	 */
-
-	public boolean addFileInfo(FileInfo fileInfo);
 
 	/**
 	 * @author 米登

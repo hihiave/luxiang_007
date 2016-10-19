@@ -1,6 +1,6 @@
-package com.qmd.service;
+package com.lx.service;
 
-import com.qmd.model.Category;
+import com.lx.model.Category;
 
 public interface CategoryService {
 	/**

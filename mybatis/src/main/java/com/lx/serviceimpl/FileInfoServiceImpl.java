@@ -1,19 +1,27 @@
-package com.qmd.serviceimpl;
+package com.lx.serviceimpl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.qmd.dao.FileInfoMapper;
-import com.qmd.model.FileInfo;
-import com.qmd.service.FileInfoService;
+import com.lx.dao.FileInfoMapper;
+import com.lx.model.FileInfo;
+import com.lx.service.FileInfoService;
 
 @Service
 public class FileInfoServiceImpl implements FileInfoService {
 
 	@Autowired
 	private FileInfoMapper fileInfoMapper;
+
+	@Override
+	public boolean addFileInfo(FileInfo fileInfo) {
+		if (fileInfoMapper.insert(fileInfo) == 1) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public FileInfo getFileInfoById(int fileId) {
@@ -29,27 +37,19 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	@Override
-	public boolean addFileInfo(FileInfo fileInfo) {
-		int i = fileInfoMapper.insert(fileInfo);
-		System.out.println("_____" + i + "----");
-		return true;
-	}
-
-	@Override
 	public FileInfo getFileInfoByName(String fileName) {
 		return null;
-		
-		//return fileInfoMapper.selectByFileName(fileName);
+
+		// return fileInfoMapper.selectByFileName(fileName);
 	}
 
 	@Override
 	public int getFileInfoCountByCategory(String fileCategory) {
 		return 0;
-		
-		
-//		int count = fileInfoMapper.selectCountByFileCategory(fileCategory);
-//		System.out.println(count);
-//		return count;
+
+		// int count = fileInfoMapper.selectCountByFileCategory(fileCategory);
+		// System.out.println(count);
+		// return count;
 	}
 
 	@Override
@@ -65,18 +65,18 @@ public class FileInfoServiceImpl implements FileInfoService {
 	@Override
 	public boolean updateFileStatusByFileCategory(String fileCategory) {
 		return false;
-//		int temp = fileInfoMapper.updateFileStatusByCategory(fileCategory);
-//		System.out.println(temp);
-//		if (temp >= 0)
-//			return true;
-//		else
-//			return false;
+		// int temp = fileInfoMapper.updateFileStatusByCategory(fileCategory);
+		// System.out.println(temp);
+		// if (temp >= 0)
+		// return true;
+		// else
+		// return false;
 	}
 
 	@Override
 	public List<FileInfo> getFileInfoByCategory(String fileCategory) {
 		return null;
-		//return fileInfoMapper.selectByCategory(fileCategory);
+		// return fileInfoMapper.selectByCategory(fileCategory);
 	}
 
 }
