@@ -1,5 +1,7 @@
 package com.lx.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.lx.model.FileInfo;
 
 public interface FileInfoMapper {
@@ -15,4 +17,8 @@ public interface FileInfoMapper {
 	int updateByPrimaryKeySelective(FileInfo record);
 
 	int updateByPrimaryKey(FileInfo record);
+	
+	//*********用于处理一些业务逻辑的方法
+	int delFileInfoById(@Param("fileIds") Integer[]... fileIds);
+	
 }

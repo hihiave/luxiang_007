@@ -19,6 +19,14 @@
     file_id, file_name, file_author, file_upload_time, file_keywords, file_category, 
     file_desc, file_check, file_is_visible, file_download_count, file_url, file_status
   </sql>
+
+  <!--*********用于处理一些业务逻辑的方法*********-->
+  <delete id="delFileInfoById">
+  	delete from File where file_id in
+		<foreach collection="fileIds" item="fileId" index="index" open="(" close=")" separator=",">
+			#{fileId}
+		</foreach>
+  </delete>
   
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

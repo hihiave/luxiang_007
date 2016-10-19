@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.serviceimpl.FileInfoServiceImpl;
@@ -31,9 +32,24 @@ public class TestFileInfo {
 		fileInfo.setFileName("西游记");
 		fileInfo.setFileAuthor("luxiang");
 		fileInfo.setFileUploadTime(0);
+		fileInfo.setFileKeywords("两学一做");
+		fileInfo.setFileCategory("科技成果");
+		fileInfo.setFileDesc("hahahahaha");
+		fileInfo.setFileIsVisible(KCheckType.PUBLICFILE);
+		fileInfo.setFileUrl("F/");
 		boolean d = fileInfoService.addFileInfo(fileInfo);
-		logger.info("===============" + d);
-
+		logger.info("=========上传======" + d);
 	}
 
+	@Test
+	public void TestDeleteFileInfoById() {
+		logger.info("===============TestDeleteFileInfoById=============");
+		
+		boolean d = fileInfoService.delFileInfoById(null);
+		logger.info("=========删除======" + d);
+	}
+	
+	
+	
+	
 }

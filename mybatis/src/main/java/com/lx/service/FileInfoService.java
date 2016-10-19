@@ -13,6 +13,20 @@ public interface FileInfoService {
 	 */
 	public boolean addFileInfo(FileInfo fileInfo);
 
+	/** 通过文件id批量删除文件
+	 * @author luxiang
+	 * @param fileIds
+	 * @return boolean，true表示删除成功，false表示删除失败
+	 */
+	public boolean delFileInfoById(Integer[]... fileIds);
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * 通过文件fileId查询文件
 	 * 
@@ -22,13 +36,10 @@ public interface FileInfoService {
 	 */
 	public FileInfo getFileInfoById(int fileId);
 
-	/**
-	 * @author 米登
-	 * @param fileId
-	 * @return 一个Boolean值 true代表删除成功 false代表删除失败
-	 */
-	public boolean deleteFileInfoById(int fileId);
 
+	
+	
+	
 	/**
 	 * @author 米登
 	 * @param fileName
