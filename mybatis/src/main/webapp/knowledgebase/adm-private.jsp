@@ -29,7 +29,7 @@
 <script src="/mybatis/knowledgebase/js/bootstrap.min.js"></script>
 <script src="/mybatis/knowledgebase/js/html5shiv.min.js"></script>
 <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
-
+<script src="/mybatis/knowledgebase/js/adm_private.js"></script>
 <style type="text/css">
 .nav{
 		margin-bottom: 5px;
@@ -107,6 +107,11 @@ width: 1320px !important;
 				 	<li><a href="##">类别管理</a></li>
 				 	<li><a href="##">资源审核</a></li>
 		 			</ul>
+		 			<ul class="nav nav-pills nav-stacked">
+				     <li class="active"><a href="##">系统管理</a></li>
+				 	<li><a href="##">数据还原</a></li>
+				 	<li><a href="##">数据备份</a></li>
+		 			</ul>
  				</div>
 			 	<div class="col-md-8" style="margin-left:50px;">	 		
 			 		<div class="panel panel-primary" style="height:625px;">
@@ -123,8 +128,8 @@ width: 1320px !important;
 			 							<th style="padding-left:20px;">预览</th>
 			 						</tr>
 			 					</thead>
-			 					<tbody >
-			 						<tr>
+			 					<tbody id="pri_file">
+			 						<!-- <tr>
 			 							<td style="padding-top:15px;">第八次人民代表大会</td>
 			 							<td style="padding-top:15px;">2016-8-1</td>
 			 							<td><button class="btn btn-primary" data-toggle="modal" data-target="#download">下载</button></td>
@@ -135,7 +140,7 @@ width: 1320px !important;
 			 							<td style="padding-top:15px;">2016-8-1</td>
 			 							<td><button class="btn btn-primary" data-toggle="modal" data-target="#download">下载</button></td>
 			 							<td><button class="btn btn-primary">预览</button></td>
-			 						</tr>
+			 						</tr> -->
 			 					</tbody>
 			 				</table>
 			 			</div>
@@ -152,16 +157,33 @@ width: 1320px !important;
         <h4 class="modal-title" id="myModalLabel">提示</h4>
       </div>
       <div class="modal-body">
-        是否下载该文件？
+  		<p id="download_file"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">否</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">是</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="downloadFile(this)">是</button>
       </div>
     </div>
   </div>
 </div>
 
+<div class="modal fade" id="preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+       
+        <h4 class="modal-title" id="myModalLabel">提示</h4>
+      </div>
+      <div class="modal-body">
+      		<p id="preview_file"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">否</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="previewFile(this)">是</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <style type="text/css">
 th.btn-primary{
