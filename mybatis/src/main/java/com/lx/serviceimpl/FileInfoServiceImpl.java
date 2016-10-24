@@ -24,11 +24,21 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	@Override
-	public boolean delFileInfoById(Integer[]... fileIds) {
+	public boolean delFileInfoById(Integer... fileIds) {
 		if (fileInfoMapper.delFileInfoById(fileIds) == fileIds.length) {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<FileInfo> selectFileInfoByfileAuthor(String fileAuthor) {
+		return fileInfoMapper.selectFileInfoByfileAuthor(fileAuthor);
+	}
+
+	@Override
+	public List<FileInfo> selectPublicFileInfo() {
+		return fileInfoMapper.selectPublicFileInfo();
 	}
 
 	@Override

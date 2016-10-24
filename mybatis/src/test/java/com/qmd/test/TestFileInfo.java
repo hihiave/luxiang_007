@@ -1,5 +1,7 @@
 package com.qmd.test;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.alibaba.fastjson.JSON;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
@@ -44,12 +47,25 @@ public class TestFileInfo {
 	@Test
 	public void TestDeleteFileInfoById() {
 		logger.info("===============TestDeleteFileInfoById=============");
-		
-		boolean d = fileInfoService.delFileInfoById(null);
+
+		boolean d = fileInfoService.delFileInfoById(23, 22);
 		logger.info("=========删除======" + d);
 	}
-	
-	
-	
-	
+
+	@Test
+	public void TestSelectFileInfoByfileAuthor() {
+		logger.info("===============TestSelectFileInfoByfileAuthor=============");
+
+		List<FileInfo> fileInfos = fileInfoService.selectFileInfoByfileAuthor(null);
+		logger.info("=========查询======" + JSON.toJSONString(fileInfos));
+
+	}
+
+	@Test
+	public void TestSelectPublicFileInfo() {
+		logger.info("===============TestSelectPublicFileInfo=============");
+		List<FileInfo> fileInfos = fileInfoService.selectPublicFileInfo();
+		logger.info("=========公有文件======" + JSON.toJSONString(fileInfos));
+	}
+
 }

@@ -18,11 +18,20 @@ public interface FileInfoService {
 	 * @param fileIds
 	 * @return boolean，true表示删除成功，false表示删除失败
 	 */
-	public boolean delFileInfoById(Integer[]... fileIds);
+	public boolean delFileInfoById(Integer... fileIds);
 	
+	/** 通过上传者查询我的文件信息
+	 * @author luxiang
+	 * @param fileAuthor
+	 * @return 一个用户对象列表 FileInfo
+	 */
+	public List<FileInfo> selectFileInfoByfileAuthor(String fileAuthor); 
 	
-	
-	
+	/** 查询公有文件信息
+	 * @author luxiang
+	 * @return 一个用户对象列表 FileInfo
+	 */
+	public List<FileInfo> selectPublicFileInfo();
 	
 	
 	
