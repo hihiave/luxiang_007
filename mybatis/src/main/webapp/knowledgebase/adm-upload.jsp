@@ -45,6 +45,72 @@ width: 1320px !important;
 
 </style>
 
+<%
+java.text.SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat(  
+     "yyyy-MM-dd HH:mm:ss");  
+   java.util.Date currentTime = new java.util.Date();  
+   String time = simpleDateFormat.format(currentTime).toString();
+%>
+<script type="text/javascript">
+window.onload=function(){
+var file1= $('#file1'),
+	aim1= $('#aim1');
+file1.on('change', function( e ){
+    var name = e.currentTarget.files[0].name;
+    aim1.val( name );
+});
+var file2= $('#file2'),
+	aim2= $('#aim2');
+file2.on('change', function( e ){
+    var name= e.currentTarget.files[0].name;
+    aim2.val( name );
+});
+var file3= $('#file3'),
+	aim3= $('#aim3');
+file3.on('change', function( e ){
+    var name = e.currentTarget.files[0].name;
+    aim3.val( name );
+});
+sub.onclick=check;
+function check(){
+	
+	var aim1=document.getElementById("aim1"),
+	aim2=document.getElementById("aim2"),aim3=document.getElementById("aim3");
+	var word1=document.getElementById("word1"),
+	word2=document.getElementById("word2"),word3=document.getElementById("word3");
+	var area1=document.getElementById("area1"),
+	area2=document.getElementById("area2"),area3=document.getElementById("area3");
+
+	if(aim1.value==""&aim2.value==""&aim3.value==""){
+	alert("请选择上传的文件");
+	return false;
+	}
+	else{ 
+	if(aim2.value!=""){
+		if((area2.value=="")||(word2.value==""))
+			{
+			alert("请完善文件信息");
+			return false;
+			}
+	}
+	else if(aim1.value!=""){
+		if((area1.value=="")||(word1.value==""))
+			{
+			alert("请完善文件信息");
+			return false;
+			}
+	}
+	else if(aim3.value!=""){
+		if((area3.value=="")||(word3.value==""))
+			{
+			alert("请完善文件信息");
+			return false;
+			}
+	}
+	}
+}
+}
+</script>
 </head>
 <body>
 
@@ -154,16 +220,92 @@ width: 1320px !important;
                     </div>
  				</div>
 			 	<div class="col-md-8" style="margin-left:50px;">	 		
+			 			
 			 					 		<div class="panel panel-primary" style="height:625px;">
 			 			<div class="panel-heading">
 			 				<h3 class="panel-title">文件上传</h3>	
 			 			</div>
-			 			<div class="panel-body" style="padding-top:0px;">
-			 				
+			 			<div class="panel-body" style="height:580px;overflow-y:auto;">
+			 			<form action="/mybatis/Uploadservlet" name="name1"  enctype="multipart/form-data" method="post">
+			 		
+	 					<div class="panel panel-default">
+				 			  <div class="panel-heading">
+				 			  	<h4 class="panel-title">
+					 			  	<a data-toggle="collapse" data-parent="#accordion" href="#upload1">
+					 			  	选择文件1
+					 			  	</a>
+					 			</h4> 	
+				 			  </div>
+				 			  <div id="upload1" class="panel-collapse collapse">
+				 			  <div class="panel-body form-inline">
+				 			  	 <input type="file" class="upload" name="file" id="file1"><br>
+				 			  	 <span>资料名称：</span><input class="form-control" style="width:40%;" type="text"  id="aim1" readonly="true">&nbsp;&nbsp;
+				 			  	 
+				 			  	 <span>上传者：</span><input class="form-control" style="width:40%;" type="text" placeholder="<%=session.getAttribute("username")%>" readonly="true"><br><br>
+				 			  	 <span>上传时间：</span><input class="form-control" style="width:40%;" type="text" placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
+				 			  	 <span>关键词：</span><input class="form-control" style="width:40%;" placeholder="多个关键词以空格分开" type="text" id="word1"><br><br>
+								 <span>资料属性：</span><input type="radio" name="type1" checked>公有&nbsp;&nbsp;<input type="radio" name="type1">私有<br><br>
+								 <span>资料描述：</span><textarea type="textarea" class="form-control" style="width:89.5%;" rows="3" id="area1" ></textarea>
+										
+				 			  </div>
+				 			  </div>
+			 			 </div>
+ 							<div class="panel panel-default">
+				 			  <div class="panel-heading">
+				 			  	<h4 class="panel-title">
+					 			  	<a data-toggle="collapse" data-parent="#accordion" href="#upload2">
+					 			  	选择文件2
+					 			  	</a>
+					 			</h4> 	
+				 			  </div>
+				 			  <div id="upload2" class="panel-collapse collapse">
+				 			  <div class="panel-body form-inline">
+				 			  	 <input type="file" class="upload" name="file" id="file2"><br>
+				 			  	 <span>资料名称：</span><input class="form-control" style="width:40%;" type="text" id="aim2" readonly="true">&nbsp;&nbsp;
+				 			  	 
+				 			  	 <span>上传者：</span><input class="form-control" style="width:40%;" type="text" placeholder="<%=session.getAttribute("username")%>" readonly="true"><br><br>
+				 			  	 <span>上传时间：</span><input class="form-control" style="width:40%;" type="text" placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
+				 			  	 <span>关键词：</span><input class="form-control" style="width:40%;" placeholder="多个关键词以空格分开" type="text" id="word2"><br><br>
+								 <span>资料属性：</span><input type="radio" name="type2" checked>公有&nbsp;&nbsp;<input type="radio" name="type2">私有<br><br>
+								 <span>资料描述：</span><textarea type="textarea" class="form-control" style="width:89.5%;" rows="3" id="area2"></textarea>
+										
+				 			  </div>
+				 			  </div>
+			 			 </div>
+			 			 <div class="panel panel-default">
+				 			  <div class="panel-heading">
+				 			  	<h4 class="panel-title">
+					 			  	<a data-toggle="collapse" data-parent="#accordion" href="#upload3">
+					 			  	选择文件3
+					 			  	</a>
+					 			</h4> 	
+				 			  </div>
+				 			  <div id="upload3" class="panel-collapse collapse">
+				 			  <div class="panel-body form-inline">
+				 			  	 <input type="file" class="upload" name="file" id="file3"><br>
+				 			  	 <span>资料名称：</span><input class="form-control" style="width:40%;" type="text" id="aim3" readonly="true">&nbsp;&nbsp;
+				 			  	 
+				 			  	 <span>上传者：</span><input class="form-control" style="width:40%;" type="text" placeholder="<%=session.getAttribute("username")%>" readonly="true"><br><br>
+				 			  	 <span>上传时间：</span><input class="form-control" style="width:40%;" type="text" placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
+				 			  	 <span>关键词：</span><input class="form-control" style="width:40%;" placeholder="多个关键词以空格分开" type="text" id="word3"><br><br>
+								 <span>资料属性：</span><input type="radio" name="type3" checked>公有&nbsp;&nbsp;<input type="radio" name="type3">私有<br><br>
+								 <span>资料描述：</span><textarea type="textarea" class="form-control" style="width:89.5%;" rows="3" id="area3"></textarea>
+										
+				 			  </div>
+				 			  </div>
+			 			 </div> 
+			 			 	
+			 			 
+			 			 <div align="center">
+			 					<input type="submit" value="上传文件" id="sub" class="btn btn-primary" >
+			 				</div>
+			 			</form>
 			 				
 			 				
 			 			</div>
-					</div>
+					</div>		
+	
+			
 										
 			 	</div>
 			</div>

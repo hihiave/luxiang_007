@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.lx.model.UserInfo;
 
 public interface UserInfoMapper {
+	
 	int deleteByPrimaryKey(Integer userId);
 
 	int insert(UserInfo record);

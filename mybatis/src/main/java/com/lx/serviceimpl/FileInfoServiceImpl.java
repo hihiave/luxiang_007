@@ -17,23 +17,33 @@ public class FileInfoServiceImpl implements FileInfoService {
 
 	@Override
 	public boolean addFileInfo(FileInfo fileInfo) {
-		if (fileInfoMapper.insert(fileInfo) == 1) {
+		if (fileInfoMapper.insertSelective(fileInfo) == 1) {
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public FileInfo getFileInfoById(int fileId) {
-		return fileInfoMapper.selectByPrimaryKey(fileId);
+	public boolean delFileInfoById(Integer... fileIds) {
+		if (fileInfoMapper.delFileInfoById(fileIds) == fileIds.length) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
-	public boolean deleteFileInfoById(int fileId) {
-		boolean flag = false;
-		if (fileInfoMapper.deleteByPrimaryKey(fileId) == 1)
-			flag = true;
-		return flag;
+	public List<FileInfo> selectFileInfoByfileAuthor(String fileAuthor) {
+		return fileInfoMapper.selectFileInfoByfileAuthor(fileAuthor);
+	}
+
+	@Override
+	public List<FileInfo> selectPublicFileInfo() {
+		return fileInfoMapper.selectPublicFileInfo();
+	}
+
+	@Override
+	public FileInfo getFileInfoById(int fileId) {
+		return fileInfoMapper.selectByPrimaryKey(fileId);
 	}
 
 	@Override

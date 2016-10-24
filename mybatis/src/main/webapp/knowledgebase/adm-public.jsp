@@ -31,6 +31,7 @@
 <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
 <script src="/mybatis/knowledgebase/js/common.js"></script>
 
+<script src="/mybatis/knowledgebase/js/adm_public.js"></script>
 <style type="text/css">
 .nav{
 		margin-bottom: 5px;
@@ -170,8 +171,8 @@ width: 1320px !important;
 			 							<th style="padding-left:0px;">下载量</th>
 			 						</tr>
 			 					</thead>
-			 					<tbody >
-			 						<tr>
+			 					<tbody id="pub_file">
+			 						<!-- <tr>
 			 							<td style="padding-top:15px;">第八次人民代表大会</td>
 			 							<td style="padding-top:15px;">张三</td>
 			 							<td style="padding-top:15px;">2016-8-1</td>
@@ -186,7 +187,7 @@ width: 1320px !important;
 			 							<td><button class="btn btn-primary" data-toggle="modal" data-target="#download">下载</button></td>
 			 							<td><button class="btn btn-primary">预览</button></td>
 			 							<td style="padding-top:15px;">211</td>
-			 						</tr>
+			 						</tr> -->
 			 					</tbody>
 			 				</table>
 			 			</div>
@@ -204,11 +205,29 @@ width: 1320px !important;
         <h4 class="modal-title" id="myModalLabel">提示</h4>
       </div>
       <div class="modal-body">
-        是否下载该文件？
+  		<p id="download_file"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">否</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">是</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="downloadFile(this)">是</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+       
+        <h4 class="modal-title" id="myModalLabel">提示</h4>
+      </div>
+      <div class="modal-body">
+      		<p id="preview_file"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">否</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="previewFile(this)">是</button>
       </div>
     </div>
   </div>

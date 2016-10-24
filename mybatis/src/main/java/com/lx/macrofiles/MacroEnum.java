@@ -13,9 +13,11 @@ public class MacroEnum {
 	 * 审核类型
 	 */
 	public interface KCheckType {
-		public static final int PASS = 1;
+		// 审核是否通过
+		public static final int PASS = 1; 
 		public static final int NOTPASS = 0;
 
+		// 文件公有还是私有
 		public static final String PUBLICFILE = "public";
 		public static final String PRIVATEFILE = "private";
 	}
