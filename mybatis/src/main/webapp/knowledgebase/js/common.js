@@ -94,5 +94,31 @@ function getFormatTime (date, format) {
     return time;
 }
 
+//退出登录
+function logout(){
+    $.ajax({
+        type:'post',
+        url:"/mybatis/UserInfoController/logout.do",
+        dataType:'json',
+        success:function(data){
+            var username = data["username"];
+            //console.log(data["result"]);
+            $("#logout-username").text(username+"再见！");
+            $("#logout-modal").modal('show');
+            $("#logout-dismiss").click(function(){
+                top.location='Login.jsp';
+            })
+
+        },
+        error:function(){
+            $("#logout-username").text("登录已过期，请重新登录！");
+            $("#logout-modal").modal('show');
+            $("#logout-dismiss").click(function(){
+                top.location='Login.jsp';
+            })
+        }
+    })
+}
+
 
 

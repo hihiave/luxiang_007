@@ -45,10 +45,11 @@ public class UserInfoController {
         Map<String ,Object> map = new HashMap<String, Object>();
 		if (result == MacroEnum.KMessageType.loginSuccess) {
             str_result = "LoginSuccess";
-            httpSession.setAttribute("userinfo",userInfo);
+//            httpSession.setAttribute("userinfo",userInfo);
             httpSession.setAttribute("username",username);
             httpSession.setAttribute("time",userInfo.getUserRegisterTime());
             httpSession.setAttribute("userrole",userInfo.getUserRole());
+            httpSession.setAttribute("userid",userInfo.getUserId());
 //            httpSession.setAttribute("password",password);
 //			httpSession.setAttribute("flag", true);
             map.put("data",str_result);
@@ -65,6 +66,19 @@ public class UserInfoController {
 
 
 	}
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String ,Object> logout(HttpSession httpSession) {
+        Map<String,Object> map = new HashMap<String, Object>();
+        String str = (String)httpSession.getAttribute("username");
+        map.put("username",str);
+        System.out.println("登出用户"+str);
+        httpSession.removeAttribute("username");
+
+        map.put("result","success");
+        return map;
+    }
     @RequestMapping(value = "/regist" , method = RequestMethod.POST)
     @ResponseBody
     public Map<String ,Object> regist(String username1, String password1, HttpSession httpSession){
