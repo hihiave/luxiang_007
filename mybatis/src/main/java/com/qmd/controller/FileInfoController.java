@@ -43,7 +43,7 @@ public class FileInfoController {
 	public Map<String, Object> privatefile(HttpSession httpSession, HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		List<FileInfo> pri_file = fileInfoService.selectFileInfoByfileAuthor("luxiang");
+		List<FileInfo> pri_file = fileInfoService.selectMyFileInfo("luxiang");
 
 		map.put("pri_file", pri_file);
 		return map;
