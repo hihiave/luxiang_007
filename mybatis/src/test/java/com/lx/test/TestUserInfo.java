@@ -75,7 +75,7 @@ public class TestUserInfo {
 
 	@Test
 	public void TestSelectAllUserInfoByLikeUserName() {
-		List<UserInfo> userInfos = userInfoService.selectAllUserInfoByLikeUserName("");
+		List<UserInfo> userInfos = userInfoService.selectAllUserInfoByLikeUserName("李");
 		logger.info("===A====" + userInfos.isEmpty() + "==");
 		logger.info("===B=====" + userInfos.size() + "==");
 		logger.info("===HH=====" + JSON.toJSONString(userInfos) + "==");

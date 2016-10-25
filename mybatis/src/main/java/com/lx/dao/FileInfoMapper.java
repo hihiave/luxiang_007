@@ -23,7 +23,8 @@ public interface FileInfoMapper {
 	//**********用于处理一些业务逻辑的方法**********
 	int delFileInfoById(@Param("fileIds") Integer... fileIds);
 	FileInfo getFileByFileName(String fileName);
-	List<FileInfo> selectMyFileInfo(String fileAuthor);
+	List<FileInfo> selectFileByIsPass(int checkType);
+	List<FileInfo> selectMyFileInfo(String userName);
 	List<FileInfo> selectPublicFileInfo();
 	
 	//**********用于一些查询的方法**********
@@ -31,10 +32,10 @@ public interface FileInfoMapper {
 	
 	
 	
-	List<FileInfo> selectFileInfoByFileName(String fileName);
-	
-
-	List<FileInfo> selectFileInfoByfileAuthor(String fileAuthor);
+//	List<FileInfo> selectFileInfoByFileName(String fileName);
+//	
+//
+//	List<FileInfo> selectFileInfoByfileAuthor(String fileAuthor);
 	
 	
 	

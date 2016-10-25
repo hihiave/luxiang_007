@@ -24,7 +24,7 @@ public interface UserInfoMapper {
 	int updateUsersCheck(@Param("userNames") String... userNames);
 	UserInfo checkLogin(String userName);
 	List<UserInfo> selectUserByIsPass(int checkType);
-	List<UserInfo> selectAllUserInfoByLikeUserName(String userName);
+	List<UserInfo> selectAllUserInfoByLikeUserName(@Param("userName") String userName);
 	int deleteByUserName(String userName);
 	int updateUserPassword(@Param("userName") String userName, @Param("newPwd") String newPwd);
 	

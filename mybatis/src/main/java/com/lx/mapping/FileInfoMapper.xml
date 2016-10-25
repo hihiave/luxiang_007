@@ -30,6 +30,9 @@
   <select id="getFileByFileName" resultMap="BaseResultMap" parameterType="java.lang.String">
   	select * from File where file_name = #{fileName,jdbcType=VARCHAR} limit 1
   </select>
+  <select id="selectFileByIsPass" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	select * from File where file_check = #{checkType,jdbcType=INTEGER}
+  </select>
   <select id="selectMyFileInfo" resultMap="BaseResultMap" parameterType="java.lang.String">
   	select * from File where file_author = #{fileAuthor,jdbcType=VARCHAR} and file_check = '1'
   </select>
@@ -38,40 +41,27 @@
   </select>
   
   <!--*********用于一些查询的方法*********-->
+  <sql id="query_condition">
+  	<if test="fileIsVisible!=null and fileIsVisible!=''">
+  		and file_is_visible = #{fileIsVisible}
+  	</if>
+  	<if test="fileAuthor!=null and fileAuthor!=''">
+  		and file_author like CONCAT(CONCAT('%',#{fileAuthor},'%'))
+  	</if>
+  	<if test="fileName!=null and fileName!=''">
+  		and file_name like CONCAT(CONCAT('%',#{fileName},'%'))
+  	</if>
+  	<if test="fileCategory!=null and fileCategory!=''">
+  		and file_category = #{fileCategory}
+  	</if>
+  </sql>
   <select id="getFileInfo" resultMap="BaseResultMap" parameterType="com.lx.model.FileInfo">
   	select * from File
   	<where>
-  		<if test="fileAuthor!=null and fileAuthor!=''">
-  			file_author = #{fileAuthor,jdbcType=VARCHAR} and file_check = '1'
-  		</if>
+  		file_check = '1'
+  		<include refid="query_condition" />
   	</where>
   </select>
-  
-  <!-- file_name like CONCAT(CONCAT('%',#{fileName},'%')) 
-  	and -->
-  
-  <select id="selectFileInfoByFileName" resultMap="BaseResultMap" parameterType="java.lang.String">
-  	select * from File where file_name like CONCAT(CONCAT('%',#{fileName},'%')) and file_check = '1'
-  </select> 
-  
-   
-  <!--*********用于处理(我的上传)的方法*********-->
-  <select id="selectFileInfoByfileAuthor" resultMap="BaseResultMap" parameterType="java.lang.String">
-  	select * from File where 
-  	file_author like CONCAT(CONCAT('%',#{fileAuthor},'%'))
-  	and file_check = '1'
-  </select>
-  
-  
-  
-  <!--*********用于处理(公有文件)的方法*********-->
-
-  
-
-  
-  
-  
-  
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

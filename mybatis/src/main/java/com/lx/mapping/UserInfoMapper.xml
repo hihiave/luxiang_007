@@ -30,8 +30,14 @@
   	from UserInfo 
   	where user_check = #{checkType,jdbcType=INTEGER}
   </select>
-  <select id="selectAllUserInfoByLikeUserName" resultMap="BaseResultMap">
-  	select user_name from UserInfo where user_name like CONCAT(CONCAT('%',#{userName},'%')) and user_check = '1'
+  <select id="selectAllUserInfoByLikeUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select user_name from UserInfo 
+  	<where>
+		user_check = '1'
+  		<if test="userName!=null and userName!=''">
+  			and user_name like CONCAT(CONCAT('%',#{userName},'%'))
+  		</if>
+  	</where>
   </select>
   <delete id="deleteByUserName" parameterType="java.lang.String">
   	delete from UserInfo where user_name = #{userName,jdbcType=VARCHAR}

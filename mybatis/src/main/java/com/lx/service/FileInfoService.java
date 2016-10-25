@@ -27,12 +27,19 @@ public interface FileInfoService {
 	 */
 	public boolean checkFileIsExist(String fileName);
 	
-	/** 通过上传者查询我的文件信息(我的上传)
+	/** 通过审核是否通过查询文件
 	 * @author luxiang
-	 * @param fileAuthor
+	 * @param checkType
 	 * @return 一个文件对象列表 FileInfo
 	 */
-	List<FileInfo> selectMyFileInfo(String fileAuthor);
+	public List<FileInfo> selectFileByIsPass(int checkType);
+	
+	/** 通过用户名查询我的文件信息(我的上传)
+	 * @author luxiang
+	 * @param userName
+	 * @return 一个文件对象列表 FileInfo
+	 */
+	List<FileInfo> selectMyFileInfo(String userName);
 	
 	/** 查询公有文件信息(公有文件)
 	 * @author luxiang
@@ -42,12 +49,6 @@ public interface FileInfoService {
 	
 	//**********用于一些查询的方法**********
 	List<FileInfo> getFileInfo(FileInfo fileInfo);
-	
-	
-	
-	
-	
-	
 	
 	
 	/** 通过文件名模糊查询文件，比如，查“三”，找到“十三”，“十三五”

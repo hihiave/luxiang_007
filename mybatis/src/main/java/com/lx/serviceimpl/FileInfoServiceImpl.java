@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
 import com.lx.dao.FileInfoMapper;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
@@ -40,8 +41,13 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	@Override
-	public List<FileInfo> selectMyFileInfo(String fileAuthor) {
-		return fileInfoMapper.selectMyFileInfo(fileAuthor);
+	public List<FileInfo> selectFileByIsPass(int checkType) {
+		return fileInfoMapper.selectFileByIsPass(checkType);
+	}
+
+	@Override
+	public List<FileInfo> selectMyFileInfo(String userName) {
+		return fileInfoMapper.selectMyFileInfo(userName);
 	}
 
 	@Override
@@ -49,15 +55,13 @@ public class FileInfoServiceImpl implements FileInfoService {
 		return fileInfoMapper.selectPublicFileInfo();
 	}
 
-	//**********用于一些查询的方法**********
+	// **********用于一些查询的方法**********
 	@Override
 	public List<FileInfo> getFileInfo(FileInfo fileInfo) {
+		System.out.println("fileInfo============" + JSON.toJSON(fileInfo));
 		return fileInfoMapper.getFileInfo(fileInfo);
 	}
-	
-	
-	
-	
+
 	@Override
 	public List<FileInfo> selectFileInfoByFileName(String fileName) {
 		return null;
@@ -66,7 +70,9 @@ public class FileInfoServiceImpl implements FileInfoService {
 
 	@Override
 	public List<FileInfo> selectFileInfoByfileAuthor(String fileAuthor) {
-		return fileInfoMapper.selectFileInfoByfileAuthor(fileAuthor);
+		return null;
+
+		// return fileInfoMapper.selectFileInfoByfileAuthor(fileAuthor);
 	}
 
 	@Override
@@ -104,7 +110,5 @@ public class FileInfoServiceImpl implements FileInfoService {
 		return null;
 		// return fileInfoMapper.selectByCategory(fileCategory);
 	}
-
-
 
 }
