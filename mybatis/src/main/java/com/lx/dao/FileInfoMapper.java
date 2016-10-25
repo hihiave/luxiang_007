@@ -20,9 +20,23 @@ public interface FileInfoMapper {
 
 	int updateByPrimaryKey(FileInfo record);
 	
-	//*********用于处理一些业务逻辑的方法
+	//**********用于处理一些业务逻辑的方法**********
 	int delFileInfoById(@Param("fileIds") Integer... fileIds);
-	List<FileInfo> selectFileInfoByfileAuthor(String fileAuthor);
+	FileInfo getFileByFileName(String fileName);
+	List<FileInfo> selectMyFileInfo(String fileAuthor);
 	List<FileInfo> selectPublicFileInfo();
 	
+	//**********用于一些查询的方法**********
+	List<FileInfo> getFileInfo(FileInfo fileInfo);
+	
+	
+	
+	List<FileInfo> selectFileInfoByFileName(String fileName);
+	
+
+	List<FileInfo> selectFileInfoByfileAuthor(String fileAuthor);
+	
+	
+	
+
 }

@@ -6,6 +6,7 @@ import com.lx.model.FileInfo;
 
 public interface FileInfoService {
 
+	//**********用于处理一些业务逻辑的方法**********
 	/** 添加一个文件信息，必须指定文件名
 	 * @author 米登
 	 * @param FileInfo
@@ -19,43 +20,54 @@ public interface FileInfoService {
 	 * @return boolean，true表示删除成功，false表示删除失败
 	 */
 	public boolean delFileInfoById(Integer... fileIds);
+
+	/** 通过文件名检查文件是否存在
+	 * @author luxiang
+	 * @return boolean，true表示存在，false表示不存在
+	 */
+	public boolean checkFileIsExist(String fileName);
 	
-	/** 通过上传者查询我的文件信息
+	/** 通过上传者查询我的文件信息(我的上传)
+	 * @author luxiang
+	 * @param fileAuthor
+	 * @return 一个文件对象列表 FileInfo
+	 */
+	List<FileInfo> selectMyFileInfo(String fileAuthor);
+	
+	/** 查询公有文件信息(公有文件)
+	 * @author luxiang
+	 * @return 一个文件对象列表 FileInfo
+	 */
+	public List<FileInfo> selectPublicFileInfo();
+	
+	//**********用于一些查询的方法**********
+	List<FileInfo> getFileInfo(FileInfo fileInfo);
+	
+	
+	
+	
+	
+	
+	
+	
+	/** 通过文件名模糊查询文件，比如，查“三”，找到“十三”，“十三五”
+	 * @author luxiang
+	 * @param fileName
+	 * @return 一个文件对象列表 FileInfo
+	 */
+	public List<FileInfo> selectFileInfoByFileName(String fileName);
+	
+	/** 
 	 * @author luxiang
 	 * @param fileAuthor
 	 * @return 一个用户对象列表 FileInfo
 	 */
 	public List<FileInfo> selectFileInfoByfileAuthor(String fileAuthor); 
 	
-	/** 查询公有文件信息
-	 * @author luxiang
-	 * @return 一个用户对象列表 FileInfo
-	 */
-	public List<FileInfo> selectPublicFileInfo();
-	
-	
-	
-	
-	/**
-	 * 通过文件fileId查询文件
-	 * 
-	 * @author 米登
-	 * @param fileId
-	 * @return 一个文件信息FileInfo
-	 */
-	public FileInfo getFileInfoById(int fileId);
+
 
 
 	
-	
-	
-	/**
-	 * @author 米登
-	 * @param fileName
-	 * @return 一个文件信息对象fileInfo
-	 */
-	public FileInfo getFileInfoByName(String fileName);
-
 	/**
 	 * @author 米登
 	 * @param fileCategory

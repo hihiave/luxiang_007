@@ -32,8 +32,16 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	@Override
-	public List<FileInfo> selectFileInfoByfileAuthor(String fileAuthor) {
-		return fileInfoMapper.selectFileInfoByfileAuthor(fileAuthor);
+	public boolean checkFileIsExist(String fileName) {
+		if (fileInfoMapper.getFileByFileName(fileName) != null) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public List<FileInfo> selectMyFileInfo(String fileAuthor) {
+		return fileInfoMapper.selectMyFileInfo(fileAuthor);
 	}
 
 	@Override
@@ -41,16 +49,24 @@ public class FileInfoServiceImpl implements FileInfoService {
 		return fileInfoMapper.selectPublicFileInfo();
 	}
 
+	//**********用于一些查询的方法**********
 	@Override
-	public FileInfo getFileInfoById(int fileId) {
-		return fileInfoMapper.selectByPrimaryKey(fileId);
+	public List<FileInfo> getFileInfo(FileInfo fileInfo) {
+		return fileInfoMapper.getFileInfo(fileInfo);
+	}
+	
+	
+	
+	
+	@Override
+	public List<FileInfo> selectFileInfoByFileName(String fileName) {
+		return null;
+
 	}
 
 	@Override
-	public FileInfo getFileInfoByName(String fileName) {
-		return null;
-
-		// return fileInfoMapper.selectByFileName(fileName);
+	public List<FileInfo> selectFileInfoByfileAuthor(String fileAuthor) {
+		return fileInfoMapper.selectFileInfoByfileAuthor(fileAuthor);
 	}
 
 	@Override
@@ -88,5 +104,7 @@ public class FileInfoServiceImpl implements FileInfoService {
 		return null;
 		// return fileInfoMapper.selectByCategory(fileCategory);
 	}
+
+
 
 }

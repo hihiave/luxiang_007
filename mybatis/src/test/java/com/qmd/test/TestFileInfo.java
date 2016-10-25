@@ -3,6 +3,7 @@ package com.qmd.test;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,11 @@ public class TestFileInfo {
 	FileInfoService fileInfoService;
 
 	private Logger logger = Logger.getLogger(TestFileInfo.class);
+	ApplicationContext app = null;
 
 	@Before
 	public void init() {
-		ApplicationContext app = new ClassPathXmlApplicationContext("classpath:lx/applicationContext.xml");
+		app = new ClassPathXmlApplicationContext("classpath:lx/applicationContext.xml");
 		fileInfoService = app.getBean(FileInfoServiceImpl.class);
 	}
 
@@ -53,12 +55,18 @@ public class TestFileInfo {
 	}
 
 	@Test
-	public void TestSelectFileInfoByfileAuthor() {
-		logger.info("===============TestSelectFileInfoByfileAuthor=============");
+	public void TestCheckFileIsExist() {
+		logger.info("===============TestCheckFileIsExist=============");
+		boolean d = fileInfoService.checkFileIsExist("西游记1");
+		logger.info("=========检查======" + d);
+	}
 
-		List<FileInfo> fileInfos = fileInfoService.selectFileInfoByfileAuthor(null);
+	@Test
+	public void TestSelectMyFileInfo() {
+		logger.info("===============TestSelectMyFileInfo=============");
+		List<FileInfo> fileInfos = fileInfoService.selectMyFileInfo("luxiang");
+
 		logger.info("=========查询======" + JSON.toJSONString(fileInfos));
-
 	}
 
 	@Test
@@ -66,6 +74,31 @@ public class TestFileInfo {
 		logger.info("===============TestSelectPublicFileInfo=============");
 		List<FileInfo> fileInfos = fileInfoService.selectPublicFileInfo();
 		logger.info("=========公有文件======" + JSON.toJSONString(fileInfos));
+	}
+	
+	
+	@Test
+	public void TestSelectFileInfo() {
+		logger.info("===============TestSelectFileInfo=============");
+		
+		FileInfo fileInfo = new FileInfo();
+		//fileInfo.setFileName("十三五");
+		//fileInfo.setFileAuthor("luxiang");
+
+		List<FileInfo> fileInfos = fileInfoService.getFileInfo(fileInfo);
+		logger.info("=========公有文件======" + JSON.toJSONString(fileInfos));
+	}
+	
+	
+	
+	
+	
+	
+	
+	@Test
+	public void TestSelectFileInfoByfileAuthor() {
+		logger.info("===============TestSelectFileInfoByfileAuthor=============");
+
 	}
 
 }
