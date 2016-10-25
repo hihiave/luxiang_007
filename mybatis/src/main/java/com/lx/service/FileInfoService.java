@@ -51,6 +51,7 @@ public interface FileInfoService {
 	List<FileInfo> getFileInfo(FileInfo fileInfo);
 	
 	
+	
 	/** 通过文件名模糊查询文件，比如，查“三”，找到“十三”，“十三五”
 	 * @author luxiang
 	 * @param fileName

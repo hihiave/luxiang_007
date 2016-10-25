@@ -33,6 +33,8 @@
   <select id="selectFileByIsPass" resultMap="BaseResultMap" parameterType="java.lang.Integer">
   	select * from File where file_check = #{checkType,jdbcType=INTEGER}
   </select>
+
+
   <select id="selectMyFileInfo" resultMap="BaseResultMap" parameterType="java.lang.String">
   	select * from File where file_author = #{fileAuthor,jdbcType=VARCHAR} and file_check = '1'
   </select>

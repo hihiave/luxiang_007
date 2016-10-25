@@ -100,4 +100,5 @@ public interface UserInfoService {
 	 * @return 用户名列表List<String>
 	 */
 	List<String> getUserNames(String userName);
+
 }

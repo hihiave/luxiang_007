@@ -31,5 +31,4 @@ public interface UserInfoMapper {
 	//**********用于获取一些智能下拉提示
 	List<String> getUserNames(String userName);
 
-
 }

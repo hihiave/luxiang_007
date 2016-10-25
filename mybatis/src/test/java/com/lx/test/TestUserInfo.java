@@ -102,7 +102,6 @@ public class TestUserInfo {
 	@Test
 	public void TestCheckUserIsExist() {
 		boolean d = userInfoService.checkUserIsExist("luxiang11");
-
 		logger.info("===CheckUserIsExist====" + d + "==");
 	}
 

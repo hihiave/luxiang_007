@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
 import com.lx.dao.UserInfoMapper;
 import com.lx.macrofiles.MacroEnum;
 import com.lx.macrofiles.MacroEnum.KMessageType;
