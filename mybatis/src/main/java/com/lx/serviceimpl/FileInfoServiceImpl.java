@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.lx.dao.FileInfoMapper;
+import com.lx.macrofiles.MacroEnum.KButtonType;
+import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 
@@ -56,46 +58,45 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	// **********用于一些查询的方法**********
-	@Override
-	public List<FileInfo> getFileInfo(FileInfo fileInfo) {
+	private List<FileInfo> getFileInfo(FileInfo fileInfo) {
 		System.out.println("fileInfo============" + JSON.toJSON(fileInfo));
 		return fileInfoMapper.getFileInfo(fileInfo);
 	}
 
 	@Override
-	public List<FileInfo> selectFileInfoByFileName(String fileName) {
-		
-		
-		
-		return null;
+	public List<FileInfo> getFileByLikeFileName(String fileName, String fileCategory, KButtonType buttonType) {
+		FileInfo fileInfo = new FileInfo();
+		fileInfo.setFileName(fileName);
+		fileInfo.setFileCategory(fileCategory);
+		switch (buttonType) {
+		case MyUploadButton:
+			return getFileInfo(fileInfo);
+		case PublicFileButton:
+			fileInfo.setFileIsVisible(KCheckType.PUBLICFILE);
+			return getFileInfo(fileInfo);
+		default:
+			return null;
+		}
 	}
 
 	@Override
-	public List<FileInfo> selectFileInfoByfileAuthor(String fileAuthor) {
-		return null;
-
-		// return fileInfoMapper.selectFileInfoByfileAuthor(fileAuthor);
+	public List<FileInfo> getFileByLikeFileAuthor(String fileAuthor, String fileCategory, KButtonType buttonType) {
+		FileInfo fileInfo = new FileInfo();
+		fileInfo.setFileAuthor(fileAuthor);
+		fileInfo.setFileCategory(fileCategory);
+		switch (buttonType) {
+		case MyUploadButton:
+			return getFileInfo(fileInfo);
+		case PublicFileButton:
+			fileInfo.setFileIsVisible(KCheckType.PUBLICFILE);
+			return getFileInfo(fileInfo);
+		default:
+			return null;
+		}
 	}
 
-	@Override
-	public int getFileInfoCountByCategory(String fileCategory) {
-		return 0;
-
-		// int count = fileInfoMapper.selectCountByFileCategory(fileCategory);
-		// System.out.println(count);
-		// return count;
-	}
-
-	@Override
-	public boolean updateFileInfoById(FileInfo fileInfo) {
-		int temp = 0;
-		temp = fileInfoMapper.updateByPrimaryKey(fileInfo);
-		if (temp == 1)
-			return true;
-		else
-			return false;
-	}
-
+	
+	
 	@Override
 	public boolean updateFileStatusByFileCategory(String fileCategory) {
 		return false;

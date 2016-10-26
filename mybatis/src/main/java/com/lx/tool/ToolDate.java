@@ -6,7 +6,7 @@ import java.util.Date;
 public class ToolDate {
 
 	/**
-	 * 日期格式 Date 转 String
+	 * 日期格式 Date转 String
 	 * @param date
 	 * @param resDateFormat
 	 * @return dateString

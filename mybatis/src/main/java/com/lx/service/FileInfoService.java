@@ -2,6 +2,7 @@ package com.lx.service;
 
 import java.util.List;
 
+import com.lx.macrofiles.MacroEnum.KButtonType;
 import com.lx.model.FileInfo;
 
 public interface FileInfoService {
@@ -48,41 +49,28 @@ public interface FileInfoService {
 	public List<FileInfo> selectPublicFileInfo();
 	
 	//**********用于一些查询的方法**********
-	List<FileInfo> getFileInfo(FileInfo fileInfo);
-	
-
-	
 	/** 通过文件名模糊查询文件，比如，查“三”，找到“十三”，“十三五”
 	 * @author luxiang
-	 * @param fileName
+	 * @param fileName 文件名
+	 * @param fileCategory 文件类型(若不指定,则传入null)
+	 * @param buttonType 按钮类型，请查看枚举
 	 * @return 一个文件对象列表 FileInfo
 	 */
-	public List<FileInfo> selectFileInfoByFileName(String fileName);
+	public List<FileInfo> getFileByLikeFileName(String fileName, String fileCategory, KButtonType buttonType);
 	
-	/** 
+	/** 通过作者名模糊查询文件，比如，查“张”，找到所有张姓的文件
 	 * @author luxiang
-	 * @param fileAuthor
-	 * @return 一个用户对象列表 FileInfo
+	 * @param fileAuthor 作者名,即上传者
+	 * @param fileCategory 文件类型(若不指定,则传入null)
+	 * @param buttonType 按钮类型，请查看枚举
+	 * @return 一个文件对象列表 FileInfo
 	 */
-	public List<FileInfo> selectFileInfoByfileAuthor(String fileAuthor); 
+	public List<FileInfo> getFileByLikeFileAuthor(String fileAuthor, String fileCategory, KButtonType buttonType);
+	
 	
 
-
-
 	
-	/**
-	 * @author 米登
-	 * @param fileCategory
-	 * @return 一个int值 某一个文件种类中的文件个数
-	 */
-	public int getFileInfoCountByCategory(String fileCategory);
-
-	/**
-	 * @author 米登
-	 * @param 一个文件信息对象fileInfo
-	 * @return boolean值 true代表更新成功
-	 */
-	public boolean updateFileInfoById(FileInfo fileInfo);
+	
 
 	/**
 	 * @author 米登

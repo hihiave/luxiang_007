@@ -3,13 +3,6 @@ package com.lx.macrofiles;
 public class MacroEnum {
 
 	/**
-	 * 时间单位
-	 */
-	public enum KDateType {
-		Year, Month, Week, Day, Hour, Minute, Second;
-	}
-
-	/**
 	 * 审核类型
 	 */
 	public interface KCheckType {
@@ -20,7 +13,6 @@ public class MacroEnum {
 		// 文件公有还是私有
 		public static final String PUBLICFILE = "public";
 		public static final String PRIVATEFILE = "private";
-
 	}
 
 	/**
@@ -31,4 +23,21 @@ public class MacroEnum {
 		loginFail, // 登录失败（用户名或密码错误）
 		checkNotPass // 审核未通过
 	}
+	
+	/**
+	 * 按钮类型
+	 */
+	public enum KButtonType{
+		MyUploadButton, // 我的上传
+		PublicFileButton, // 公有文件
+	}
+	
+	
+	/**
+	 * 时间单位
+	 */
+	public enum KDateType {
+		Year, Month, Week, Day, Hour, Minute, Second;
+	}
+
 }

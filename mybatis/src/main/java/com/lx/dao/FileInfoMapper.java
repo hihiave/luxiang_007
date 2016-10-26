@@ -30,15 +30,4 @@ public interface FileInfoMapper {
 	//**********用于一些查询的方法**********
 	List<FileInfo> getFileInfo(FileInfo fileInfo);
 	
-	
-	
-//	List<FileInfo> selectFileInfoByFileName(String fileName);
-//	
-//
-//	List<FileInfo> selectFileInfoByfileAuthor(String fileAuthor);
-	
-	
-	
-	
-
 }

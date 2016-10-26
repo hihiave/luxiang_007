@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSON;
+import com.lx.macrofiles.MacroEnum.KButtonType;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
@@ -85,20 +86,26 @@ public class TestFileInfo {
 	@Test
 	public void TestSelectFileInfo() {
 		logger.info("===============TestSelectFileInfo=============");
-
 		FileInfo fileInfo = new FileInfo();
 		// fileInfo.setFileName("十三五");
 		fileInfo.setFileAuthor("luxiang");
 		// fileInfo.setFileCategory("科技成果");
 		fileInfo.setFileIsVisible(KCheckType.PUBLICFILE);
-
-		List<FileInfo> fileInfos = fileInfoService.getFileInfo(fileInfo);
-		logger.info("=========公有文件======" + JSON.toJSONString(fileInfos));
 	}
 
 	@Test
-	public void TestSelectFileInfoByfileAuthor() {
-		logger.info("===============TestSelectFileInfoByfileAuthor=============");
+	public void TestGetFileByLikeFileName() {
+		logger.info("===============TestGetFileByLikeFileName=============");
+		List<FileInfo> fileInfos = fileInfoService.getFileByLikeFileName("十三五", "科技成果", KButtonType.PublicFileButton);
+		logger.info("========文件名=======" + JSON.toJSONString(fileInfos));
+	}
+
+	@Test
+	public void TestGetFileByLikeFileAuthor() {
+		logger.info("===============TestGetFileByLikeFileAuthor=============");
+		List<FileInfo> fileInfos = fileInfoService.getFileByLikeFileAuthor("luxiang", null,
+				KButtonType.PublicFileButton);
+		logger.info("========作者=======" + JSON.toJSONString(fileInfos));
 
 	}
 
