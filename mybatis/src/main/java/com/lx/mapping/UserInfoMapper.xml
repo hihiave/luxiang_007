@@ -21,7 +21,7 @@
   			#{userName}
   		</foreach>
   </update>
-  <select id="checkLogin" resultMap="BaseResultMap" parameterType="java.lang.String">
+  <select id="selectUserByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
     select * from UserInfo 
     where user_name = #{userName,jdbcType=VARCHAR} limit 1
   </select>

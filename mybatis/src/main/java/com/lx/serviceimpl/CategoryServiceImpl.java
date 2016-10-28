@@ -38,4 +38,12 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryMapper.getAllCategory();
 	}
 
+	@Override
+	public boolean checkCategoryIsExist(String categoryName) {
+		if (categoryMapper.selectByCategoryName(categoryName) != null) {
+			return true;
+		}
+		return false;
+	}
+
 }

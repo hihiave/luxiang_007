@@ -45,7 +45,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public UserInfo selectUserByUserName(String userName) {
-		return userInfoMapper.checkLogin(userName);
+		return userInfoMapper.selectUserByUserName(userName);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	public KMessageType checkLogin(String userName, String userPassword) {
-		UserInfo userInfo = userInfoMapper.checkLogin(userName);
+		UserInfo userInfo = selectUserByUserName(userName);
 		if (userInfo != null && userInfo.getUserPassword().equals(ToolEncryption.EncryptMD5(userPassword))) {
 			if (userInfo.getUserCheck() == 1) {
 				return KMessageType.loginSuccess; // 登录成功
@@ -94,17 +94,16 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public boolean resetPassword(String userName) {
-		boolean flag = false;
 		if (userInfoMapper.updateUserPassword(userName, ToolEncryption.EncryptMD5("123456")) == 1) {
-			flag = true;
+			return true;
 		}
-		return flag;
+		return false;
 	}
 
 	@Override
 	public boolean alterPassword(String userName, String oldPwd, String newPwd) {
 		boolean flag = false;
-		UserInfo userInfo = userInfoMapper.checkLogin(userName);
+		UserInfo userInfo = selectUserByUserName(userName);
 		String temp = ToolEncryption.EncryptMD5(oldPwd);
 		if (userInfo.getUserPassword().equals(temp)) {
 			if (userInfoMapper.updateUserPassword(userName, ToolEncryption.EncryptMD5(newPwd)) == 1) {
@@ -116,8 +115,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public boolean checkUserIsExist(String userName) {
-		UserInfo userInfo = userInfoMapper.checkLogin(userName);
-		if (userInfo != null) {
+		if (userInfoMapper.selectUserByUserName(userName) != null) {
 			return true;
 		}
 		return false;

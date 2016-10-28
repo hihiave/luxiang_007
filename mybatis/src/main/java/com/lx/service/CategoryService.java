@@ -26,4 +26,11 @@ public interface CategoryService {
 	 */
 	public List<Category> getAllCategory();
 	
+	/** 检查文件类别是否存在
+	 * @author luxiang
+	 * @param categoryName 文件类别名
+	 * @return boolean，true表示类别已经存在，false表示类别不存在
+	 */
+	public boolean checkCategoryIsExist(String categoryName);
+	
 }

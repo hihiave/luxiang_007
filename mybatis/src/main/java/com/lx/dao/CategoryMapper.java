@@ -19,6 +19,7 @@ public interface CategoryMapper {
 
 	//**********用于处理一些业务逻辑的方法**********
 	int deleteByCategoryName(String categoryName);
+	Category selectByCategoryName(String categoryName);
 	public List<Category> getAllCategory();
 	
 }

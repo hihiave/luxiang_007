@@ -15,6 +15,10 @@
   	delete from Category
     where category_name = #{categoryName,jdbcType=VARCHAR}
   </delete>
+  <select id="selectByCategoryName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select * from Category
+    where category_name = #{categoryName,jdbcType=VARCHAR}
+  </select>
   <select id="getAllCategory" resultMap="BaseResultMap">
   	select * from Category
   </select>
