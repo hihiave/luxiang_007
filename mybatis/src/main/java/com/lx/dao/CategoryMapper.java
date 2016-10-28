@@ -1,5 +1,7 @@
 package com.lx.dao;
 
+import java.util.List;
+
 import com.lx.model.Category;
 
 public interface CategoryMapper {
@@ -17,5 +19,6 @@ public interface CategoryMapper {
 
 	//**********用于处理一些业务逻辑的方法**********
 	int deleteByCategoryName(String categoryName);
+	public List<Category> getAllCategory();
 	
 }

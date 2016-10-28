@@ -1,5 +1,7 @@
 package com.lx.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,11 @@ public class CategoryServiceImpl implements CategoryService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<Category> getAllCategory() {
+		return categoryMapper.getAllCategory();
 	}
 
 }

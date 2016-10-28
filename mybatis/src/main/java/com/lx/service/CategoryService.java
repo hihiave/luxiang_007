@@ -1,5 +1,9 @@
 package com.lx.service;
 
+import java.util.List;
+
+import com.lx.model.Category;
+
 public interface CategoryService {
 
 	/** 添加一个文件类别
@@ -16,4 +20,10 @@ public interface CategoryService {
 	 */
 	public boolean delCategory(String categoryName);
 
+	/** 获取所有类别
+	 * @author luxiang
+	 * @return 一个类别列表 Category
+	 */
+	public List<Category> getAllCategory();
+	
 }
