@@ -14,5 +14,8 @@ public interface CategoryMapper {
 	int updateByPrimaryKeySelective(Category record);
 
 	int updateByPrimaryKey(Category record);
+
+	//**********用于处理一些业务逻辑的方法**********
+	int deleteByCategoryName(String categoryName);
 	
 }

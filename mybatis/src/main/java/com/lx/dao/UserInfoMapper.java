@@ -20,7 +20,7 @@ public interface UserInfoMapper {
 
 	int updateByPrimaryKey(UserInfo record);
 
-	//**********用于处理一些业务逻辑的方法
+	//**********用于处理一些业务逻辑的方法**********
 	int updateUsersCheck(@Param("userNames") String... userNames);
 	UserInfo checkLogin(String userName);
 	List<UserInfo> selectUserByIsPass(int checkType);
@@ -28,7 +28,7 @@ public interface UserInfoMapper {
 	int deleteByUserName(String userName);
 	int updateUserPassword(@Param("userName") String userName, @Param("newPwd") String newPwd);
 	
-	//**********用于获取一些智能下拉提示
+	//**********用于获取一些智能下拉提示**********
 	List<String> getUserNames(String userName);
 
 }

@@ -68,8 +68,6 @@ public interface FileInfoService {
 	public List<FileInfo> getFileByLikeFileAuthor(String fileAuthor, String fileCategory, KButtonType buttonType);
 	
 	
-
-	
 	
 
 	/**

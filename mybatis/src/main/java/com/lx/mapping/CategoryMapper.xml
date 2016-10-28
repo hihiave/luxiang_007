@@ -10,7 +10,11 @@
     category_id, category_name, category_status
   </sql>
   
-  
+  <!--*********用于处理一些业务逻辑的方法*********-->
+  <delete id="deleteByCategoryName" parameterType="java.lang.String">
+  	delete from Category
+    where category_name = #{categoryName,jdbcType=VARCHAR}
+  </delete>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

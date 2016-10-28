@@ -1,4 +1,4 @@
-package com.qmd.test;
+package com.lx.test;
 
 import java.util.List;
 

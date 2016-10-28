@@ -95,8 +95,6 @@ public class FileInfoServiceImpl implements FileInfoService {
 		}
 	}
 
-	
-	
 	@Override
 	public boolean updateFileStatusByFileCategory(String fileCategory) {
 		return false;

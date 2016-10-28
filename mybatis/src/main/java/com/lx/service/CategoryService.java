@@ -1,18 +1,19 @@
 package com.lx.service;
 
-import com.lx.model.Category;
-
 public interface CategoryService {
-	
-	/**
-	 * @author 米登
-	 * @param CategoryId
-	 * @return 目录信息对象Category
-	 */
-	public Category getCategorybyId(int categoryId);
 
-	/**
-	 * @author 米登
-	 * @param
+	/** 添加一个文件类别
+	 * @author luxiang
+	 * @param categoryName 文件类别名
+	 * @return boolean，true表示添加成功，false表示添加失败
 	 */
+	public boolean addCategory(String categoryName);
+	
+	/** 删除一个文件类别
+	 * @author luxiang
+	 * @param categoryName 文件类别名
+	 * @return boolean，true表示删除成功，false表示删除失败
+	 */
+	public boolean delCategory(String categoryName);
+
 }
