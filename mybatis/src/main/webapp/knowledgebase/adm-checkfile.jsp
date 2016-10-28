@@ -112,30 +112,70 @@ else{
 			</div>
 			<hr>
 			<div class="row" style="margin-left:80px;">
-				<div class="col-xs-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
-					<ul class="nav nav-pills nav-stacked" >
-				     <li class="active"><a href="/mybatis/knowledgebase/adm-personal.jsp">个人中心</a></li>
-		
-		 			</ul>
-		 			<ul class="nav nav-pills nav-stacked">
-				     <li class="active"><a href="##">用户管理</a></li>
-				 	<li><a href="##">用户查询</a></li>
-				 	<li><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核</a></li>
-		 			</ul>
-		 			<ul class="nav nav-pills nav-stacked">
-				     <li class="active"><a href="##">资源管理</a></li>
-				     <li><a href="/mybatis/knowledgebase/adm-private.jsp">私有文件</a></li>
-				     <li><a href="/mybatis/knowledgebase/adm-public.jsp">公有文件</a></li>
-				 	<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
-				 	<li><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
-				 	<li><a href="##">类别管理</a></li>
-				 	<li><a href="##">资源审核</a></li>
-		 			</ul>
-		 			<ul class="nav nav-pills nav-stacked">
-				     <li class="active"><a href="##">系统管理</a></li>
-				 	<li><a href="##">数据还原</a></li>
-				 	<li><a href="##">数据备份</a></li>
-		 			</ul>
+					<div class="col-md-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#person-center" data-toggle="collapse"
+                                                           data-parent="accordion">个人中心<span class="caret" style="float:right;margin-top: 7px;margin-right: -11px;"></span></a></h4>
+                            </div>
+                            <div id="person-center" class="panel-collapse collapse in">
+                                <div class="panel-body" style="padding: 6px 15px;">
+                                    <ul class="nav nav-pills nav-stacked" style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                        <li ><a href="/mybatis/knowledgebase/adm-personal.jsp">个人信息</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#user-manage" data-toggle="collapse"
+                                                           data-parent="accordion">用户管理<span class="caret" style="float:right;margin-top: 7px;margin-right: -11px;"></span></a></h4>
+                            </div>
+                            <div id="user-manage" class="panel-collapse collapse in">
+                                <div class="panel-body" style="padding: 6px 15px;">
+                                    <ul class="nav nav-pills nav-stacked" style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                        <li ><a href="/mybatis/knowledgebase/adm-inquire.jsp">用户查询</a></li>
+                                        <li ><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#source-manage" data-toggle="collapse"
+                                                           data-parent="accordion">资源管理<span class="caret" style="float:right;margin-top: 7px;margin-right: -11px;"></span></a></h4>
+                            </div>
+                            <div id="source-manage" class="panel-collapse collapse in">
+                                <div class="panel-body" style="padding: 6px 15px;">
+                                    <ul class="nav nav-pills nav-stacked" style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                        <li ><a href="/mybatis/knowledgebase/adm-private.jsp">我的上传</a></li>
+                                        <li ><a href="/mybatis/knowledgebase/adm-public.jsp">共有文件</a></li>
+                                        <li ><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
+                                        <li ><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
+                                        <li ><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
+                                        <li class="active"><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#system-manage" data-toggle="collapse"
+                                                           data-parent="accordion">系统管理<span class="caret" style="float:right;margin-top: 7px;margin-right: -11px;"></span></a></h4>
+                            </div>
+                            <div id="system-manage" class="panel-collapse collapse in">
+                                <div class="panel-body" style="padding: 6px 15px;">
+                                    <ul class="nav nav-pills nav-stacked" style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                        <li ><a href="##">数据还原</a></li>
+                                        <li ><a href="##">数据备份</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
  				</div>
 			 	<div class="col-xs-8" style="margin-left:50px;">
 			 		

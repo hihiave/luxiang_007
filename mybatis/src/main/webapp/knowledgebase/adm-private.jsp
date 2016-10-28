@@ -127,12 +127,12 @@ width: 1320px !important;
                             <div id="source-manage" class="panel-collapse collapse in">
                                 <div class="panel-body" style="padding: 6px 15px;">
                                     <ul class="nav nav-pills nav-stacked" style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                        <li class="active"><a href="/mybatis/knowledgebase/adm-private.jsp">私有文件</a></li>
+                                        <li class="active"><a href="/mybatis/knowledgebase/adm-private.jsp">我的上传</a></li>
                                         <li ><a href="/mybatis/knowledgebase/adm-public.jsp">共有文件</a></li>
                                         <li ><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
                                         <li ><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
-                                        <li ><a href="##">类别管理</a></li>
-                                        <li ><a href="##">资源审核</a></li>
+                                      <li ><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
+                                        <li ><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -163,10 +163,14 @@ width: 1320px !important;
 			 				<table class="table table-striped">
 			 					<thead>
 			 						<tr>
-			 							<th>文件名</th>
-			 							<th>上传时间</th>
-			 							<th style="padding-left:20px;">下载</th>
-			 							<th style="padding-left:20px;">预览</th>
+			 							<th style="padding-left: 28px;border-bottom-width: 2px;padding-bottom: 4px;width: 78px;"><label class="checkbox"><input type="checkbox" id="selAll" onclick="selectAll()">全选 </label></th>
+			 							<th style="padding-bottom:15px;">文件名</th>
+			 							<th style="padding-bottom:15px;">文件属性</th>
+			 							<th style="padding-bottom:15px;">上传时间</th>
+			 
+			 							<th ><button class="btn btn-primary" data-toggle="modal" onclick="delete_all_pick(this)">删除</button></th>
+			 								<th></th>
+			 							<th style="padding-bottom:15px;">&nbsp;&nbsp;预览</th>
 			 						</tr>
 			 					</thead>
 			 					<tbody id="pri_file">
@@ -198,15 +202,36 @@ width: 1320px !important;
         <h4 class="modal-title" id="myModalLabel">提示</h4>
       </div>
       <div class="modal-body">
-  		<p id="download_file"></p>
+  		<p id="down_file"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">否</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="downloadFile(this)">是</button>
+        <button type="button" class="btn btn-primary" id="down_click" data-dismiss="modal" onclick="down_ok()">是</button>
       </div>
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+       
+        <h4 class="modal-title" id="myModalLabel">提示</h4>
+      </div>
+      <div class="modal-body">
+  		<p id="delete_file"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">否</button>
+        <button type="button" class="btn btn-primary" id="delete_click" data-dismiss="modal" onclick="delete_file_ok()">是</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-logout">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
@@ -242,6 +267,24 @@ width: 1320px !important;
     </div>
   </div>
 </div>
+
+    <div class="modal fade" id="click_remind" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-person_remind">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <h4 class="modal-title" id="myModalLabel-person_remind">提示</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p id="remind_file"></p>
+                            </div>
+                            <div class="modal-footer">
+
+                                <button type="button" class="btn btn-primary "  data-dismiss="modal" >确认</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 <style type="text/css">
 th.btn-primary{

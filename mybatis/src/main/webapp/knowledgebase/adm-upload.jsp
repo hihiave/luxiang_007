@@ -29,7 +29,6 @@
 <script src="/mybatis/knowledgebase/js/bootstrap.min.js"></script>
 <script src="/mybatis/knowledgebase/js/html5shiv.min.js"></script>
 <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
-<script src="/mybatis/knowledgebase/js/common.js"></script>
 
 <style type="text/css">
 .nav{
@@ -43,6 +42,7 @@
 width: 1320px !important;
 }
 
+</style>
 </style>
 
 <%
@@ -115,7 +115,7 @@ function check(){
 <body>
 
 <div style="margin:10px 20px;">
-	<button type="button" class="btn btn-md btn-default" style="border:0px;float:right;" data-toggle="tooltip" data-placement="bottom" title="退出登录" onclick="logout()">
+	<button type="button" class="btn btn-md btn-default" style="border:0px;float:right;" data-toggle="tooltip" data-placement="bottom" title="退出登录">
  		<span class="glyphicon glyphicon-off"></span>&nbsp;退出
 	</button>
 	<button type="button" class="btn btn-md btn-default" style="border:0px;float:right;" data-toggle="tooltip" data-placement="bottom" title="个人中心">
@@ -155,7 +155,7 @@ function check(){
 			</div>
 			<hr>
 			<div class="row" style="margin-left:80px;">
-				<div class="col-md-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
+			<div class="col-md-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
                     <div class="panel-group" id="accordion">
                         <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
                             <div class="panel-heading">
@@ -192,12 +192,12 @@ function check(){
                             <div id="source-manage" class="panel-collapse collapse in">
                                 <div class="panel-body" style="padding: 6px 15px;">
                                     <ul class="nav nav-pills nav-stacked" style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                        <li ><a href="/mybatis/knowledgebase/adm-private.jsp">私有文件</a></li>
+                                        <li ><a href="/mybatis/knowledgebase/adm-private.jsp">我的上传</a></li>
                                         <li ><a href="/mybatis/knowledgebase/adm-public.jsp">共有文件</a></li>
                                         <li ><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
                                         <li class="active"><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
-                                        <li ><a href="##">类别管理</a></li>
-                                        <li ><a href="##">资源审核</a></li>
+                                       <li ><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
+                                        <li ><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -309,23 +309,6 @@ function check(){
 										
 			 	</div>
 			</div>
-    <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-logout">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <h4 class="modal-title" id="myModalLabel-logout">退出提示</h4>
-                </div>
-                <div class="modal-body">
-                    <p id="logout-username"></p>
-                </div>
-                <div class="modal-footer">
-
-                    <button type="button" class="btn btn-primary " data-dismiss="modal" id="logout-dismiss">确认</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 

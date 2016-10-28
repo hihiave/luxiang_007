@@ -147,12 +147,12 @@
                             <div id="source-manage" class="panel-collapse collapse in">
                                 <div class="panel-body" style="padding: 6px 15px;">
                                     <ul class="nav nav-pills nav-stacked" style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                        <li ><a href="/mybatis/knowledgebase/adm-private.jsp">私有文件</a></li>
+                                        <li ><a href="/mybatis/knowledgebase/adm-private.jsp">我的上传</a></li>
                                         <li ><a href="/mybatis/knowledgebase/adm-public.jsp">共有文件</a></li>
                                         <li ><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
                                         <li ><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
-                                        <li ><a href="##">类别管理</a></li>
-                                        <li ><a href="##">资源审核</a></li>
+                                        <li ><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
+                                        <li ><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
                                     </ul>
                                 </div>
                             </div>
