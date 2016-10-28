@@ -11,8 +11,8 @@ public class MacroEnum {
 		public static final int NOTPASS = 0;
 
 		// 文件公有还是私有
-		public static final String PUBLICFILE = "public";
-		public static final String PRIVATEFILE = "private";
+		public static final String PUBLICFILE = "公有";
+		public static final String PRIVATEFILE = "私有";
 	}
 
 	/**

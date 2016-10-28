@@ -39,7 +39,7 @@
   	select * from File where file_author = #{fileAuthor,jdbcType=VARCHAR} and file_check = '1'
   </select>
   <select id="selectPublicFileInfo" resultMap="BaseResultMap">
-  	select * from File where file_is_visible = 'public' and file_check = '1'
+  	select * from File where file_is_visible = '公有' and file_check = '1'
   </select>
   
   <!--*********用于一些查询的方法*********-->

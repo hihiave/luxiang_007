@@ -49,7 +49,6 @@ public class TestFileInfo {
 	@Test
 	public void TestDeleteFileInfoById() {
 		logger.info("===============TestDeleteFileInfoById=============");
-
 		boolean d = fileInfoService.delFileInfoById(23, 22);
 		logger.info("=========删除======" + d);
 	}
