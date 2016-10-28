@@ -34,16 +34,16 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<Category> getAllCategory() {
-		return categoryMapper.getAllCategory();
-	}
-
-	@Override
 	public boolean checkCategoryIsExist(String categoryName) {
 		if (categoryMapper.selectByCategoryName(categoryName) != null) {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<Category> getAllCategory() {
+		return categoryMapper.getAllCategory();
 	}
 
 }

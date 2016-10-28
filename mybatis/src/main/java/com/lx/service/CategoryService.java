@@ -20,17 +20,17 @@ public interface CategoryService {
 	 */
 	public boolean delCategory(String categoryName);
 
-	/** 获取所有类别
-	 * @author luxiang
-	 * @return 一个类别列表 Category
-	 */
-	public List<Category> getAllCategory();
-	
 	/** 检查文件类别是否存在
 	 * @author luxiang
 	 * @param categoryName 文件类别名
 	 * @return boolean，true表示类别已经存在，false表示类别不存在
 	 */
 	public boolean checkCategoryIsExist(String categoryName);
+	
+	/** 获取所有类别
+	 * @author luxiang
+	 * @return 一个类别列表 Category
+	 */
+	public List<Category> getAllCategory();
 	
 }
