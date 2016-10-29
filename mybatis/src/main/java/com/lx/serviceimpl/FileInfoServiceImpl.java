@@ -103,21 +103,6 @@ public class FileInfoServiceImpl implements FileInfoService {
 		}
 	}
 
-	@Override
-	public boolean updateFileStatusByFileCategory(String fileCategory) {
-		return false;
-		// int temp = fileInfoMapper.updateFileStatusByCategory(fileCategory);
-		// System.out.println(temp);
-		// if (temp >= 0)
-		// return true;
-		// else
-		// return false;
-	}
-
-	@Override
-	public List<FileInfo> getFileInfoByCategory(String fileCategory) {
-		return null;
-		// return fileInfoMapper.selectByCategory(fileCategory);
-	}
+	
 
 }

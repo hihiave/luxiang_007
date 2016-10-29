@@ -74,22 +74,4 @@ public interface FileInfoService {
 	 */
 	public List<FileInfo> getFileByLikeFileAuthor(String fileAuthor, String fileCategory, KButtonType buttonType);
 	
-	
-	
-
-	/**
-	 * @author 米登
-	 * @param String
-	 *            类型的 文件种类名称
-	 * @return boolean值 true代表更新成功
-	 */
-	public boolean updateFileStatusByFileCategory(String fileCategory);
-
-	/**
-	 * @author 米登
-	 * @param String
-	 *            文件种类
-	 * @return FileInfo 类型的文件信息
-	 */
-	public List<FileInfo> getFileInfoByCategory(String fileCategory);
 }
