@@ -30,11 +30,15 @@
   <select id="getFileByFileName" resultMap="BaseResultMap" parameterType="java.lang.String">
   	select * from File where file_name = #{fileName,jdbcType=VARCHAR} limit 1
   </select>
+  <update id="updateFilesCheck">
+  	UPDATE File set file_check = '1' where file_id in
+  		<foreach collection="fileIds" item="fileId" index="index" open="(" close=")" separator=",">
+  			#{fileId}
+  		</foreach>
+  </update>
   <select id="selectFileByIsPass" resultMap="BaseResultMap" parameterType="java.lang.Integer">
   	select * from File where file_check = #{checkType,jdbcType=INTEGER}
   </select>
-
-
   <select id="selectMyFileInfo" resultMap="BaseResultMap" parameterType="java.lang.String">
   	select * from File where file_author = #{fileAuthor,jdbcType=VARCHAR} and file_check = '1'
   </select>

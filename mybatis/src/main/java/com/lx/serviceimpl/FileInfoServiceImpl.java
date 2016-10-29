@@ -43,6 +43,14 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	@Override
+	public boolean updateFilesCheck(Integer... fileIds) {
+		if (fileIds.length == fileInfoMapper.updateFilesCheck(fileIds)) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public List<FileInfo> selectFileByIsPass(int checkType) {
 		return fileInfoMapper.selectFileByIsPass(checkType);
 	}

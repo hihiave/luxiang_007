@@ -50,11 +50,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public boolean updateUsersCheck(String... userNames) {
-		boolean flag = false;
 		if (userNames.length == userInfoMapper.updateUsersCheck(userNames)) {
-			flag = true;
+			return true;
 		}
-		return flag;
+		return false;
 	}
 
 	public KMessageType checkLogin(String userName, String userPassword) {

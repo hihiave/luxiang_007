@@ -23,6 +23,7 @@ public interface FileInfoMapper {
 	//**********用于处理一些业务逻辑的方法**********
 	int delFileInfoById(@Param("fileIds") Integer... fileIds);
 	FileInfo getFileByFileName(String fileName);
+	int updateFilesCheck(@Param("fileIds") Integer... fileIds);
 	List<FileInfo> selectFileByIsPass(int checkType);
 	List<FileInfo> selectMyFileInfo(String userName);
 	List<FileInfo> selectPublicFileInfo();

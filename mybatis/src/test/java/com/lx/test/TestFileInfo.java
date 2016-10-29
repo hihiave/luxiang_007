@@ -61,6 +61,13 @@ public class TestFileInfo {
 	}
 
 	@Test
+	public void TestUpdateFilesCheck() {
+		logger.info("===============TestUpdateFilesCheck=============");
+		boolean d = fileInfoService.updateFilesCheck(1, 2);
+		logger.info("=========检查======" + d);
+	}
+
+	@Test
 	public void TestSelectFileByIsPass() {
 		logger.info("===============TestSelectFileByIsPass=============");
 		List<FileInfo> fileInfos = fileInfoService.selectFileByIsPass(KCheckType.PASS);

@@ -28,6 +28,13 @@ public interface FileInfoService {
 	 */
 	public boolean checkFileIsExist(String fileName);
 	
+	/** 通过文件id批量审核通过
+	 * @author luxiang
+	 * @param fileIds 批量文件fileIds
+	 * @return boolean，true表示审核通过成功，false表示审核通过失败
+	 */
+	public boolean updateFilesCheck(Integer... fileIds);
+	
 	/** 通过审核是否通过查询文件
 	 * @author luxiang
 	 * @param checkType
