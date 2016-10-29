@@ -154,7 +154,7 @@ function delete_one_pick(obj){
     var file_id=$(selected_id).attr("id");
     $("#delete_file").removeClass();
     $("#delete_file").addClass(file_id);
-    $("#delete_file").html("确认删除  "+file_id+"  么？");
+    $("#delete_file").html("确认删除  "+delete_file_name+"  么？");
     $("#delete_click").removeAttr("onclick_id");
     $("#delete_click").attr("onclick_id","delete_one");
     

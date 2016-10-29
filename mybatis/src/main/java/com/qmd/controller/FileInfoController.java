@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lx.model.Category;
 import com.lx.model.FileInfo;
 import com.lx.service.CategoryService;
 import com.lx.service.FileInfoService;
@@ -24,7 +25,7 @@ public class FileInfoController {
 	@Autowired
 	FileInfoService fileInfoService;
 	CategoryService categortservice;
-	
+
 	@RequestMapping("/fy")
 	public String showFileInfo(HttpServletRequest request) {
 		System.out.println("=====================");
@@ -39,39 +40,40 @@ public class FileInfoController {
 		return "showFileInfo";
 		// System.out.println;
 	}
-	//类别
+
+	// 类别
 	@RequestMapping(value = "/get_category", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> get_category(HttpSession httpSession, HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		List category = categortservice.getAllCategory();
 
+		List<Category> category = categortservice.getAllCategory();
+		
 		map.put("category", category);
 		return map;
 	}
-	
-	
-	//下载
-	 @RequestMapping(value = "/down_check_file",method = RequestMethod.POST,produces = "text/html;charset=UTF-8")
-	    @ResponseBody
-	    public void deleteuser(String select_filename, HttpServletRequest httpServletRequest) {
-	        System.out.println("传入数据========="+select_filename);
-	        
-	    }
 
-//删除
+	// 下载
+	@RequestMapping(value = "/down_check_file", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public void deleteuser(String select_filename, HttpServletRequest httpServletRequest) {
+		System.out.println("传入数据=========" + select_filename);
+
+	}
+
+	// 删除
 	@RequestMapping(value = "/delete_file", method = RequestMethod.POST)
 	@ResponseBody
-	 public Map<String, Object> delete_file(Integer[] delete_array,HttpServletRequest httpServletRequest) {
-       
-        Map<String, Object> map = new HashMap<String, Object>();
-        System.out.println("传入数据=========");
-       // System.out.println("传入数据========="+delete_array.toString());
-        boolean result=fileInfoService.delFileInfoById(delete_array);
-        map.put("flag",result);
-        return map;
+	public Map<String, Object> delete_file(Integer[] delete_array, HttpServletRequest httpServletRequest) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println("传入数据=========");
+		// System.out.println("传入数据========="+delete_array.toString());
+		boolean result = fileInfoService.delFileInfoById(delete_array);
+		map.put("flag", result);
+		return map;
 	}
+
 	@RequestMapping(value = "/privatefile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> privatefile(HttpSession httpSession, HttpServletRequest httpServletRequest) {

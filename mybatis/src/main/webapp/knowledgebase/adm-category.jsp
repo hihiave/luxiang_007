@@ -30,7 +30,7 @@
 <script src="/mybatis/knowledgebase/js/bootstrap.min.js"></script>
 <script src="/mybatis/knowledgebase/js/html5shiv.min.js"></script>
 <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
-<script src="/mybatis/knowledgebase/js/adm_inquire.js"></script>
+<script src="/mybatis/knowledgebase/js/adm_category.js"></script>
 
 <style type="text/css">
 .nav{
@@ -236,7 +236,7 @@ width: 1320px !important;
       </div>
       <div class="modal-body">
         <ul style="padding-left:0px;">
-        	<li><input type="text" placeholder="请输入类别名称" class="form-control" ></li>
+        	<li><input type="text" placeholder="请输入类别名称" id="cate_name" class="form-control" ></li>
         </ul>
       </div>
       <div class="modal-footer">
@@ -246,6 +246,24 @@ width: 1320px !important;
     </div>
   </div>
 </div>	
+</div>
+
+<div class="modal fade" id="tianjia_result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-add-result">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel-add-result">提示信息</h4>
+            </div>
+            <div class="modal-body">
+                <p id="add_cate_result"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary " data-dismiss="modal" >确认</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <style type="text/css">

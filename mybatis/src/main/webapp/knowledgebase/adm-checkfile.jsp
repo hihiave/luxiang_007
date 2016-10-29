@@ -30,7 +30,7 @@
 <script src="/mybatis/knowledgebase/js/bootstrap.min.js"></script>
 <script src="/mybatis/knowledgebase/js/html5shiv.min.js"></script>
 <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
-<script src="/mybatis/knowledgebase/js/adm_inquire.js"></script>
+<script src="/mybatis/knowledgebase/js/adm_checkfile.js"></script>
 
 <style type="text/css">
 .nav{
@@ -45,22 +45,7 @@ width: 1320px !important;
 }
 
 </style>
-<script type="text/javascript">
-function selectAll() { 
-var ckbs=document.getElementsByName("checkAll");
-var cka=document.getElementById("selAll");
-if (cka.checked==true) {
-	for (var i = 0; i < ckbs.length; i++) {
-		ckbs[i].checked=true;
-	}
-}
-else{
-	for (var i = 0; i < ckbs.length; i++) {
-		ckbs[i].checked=false;
-	}
-}
-} 
-</script>
+
 </head>
 <body>
 
@@ -191,12 +176,12 @@ else{
 			 							<th style="padding-left: 28px;border-bottom-width: 2px;padding-bottom: 4px;width: 78px;"><label class="checkbox"><input type="checkbox" id="selAll" onclick="selectAll()">全选 </label></th>
 			 							<th style="padding-bottom:15px;">资源名</th>
 			 							<th style="padding-bottom:15px;">上传者</th>
-			 							<th style="width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#tongguo">通过</button></th>
+			 							<th style="width:116px;"><button class="btn btn-primary" data-toggle="modal" onclick="check_all_pick(this)">通过</button></th>
 			 							<th style="width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#jujue">拒绝</button></th>
 			 						</tr>
 			 					</thead>
-			 					<tbody id="list">
-			 						<tr>
+			 					<tbody id="file_result">
+			 						<!-- <tr>
 			 							<td style="padding-top:15px;"><label><input type="checkbox" name="checkAll"></label></td>
 			 							<td style="padding-top:15px;">第八次人名代表大会</td>
 			 							<td style="padding-top:15px;padding-left:15px;">张三</td>
@@ -216,7 +201,7 @@ else{
 			 							<td style="padding-top:15px;padding-left:15px;">王五</td>
 			 							<td><button class="btn btn-primary">通过</button></td>
 			 							<td><button class="btn btn-primary">拒绝</button></td>
-			 						</tr>
+			 						</tr> -->
 
 			 					</tbody>
 			 				</table>
@@ -229,7 +214,7 @@ else{
 </div>
 
 
-<div class="modal fade" id="tongguo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="pass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -237,10 +222,11 @@ else{
         <h4 class="modal-title" id="myModalLabel">提示</h4>
       </div>
       <div class="modal-body">
-        资源已通过审核！
+		<p id="file_remind"></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="file_click" onclick="pass_file_ok()">确认</button>
       </div>
     </div>
   </div>
@@ -257,7 +243,7 @@ else{
         <h4 class="modal-title" id="myModalLabel">提示</h4>
       </div>
       <div class="modal-body">
-       资源未通过审核!
+			
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
