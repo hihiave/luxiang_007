@@ -11,7 +11,7 @@ $(function(){
 function get_all_private_file(){
     $.ajax({
         type:'post',
-        url:"/mybatis/FileInfoController/privatefile.do",
+        url:"/mybatis/FileInfoController/myuploadfile.do",
         dataType:"json",
         success:function get_all_private_file(data){
             var _table = $("#pri_file>tr");

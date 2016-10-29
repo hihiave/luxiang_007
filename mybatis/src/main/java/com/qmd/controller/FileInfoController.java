@@ -24,7 +24,6 @@ public class FileInfoController {
 
 	@Autowired
 	FileInfoService fileInfoService;
-	
 
 	@RequestMapping("/fy")
 	public String showFileInfo(HttpServletRequest request) {
@@ -40,20 +39,31 @@ public class FileInfoController {
 		return "showFileInfo";
 		// System.out.println;
 	}
-	
-	//资源审核
+
+	// 资源审核
 	@RequestMapping(value = "/get_all_checkfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> get_all_checkfile(HttpSession httpSession, HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		List<FileInfo> all_checkfile = fileInfoService.selectFileByIsPass(0);
-		
+
 		map.put("checkfile", all_checkfile);
 		return map;
 	}
 
+	// 审核文件
 
+	  @RequestMapping(value = "/pass_file", method = RequestMethod.POST)
+	 
+	  @ResponseBody public Map<String, Object> pass_file(Integer[] pass_array,HttpSession httpSession, HttpServletRequest httpServletRequest) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println("传入数据=========");
+		boolean result = fileInfoService.updateFilesCheck(pass_array);
+		map.put("flag", result);
+		return map;
+	}
+	 
 	// 下载
 	@RequestMapping(value = "/down_check_file", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
@@ -75,12 +85,13 @@ public class FileInfoController {
 		return map;
 	}
 
-	@RequestMapping(value = "/privatefile", method = RequestMethod.POST)
+	@RequestMapping(value = "/myuploadfile", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> privatefile(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+	public Map<String, Object> myuploadfile(HttpSession httpSession, HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
-
-		List<FileInfo> pri_file = fileInfoService.selectMyFileInfo("luxiang");
+		String username = (String) httpSession.getAttribute("username");
+		System.out.println(username);
+		List<FileInfo> pri_file = fileInfoService.selectMyFileInfo(username);
 
 		map.put("pri_file", pri_file);
 		return map;
