@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +19,12 @@ import com.lx.service.CategoryService;
 import com.lx.service.FileInfoService;
 
 @Controller
-@RequestMapping("/qmd")
+@RequestMapping("/FileInfoController")
 public class FileInfoController {
 
 	@Autowired
 	FileInfoService fileInfoService;
-	@Autowired
-	CategoryService categoryService;
-
-	private static final Logger logger = Logger.getLogger(FileInfoController.class);
+	
 
 	@RequestMapping("/fy")
 	public String showFileInfo(HttpServletRequest request) {
@@ -44,17 +40,19 @@ public class FileInfoController {
 		return "showFileInfo";
 		// System.out.println;
 	}
-
-	// 类别
-	@RequestMapping(value = "/get_category", method = RequestMethod.POST)
+	
+	//资源审核
+	@RequestMapping(value = "/get_all_checkfile", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> get_category(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+	public Map<String, Object> get_all_checkfile(HttpSession httpSession, HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Category> category = categoryService.getAllCategory();
 
-		map.put("category", category);
+		List<FileInfo> all_checkfile = fileInfoService.selectFileByIsPass(0);
+		
+		map.put("checkfile", all_checkfile);
 		return map;
 	}
+
 
 	// 下载
 	@RequestMapping(value = "/down_check_file", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
