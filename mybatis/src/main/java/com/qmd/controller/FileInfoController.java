@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,10 @@ public class FileInfoController {
 
 	@Autowired
 	FileInfoService fileInfoService;
-	CategoryService categortservice;
+	@Autowired
+	CategoryService categoryService;
+
+	private static final Logger logger = Logger.getLogger(FileInfoController.class);
 
 	@RequestMapping("/fy")
 	public String showFileInfo(HttpServletRequest request) {
@@ -46,9 +50,8 @@ public class FileInfoController {
 	@ResponseBody
 	public Map<String, Object> get_category(HttpSession httpSession, HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		List<Category> category = categoryService.getAllCategory();
 
-		List<Category> category = categortservice.getAllCategory();
-		
 		map.put("category", category);
 		return map;
 	}
