@@ -9,7 +9,7 @@ $(function(){
 function get_all_public_file(){
     $.ajax({
         type:'post',
-        url:"/mybatis/qmd/publicfile.do",
+        url:"/mybatis/FileInfoController/publicfile.do",
         dataType:"json",
         success:function get_aal_public_file(data){
             var _table = $("#pub_file>tr");

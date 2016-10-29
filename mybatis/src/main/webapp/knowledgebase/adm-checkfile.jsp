@@ -176,8 +176,8 @@ width: 1320px !important;
 			 							<th style="padding-left: 28px;border-bottom-width: 2px;padding-bottom: 4px;width: 78px;"><label class="checkbox"><input type="checkbox" id="selAll" onclick="selectAll()">全选 </label></th>
 			 							<th style="padding-bottom:15px;">资源名</th>
 			 							<th style="padding-bottom:15px;">上传者</th>
-			 							<th style="width:116px;"><button class="btn btn-primary" data-toggle="modal" onclick="check_all_pick(this)">通过</button></th>
-			 							<th style="width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#jujue">拒绝</button></th>
+			 							<th style="width:116px;"><button class="btn btn-primary"  onclick="check_all_file(this)">通过</button></th>
+			 							<th style="width:116px;"><button class="btn btn-primary" data-toggle="modal" >拒绝</button></th>
 			 						</tr>
 			 					</thead>
 			 					<tbody id="file_result">
@@ -233,6 +233,23 @@ width: 1320px !important;
 </div>	
 </div>
 
+ <div class="modal fade" id="pass_remind" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-person_remind">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <h4 class="modal-title" id="myModalLabel-person_remind">提示</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p id="remind_info"></p>
+                            </div>
+                            <div class="modal-footer">
+
+                                <button type="button" class="btn btn-primary "  data-dismiss="modal" >确认</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 <div class="modal fade" id="jujue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

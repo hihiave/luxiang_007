@@ -211,11 +211,11 @@ width: 1320px !important;
         <h4 class="modal-title" id="myModalLabel">提示</h4>
       </div>
       <div class="modal-body">
-        确认删除该类别吗?
+			<p id="adm_delete"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" id="queren" class="btn btn-primary" data-dismiss="modal">确认</button>
+        <button type="button" id="queren" class="btn btn-primary" data-dismiss="modal" onclick="delete_ok(this)">确认</button>
       </div>
     </div>
   </div>
@@ -241,7 +241,7 @@ width: 1320px !important;
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary " id="btnclick" onclick="add_cate()">确认</button>
+        <button type="button" class="btn btn-primary " id="btnclick" data-dismiss="modal" onclick="add_cate()">确认</button>
       </div>
     </div>
   </div>

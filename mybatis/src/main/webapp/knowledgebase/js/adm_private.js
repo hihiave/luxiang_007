@@ -11,7 +11,7 @@ $(function(){
 function get_all_private_file(){
     $.ajax({
         type:'post',
-        url:"/mybatis/qmd/privatefile.do",
+        url:"/mybatis/FileInfoController/privatefile.do",
         dataType:"json",
         success:function get_all_private_file(data){
             var _table = $("#pri_file>tr");
@@ -80,7 +80,7 @@ function down_ok(obj){
     $.ajax(
         {
             type:'post',
-            url:"/mybatis/qmd/down_check_file.do",
+            url:"/mybatis/FileInfoController/down_check_file.do",
             data:{"select_filename":attr_p},
             dataType:"json",
             success:function(data){
@@ -134,7 +134,7 @@ function delete_all(){
     console.log(delete_array);
     $.ajax({
         type:'post',
-        url:"/mybatis/qmd/delete_file.do",
+        url:"/mybatis/FileInfoController/delete_file.do",
         dataType:"json",
         traditional:true,
         data:{"delete_array":delete_array},
@@ -164,7 +164,7 @@ function delete_one(obj){
 	 var file_id = $("#delete_file").attr("class");
 	    $.ajax({
 	        type:'post',
-	        url:"/mybatis/qmd/delete_file.do",
+	        url:"/mybatis/FileInfoController/delete_file.do",
 	        dataType:"json",
 	        data:{"delete_array":file_id},
 	        success:function(data){
@@ -240,7 +240,7 @@ function down_all_pick(obj){
    // console.log(check_array);
     $.ajax({
         type:'post',
-        url:"/mybatis/qmd/down_check_file.do",
+        url:"/mybatis/FileInfoController/down_check_file.do",
         dataType:"json",
         traditional:true,
         data:{"check_file_arry":down_array},
@@ -266,7 +266,7 @@ function down_one_selected(){
     var check_file = $("#check_file").attr("class");
     $.ajax({
         type:'post',
-        url:"/mybatis/qmd/down_check_file.do",
+        url:"/mybatis/FileInfoController/down_check_file.do",
         dataType:"json",
         data:{"check_file_array":check_file},
         success:function(data){
