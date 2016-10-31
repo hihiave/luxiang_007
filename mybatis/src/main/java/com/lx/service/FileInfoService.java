@@ -11,8 +11,8 @@ public interface FileInfoService {
 
 	//**********用于处理一些业务逻辑的方法**********
 	/** 添加一个文件信息，必须指定文件名
-	 * @author 米登
-	 * @param FileInfo
+	 * @author luxiang
+	 * @param fileInfo
 	 * @return boolean，true表示添加成功，false表示添加失败
 	 */
 	public boolean addFileInfo(FileInfo fileInfo);
@@ -26,6 +26,7 @@ public interface FileInfoService {
 
 	/** 通过文件名检查文件是否存在
 	 * @author luxiang
+	 * @param fileName 文件名
 	 * @return boolean，true表示存在，false表示不存在
 	 */
 	public boolean checkFileIsExist(String fileName);
@@ -38,7 +39,7 @@ public interface FileInfoService {
 	 */
 	public boolean batchFilesIsPass(KCheckType checkType, Integer... fileIds);
 	
-	/** 通过审核是否通过查询文件
+	/** 通过审核是否通过查询文件(待审核waitforcheck,公有文件pass)
 	 * @author luxiang
 	 * @param checkType 审核类型，请查看枚举
 	 * @return 一个文件对象列表 FileInfo
@@ -52,13 +53,6 @@ public interface FileInfoService {
 	 * @return 一个文件对象列表 FileInfo
 	 */
 	List<FileInfo> selectMyFileInfo(String userName, KCheckType checkType);
-	
-	
-	
-	
-	
-	
-	
 	
 	//**********用于一些查询的方法**********
 	/** 通过文件名模糊查询文件，比如，查“三”，找到“十三”，“十三五”

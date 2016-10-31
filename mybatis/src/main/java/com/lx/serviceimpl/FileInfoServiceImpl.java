@@ -59,7 +59,6 @@ public class FileInfoServiceImpl implements FileInfoService {
 	@Override
 	public List<FileInfo> selectMyFileInfo(String userName, KCheckType checkType) {
 		return fileInfoMapper.selectFileByfileAuthorWithFileCheck(userName, checkType.getValue());
-
 	}
 
 	// **********用于一些查询的方法**********

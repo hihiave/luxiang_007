@@ -17,6 +17,7 @@ import com.lx.macrofiles.MacroEnum.KMessageType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.serviceimpl.FileInfoServiceImpl;
+import com.lx.tool.ToolDate;
 
 public class TestFileInfo {
 
@@ -36,8 +37,9 @@ public class TestFileInfo {
 	public void TestAddFileInfo() {
 		logger.info("===============TestAddFileInfo=============");
 		FileInfo fileInfo = new FileInfo();
-		fileInfo.setFileName("西游记");
+		fileInfo.setFileName("西游记111");
 		fileInfo.setFileAuthor("luxiang");
+		fileInfo.setFileUploadTime(ToolDate.getCurrentTimestamp());
 		fileInfo.setFileUploadTime(0);
 		fileInfo.setFileKeywords("两学一做");
 		fileInfo.setFileCategory("科技成果");
@@ -65,24 +67,11 @@ public class TestFileInfo {
 	@Test
 	public void TestBatchFilesIsPass() {
 		logger.info("===============TestBatchFilesIsPass=============");
-
 		boolean d = fileInfoService.batchFilesIsPass(KCheckType.PASS, 1, 2);
-		//.batchFilesIsPass(1, 1);
+		// .batchFilesIsPass(1, 1);
 		logger.info("=========检查======" + d);
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@Test
 	public void TestSelectFileByIsPass() {
 		logger.info("===============TestSelectFileByIsPass=============");
@@ -93,10 +82,9 @@ public class TestFileInfo {
 	@Test
 	public void TestSelectMyFileInfo() {
 		logger.info("===============TestSelectMyFileInfo=============");
-		List<FileInfo> fileInfos = fileInfoService.selectMyFileInfo("luxiang", KCheckType.PASS);
+		List<FileInfo> fileInfos = fileInfoService.selectMyFileInfo("luxiang", KCheckType.NOTPASS);
 		logger.info("=========查询======" + JSON.toJSONString(fileInfos));
 	}
-
 
 	// **********用于一些查询的方法**********
 	@Test

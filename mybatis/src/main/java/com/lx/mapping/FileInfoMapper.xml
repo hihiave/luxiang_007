@@ -37,15 +37,16 @@
   		</foreach>
   </update>
   <select id="selectFileByfileCheck" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-  	select * from File where file_check = #{fileCheck,jdbcType=INTEGER} and file_is_visible = '公有'
+  	select * from File where 
+  	file_check = #{fileCheck,jdbcType=INTEGER} and 
+  	file_is_visible = '公有'
   </select>
-  <select id="selectFileByfileAuthorWithFileCheck" resultMap="BaseResultMap" parameterType="java.lang.String">
+  <select id="selectFileByfileAuthorWithFileCheck" resultMap="BaseResultMap">
   	select * from File where 
   	file_author = #{fileAuthor,jdbcType=VARCHAR} and 
-  	file_check = #{fileCheck} 
+  	file_check = #{fileCheck,jdbcType=INTEGER} 
   </select>
 
-  
   <!--*********用于一些查询的方法*********-->
   <sql id="query_condition">
   	<if test="fileIsVisible!=null and fileIsVisible!=''">

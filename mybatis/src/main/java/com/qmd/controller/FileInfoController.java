@@ -88,6 +88,7 @@ public class FileInfoController {
 		return map;
 	}
 
+	// 我的上传
 	@RequestMapping(value = "/myuploadfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> myuploadfile(HttpSession httpSession, HttpServletRequest httpServletRequest) {
@@ -100,6 +101,7 @@ public class FileInfoController {
 		return map;
 	}
 
+	// 公有文件
 	@RequestMapping(value = "/publicfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> publicfile(HttpSession httpSession, HttpServletRequest httpServletRequest) {
