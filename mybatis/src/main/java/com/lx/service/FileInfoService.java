@@ -3,6 +3,8 @@ package com.lx.service;
 import java.util.List;
 
 import com.lx.macrofiles.MacroEnum.KButtonType;
+import com.lx.macrofiles.MacroEnum.KCheckType;
+import com.lx.macrofiles.MacroEnum.KMessageType;
 import com.lx.model.FileInfo;
 
 public interface FileInfoService {
@@ -28,32 +30,35 @@ public interface FileInfoService {
 	 */
 	public boolean checkFileIsExist(String fileName);
 	
-	/** 通过文件id批量审核通过
+	/** 通过文件id批量,审核通过(不通过)
 	 * @author luxiang
+	 * @param checkType 审核类型，请查看枚举
 	 * @param fileIds 批量文件fileIds
-	 * @return boolean，true表示审核通过成功，false表示审核通过失败
+	 * @return boolean，true表示操作成功，false表示操作失败
 	 */
-	public boolean updateFilesCheck(Integer... fileIds);
+	public boolean batchFilesIsPass(KCheckType checkType, Integer... fileIds);
 	
 	/** 通过审核是否通过查询文件
 	 * @author luxiang
-	 * @param checkType
+	 * @param checkType 审核类型，请查看枚举
 	 * @return 一个文件对象列表 FileInfo
 	 */
-	public List<FileInfo> selectFileByIsPass(int checkType);
+	public List<FileInfo> selectFileByIsPass(KCheckType checkType);
 	
-	/** 通过用户名查询我的文件信息(我的上传)
+	/** 通过用户名查询我的文件信息(我的上传pass、我的待审核waitforcheck、我的未通过notpass)
 	 * @author luxiang
-	 * @param userName
+	 * @param userName 我的用户名
+	 * @param checkType 审核类型，请查看枚举
 	 * @return 一个文件对象列表 FileInfo
 	 */
-	List<FileInfo> selectMyFileInfo(String userName);
+	List<FileInfo> selectMyFileInfo(String userName, KCheckType checkType);
 	
-	/** 查询公有文件信息(公有文件)
-	 * @author luxiang
-	 * @return 一个文件对象列表 FileInfo
-	 */
-	public List<FileInfo> selectPublicFileInfo();
+	
+	
+	
+	
+	
+	
 	
 	//**********用于一些查询的方法**********
 	/** 通过文件名模糊查询文件，比如，查“三”，找到“十三”，“十三五”

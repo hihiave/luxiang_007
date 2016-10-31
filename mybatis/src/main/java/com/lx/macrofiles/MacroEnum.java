@@ -5,14 +5,27 @@ public class MacroEnum {
 	/**
 	 * 审核类型
 	 */
-	public interface KCheckType {
-		// 审核是否通过
-		public static final int PASS = 1;
-		public static final int NOTPASS = 0;
+	public enum KCheckType {
+		WAITFORCHECK(0), // 等待审核
+		PASS(1), // 审核通过
+		NOTPASS(-1); // 审核不通过
 
+		KCheckType(int value) {
+			this.value = value;
+		}
+
+		private int value;
+
+		public int getValue() {
+			return value;
+		}
+
+	}
+
+	public interface KFileType {
 		// 文件公有还是私有
 		public static final String PUBLICFILE = "公有";
-		public static final String PRIVATEFILE = "私有";
+		//public static final String PRIVATEFILE = "私有";
 	}
 
 	/**
@@ -23,16 +36,15 @@ public class MacroEnum {
 		loginFail, // 登录失败（用户名或密码错误）
 		checkNotPass // 审核未通过
 	}
-	
+
 	/**
 	 * 按钮类型
 	 */
-	public enum KButtonType{
+	public enum KButtonType {
 		MyUploadButton, // 我的上传
 		PublicFileButton, // 公有文件
 	}
-	
-	
+
 	/**
 	 * 时间单位
 	 */

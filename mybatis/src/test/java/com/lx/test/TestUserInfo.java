@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSON;
-import com.lx.macrofiles.MacroEnum;
+import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KMessageType;
 import com.lx.model.UserInfo;
 import com.lx.service.UserInfoService;
@@ -58,7 +58,7 @@ public class TestUserInfo {
 
 	@Test
 	public void TestSelectUserByIsPass() {
-		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(MacroEnum.KCheckType.NOTPASS);
+		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.WAITFORCHECK);
 		logger.info("===A====" + userInfos.isEmpty() + "==");
 		logger.info("===B=====" + userInfos.size() + "==");
 		logger.info("===HH=====" + JSON.toJSONString(userInfos.get(1)) + "==");

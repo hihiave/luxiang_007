@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSON;
 import com.lx.dao.FileInfoMapper;
 import com.lx.macrofiles.MacroEnum.KButtonType;
 import com.lx.macrofiles.MacroEnum.KCheckType;
+import com.lx.macrofiles.MacroEnum.KFileType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 
@@ -43,26 +44,22 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	@Override
-	public boolean updateFilesCheck(Integer... fileIds) {
-		if (fileIds.length == fileInfoMapper.updateFilesCheck(fileIds)) {
+	public boolean batchFilesIsPass(KCheckType checkType, Integer... fileIds) {
+		if (fileIds.length == fileInfoMapper.updateFilesCheck(checkType.getValue(), fileIds)) {
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public List<FileInfo> selectFileByIsPass(int checkType) {
-		return fileInfoMapper.selectFileByIsPass(checkType);
+	public List<FileInfo> selectFileByIsPass(KCheckType checkType) {
+		return fileInfoMapper.selectFileByfileCheck(checkType.getValue());
 	}
 
 	@Override
-	public List<FileInfo> selectMyFileInfo(String userName) {
-		return fileInfoMapper.selectMyFileInfo(userName);
-	}
+	public List<FileInfo> selectMyFileInfo(String userName, KCheckType checkType) {
+		return fileInfoMapper.selectFileByfileAuthorWithFileCheck(userName, checkType.getValue());
 
-	@Override
-	public List<FileInfo> selectPublicFileInfo() {
-		return fileInfoMapper.selectPublicFileInfo();
 	}
 
 	// **********用于一些查询的方法**********
@@ -80,7 +77,7 @@ public class FileInfoServiceImpl implements FileInfoService {
 		case MyUploadButton:
 			return getFileInfo(fileInfo);
 		case PublicFileButton:
-			fileInfo.setFileIsVisible(KCheckType.PUBLICFILE);
+			fileInfo.setFileIsVisible(KFileType.PUBLICFILE);
 			return getFileInfo(fileInfo);
 		default:
 			return null;
@@ -96,13 +93,11 @@ public class FileInfoServiceImpl implements FileInfoService {
 		case MyUploadButton:
 			return getFileInfo(fileInfo);
 		case PublicFileButton:
-			fileInfo.setFileIsVisible(KCheckType.PUBLICFILE);
+			fileInfo.setFileIsVisible(KFileType.PUBLICFILE);
 			return getFileInfo(fileInfo);
 		default:
 			return null;
 		}
 	}
-
-	
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.lx.dao.UserInfoMapper;
 import com.lx.macrofiles.MacroEnum;
+import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KMessageType;
 import com.lx.model.UserInfo;
 import com.lx.service.UserInfoService;
@@ -19,13 +20,13 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Autowired
 	private UserInfoMapper userInfoMapper;
 
-	private boolean insertUserInfo(String userName, String userPassword, int checkType) {
+	private boolean insertUserInfo(String userName, String userPassword, KCheckType checkType) {
 		boolean flag = false;
 		UserInfo userInfo = new UserInfo();
 		userInfo.setUserName(userName);
 		userInfo.setUserPassword(userPassword);
 		userInfo.setUserRole("普通用户");
-		userInfo.setUserCheck(checkType);
+		userInfo.setUserCheck(checkType.getValue());
 		userInfo.setUserRegisterTime(ToolDate.getCurrentTimestamp());
 		if (userInfoMapper.insertSelective(userInfo) == 1) {
 			flag = true;
@@ -35,12 +36,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public boolean addUserInfo(String userName) {
-		return insertUserInfo(userName, ToolEncryption.EncryptMD5("123456"), MacroEnum.KCheckType.PASS);
+		return insertUserInfo(userName, ToolEncryption.EncryptMD5("123456"), KCheckType.PASS);
 	}
 
 	@Override
 	public boolean registerUserInfo(String userName, String userPassword) {
-		return insertUserInfo(userName, ToolEncryption.EncryptMD5(userPassword), MacroEnum.KCheckType.NOTPASS);
+		return insertUserInfo(userName, ToolEncryption.EncryptMD5(userPassword), KCheckType.WAITFORCHECK);
 	}
 
 	@Override
@@ -68,13 +69,13 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public List<UserInfo> selectUserByIsPass(int checkType) {
-		return userInfoMapper.selectUserByIsPass(checkType);
+	public List<UserInfo> selectUserByIsPass(KCheckType checkType) {
+		return userInfoMapper.selectUserByIsPass(checkType.getValue());
 	}
 
 	@Override
 	public int getCountWithNotPass() {
-		return selectUserByIsPass(MacroEnum.KCheckType.NOTPASS).size();
+		return selectUserByIsPass(MacroEnum.KCheckType.WAITFORCHECK).size();
 	}
 
 	@Override

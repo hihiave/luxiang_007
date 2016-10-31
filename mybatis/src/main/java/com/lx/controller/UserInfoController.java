@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lx.macrofiles.MacroEnum;
+import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.model.UserInfo;
 import com.lx.service.UserInfoService;
 
@@ -129,7 +130,7 @@ public class UserInfoController {
 	@ResponseBody
 	public Map<String, Object> is_pass(HttpSession httpSession, HttpServletRequest httpServletRequest) {
 
-		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(1);
+		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.PASS);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("UserInfo_check", userInfos);
 		return map;
@@ -139,7 +140,7 @@ public class UserInfoController {
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> check(HttpSession httpSession, HttpServletRequest httpServletRequest) {
-		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(0);
+		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.WAITFORCHECK);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("UserInfo_check", userInfos);
 		return map;

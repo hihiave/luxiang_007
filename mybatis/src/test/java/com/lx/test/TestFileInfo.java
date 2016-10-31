@@ -12,6 +12,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.alibaba.fastjson.JSON;
 import com.lx.macrofiles.MacroEnum.KButtonType;
 import com.lx.macrofiles.MacroEnum.KCheckType;
+import com.lx.macrofiles.MacroEnum.KFileType;
+import com.lx.macrofiles.MacroEnum.KMessageType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.serviceimpl.FileInfoServiceImpl;
@@ -40,7 +42,7 @@ public class TestFileInfo {
 		fileInfo.setFileKeywords("两学一做");
 		fileInfo.setFileCategory("科技成果");
 		fileInfo.setFileDesc("hahahahaha");
-		fileInfo.setFileIsVisible(KCheckType.PUBLICFILE);
+		fileInfo.setFileIsVisible(KFileType.PUBLICFILE);
 		fileInfo.setFileUrl("F/");
 		boolean d = fileInfoService.addFileInfo(fileInfo);
 		logger.info("=========上传======" + d);
@@ -61,12 +63,26 @@ public class TestFileInfo {
 	}
 
 	@Test
-	public void TestUpdateFilesCheck() {
-		logger.info("===============TestUpdateFilesCheck=============");
-		boolean d = fileInfoService.updateFilesCheck(1, 2);
+	public void TestBatchFilesIsPass() {
+		logger.info("===============TestBatchFilesIsPass=============");
+
+		boolean d = fileInfoService.batchFilesIsPass(KCheckType.PASS, 1, 2);
+		//.batchFilesIsPass(1, 1);
 		logger.info("=========检查======" + d);
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Test
 	public void TestSelectFileByIsPass() {
 		logger.info("===============TestSelectFileByIsPass=============");
@@ -77,16 +93,10 @@ public class TestFileInfo {
 	@Test
 	public void TestSelectMyFileInfo() {
 		logger.info("===============TestSelectMyFileInfo=============");
-		List<FileInfo> fileInfos = fileInfoService.selectMyFileInfo("luxiang");
+		List<FileInfo> fileInfos = fileInfoService.selectMyFileInfo("luxiang", KCheckType.PASS);
 		logger.info("=========查询======" + JSON.toJSONString(fileInfos));
 	}
 
-	@Test
-	public void TestSelectPublicFileInfo() {
-		logger.info("===============TestSelectPublicFileInfo=============");
-		List<FileInfo> fileInfos = fileInfoService.selectPublicFileInfo();
-		logger.info("=========公有文件======" + JSON.toJSONString(fileInfos));
-	}
 
 	// **********用于一些查询的方法**********
 	@Test
@@ -96,7 +106,7 @@ public class TestFileInfo {
 		// fileInfo.setFileName("十三五");
 		fileInfo.setFileAuthor("luxiang");
 		// fileInfo.setFileCategory("科技成果");
-		fileInfo.setFileIsVisible(KCheckType.PUBLICFILE);
+		fileInfo.setFileIsVisible(KFileType.PUBLICFILE);
 	}
 
 	@Test
