@@ -43,7 +43,7 @@ width: 1320px !important;
 }
 
 </style>
-</style>
+
 
 <%
 java.text.SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat(  
@@ -154,161 +154,193 @@ function check(){
 				</div>
 			</div>
 			<hr>
-			<div class="row" style="margin-left:80px;">
-			<div class="col-md-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
-                    <div class="panel-group" id="accordion">
-                        <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
+    <div class="row" style="margin-left:80px;">
+        <div class="col-md-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a href="#person-center" data-toggle="collapse"
+                                                   data-parent="accordion">个人中心<span class="caret"
+                                                                                     style="float:right;margin-top: 7px;margin-right: -11px;"></span></a>
+                        </h4>
+                    </div>
+                    <div id="person-center" class="panel-collapse collapse in">
+                        <div class="panel-body" style="padding: 6px 15px;">
+                            <ul class="nav nav-pills nav-stacked"
+                                style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                <li><a href="/mybatis/knowledgebase/adm-personal.jsp">个人信息</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a href="#user-manage" data-toggle="collapse"
+                                                   data-parent="accordion">用户管理<span class="caret"
+                                                                                     style="float:right;margin-top: 7px;margin-right: -11px;"></span></a>
+                        </h4>
+                    </div>
+                    <div id="user-manage" class="panel-collapse collapse in">
+                        <div class="panel-body" style="padding: 6px 15px;">
+                            <ul class="nav nav-pills nav-stacked"
+                                style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                <li><a href="/mybatis/knowledgebase/adm-inquire.jsp">用户查询</a></li>
+                                <li><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a href="#source-manage" data-toggle="collapse"
+                                                   data-parent="accordion">资源管理<span class="caret"
+                                                                                     style="float:right;margin-top: 7px;margin-right: -11px;"></span></a>
+                        </h4>
+                    </div>
+                    <div id="source-manage" class="panel-collapse collapse in">
+                        <div class="panel-body" style="padding: 6px 15px;">
+                            <ul class="nav nav-pills nav-stacked"
+                                style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                <li><a href="/mybatis/knowledgebase/adm-private.jsp">我的上传</a></li>
+                                <li><a href="/mybatis/knowledgebase/adm-public.jsp">共有文件</a></li>
+                                <li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
+                                <li class="active"><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
+                                <li><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
+                                <li><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a href="#system-manage" data-toggle="collapse"
+                                                   data-parent="accordion">系统管理<span class="caret"
+                                                                                     style="float:right;margin-top: 7px;margin-right: -11px;"></span></a>
+                        </h4>
+                    </div>
+                    <div id="system-manage" class="panel-collapse collapse in">
+                        <div class="panel-body" style="padding: 6px 15px;">
+                            <ul class="nav nav-pills nav-stacked"
+                                style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                <li><a href="##">数据还原</a></li>
+                                <li><a href="##">数据备份</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-8" style="margin-left:50px;">
+
+            <div class="panel panel-primary" style="height:625px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">文件上传</h3>
+                </div>
+                <div class="panel-body" style="height:580px;overflow-y:auto;">
+                    <form action="/mybatis/Uploadservlet" name="name1" enctype="multipart/form-data" method="post">
+
+                        <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#person-center" data-toggle="collapse"
-                                                           data-parent="accordion">个人中心<span class="caret" style="float:right;margin-top: 7px;margin-right: -11px;"></span></a></h4>
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse"  href="#upload1">
+                                        选择文件1
+                                    </a>
+                                </h4>
                             </div>
-                            <div id="person-center" class="panel-collapse collapse in">
-                                <div class="panel-body" style="padding: 6px 15px;">
-                                    <ul class="nav nav-pills nav-stacked" style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                        <li ><a href="/mybatis/knowledgebase/adm-personal.jsp">个人信息</a></li>
-                                    </ul>
+                            <div id="upload1" class="panel-collapse collapse">
+                                <div class="panel-body form-inline">
+                                    <input type="file" class="upload" name="file" id="file1"><br>
+                                    <span>资料名称：</span><input class="form-control" style="width:40%;" type="text"
+                                                             id="aim1" readonly="true">&nbsp;&nbsp;
+
+                                    <span>上传者：</span><input class="form-control" style="width:40%;" type="text"
+                                                            placeholder="<%=session.getAttribute("username")%>"
+                                                            readonly="true"><br><br>
+                                    <span>上传时间：</span><input class="form-control" style="width:40%;" type="text"
+                                                             placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
+                                    <span>关键词：</span><input class="form-control" style="width:40%;"
+                                                            placeholder="多个关键词以空格分开" type="text" id="word1"><br><br>
+                                    <span>资料属性：</span><input type="radio" name="type1" checked>公有&nbsp;&nbsp;<input
+                                        type="radio" name="type1">私有<br><br>
+                                    <span>资料描述：</span><textarea type="textarea" class="form-control"
+                                                                style="width:89.5%;" rows="3" id="area1"></textarea>
+
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
+                        <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#user-manage" data-toggle="collapse"
-                                                           data-parent="accordion">用户管理<span class="caret" style="float:right;margin-top: 7px;margin-right: -11px;"></span></a></h4>
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse"  href="#upload2">
+                                        选择文件2
+                                    </a>
+                                </h4>
                             </div>
-                            <div id="user-manage" class="panel-collapse collapse in">
-                                <div class="panel-body" style="padding: 6px 15px;">
-                                    <ul class="nav nav-pills nav-stacked" style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                        <li ><a href="/mybatis/knowledgebase/adm-inquire.jsp">用户查询</a></li>
-                                        <li ><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核</a></li>
-                                    </ul>
+                            <div id="upload2" class="panel-collapse collapse">
+                                <div class="panel-body form-inline">
+                                    <input type="file" class="upload" name="file" id="file2"><br>
+                                    <span>资料名称：</span><input class="form-control" style="width:40%;" type="text"
+                                                             id="aim2" readonly="true">&nbsp;&nbsp;
+
+                                    <span>上传者：</span><input class="form-control" style="width:40%;" type="text"
+                                                            placeholder="<%=session.getAttribute("username")%>"
+                                                            readonly="true"><br><br>
+                                    <span>上传时间：</span><input class="form-control" style="width:40%;" type="text"
+                                                             placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
+                                    <span>关键词：</span><input class="form-control" style="width:40%;"
+                                                            placeholder="多个关键词以空格分开" type="text" id="word2"><br><br>
+                                    <span>资料属性：</span><input type="radio" name="type2" checked>公有&nbsp;&nbsp;<input
+                                        type="radio" name="type2">私有<br><br>
+                                    <span>资料描述：</span><textarea type="textarea" class="form-control"
+                                                                style="width:89.5%;" rows="3" id="area2"></textarea>
+
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
+                        <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#source-manage" data-toggle="collapse"
-                                                           data-parent="accordion">资源管理<span class="caret" style="float:right;margin-top: 7px;margin-right: -11px;"></span></a></h4>
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse"  href="#upload3">
+                                        选择文件3
+                                    </a>
+                                </h4>
                             </div>
-                            <div id="source-manage" class="panel-collapse collapse in">
-                                <div class="panel-body" style="padding: 6px 15px;">
-                                    <ul class="nav nav-pills nav-stacked" style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                        <li ><a href="/mybatis/knowledgebase/adm-private.jsp">我的上传</a></li>
-                                        <li ><a href="/mybatis/knowledgebase/adm-public.jsp">共有文件</a></li>
-                                        <li ><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
-                                        <li class="active"><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
-                                       <li ><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
-                                        <li ><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#system-manage" data-toggle="collapse"
-                                                           data-parent="accordion">系统管理<span class="caret" style="float:right;margin-top: 7px;margin-right: -11px;"></span></a></h4>
-                            </div>
-                            <div id="system-manage" class="panel-collapse collapse in">
-                                <div class="panel-body" style="padding: 6px 15px;">
-                                    <ul class="nav nav-pills nav-stacked" style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                        <li ><a href="##">数据还原</a></li>
-                                        <li ><a href="##">数据备份</a></li>
-                                    </ul>
+                            <div id="upload3" class="panel-collapse collapse">
+                                <div class="panel-body form-inline">
+                                    <input type="file" class="upload" name="file" id="file3"><br>
+                                    <span>资料名称：</span><input class="form-control" style="width:40%;" type="text"
+                                                             id="aim3" readonly="true">&nbsp;&nbsp;
+
+                                    <span>上传者：</span><input class="form-control" style="width:40%;" type="text"
+                                                            placeholder="<%=session.getAttribute("username")%>"
+                                                            readonly="true"><br><br>
+                                    <span>上传时间：</span><input class="form-control" style="width:40%;" type="text"
+                                                             placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
+                                    <span>关键词：</span><input class="form-control" style="width:40%;"
+                                                            placeholder="多个关键词以空格分开" type="text" id="word3"><br><br>
+                                    <span>资料属性：</span><input type="radio" name="type3" checked>公有&nbsp;&nbsp;<input
+                                        type="radio" name="type3">私有<br><br>
+                                    <span>资料描述：</span><textarea type="textarea" class="form-control"
+                                                                style="width:89.5%;" rows="3" id="area3"></textarea>
+
                                 </div>
                             </div>
                         </div>
 
-                    </div>
- 				</div>
-			 	<div class="col-md-8" style="margin-left:50px;">	 		
-			 			
-			 					 		<div class="panel panel-primary" style="height:625px;">
-			 			<div class="panel-heading">
-			 				<h3 class="panel-title">文件上传</h3>	
-			 			</div>
-			 			<div class="panel-body" style="height:580px;overflow-y:auto;">
-			 			<form action="/mybatis/Uploadservlet" name="name1"  enctype="multipart/form-data" method="post">
-			 		
-	 					<div class="panel panel-default">
-				 			  <div class="panel-heading">
-				 			  	<h4 class="panel-title">
-					 			  	<a data-toggle="collapse" data-parent="#accordion" href="#upload1">
-					 			  	选择文件1
-					 			  	</a>
-					 			</h4> 	
-				 			  </div>
-				 			  <div id="upload1" class="panel-collapse collapse">
-				 			  <div class="panel-body form-inline">
-				 			  	 <input type="file" class="upload" name="file" id="file1"><br>
-				 			  	 <span>资料名称：</span><input class="form-control" style="width:40%;" type="text"  id="aim1" readonly="true">&nbsp;&nbsp;
-				 			  	 
-				 			  	 <span>上传者：</span><input class="form-control" style="width:40%;" type="text" placeholder="<%=session.getAttribute("username")%>" readonly="true"><br><br>
-				 			  	 <span>上传时间：</span><input class="form-control" style="width:40%;" type="text" placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
-				 			  	 <span>关键词：</span><input class="form-control" style="width:40%;" placeholder="多个关键词以空格分开" type="text" id="word1"><br><br>
-								 <span>资料属性：</span><input type="radio" name="type1" checked>公有&nbsp;&nbsp;<input type="radio" name="type1">私有<br><br>
-								 <span>资料描述：</span><textarea type="textarea" class="form-control" style="width:89.5%;" rows="3" id="area1" ></textarea>
-										
-				 			  </div>
-				 			  </div>
-			 			 </div>
- 							<div class="panel panel-default">
-				 			  <div class="panel-heading">
-				 			  	<h4 class="panel-title">
-					 			  	<a data-toggle="collapse" data-parent="#accordion" href="#upload2">
-					 			  	选择文件2
-					 			  	</a>
-					 			</h4> 	
-				 			  </div>
-				 			  <div id="upload2" class="panel-collapse collapse">
-				 			  <div class="panel-body form-inline">
-				 			  	 <input type="file" class="upload" name="file" id="file2"><br>
-				 			  	 <span>资料名称：</span><input class="form-control" style="width:40%;" type="text" id="aim2" readonly="true">&nbsp;&nbsp;
-				 			  	 
-				 			  	 <span>上传者：</span><input class="form-control" style="width:40%;" type="text" placeholder="<%=session.getAttribute("username")%>" readonly="true"><br><br>
-				 			  	 <span>上传时间：</span><input class="form-control" style="width:40%;" type="text" placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
-				 			  	 <span>关键词：</span><input class="form-control" style="width:40%;" placeholder="多个关键词以空格分开" type="text" id="word2"><br><br>
-								 <span>资料属性：</span><input type="radio" name="type2" checked>公有&nbsp;&nbsp;<input type="radio" name="type2">私有<br><br>
-								 <span>资料描述：</span><textarea type="textarea" class="form-control" style="width:89.5%;" rows="3" id="area2"></textarea>
-										
-				 			  </div>
-				 			  </div>
-			 			 </div>
-			 			 <div class="panel panel-default">
-				 			  <div class="panel-heading">
-				 			  	<h4 class="panel-title">
-					 			  	<a data-toggle="collapse" data-parent="#accordion" href="#upload3">
-					 			  	选择文件3
-					 			  	</a>
-					 			</h4> 	
-				 			  </div>
-				 			  <div id="upload3" class="panel-collapse collapse">
-				 			  <div class="panel-body form-inline">
-				 			  	 <input type="file" class="upload" name="file" id="file3"><br>
-				 			  	 <span>资料名称：</span><input class="form-control" style="width:40%;" type="text" id="aim3" readonly="true">&nbsp;&nbsp;
-				 			  	 
-				 			  	 <span>上传者：</span><input class="form-control" style="width:40%;" type="text" placeholder="<%=session.getAttribute("username")%>" readonly="true"><br><br>
-				 			  	 <span>上传时间：</span><input class="form-control" style="width:40%;" type="text" placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
-				 			  	 <span>关键词：</span><input class="form-control" style="width:40%;" placeholder="多个关键词以空格分开" type="text" id="word3"><br><br>
-								 <span>资料属性：</span><input type="radio" name="type3" checked>公有&nbsp;&nbsp;<input type="radio" name="type3">私有<br><br>
-								 <span>资料描述：</span><textarea type="textarea" class="form-control" style="width:89.5%;" rows="3" id="area3"></textarea>
-										
-				 			  </div>
-				 			  </div>
-			 			 </div> 
-			 			 	
-			 			 
-			 			 <div align="center">
-			 					<input type="submit" value="上传文件" id="sub" class="btn btn-primary" >
-			 				</div>
-			 			</form>
-			 				
-			 				
-			 			</div>
-					</div>		
-	
-			
-										
-			 	</div>
-			</div>
+
+                        <div align="center">
+                            <input type="submit" value="上传文件" id="sub" class="btn btn-primary">
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
 </div>
 
 

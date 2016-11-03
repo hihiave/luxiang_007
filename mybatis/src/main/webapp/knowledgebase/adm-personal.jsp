@@ -28,6 +28,7 @@
         <script src="/mybatis/knowledgebase/js/html5shiv.min.js"></script>
         <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
         <script src="/mybatis/knowledgebase/js/common.js"></script>
+        <script src="/mybatis/knowledgebase/js/public_search.js"></script>
         <script src="/mybatis/knowledgebase/js/adm_personal.js"></script>
 
         <style type="text/css">
@@ -87,7 +88,7 @@
 				</div>
 				<div class="col-md-9" style="margin-top:16px;">
 				<div  style="float:left;margin-right:0px;">
-		  			<select  class="form-control"  onchange="value">
+		  			<select  class="form-control"  onchange="value" id="category_select">
 					<option value='' selected>类别&nbsp;&nbsp;&nbsp;</option>
 					<option value=''>专利</option>
 					<option value=''>论文</option>
@@ -95,16 +96,16 @@
 					</select>
 				</div> 
 				<div  style="float:left;margin-right:0px;">
-		  			<select  class="form-control" onchange="value">
-					<option value='' selected>全文</option>
-					<option value=''>标题</option>
-					<option value=''>作者</option>
-					<option value=''>关键字</option>
+		  			<select  class="form-control" onchange="value" id="key_select">
+					<option value='全文' selected>全文</option>
+					<option value='标题'>标题</option>
+					<option value='作者'>作者</option>
+					<option value='关键字'>关键字</option>
 					</select>
 				</div> 
 				<div class="input-group input-group-md" style="float:left;">
-				<input type="text" class="form-control"  aria-describedby="sizing-addon1" style="width:521px;">
-				<button class="btn btn-primary" style="width:78px;margin-left:5px;">搜&nbsp;索</button>
+				<input type="text" class="form-control"  aria-describedby="sizing-addon1" style="width:521px;" id="file_search_input">
+				<button class="btn btn-primary" style="width:78px;margin-left:5px;" id="file_search_sub" onclick="send_search_info()">搜&nbsp;索</button>
 				</div>
 				</div>
 			</div>

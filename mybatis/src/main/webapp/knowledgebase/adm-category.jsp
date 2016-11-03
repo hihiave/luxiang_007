@@ -30,6 +30,7 @@
 <script src="/mybatis/knowledgebase/js/bootstrap.min.js"></script>
 <script src="/mybatis/knowledgebase/js/html5shiv.min.js"></script>
 <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
+<script src="/mybatis/knowledgebase/js/public_search.js"></script>
 <script src="/mybatis/knowledgebase/js/adm_category.js"></script>
 
 <style type="text/css">
@@ -74,7 +75,7 @@ width: 1320px !important;
 				</div>
 				<div class="col-md-9 " style="margin-top:16px;">
 				<div  style="float:left;margin-right:0px;">
-		  			<select  class="form-control"  onchange="value">
+		  			<select  class="form-control"  onchange="value" id="category_select">
 					<option value='' selected>类别&nbsp;&nbsp;&nbsp;</option>
 					<option value=''>专利</option>
 					<option value=''>论文</option>
@@ -82,7 +83,7 @@ width: 1320px !important;
 					</select>
 				</div> 
 				<div  style="float:left;margin-right:0px;">
-		  			<select  class="form-control" onchange="value">
+		  			<select  class="form-control" onchange="value" id="key_select">
 					<option value='' selected>全文</option>
 					<option value=''>标题</option>
 					<option value=''>作者</option>

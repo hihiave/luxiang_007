@@ -11,7 +11,7 @@ function get_all_public_file(){
         type:'post',
         url:"/mybatis/FileInfoController/publicfile.do",
         dataType:"json",
-        success:function get_aal_public_file(data){
+        success:function(data){
             var _table = $("#pub_file>tr");
             _table.remove();
             var all_pub_file = data["pub_file"];

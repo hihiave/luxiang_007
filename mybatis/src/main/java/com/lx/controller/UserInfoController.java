@@ -29,7 +29,7 @@ public class UserInfoController {
 	@ResponseBody
 	public Map<String, Object> login(String username, String password, HttpSession httpSession) {
 		MacroEnum.KMessageType result = userInfoService.checkLogin(username, password);
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		switch (result) {
 		case loginSuccess:
 			UserInfo userInfo = userInfoService.selectUserByUserName(username);
