@@ -77,178 +77,197 @@ width: 1320px !important;
 	</button>
 </div>
 <div class="container">
-			<div class="row" style="text-align:center;margin:40px auto;">
-				<img src="/mybatis/knowledgebase/img/img_3.jpg" width="725px" height="80px">
-			</div>
-			<div class="row" style="margin:0px ">
-				<div class="col-md-3" style="width:283px;margin-right:16px;"> 
-				<img src="/mybatis/knowledgebase/img/zhishiku_2.png" style="margin-left:30px;">
-				</div>
-				<div class="col-md-9 " style="margin-top:16px;">
-                    <div  style="float:left;margin-right:0px;">
-                        <select  class="form-control"  onchange="value" id="category_select">
-                            <option value='' selected>类别&nbsp;&nbsp;&nbsp;</option>
-                            <option value=''>专利</option>
-                            <option value=''>论文</option>
-                            <option value=''>报告</option>
-                        </select>
+    <div class="row" style="text-align:center;margin:40px auto;">
+        <img src="/mybatis/knowledgebase/img/img_3.jpg" width="725px" height="80px">
+    </div>
+    <div class="row" style="margin:0px ">
+        <div class="col-md-3" style="width:283px;margin-right:16px;">
+            <img src="/mybatis/knowledgebase/img/zhishiku_2.png" style="margin-left:30px;">
+        </div>
+        <div class="col-md-9 " style="margin-top:16px;">
+            <div style="float:left;margin-right:0px;">
+                <select class="form-control" onchange="value" id="category_select">
+                    <option value='' selected>类别&nbsp;&nbsp;&nbsp;</option>
+                    <option value=''>专利</option>
+                    <option value=''>论文</option>
+                    <option value=''>报告</option>
+                </select>
+            </div>
+            <div style="float:left;margin-right:0px;">
+                <select class="form-control" onchange="value" id="key_select">
+                    <option value='' selected>全文</option>
+                    <option value=''>标题</option>
+                    <option value=''>作者</option>
+                    <option value=''>关键字</option>
+                </select>
+            </div>
+            <div class="input-group input-group-md" style="float:left;">
+                <input type="text" class="form-control" aria-describedby="sizing-addon1" style="width:521px;">
+                <button class="btn btn-primary" style="width:78px;margin-left:5px;">搜&nbsp;索</button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row" style="margin-left:80px;">
+        <div class="col-xs-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a href="#person-center" data-toggle="collapse"
+                                                   data-parent="accordion">个人中心<span class="caret"
+                                                                                     style="float:right;margin-top: 7px;margin-right: -11px;"></span></a>
+                        </h4>
                     </div>
-                    <div  style="float:left;margin-right:0px;">
-                        <select  class="form-control" onchange="value" id="key_select">
-                            <option value='' selected>全文</option>
-                            <option value=''>标题</option>
-                            <option value=''>作者</option>
-                            <option value=''>关键字</option>
-                        </select>
-                    </div>
-				<div class="input-group input-group-md" style="float:left;">
-				<input type="text" class="form-control"  aria-describedby="sizing-addon1" style="width:521px;">
-				<button class="btn btn-primary" style="width:78px;margin-left:5px;">搜&nbsp;索</button>
-				</div>
-				</div>
-			</div>
-			<hr>
-			<div class="row" style="margin-left:80px;">
-				<div class="col-xs-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
-                    <div class="panel-group" id="accordion">
-                        <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#person-center" data-toggle="collapse"
-                                                           data-parent="accordion">个人中心<span class="caret" style="float:right;margin-top: 7px;margin-right: -11px;"></span></a></h4>
-                            </div>
-                            <div id="person-center" class="panel-collapse collapse in">
-                                <div class="panel-body" style="padding: 6px 15px;">
-                                    <ul class="nav nav-pills nav-stacked" style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                        <li ><a href="/mybatis/knowledgebase/adm-personal.jsp">个人信息</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-<c:if test="${is_manager == 1}">
-                        <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#user-manage" data-toggle="collapse"
-                                                           data-parent="accordion">用户管理<span class="caret" style="float:right;margin-top: 7px;margin-right: -11px;"></span></a></h4>
-                            </div>
-                            <div id="user-manage" class="panel-collapse collapse in">
-                                <div class="panel-body" style="padding: 6px 15px;">
-                                    <ul class="nav nav-pills nav-stacked" style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                        <li class="active"><a href="/mybatis/knowledgebase/adm-inquire.jsp">用户查询</a></li>
-                                        <li ><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-    </c:if>
-                        <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#source-manage" data-toggle="collapse"
-                                                           data-parent="accordion">资源管理<span class="caret" style="float:right;margin-top: 7px;margin-right: -11px;"></span></a></h4>
-                            </div>
-                            <div id="source-manage" class="panel-collapse collapse in">
-                                <div class="panel-body" style="padding: 6px 15px;">
-                                    <ul class="nav nav-pills nav-stacked" style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                        <li ><a href="/mybatis/knowledgebase/adm-private.jsp">我的上传</a></li>
-                                        <li ><a href="/mybatis/knowledgebase/adm-public.jsp">共有文件</a></li>
-                                        <li ><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
-                                        <li ><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
-<c:if test="${is_manager == 1}">
-                                       <li ><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
-                                        <li ><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
-    </c:if>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-<c:if test="${is_manager == 1}">
-                        <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#system-manage" data-toggle="collapse"
-                                                           data-parent="accordion">系统管理<span class="caret" style="float:right;margin-top: 7px;margin-right: -11px;"></span></a></h4>
-                            </div>
-                            <div id="system-manage" class="panel-collapse collapse in">
-                                <div class="panel-body" style="padding: 6px 15px;">
-                                    <ul class="nav nav-pills nav-stacked" style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                        <li ><a href="##">数据还原</a></li>
-                                        <li ><a href="##">数据备份</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-    </c:if>
-
-                    </div>
- 				</div>
-			 	<div class="col-xs-8" style="margin-left:50px;">
-			 		
-			 		<div class="panel panel-primary" style="height:625px;">
-						<div class="panel-heading" >
-							<h3 class="panel-title">用户查询</h3>
-						</div>
-						<div class="panel-body">
-							<table class="table table-striped">
-							<thead>
-							<tr >
-							<th style="font-size:16px;"></th>
-							<th style="font-size:16px;">用户名</th>
-							<th style="padding-bottom:5px;padding-top:0px;width:285px;"><input type="text" id="search-in" name="" style="height:34px;width:273px;"></th>
-							<th style="padding-bottom:5px;padding-top:0px;width:116px;"><button class="btn btn-info" id="search-user" onclick="searchuser()" >搜索用户</button></th>
-							<th style="padding-bottom:5px;padding-top:0px;width:116px;"><button class="btn btn-info" data-toggle="modal" data-target="#tianjia">添加用户</button></th>
-							</tr>
-							</thead>
-							<tbody id="search_result">
-                            <%--<c:forEach var="row" items="${result.rows}" varStatus="status">--%>
-                                <%--<tr>--%>
-                                    <%--<td><c:out value="${status.index+1}"/></td>--%>
-                                    <%--<td class="Name"><c:out value="${row.user_name}"/></td>--%>
-                                    <%--<td></td>--%>
-                                    <%--<td style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="" onclick="deleteUser(this)">删除用户</button></td>--%>
-                                    <%--<td style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="" onclick="user_selected(this)">重置密码</button></td>--%>
-
-                                <%--</tr>--%>
-                            <%--</c:forEach>--%>
-
-							<%--<tr>--%>
-							<%--<td>1</td>--%>
-							<%--<td id="name1">张三</td>--%>
-							<%--<td></td>--%>
-							<%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#shanchu">删除用户</button></th>--%>
-							<%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#chongzhi">重置密码</button></th>--%>
-							<%--</tr>--%>
-							<%--<tr>--%>
-							<%--<td>2</td>--%>
-							<%--<td id="name2">李四</td>--%>
-							<%--<td></td>--%>
-							<%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">删除用户</button></th>--%>
-							<%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">重置密码</button></th>--%>
-							<%--</tr>--%>
-							<%--</tr>--%>
-							<%--<tr>--%>
-							<%--<td>3</td>--%>
-							<%--<td id="name3">王五</td>--%>
-							<%--<td></td>--%>
-							<%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">删除用户</button></th>--%>
-							<%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">重置密码</button></th>--%>
-							<%--</tr>--%>
-							</tbody>
-							</table>
-						</div>
-
-                        <div style="margin-top: -20px;float: right;">
-                            <ul class="pagination">
-                                <li><a href="#">&laquo;</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li ><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">&raquo;</a></li>
+                    <div id="person-center" class="panel-collapse collapse in">
+                        <div class="panel-body" style="padding: 6px 15px;">
+                            <ul class="nav nav-pills nav-stacked"
+                                style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                <li><a href="/mybatis/knowledgebase/adm-personal.jsp">个人信息</a></li>
                             </ul>
                         </div>
-				</div>
-			
-</div>
+                    </div>
+                </div>
+                <c:if test="${is_manager == 1}">
+                    <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><a href="#user-manage" data-toggle="collapse"
+                                                       data-parent="accordion">用户管理<span class="caret"
+                                                                                         style="float:right;margin-top: 7px;margin-right: -11px;"></span></a>
+                            </h4>
+                        </div>
+                        <div id="user-manage" class="panel-collapse collapse in">
+                            <div class="panel-body" style="padding: 6px 15px;">
+                                <ul class="nav nav-pills nav-stacked"
+                                    style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                    <li class="active"><a href="/mybatis/knowledgebase/adm-inquire.jsp">用户查询</a></li>
+                                    <li><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
+                <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a href="#source-manage" data-toggle="collapse"
+                                                   data-parent="accordion">资源管理<span class="caret"
+                                                                                     style="float:right;margin-top: 7px;margin-right: -11px;"></span></a>
+                        </h4>
+                    </div>
+                    <div id="source-manage" class="panel-collapse collapse in">
+                        <div class="panel-body" style="padding: 6px 15px;">
+                            <ul class="nav nav-pills nav-stacked"
+                                style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                <li><a href="/mybatis/knowledgebase/adm-private.jsp">我的上传</a></li>
+                                <li><a href="/mybatis/knowledgebase/adm-public.jsp">共有文件</a></li>
+                                <li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
+                                <li><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
+                                <c:if test="${is_manager == 1}">
+                                    <li><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
+                                    <li><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
+                                </c:if>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <c:if test="${is_manager == 1}">
+                    <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><a href="#system-manage" data-toggle="collapse"
+                                                       data-parent="accordion">系统管理<span class="caret"
+                                                                                         style="float:right;margin-top: 7px;margin-right: -11px;"></span></a>
+                            </h4>
+                        </div>
+                        <div id="system-manage" class="panel-collapse collapse in">
+                            <div class="panel-body" style="padding: 6px 15px;">
+                                <ul class="nav nav-pills nav-stacked"
+                                    style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                    <li><a href="##">数据还原</a></li>
+                                    <li><a href="##">数据备份</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
+
             </div>
+        </div>
+        <div class="col-xs-8" style="margin-left:50px;">
+
+            <div class="panel panel-primary" style="height:625px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">用户查询</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th style="font-size:16px;"></th>
+                            <th style="font-size:16px;">用户名</th>
+                            <th style="padding-bottom:5px;padding-top:0px;width:285px;"><input type="text"
+                                                                                               id="search-in" name=""
+                                                                                               style="height:34px;width:273px;">
+                            </th>
+                            <th style="padding-bottom:5px;padding-top:0px;width:116px;">
+                                <button class="btn btn-info" id="search-user" onclick="searchuser()">搜索用户</button>
+                            </th>
+                            <th style="padding-bottom:5px;padding-top:0px;width:116px;">
+                                <button class="btn btn-info" data-toggle="modal" data-target="#tianjia">添加用户</button>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="search_result">
+                        <%--<c:forEach var="row" items="${result.rows}" varStatus="status">--%>
+                        <%--<tr>--%>
+                        <%--<td><c:out value="${status.index+1}"/></td>--%>
+                        <%--<td class="Name"><c:out value="${row.user_name}"/></td>--%>
+                        <%--<td></td>--%>
+                        <%--<td style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="" onclick="deleteUser(this)">删除用户</button></td>--%>
+                        <%--<td style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="" onclick="user_selected(this)">重置密码</button></td>--%>
+
+                        <%--</tr>--%>
+                        <%--</c:forEach>--%>
+
+                        <%--<tr>--%>
+                        <%--<td>1</td>--%>
+                        <%--<td id="name1">张三</td>--%>
+                        <%--<td></td>--%>
+                        <%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#shanchu">删除用户</button></th>--%>
+                        <%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary" data-toggle="modal" data-target="#chongzhi">重置密码</button></th>--%>
+                        <%--</tr>--%>
+                        <%--<tr>--%>
+                        <%--<td>2</td>--%>
+                        <%--<td id="name2">李四</td>--%>
+                        <%--<td></td>--%>
+                        <%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">删除用户</button></th>--%>
+                        <%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">重置密码</button></th>--%>
+                        <%--</tr>--%>
+                        <%--</tr>--%>
+                        <%--<tr>--%>
+                        <%--<td>3</td>--%>
+                        <%--<td id="name3">王五</td>--%>
+                        <%--<td></td>--%>
+                        <%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">删除用户</button></th>--%>
+                        <%--<th style="padding-bottom:3px;padding-top:3px;width:116px;"><button class="btn btn-primary">重置密码</button></th>--%>
+                        <%--</tr>--%>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top: -20px;float: right;">
+                    <ul class="pagination">
+                        <li><a href="#">&laquo;</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 
