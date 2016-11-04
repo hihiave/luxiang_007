@@ -64,6 +64,7 @@ public interface FileInfoService {
 	 */
 	public List<FileInfo> getFileByLikeFileName(String fileName, String fileCategory, KButtonType buttonType);
 	
+	
 	/** 通过作者名模糊查询文件，比如，查“张”，找到所有张姓的文件
 	 * @author luxiang
 	 * @param fileAuthor 作者名,即上传者
