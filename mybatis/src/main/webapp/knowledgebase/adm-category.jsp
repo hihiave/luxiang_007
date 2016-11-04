@@ -1,5 +1,5 @@
 <%--<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>--%>
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -22,6 +22,16 @@
 <%
 	}
 %>
+<c:set value="0" var="is_manager"/>
+<c:set value="0" var="is_worker"/>
+<c:forEach items="${userrole}" var="role">
+    <c:if test="${role == '管理员'}">
+        <c:set value="1" var="is_manager"/>
+    </c:if>
+    <c:if test="${role == '普通用户'}">
+        <c:set value="1" var="is_worker"/>
+    </c:if>
+</c:forEach>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
 <html> 
 <head>
@@ -100,6 +110,7 @@ width: 1320px !important;
 			<div class="row" style="margin-left:80px;">
 			<div class="col-md-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
                     <div class="panel-group" id="accordion">
+
                         <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
                             <div class="panel-heading">
                                 <h4 class="panel-title"><a href="#person-center" data-toggle="collapse"
@@ -113,6 +124,7 @@ width: 1320px !important;
                                 </div>
                             </div>
                         </div>
+                        <c:if test="${is_manager == 1}">
                         <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
                             <div class="panel-heading">
                                 <h4 class="panel-title"><a href="#user-manage" data-toggle="collapse"
@@ -127,6 +139,7 @@ width: 1320px !important;
                                 </div>
                             </div>
                         </div>
+                        </c:if>
                         <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
                             <div class="panel-heading">
                                 <h4 class="panel-title"><a href="#source-manage" data-toggle="collapse"
@@ -139,12 +152,15 @@ width: 1320px !important;
                                         <li ><a href="/mybatis/knowledgebase/adm-public.jsp">共有文件</a></li>
                                         <li ><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
                                         <li ><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
+                                        <c:if test="${is_manager == 1}">
                                         <li  class="active"><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
                                         <li ><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
+                                        </c:if>
                                     </ul>
                                 </div>
                             </div>
                         </div>
+                        <c:if test="${is_manager == 1}">
                         <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
                             <div class="panel-heading">
                                 <h4 class="panel-title"><a href="#system-manage" data-toggle="collapse"
@@ -159,7 +175,7 @@ width: 1320px !important;
                                 </div>
                             </div>
                         </div>
-
+                        </c:if>
                     </div>
 
  				</div>

@@ -13,11 +13,11 @@ function get_category_select(){
             var _select = $("#category_select>option");
             _select.remove();
             var all_select_category = data["category"];
-            console.log(all_select_category.length);
+            //console.log(all_select_category.length);
             for(var i = 0;i < all_select_category.length;i++){
                 var op = "<option value='"+ all_select_category[i].categoryName +"'>" +all_select_category[i].categoryName+"</option>";
                 $("#category_select").append(op);
-                console.log(all_select_category[i].categoryName);
+                //console.log(all_select_category[i].categoryName);
             }
         }
     })

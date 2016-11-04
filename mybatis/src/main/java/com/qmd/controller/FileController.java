@@ -94,7 +94,7 @@ public class FileController {
     public Map<String, Object> myuploadfile(HttpSession httpSession, HttpServletRequest httpServletRequest) {
         Map<String, Object> map = new HashMap<String, Object>();
         String username = (String) httpSession.getAttribute("username");
-        System.out.println(username);
+        System.out.println(username + "hahahaha");
         List<FileInfo> pri_file = fileInfoService.selectMyFileInfo(username, KCheckType.PASS);
 
         map.put("pri_file", pri_file);

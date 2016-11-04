@@ -1,5 +1,5 @@
 <%--<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>--%>
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -22,6 +22,16 @@
 <%
 	}
 %>
+<c:set value="0" var="is_manager"/>
+<c:set value="0" var="is_worker"/>
+<c:forEach items="${userrole}" var="role">
+    <c:if test="${role == '管理员'}">
+        <c:set value="1" var="is_manager"/>
+    </c:if>
+    <c:if test="${role == '普通用户'}">
+        <c:set value="1" var="is_worker"/>
+    </c:if>
+</c:forEach>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
 <html> 
 <head>
@@ -30,6 +40,7 @@
 <script src="/mybatis/knowledgebase/js/bootstrap.min.js"></script>
 <script src="/mybatis/knowledgebase/js/html5shiv.min.js"></script>
 <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
+<script src="/mybatis/knowledgebase/js/public_search.js"></script>
 <script src="/mybatis/knowledgebase/js/adm_checkfile.js"></script>
 
 <style type="text/css">
@@ -73,22 +84,22 @@ width: 1320px !important;
 				<img src="/mybatis/knowledgebase/img/zhishiku_2.png" style="margin-left:30px;">
 				</div>
 				<div class="col-md-9 " style="margin-top:16px;">
-				<div  style="float:left;margin-right:0px;">
-		  			<select  class="form-control"  onchange="value">
-					<option value='' selected>类别&nbsp;&nbsp;&nbsp;</option>
-					<option value=''>专利</option>
-					<option value=''>论文</option>
-					<option value=''>报告</option>
-					</select>
-				</div> 
-				<div  style="float:left;margin-right:0px;">
-		  			<select  class="form-control" onchange="value">
-					<option value='' selected>全文</option>
-					<option value=''>标题</option>
-					<option value=''>作者</option>
-					<option value=''>关键字</option>
-					</select>
-				</div> 
+                    <div  style="float:left;margin-right:0px;">
+                        <select  class="form-control"  onchange="value" id="category_select">
+                            <option value='' selected>类别&nbsp;&nbsp;&nbsp;</option>
+                            <option value=''>专利</option>
+                            <option value=''>论文</option>
+                            <option value=''>报告</option>
+                        </select>
+                    </div>
+                    <div  style="float:left;margin-right:0px;">
+                        <select  class="form-control" onchange="value" id="key_select">
+                            <option value='' selected>全文</option>
+                            <option value=''>标题</option>
+                            <option value=''>作者</option>
+                            <option value=''>关键字</option>
+                        </select>
+                    </div>
 				<div class="input-group input-group-md" style="float:left;">
 				<input type="text" class="form-control"  aria-describedby="sizing-addon1" style="width:521px;">
 				<button class="btn btn-primary" style="width:78px;margin-left:5px;">搜&nbsp;索</button>
@@ -112,6 +123,7 @@ width: 1320px !important;
                                 </div>
                             </div>
                         </div>
+<c:if test="${is_manager == 1}">
                         <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
                             <div class="panel-heading">
                                 <h4 class="panel-title"><a href="#user-manage" data-toggle="collapse"
@@ -126,6 +138,7 @@ width: 1320px !important;
                                 </div>
                             </div>
                         </div>
+    </c:if>
                         <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
                             <div class="panel-heading">
                                 <h4 class="panel-title"><a href="#source-manage" data-toggle="collapse"
@@ -138,12 +151,15 @@ width: 1320px !important;
                                         <li ><a href="/mybatis/knowledgebase/adm-public.jsp">共有文件</a></li>
                                         <li ><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
                                         <li ><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
+<c:if test="${is_manager == 1}">
                                         <li ><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
                                         <li class="active"><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
+    </c:if>
                                     </ul>
                                 </div>
                             </div>
                         </div>
+<c:if test="${is_manager == 1}">
                         <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
                             <div class="panel-heading">
                                 <h4 class="panel-title"><a href="#system-manage" data-toggle="collapse"
@@ -158,6 +174,7 @@ width: 1320px !important;
                                 </div>
                             </div>
                         </div>
+    </c:if>
 
                     </div>
 
@@ -214,12 +231,12 @@ width: 1320px !important;
 </div>
 
 
-<div class="modal fade" id="pass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="pass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-check-1">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
        
-        <h4 class="modal-title" id="myModalLabel">提示</h4>
+        <h4 class="modal-title" id="myModalLabel-check-1">提示</h4>
       </div>
       <div class="modal-body">
 		<p id="file_remind"></p>

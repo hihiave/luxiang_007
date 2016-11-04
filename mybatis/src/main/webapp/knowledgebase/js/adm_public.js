@@ -20,7 +20,7 @@ function get_all_public_file(){
                 var tr_end = "</tr>";
                 var td_1 = "<td style='padding-top:15px;'>"+all_pub_file[i].fileName+"</td>";
                 var td_2 = "<td style='padding-top:15px;'>"+all_pub_file[i].fileAuthor+"</td>";
-                var td_3 = "<td style='padding-top:15px;'>"+all_pub_file[i].fileUploadTime+"</td>";
+                var td_3 = "<td style='padding-top:15px;'>"+timeStampFormatDay(all_pub_file[i].fileUploadTime*1000)+"</td>";
                 var td_4 = "<td><button class='btn btn-primary' data-toggle='modal' data-target='#download' onclick='down_file(this)'>下载</button></td>";
                 var td_5 = "<td><button class='btn btn-primary' data-toggle='modal' data-target='#preview' onclick='pre_file(this)'>预览</button></td>";
                 var td_6="<td style='padding-top:15px;'>"+all_pub_file[i].fileDownloadCount+"</td>"

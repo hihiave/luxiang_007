@@ -107,18 +107,32 @@ function pass_all_file(){
 
 function check_one_file(obj){
 	var check_one_file = $(obj).parent().siblings()[1].innerHTML;
+    var check_one_id = $($(obj).parent().siblings()[1]).attr("id");
+    console.log(check_one_id);
     $(obj).attr({"data-toggle":"modal","data-target":"#pass"});
-    $("#file_remind").html("确认通过  "+check_one_file+"  么？");
+    $("#file_remind").html("确认通过  "+"<span id='one_selected_file' checkid='"+check_one_id+"'>"+check_one_file+"</span>"+"  么？");
     $("#file_remind").removeClass();
     $("#file_click").removeAttr("onclick_name");
     $("#file_click").attr("onclick_name","pass_one");
 }
 
-/*function pass_one_file(obj){
-	
-
+function pass_one_file(obj){
+    var pass_arr = [];
+    pass_arr.push($("#one_selected_file").attr("checkid"));
+    //console.log(pass_arr[0]);
+    $.ajax({
+        type:'post',
+        url:"/mybatis/FileInfoController/pass_file.do",
+        dataType:"json",
+        traditional:true,
+        data:{"pass_array":pass_arr},
+        success:function(data)
+        {
+            get_all_checkfile();
+        }
+    })
 }
-*/
+
 function pass_file_ok(){
     var btn_info = $("#file_click").attr("onclick_name");
     if(btn_info == "pass_one"){
