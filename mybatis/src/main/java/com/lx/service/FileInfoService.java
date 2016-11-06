@@ -2,9 +2,8 @@ package com.lx.service;
 
 import java.util.List;
 
-import com.lx.macrofiles.MacroEnum.KButtonType;
 import com.lx.macrofiles.MacroEnum.KCheckType;
-import com.lx.macrofiles.MacroEnum.KMessageType;
+import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.model.FileInfo;
 
 public interface FileInfoService {
@@ -22,7 +21,7 @@ public interface FileInfoService {
 	 * @param fileIds
 	 * @return boolean，true表示删除成功，false表示删除失败
 	 */
-	public boolean delFileInfoById(Integer... fileIds);
+	public boolean delFilesById(Integer... fileIds);
 
 	/** 通过文件名检查文件是否存在
 	 * @author luxiang
@@ -31,7 +30,7 @@ public interface FileInfoService {
 	 */
 	public boolean checkFileIsExist(String fileName);
 	
-	/** 通过文件id批量,审核通过(不通过)
+	/** 通过文件id批量修改审核类型(审核通过pass,文件失效invalid等等)
 	 * @author luxiang
 	 * @param checkType 审核类型，请查看枚举
 	 * @param fileIds 批量文件fileIds
@@ -39,14 +38,14 @@ public interface FileInfoService {
 	 */
 	public boolean batchFilesIsPass(KCheckType checkType, Integer... fileIds);
 	
-	/** 通过审核是否通过查询文件(待审核waitforcheck,公有文件pass)
+	/** 通过审核类型查询文件(公有:待审核WaitForCheck,公有文件Pass)
 	 * @author luxiang
 	 * @param checkType 审核类型，请查看枚举
 	 * @return 一个文件对象列表 FileInfo
 	 */
 	public List<FileInfo> selectFileByIsPass(KCheckType checkType);
 	
-	/** 通过用户名查询我的文件信息(我的上传pass、我的待审核waitforcheck、我的未通过notpass)
+	/** 通过用户名查询我的文件信息(我的上传pass,我的待审核waitforcheck,我的未通过notpass,已删除文件Invalid)
 	 * @author luxiang
 	 * @param userName 我的用户名
 	 * @param checkType 审核类型，请查看枚举
@@ -55,23 +54,13 @@ public interface FileInfoService {
 	List<FileInfo> selectMyFileInfo(String userName, KCheckType checkType);
 	
 	//**********用于一些查询的方法**********
-	/** 通过文件名模糊查询文件，比如，查“三”，找到“十三”，“十三五”
+	/** 通过文件属性(标题,作者等等)模糊查询文件
 	 * @author luxiang
-	 * @param fileName 文件名
-	 * @param fileCategory 文件类型(若不指定,则传入null)
-	 * @param buttonType 按钮类型，请查看枚举
+	 * @param fileCategory 文件类别(若不指定,则传入null)
+	 * @param filePropertyType 文件属性类型，请查看枚举
+	 * @param value 文件属性类型的值
 	 * @return 一个文件对象列表 FileInfo
 	 */
-	public List<FileInfo> getFileByLikeFileName(String fileName, String fileCategory, KButtonType buttonType);
-	
-	
-	/** 通过作者名模糊查询文件，比如，查“张”，找到所有张姓的文件
-	 * @author luxiang
-	 * @param fileAuthor 作者名,即上传者
-	 * @param fileCategory 文件类型(若不指定,则传入null)
-	 * @param buttonType 按钮类型，请查看枚举
-	 * @return 一个文件对象列表 FileInfo
-	 */
-	public List<FileInfo> getFileByLikeFileAuthor(String fileAuthor, String fileCategory, KButtonType buttonType);
+	public List<FileInfo> getFileByLikeFileProperty(String fileCategory, KFilePropertyType filePropertyType, String value);
 	
 }

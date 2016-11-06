@@ -46,7 +46,7 @@ public class TestUserInfo {
 
 	@Test
 	public void TestUpdateUsersCheck() {
-		boolean d = userInfoService.updateUsersCheck("rr", "ee");
+		boolean d = userInfoService.batchUsersPass("rr", "ee");
 		logger.info("批量审核通过=" + d);
 	}
 
@@ -58,7 +58,7 @@ public class TestUserInfo {
 
 	@Test
 	public void TestSelectUserByIsPass() {
-		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.WAITFORCHECK);
+		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.waitForCheck);
 		logger.info("===A====" + userInfos.isEmpty() + "==");
 		logger.info("===B=====" + userInfos.size() + "==");
 		logger.info("===HH=====" + JSON.toJSONString(userInfos.get(1)) + "==");
@@ -84,7 +84,7 @@ public class TestUserInfo {
 
 	@Test
 	public void TestDelByUserName() {
-		logger.info("====" + userInfoService.delByUserName("wowowowo") + "==");
+		logger.info("====" + userInfoService.delUsersByUserName("wowowowo") + "==");
 	}
 
 	@Test

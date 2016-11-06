@@ -25,6 +25,9 @@ public class UserInfoController {
 	@Autowired
 	UserInfoService userInfoService;
 
+	/**
+	 * 登录
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> login(String username, String password, HttpSession httpSession) {
@@ -55,6 +58,9 @@ public class UserInfoController {
 
 	}
 
+	/**
+	 * 登出
+	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> logout(HttpSession httpSession) {
@@ -68,6 +74,9 @@ public class UserInfoController {
 		return map;
 	}
 
+	/**
+	 * 注册
+	 */
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> regist(String username1, String password1, HttpSession httpSession) {
@@ -86,6 +95,9 @@ public class UserInfoController {
 		return map;
 	}
 
+	/**
+	 * 添加一个用户
+	 */
 	@RequestMapping(value = "/adm-adduser", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> admadduser(String username, HttpServletRequest request) {
@@ -126,24 +138,30 @@ public class UserInfoController {
 
 	}
 
+	/**
+	 * 用户待审核
+	 */
+	@RequestMapping(value = "/check", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> check(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.waitForCheck);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("UserInfo_check", userInfos);
+		return map;
+	}
+
+	/**
+	 * 用户通过
+	 */
 	@RequestMapping(value = "/Is_pass", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> is_pass(HttpSession httpSession, HttpServletRequest httpServletRequest) {
 
-		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.PASS);
+		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.pass);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("UserInfo_check", userInfos);
 		return map;
 
-	}
-
-	@RequestMapping(value = "/check", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> check(HttpSession httpSession, HttpServletRequest httpServletRequest) {
-		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.WAITFORCHECK);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("UserInfo_check", userInfos);
-		return map;
 	}
 
 	@RequestMapping(value = "/alterpsw", method = RequestMethod.POST)
@@ -186,20 +204,27 @@ public class UserInfoController {
 		System.out.println("=========wqewq==============");
 	}
 
+	// 批量删除用户
 	@RequestMapping(value = "/del_user", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> user_delete(String select_username, HttpServletRequest httpServletRequest) {
-		boolean result = userInfoService.delByUserName(select_username);
+
+		 批量删除用户 select_username 请定义为数组
+
+		boolean result = userInfoService.delUsersByUserName(select_username);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", result);
 		return map;
 	}
 
+	/**
+	 * 批量用户名审核通过
+	 */
 	@RequestMapping(value = "/check_pass_user", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> checkpassuser(String[] check_user_array, HttpServletRequest httpServletRequest) {
 		System.out.println("传入数据=========" + check_user_array.toString());
-		boolean result = userInfoService.updateUsersCheck(check_user_array);
+		boolean result = userInfoService.batchUsersPass(check_user_array);
 		System.out.println("审核结果========" + result);
 		// boolean result = userInfoService.delByUserName(select_username);
 		Map<String, Object> map = new HashMap<String, Object>();

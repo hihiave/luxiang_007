@@ -25,7 +25,7 @@ public class CategoryController {
 	@Autowired
 	CategoryService categortservice;
 
-	//添加类别
+	// 添加类别
 	@RequestMapping(value = "/add_cate", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> add_cate(String catename, HttpServletRequest request) {
@@ -43,17 +43,20 @@ public class CategoryController {
 		map.put("flag", "cunzai");
 		return map;
 	}
-	//删除类别
+
+	// 删除类别
 	@RequestMapping(value = "/del_cate", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public Map<String, Object> del_cate(String cate_name,HttpSession httpSession, HttpServletRequest httpServletRequest) {
+	public Map<String, Object> del_cate(String cate_name, HttpSession httpSession,
+			HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		boolean result = categortservice.delCategory(cate_name);
-		
+
 		map.put("flag", result);
 		return map;
 	}
+
 	// 获取类别
 	@RequestMapping(value = "/get_category", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
@@ -61,10 +64,9 @@ public class CategoryController {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		List<Category> category = categortservice.getAllCategory();
-		
+
 		map.put("category", category);
 		return map;
 	}
-	
 
 }

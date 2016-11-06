@@ -7,9 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.lx.dao.FileInfoMapper;
-import com.lx.macrofiles.MacroEnum.KButtonType;
 import com.lx.macrofiles.MacroEnum.KCheckType;
-import com.lx.macrofiles.MacroEnum.KFileType;
+import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 
@@ -19,6 +18,7 @@ public class FileInfoServiceImpl implements FileInfoService {
 	@Autowired
 	private FileInfoMapper fileInfoMapper;
 
+	//**********用于处理一些业务逻辑的方法**********
 	@Override
 	public boolean addFileInfo(FileInfo fileInfo) {
 		if (fileInfoMapper.insertSelective(fileInfo) == 1) {
@@ -28,8 +28,8 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	@Override
-	public boolean delFileInfoById(Integer... fileIds) {
-		if (fileInfoMapper.delFileInfoById(fileIds) == fileIds.length) {
+	public boolean delFilesById(Integer... fileIds) {
+		if (fileInfoMapper.delFilesById(fileIds) == fileIds.length) {
 			return true;
 		}
 		return false;
@@ -65,38 +65,28 @@ public class FileInfoServiceImpl implements FileInfoService {
 	private List<FileInfo> getFileInfo(FileInfo fileInfo) {
 		System.out.println("fileInfo============" + JSON.toJSON(fileInfo));
 		return fileInfoMapper.getFileInfo(fileInfo);
+
 	}
 
 	@Override
-	public List<FileInfo> getFileByLikeFileName(String fileName, String fileCategory, KButtonType buttonType) {
+	public List<FileInfo> getFileByLikeFileProperty(String fileCategory, KFilePropertyType filePropertyType,
+			String value) {
 		FileInfo fileInfo = new FileInfo();
-		fileInfo.setFileName(fileName);
 		fileInfo.setFileCategory(fileCategory);
-		switch (buttonType) {
-		case MyUploadButton:
-			return getFileInfo(fileInfo);
-		case PublicFileButton:
-			fileInfo.setFileIsVisible(KFileType.PUBLICFILE);
-			return getFileInfo(fileInfo);
+		switch (filePropertyType) {
+		case title:
+			fileInfo.setFileName(value);
+			break;
+		case author:
+			fileInfo.setFileAuthor(value);
+			break;
+		case keyword:
+			fileInfo.setFileKeywords(value);
+			break;
 		default:
-			return null;
+			break;
 		}
-	}
 
-	@Override
-	public List<FileInfo> getFileByLikeFileAuthor(String fileAuthor, String fileCategory, KButtonType buttonType) {
-		FileInfo fileInfo = new FileInfo();
-		fileInfo.setFileAuthor(fileAuthor);
-		fileInfo.setFileCategory(fileCategory);
-		switch (buttonType) {
-		case MyUploadButton:
-			return getFileInfo(fileInfo);
-		case PublicFileButton:
-			fileInfo.setFileIsVisible(KFileType.PUBLICFILE);
-			return getFileInfo(fileInfo);
-		default:
-			return null;
-		}
+		return getFileInfo(fileInfo);
 	}
-
 }

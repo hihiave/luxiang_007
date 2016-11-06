@@ -21,7 +21,7 @@
   </sql>
 
   <!--*********用于处理一些业务逻辑的方法*********-->
-  <delete id="delFileInfoById">
+  <delete id="delFilesById">
   	delete from File where file_id in
 		<foreach collection="fileIds" item="fileId" index="index" open="(" close=")" separator=",">
 			#{fileId}
@@ -49,15 +49,15 @@
 
   <!--*********用于一些查询的方法*********-->
   <sql id="query_condition">
-  	<if test="fileIsVisible!=null and fileIsVisible!=''">
-  		and file_is_visible = #{fileIsVisible}
-  	</if>
-  	<if test="fileAuthor!=null and fileAuthor!=''">
-  		and file_author like CONCAT(CONCAT('%',#{fileAuthor},'%'))
-  	</if>
   	<if test="fileName!=null and fileName!=''">
   		and file_name like CONCAT(CONCAT('%',#{fileName},'%'))
   	</if>
+  	<if test="fileAuthor!=null and fileAuthor!=''">
+  		and file_author like CONCAT(CONCAT('%',#{fileAuthor},'%'))
+  	</if> 	
+  	<if test="fileKeywords!=null and fileKeywords!=''">
+  		and file_keywords like CONCAT(CONCAT('%',#{fileKeywords},'%'))
+  	</if> 	
   	<if test="fileCategory!=null and fileCategory!=''">
   		and file_category = #{fileCategory}
   	</if>
@@ -65,7 +65,7 @@
   <select id="getFileInfo" resultMap="BaseResultMap" parameterType="com.lx.model.FileInfo">
   	select * from File
   	<where>
-  		file_check = '1'
+  		file_check = '1' and file_is_visible = '公有'
   		<include refid="query_condition" />
   	</where>
   </select>

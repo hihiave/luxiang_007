@@ -15,21 +15,32 @@
   </sql>
 
   <!--**********用于处理一些业务逻辑的方法**********-->
+  <delete id="delUsersByUserName">
+  	delete from UserInfo where user_name in
+		<foreach collection="userNames" item="userName" index="index" open="(" close=")" separator=",">
+			#{userName}
+		</foreach>
+  </delete>
+  <select id="selectUserByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select * from UserInfo
+    where user_name = #{userName,jdbcType=VARCHAR} limit 1
+  </select>
   <update id="updateUsersCheck">
   	UPDATE UserInfo set user_check = '1' where user_name in
   		<foreach collection="userNames" item="userName" index="index" open="(" close=")" separator=",">
   			#{userName}
   		</foreach>
   </update>
-  <select id="selectUserByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
-    select * from UserInfo 
-    where user_name = #{userName,jdbcType=VARCHAR} limit 1
+  <update id="updateUserPasswordByUserName">
+  	update UserInfo set user_password = #{newPwd,jdbcType=VARCHAR} 
+  	where user_name = #{userName,jdbcType=VARCHAR} 
+  </update>
+  <select id="selectUserByUserCheck" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	select * from UserInfo 
+  	where user_check = #{userCheck,jdbcType=INTEGER}
   </select>
-  <select id="selectUserByIsPass" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-  	select user_name, user_register_time 
-  	from UserInfo 
-  	where user_check = #{checkType,jdbcType=INTEGER}
-  </select>
+  
+  <!--**********用于获取一些智能下拉提示**********-->
   <select id="selectAllUserInfoByLikeUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
   	select user_name from UserInfo 
   	<where>
@@ -39,17 +50,8 @@
   		</if>
   	</where>
   </select>
-  <delete id="deleteByUserName" parameterType="java.lang.String">
-  	delete from UserInfo where user_name = #{userName,jdbcType=VARCHAR}
-  </delete>
-  <update id="updateUserPassword">
-  	update UserInfo set user_password = #{newPwd,jdbcType=VARCHAR} 
-  	where user_name = #{userName,jdbcType=VARCHAR} 
-  </update>
-
-  <!--**********用于获取一些智能下拉提示**********-->
   <select id="getUserNames" resultType="java.lang.String" parameterType="java.lang.String">
-  	select user_name from UserInfo where user_name like CONCAT(CONCAT(#{user_name},'%'))
+  	select user_name from UserInfo where user_name like CONCAT(CONCAT(#{userName},'%')) and user_check = '1'
   </select>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

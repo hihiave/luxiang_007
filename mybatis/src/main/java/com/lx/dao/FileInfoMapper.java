@@ -21,19 +21,15 @@ public interface FileInfoMapper {
 	int updateByPrimaryKey(FileInfo record);
 	
 	//**********用于处理一些业务逻辑的方法**********
-	int delFileInfoById(@Param("fileIds") Integer... fileIds);
+	int delFilesById(@Param("fileIds") Integer... fileIds);
 	FileInfo getFileByFileName(String fileName);
 	int updateFilesCheck(@Param("fileCheck") int fileCheck, @Param("fileIds") Integer... fileIds);
 	List<FileInfo> selectFileByfileCheck(int fileCheck);
 	List<FileInfo> selectFileByfileAuthorWithFileCheck(@Param("fileAuthor") String fileAuthor, @Param("fileCheck") int fileCheck);
 
-	
 	//**********用于一些查询的方法**********
 	List<FileInfo> getFileInfo(FileInfo fileInfo);
-	List<FileInfo> getFileInfoByKeywords(@Param("keywords") String... keywords);
-	
-	
-	
+	//List<FileInfo> getFileInfoByKeywords(@Param("keywords") String... keywords);
 	
 	
 //	 <select id="selectFileByKeywords" resultMap="BaseResultMap">
@@ -45,10 +41,5 @@ public interface FileInfoMapper {
 //	            
 //	        </foreach>
 //	  </select>
-	
-	
-	
-	
-	
 	
 }

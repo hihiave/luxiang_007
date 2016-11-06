@@ -6,9 +6,10 @@ public class MacroEnum {
 	 * 审核类型
 	 */
 	public enum KCheckType {
-		WAITFORCHECK(0), // 等待审核
-		PASS(1), // 审核通过
-		NOTPASS(-1); // 审核不通过
+		waitForCheck(0), // 等待审核
+		pass(1), // 审核通过
+		notPass(-1), // 审核不通过
+		invalid(-2); // 文件失效,我的垃圾箱
 
 		KCheckType(int value) {
 			this.value = value;
@@ -22,10 +23,14 @@ public class MacroEnum {
 
 	}
 
-	public interface KFileType {
-		// 文件公有还是私有
-		public static final String PUBLICFILE = "公有";
-		//public static final String PRIVATEFILE = "私有";
+	/**
+	 * 文件属性类型
+	 */
+	public enum KFilePropertyType {
+		fullText, // 全文
+		title, // 标题
+		author, // 作者
+		keyword, // 关键词
 	}
 
 	/**
@@ -38,18 +43,19 @@ public class MacroEnum {
 	}
 
 	/**
-	 * 按钮类型
-	 */
-	public enum KButtonType {
-		MyUploadButton, // 我的上传
-		PublicFileButton, // 公有文件
-	}
-
-	/**
 	 * 时间单位
 	 */
 	public enum KDateType {
-		Year, Month, Week, Day, Hour, Minute, Second;
+		year, month, week, day, hour, minute, second;
+	}
+
+	/**
+	 * 文件可见类型
+	 */
+	public interface KFileVisibleType {
+		// 文件公有还是私有
+		public static final String PUBLIC_FILE = "公有";
+		// public static final String PRIVATEFILE = "私有";
 	}
 
 }

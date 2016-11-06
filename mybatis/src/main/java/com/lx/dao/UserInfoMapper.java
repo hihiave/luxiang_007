@@ -21,14 +21,14 @@ public interface UserInfoMapper {
 	int updateByPrimaryKey(UserInfo record);
 
 	//**********用于处理一些业务逻辑的方法**********
-	int updateUsersCheck(@Param("userNames") String... userNames);
+	int delUsersByUserName(@Param("userNames") String... userNames);
 	UserInfo selectUserByUserName(String userName);
-	List<UserInfo> selectUserByIsPass(int checkType);
-	List<UserInfo> selectAllUserInfoByLikeUserName(@Param("userName") String userName);
-	int deleteByUserName(String userName);
-	int updateUserPassword(@Param("userName") String userName, @Param("newPwd") String newPwd);
+	int updateUsersCheck(@Param("userNames") String... userNames);
+	int updateUserPasswordByUserName(@Param("userName") String userName, @Param("newPwd") String newPwd);
+	List<UserInfo> selectUserByUserCheck(int userCheck);
 	
 	//**********用于获取一些智能下拉提示**********
+	List<UserInfo> selectAllUserInfoByLikeUserName(@Param("userName") String userName);
 	List<String> getUserNames(String userName);
 
 }

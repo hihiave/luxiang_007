@@ -20,6 +20,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Autowired
 	private UserInfoMapper userInfoMapper;
 
+	// **********用于处理一些业务逻辑的方法**********
 	private boolean insertUserInfo(String userName, String userPassword, KCheckType checkType) {
 		boolean flag = false;
 		UserInfo userInfo = new UserInfo();
@@ -36,12 +37,20 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public boolean addUserInfo(String userName) {
-		return insertUserInfo(userName, ToolEncryption.EncryptMD5("123456"), KCheckType.PASS);
+		return insertUserInfo(userName, ToolEncryption.EncryptMD5("123456"), KCheckType.pass);
 	}
 
 	@Override
 	public boolean registerUserInfo(String userName, String userPassword) {
-		return insertUserInfo(userName, ToolEncryption.EncryptMD5(userPassword), KCheckType.WAITFORCHECK);
+		return insertUserInfo(userName, ToolEncryption.EncryptMD5(userPassword), KCheckType.waitForCheck);
+	}
+
+	@Override
+	public boolean delUsersByUserName(String... userNames) {
+		if (userInfoMapper.delUsersByUserName(userNames) == userNames.length) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -50,8 +59,16 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public boolean updateUsersCheck(String... userNames) {
-		if (userNames.length == userInfoMapper.updateUsersCheck(userNames)) {
+	public boolean checkUserIsExist(String userName) {
+		if (selectUserByUserName(userName) != null) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean batchUsersPass(String... userNames) {
+		if (userInfoMapper.updateUsersCheck(userNames) == userNames.length) {
 			return true;
 		}
 		return false;
@@ -69,32 +86,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public List<UserInfo> selectUserByIsPass(KCheckType checkType) {
-		return userInfoMapper.selectUserByIsPass(checkType.getValue());
-	}
-
-	@Override
-	public int getCountWithNotPass() {
-		return selectUserByIsPass(MacroEnum.KCheckType.WAITFORCHECK).size();
-	}
-
-	@Override
-	public List<UserInfo> selectAllUserInfoByLikeUserName(String userName) {
-		return userInfoMapper.selectAllUserInfoByLikeUserName(userName);
-	}
-
-	@Override
-	public boolean delByUserName(String userName) {
-		boolean flag = false;
-		if (userInfoMapper.deleteByUserName(userName) == 1) {
-			flag = true;
-		}
-		return flag;
-	}
-
-	@Override
 	public boolean resetPassword(String userName) {
-		if (userInfoMapper.updateUserPassword(userName, ToolEncryption.EncryptMD5("123456")) == 1) {
+		if (userInfoMapper.updateUserPasswordByUserName(userName, ToolEncryption.EncryptMD5("123456")) == 1) {
 			return true;
 		}
 		return false;
@@ -106,7 +99,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 		UserInfo userInfo = selectUserByUserName(userName);
 		String temp = ToolEncryption.EncryptMD5(oldPwd);
 		if (userInfo.getUserPassword().equals(temp)) {
-			if (userInfoMapper.updateUserPassword(userName, ToolEncryption.EncryptMD5(newPwd)) == 1) {
+			if (userInfoMapper.updateUserPasswordByUserName(userName, ToolEncryption.EncryptMD5(newPwd)) == 1) {
 				flag = true;
 			}
 		}
@@ -114,11 +107,19 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public boolean checkUserIsExist(String userName) {
-		if (userInfoMapper.selectUserByUserName(userName) != null) {
-			return true;
-		}
-		return false;
+	public List<UserInfo> selectUserByIsPass(KCheckType checkType) {
+		return userInfoMapper.selectUserByUserCheck(checkType.getValue());
+	}
+
+	@Override
+	public int getCountWithNotPass() {
+		return selectUserByIsPass(MacroEnum.KCheckType.waitForCheck).size();
+	}
+
+	// **********用于一些查询的方法**********
+	@Override
+	public List<UserInfo> selectAllUserInfoByLikeUserName(String userName) {
+		return userInfoMapper.selectAllUserInfoByLikeUserName(userName);
 	}
 
 	@Override
