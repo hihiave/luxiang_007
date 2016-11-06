@@ -1,4 +1,4 @@
-package com.qmd.controller;
+package com.lx.controller;
 
 import java.util.HashMap;
 import java.util.List;

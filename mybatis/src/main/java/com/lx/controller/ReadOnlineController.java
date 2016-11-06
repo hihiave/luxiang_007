@@ -1,4 +1,4 @@
-package com.qmd.controller;
+package com.lx.controller;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.qmd.tools.DocConverter;
-import com.qmd.tools.FileTransfer;
+import com.lx.tool.DocConverter;
+import com.lx.tool.FileTransfer;
 
 @Controller
 @RequestMapping("/ReadOnlineController")

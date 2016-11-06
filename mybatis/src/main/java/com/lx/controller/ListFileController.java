@@ -1,4 +1,4 @@
-package com.qmd.controller;
+package com.lx.controller;
 
 import java.io.File;
 import java.io.IOException;

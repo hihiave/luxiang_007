@@ -1,4 +1,4 @@
-package com.qmd.tools;
+package com.lx.tool;
 
 import java.io.BufferedInputStream;
 import java.io.File;
