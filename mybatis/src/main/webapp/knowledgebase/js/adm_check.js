@@ -33,30 +33,6 @@ function get_all_user_is_check(){
 }
 
 
-//全选
-
-function selectAll() {
-    var ckbs=document.getElementsByName("checkAll");
-    var cka=document.getElementById("selAll");
-    if (cka.checked == true) {
-        for (var i = 0; i < ckbs.length; i++) {
-            ckbs[i].checked = true;
-        }
-    }
-    else{
-        for (var i = 0; i < ckbs.length; i++) {
-            ckbs[i].checked = false;
-        }
-    }
-};
-function select_one(obj) {
-    var s = $(this).checked;
-    if(s){
-        $(this).attr("checked",false);
-    }else{
-        $(this).attr("checked",true);
-    }
-}
 //审核选中的用户（多个用户）
 function check_all_pick(obj){
     var check_num_1 = 0;

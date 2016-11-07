@@ -69,7 +69,7 @@
 
 <div style="margin:10px 20px;">
     <button type="button" class="btn btn-md btn-default" style="border:0px;float:right;" data-toggle="tooltip"
-            data-placement="bottom" title="退出登录">
+            data-placement="bottom" title="退出登录" onclick="logout()">
         <span class="glyphicon glyphicon-off"></span>&nbsp;退出
     </button>
     <button type="button" class="btn btn-md btn-default" style="border:0px;float:right;" data-toggle="tooltip"
@@ -88,10 +88,7 @@
         <div class="col-md-9 " style="margin-top:16px;">
             <div style="float:left;margin-right:0px;">
                 <select class="form-control" onchange="value" id="category_select">
-                    <option value='' selected>类别&nbsp;&nbsp;&nbsp;</option>
-                    <option value=''>专利</option>
-                    <option value=''>论文</option>
-                    <option value=''>报告</option>
+
                 </select>
             </div>
             <div style="float:left;margin-right:0px;">
@@ -158,14 +155,12 @@
                         <div class="panel-body" style="padding: 6px 15px;">
                             <ul class="nav nav-pills nav-stacked"
                                 style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                <li><a href="/mybatis/knowledgebase/adm-private.jsp">我的上传</a></li>
+                                <li><a href="/mybatis/knowledgebase/adm-private.jsp">我的文件</a></li>
+                                <li><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
                                 <li><a href="/mybatis/knowledgebase/adm-public.jsp">共有文件</a></li>
                                 <li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
                                 <li><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
-                                <c:if test="${is_manager == 1}">
-                                    <li><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
-                                    <li class="active"><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
-                                </c:if>
+                                <li><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>
                             </ul>
                         </div>
                     </div>
@@ -182,6 +177,8 @@
                             <div class="panel-body" style="padding: 6px 15px;">
                                 <ul class="nav nav-pills nav-stacked"
                                     style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                    <li><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
+                                    <li class="active"><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
                                     <li><a href="##">数据还原</a></li>
                                     <li><a href="##">数据备份</a></li>
                                 </ul>
@@ -213,7 +210,7 @@
                                 <button class="btn btn-primary" onclick="check_all_file(this)">通过</button>
                             </th>
                             <th style="width:116px;">
-                                <button class="btn btn-primary" data-toggle="modal">拒绝</button>
+                                <button class="btn btn-primary" onclick="notpass_all_selected_file_modal(this)">拒绝</button>
                             </th>
                         </tr>
                         </thead>
@@ -291,18 +288,19 @@
 </div>
 
 
-<div class="modal fade" id="jujue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="jujue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-not">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
 
-                <h4 class="modal-title" id="myModalLabel">提示</h4>
+                <h4 class="modal-title" id="myModalLabel-not">提示</h4>
             </div>
             <div class="modal-body">
-
+                <p id="jujue_remind_info"></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="jujue_ok_btn">确定</button>
             </div>
         </div>
     </div>

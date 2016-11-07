@@ -37,7 +37,8 @@
     <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
     <script src="/mybatis/knowledgebase/js/common.js"></script>
     <script src="/mybatis/knowledgebase/js/public_search.js"></script>
-    <script src="/mybatis/knowledgebase/js/adm_personal.js"></script>
+    <script src="/mybatis/knowledgebase/js/adm_draft.js"></script>
+
 
     <style type="text/css">
         .nav {
@@ -54,28 +55,6 @@
         }
 
     </style>
-    <script>
-        <%--$(function(){--%>
-        <%--var register_time = "${userinfo.getUserRegisterTime()}";--%>
-        <%--var time = timeStampFormatDay(register_time*1000);--%>
-        <%--console.log(time);--%>
-        <%--$("#show_user_name").html("${username}");--%>
-        <%--$("#show_user_role").html("${userinfo.getUserRole()}");--%>
-        <%--$("#show_register_time").html(time);--%>
-        <%--})--%>
-
-    </script>
-    <script type="text/javascript">
-        window.onload = function () {
-            var register_time = "${time}";
-            var time = timeStampFormatDay(register_time * 1000);
-            console.log(time);
-            $("#show_user_name").html("${username}");
-            $("#show_user_role").html("${userrole}");
-            $("#show_register_time").html(time);
-
-        }
-    </script>
 
 </head>
 <body>
@@ -137,7 +116,7 @@
                         <div class="panel-body" style="padding: 6px 15px;">
                             <ul class="nav nav-pills nav-stacked"
                                 style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                <li class="active"><a href="/mybatis/knowledgebase/adm-personal.jsp">个人信息</a></li>
+                                <li><a href="/mybatis/knowledgebase/adm-personal.jsp">个人信息</a></li>
                             </ul>
                         </div>
                     </div>
@@ -178,7 +157,7 @@
                                 <li><a href="/mybatis/knowledgebase/adm-public.jsp">共有文件</a></li>
                                 <li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
                                 <li><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
-                                <li><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>
+                                <li class="active"><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>
                             </ul>
                         </div>
                     </div>
@@ -199,61 +178,39 @@
                                     <li><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
                                     <li><a href="##">数据还原</a></li>
                                     <li><a href="##">数据备份</a></li>
+
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </c:if>
             </div>
-
-            <%--<ul class="nav nav-pills nav-stacked" >--%>
-            <%--<li class="active"><a href="/mybatis/knowledgebase/adm-personal.jsp">个人中心</a></li>--%>
-            <%----%>
-            <%--</ul>--%>
-            <%--<ul class="nav nav-pills nav-stacked">--%>
-            <%--<li class="active" readonly="true"><a href="##">用户管理</a></li>--%>
-            <%--<li><a href="/mybatis/knowledgebase/adm-inquire.jsp">用户查询</a></li>--%>
-            <%--<li><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核</a></li>--%>
-            <%--</ul>--%>
-            <%--<ul class="nav nav-pills nav-stacked">--%>
-            <%--<li class="active"><a href="##">资源管理</a></li>--%>
-            <%--<li><a href="/mybatis/knowledgebase/adm-private.jsp">私有文件</a></li>--%>
-            <%--<li><a href="/mybatis/knowledgebase/adm-public.jsp">公有文件</a></li>--%>
-            <%--<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>--%>
-            <%--<li><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>--%>
-            <%--<li><a href="##">类别管理</a></li>--%>
-            <%--<li><a href="##">资源审核</a></li>--%>
-            <%--</ul>--%>
-            <%--<ul class="nav nav-pills nav-stacked">--%>
-            <%--<li class="active"><a href="##">系统管理</a></li>--%>
-            <%--<li><a href="##">数据还原</a></li>--%>
-            <%--<li><a href="##">数据备份</a></li>--%>
-            <%--</ul>--%>
         </div>
         <div class="col-md-8" style="margin-left:50px;">
 
             <div class="panel panel-primary" style="height:625px;">
                 <div class="panel-heading">
-                    <h3 class="panel-title">个人信息</h3>
+                    <h3 class="panel-title">草稿箱</h3>
                 </div>
                 <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selAll" onclick="selectAll()"></th>
+                            <th>文件名</th>
+
+                            <th style="padding-left:20px;">下载</th>
+                            <th style="padding-left:20px;">预览</th>
+                            <th ><button class="btn btn-primary" onclick="delete_all_file_modal(this)">删除</button></th>
+                            <th ><button class="btn btn-primary" onclick="recovery_all_file_modal(this)">恢复</button></th>
+                        </tr>
+                        </thead>
+                        <tbody id="draft_file">
+
+                        </tbody>
+                    </table>
 
 
-                    <div style="float:left;margin-top:50px;margin-left:100px;">
-                        <img src="/mybatis/knowledgebase/img/1.png">
-                    </div>
-                    <div style="font-size:15px;float:right;margin-top:120px;margin-right:150px;">
-                        <p>用户名：<span id="show_user_name">xxxx</span></p>
-
-                        <p>用户角色：<span id="show_user_role">xxxx</span></p>
-
-                        <p>注册时间：<span id="show_register_time">xxxx</span></p>
-                    </div>
-                    <div align="center" style="margin-top:400px;">
-                        <button class="btn btn-info" data-toggle="modal" data-target="#changepsw"
-                                onclick="change_password()">修改密码
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -282,19 +239,39 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-logout">
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-logout">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <h4 class="modal-title" id="myModalLabel-logout">退出提示</h4>
+                    <h4 class="modal-title" id="myModalLabel-delete_title"></h4>
                 </div>
                 <div class="modal-body">
-                    <p id="logout-username"></p>
+                    <p id="delete_p_info"></p>
+
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="ok_btn" >确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    <button type="button" class="btn btn-primary " data-dismiss="modal" id="logout-dismiss">确认</button>
+    <div class="modal fade" id="delete-success-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-logout">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title" id="myModalLabel-delete">删除文件提示</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="delete_p_success_info"></p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary " data-dismiss="modal">确认</button>
                 </div>
             </div>
         </div>
