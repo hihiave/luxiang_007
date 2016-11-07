@@ -63,6 +63,12 @@
     %>
     <script type="text/javascript">
         window.onload = function () {
+            $("#file1").val("");
+            $("#file2").val("");
+            $("#file3").val("");
+            $("#aim1").val("");
+            $("#aim2").val("");
+            $("#aim3").val("");
             var file1 = $('#file1'),
                     aim1 = $('#aim1');
             file1.on('change', function (e) {
@@ -123,7 +129,7 @@
 
 <div style="margin:10px 20px;">
     <button type="button" class="btn btn-md btn-default" style="border:0px;float:right;" data-toggle="tooltip"
-            data-placement="bottom" title="退出登录">
+            data-placement="bottom" title="退出登录" onclick="logout()">
         <span class="glyphicon glyphicon-off"></span>&nbsp;退出
     </button>
     <button type="button" class="btn btn-md btn-default" style="border:0px;float:right;" data-toggle="tooltip"
@@ -142,10 +148,7 @@
         <div class="col-md-9" style="margin-top:16px;">
             <div style="float:left;margin-right:0px;">
                 <select class="form-control" onchange="value" id="category_select">
-                    <option value='' selected>类别&nbsp;&nbsp;&nbsp;</option>
-                    <option value=''>专利</option>
-                    <option value=''>论文</option>
-                    <option value=''>报告</option>
+
                 </select>
             </div>
             <div style="float:left;margin-right:0px;">
@@ -212,14 +215,12 @@
                         <div class="panel-body" style="padding: 6px 15px;">
                             <ul class="nav nav-pills nav-stacked"
                                 style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                <li><a href="/mybatis/knowledgebase/adm-private.jsp">我的上传</a></li>
+                                <li><a href="/mybatis/knowledgebase/adm-private.jsp">我的文件</a></li>
+                                <li><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
                                 <li><a href="/mybatis/knowledgebase/adm-public.jsp">共有文件</a></li>
                                 <li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
                                 <li class="active"><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
-                                <c:if test="${is_manager == 1}">
-                                    <li><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
-                                    <li><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
-                                </c:if>
+                                <li><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>
                             </ul>
                         </div>
                     </div>
@@ -236,6 +237,8 @@
                             <div class="panel-body" style="padding: 6px 15px;">
                                 <ul class="nav nav-pills nav-stacked"
                                     style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                    <li><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
+                                    <li><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
                                     <li><a href="##">数据还原</a></li>
                                     <li><a href="##">数据备份</a></li>
                                 </ul>

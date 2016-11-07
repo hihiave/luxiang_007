@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,7 +54,19 @@ public class FileController {
 		map.put("pub_file", pub_file);
 		return map;
 	}
-
+    /**
+     * 草稿箱文件
+     */
+    @RequestMapping(value = "/draftfile", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> draftfile(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        String username = (String) httpSession.getAttribute("username");
+//        List<FileInfo> pub_file = fileInfoService.selectFileByIsPass(KCheckType.invalid);
+        List<FileInfo> draft_file = fileInfoService.selectMyFileInfo(username, KCheckType.invalid);
+        map.put("all_file", draft_file);
+        return map;
+    }
 	/**
 	 * 上传文件
 	 */
@@ -71,6 +84,11 @@ public class FileController {
 		String username = (String) httpSession.getAttribute("username");
 		System.out.println(username + "hahahaha");
 		List<FileInfo> pri_file = fileInfoService.selectMyFileInfo(username, KCheckType.pass);
+//		List<FileInfo> pri_file_2 = fileInfoService.selectMyFileInfo(username, KCheckType.waitForCheck);
+//		List<FileInfo> pri_file_3 = fileInfoService.selectMyFileInfo(username, KCheckType.notPass);
+//        pri_file.addAll(pri_file_2);
+//        pri_file.addAll(pri_file_3);
+
 
 		map.put("pri_file", pri_file);
 		return map;
@@ -95,24 +113,52 @@ public class FileController {
 		
 		
 	}
-	
+    /**
+     * 用户待审文件
+     */
+    @RequestMapping(value = "/waitforcheckfile", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> waitforcheckfile(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        String username = (String) httpSession.getAttribute("username");
+        System.out.println(username + "hahahaha");
+        List<FileInfo> wait_file = fileInfoService.selectMyFileInfo(username, KCheckType.waitForCheck);
+//		List<FileInfo> pri_file_2 = fileInfoService.selectMyFileInfo(username, KCheckType.waitForCheck);
+		List<FileInfo> pri_file_3 = fileInfoService.selectMyFileInfo(username, KCheckType.notPass);
+//        pri_file.addAll(pri_file_2);
+        wait_file.addAll(pri_file_3);
+
+
+        map.put("wait_file", wait_file);
+        return map;
+    }
 	
 	/**
 	 * 用户删除文件,仅仅放入垃圾箱
 	 */
-	public String pushWithRecycleBin(){
-		
-		boolean d = fileInfoService.batchFilesIsPass(KCheckType.invalid, fileIds);
-		return null;
+    @RequestMapping(value = "/delete_file_to_draft", method = RequestMethod.POST)
+    @ResponseBody
+	public Map<String, Object> pushWithRecycleBin(Integer[] delete_array,HttpServletRequest httpServletRequest){
+        Map<String, Object> map = new HashMap<String, Object>();
+		boolean d = fileInfoService.batchFilesIsPass(KCheckType.invalid, delete_array);
+        map.put("flag",d);
+		return map;
 	}
 	
 	/**
 	 * 用户还原垃圾箱的文件
 	 */
-	public String popWithRecycleBin(){
-		
-		boolean d = fileInfoService.batchFilesIsPass(KCheckType.pass, fileIds);
-		return null;
+    @RequestMapping(value = "/recovery_file",method = RequestMethod.POST)
+    @ResponseBody
+	public Map<String,Object> popWithRecycleBin(Integer[] recovery_array,HttpServletRequest httpServletRequest){
+        Map<String, Object> map = new HashMap<String, Object>();
+        System.out.println("+++++++++++++++++");
+        System.out.println(fileInfoService+"++++++++==+++++++++");
+        System.out.println(recovery_array+"+++++++++++++++++");
+		boolean d = fileInfoService.batchFilesIsPass(KCheckType.pass, recovery_array);
+
+        map.put("flag",d);
+		return map;
 	}
 	
 	/**
@@ -132,19 +178,19 @@ public class FileController {
 	
 	
 	// **********查询**********
-	public String ddd(){
-		String param1 = "";  // 类别
-		String param2 = "author";  // 属性(标题，作者……)
-		String param3 = "";  // 值 是什么
-		
-		
-		
-		// 将第二个String转化成枚举类型的 , 注意： param2  只能是枚举里面有的。
-		KFilePropertyType filePropertyType = KFilePropertyType.valueOf(param2); 
-		fileInfoService.getFileByLikeFileProperty(fileCategory, filePropertyType, value);
-		return null;
-	}
-	
+//	public String ddd(){
+//		String param1 = "";  // 类别
+//		String param2 = "author";  // 属性(标题，作者……)
+//		String param3 = "";  // 值 是什么
+//
+//
+//
+//		// 将第二个String转化成枚举类型的 , 注意： param2  只能是枚举里面有的。
+//		KFilePropertyType filePropertyType = KFilePropertyType.valueOf(param2);
+//		fileInfoService.getFileByLikeFileProperty(fileCategory, filePropertyType, value);
+//		return null;
+//	}
+//
 	
 	
 	
@@ -182,11 +228,14 @@ public class FileController {
 	/**
 	 * 审核不通过
 	 */
+    @RequestMapping(value = "/notpass_file",method = RequestMethod.POST)
 	@ResponseBody
-	public String notpass_file() {
-		
-		// fileIds ： 文件id 数组
-		boolean d = fileInfoService.batchFilesIsPass(KCheckType.notPass, fileIds); 
+	public Map<String,Object> notpass_file(Integer[] notpass_array,HttpServletRequest httpServletRequest) {
+
+		Map<String,Object> map = new HashMap<String, Object>();
+		boolean d = fileInfoService.batchFilesIsPass(KCheckType.notPass, notpass_array);
+        map.put("flag",d);
+        return map;
 
 	}
 

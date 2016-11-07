@@ -31,3 +31,29 @@ function send_search_info(){
     console.log(_key);
     console.log(_search_input);
 }
+
+
+
+function selectAll() {
+    var ckbs=document.getElementsByName("checkAll");
+    var cka=document.getElementById("selAll");
+    if (cka.checked == true) {
+        for (var i = 0; i < ckbs.length; i++) {
+            ckbs[i].checked = true;
+        }
+    }
+    else{
+        for (var i = 0; i < ckbs.length; i++) {
+            ckbs[i].checked = false;
+        }
+    }
+};
+
+function select_one(obj) {
+    var s = $(this).checked;
+    if(s){
+        $(this).attr("checked",false);
+    }else{
+        $(this).attr("checked",true);
+    }
+}

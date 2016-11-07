@@ -34,30 +34,6 @@ function get_all_private_file(){
     })
 }
 
-function selectAll() {
-    var ckbs=document.getElementsByName("checkAll");
-    var cka=document.getElementById("selAll");
-    if (cka.checked == true) {
-        for (var i = 0; i < ckbs.length; i++) {
-            ckbs[i].checked = true;
-        }
-    }
-    else{
-        for (var i = 0; i < ckbs.length; i++) {
-            ckbs[i].checked = false;
-        }
-    }
-};
-
-
-function select_one(obj) {
-    var s = $(this).checked;
-    if(s){
-        $(this).attr("checked",false);
-    }else{
-        $(this).attr("checked",true);
-    }
-}
 
 
 
@@ -134,11 +110,12 @@ function delete_all(){
     console.log(delete_array);
     $.ajax({
         type:'post',
-        url:"/mybatis/FileInfoController/delete_file.do",
+        url:"/mybatis/FileInfoController/delete_file_to_draft.do",
         dataType:"json",
         traditional:true,
         data:{"delete_array":delete_array},
         success:function(data){
+            console.log(data["flag"]);
         	get_all_private_file();
         }
     })
@@ -164,11 +141,11 @@ function delete_one(obj){
 	 var file_id = $("#delete_file").attr("class");
 	    $.ajax({
 	        type:'post',
-	        url:"/mybatis/FileInfoController/delete_file.do",
+	        url:"/mybatis/FileInfoController/delete_file_to_draft.do",
 	        dataType:"json",
 	        data:{"delete_array":file_id},
 	        success:function(data){
-	        		
+                console.log(data["flag"]);
 	        	get_all_private_file();
 	                
 	        }

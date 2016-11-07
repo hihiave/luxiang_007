@@ -87,10 +87,7 @@ width: 1320px !important;
         <div class="col-md-9 " style="margin-top:16px;">
             <div style="float:left;margin-right:0px;">
                 <select class="form-control" onchange="value" id="category_select">
-                    <option value='' selected>类别&nbsp;&nbsp;&nbsp;</option>
-                    <option value=''>专利</option>
-                    <option value=''>论文</option>
-                    <option value=''>报告</option>
+
                 </select>
             </div>
             <div style="float:left;margin-right:0px;">
@@ -157,14 +154,12 @@ width: 1320px !important;
                         <div class="panel-body" style="padding: 6px 15px;">
                             <ul class="nav nav-pills nav-stacked"
                                 style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
-                                <li><a href="/mybatis/knowledgebase/adm-private.jsp">我的上传</a></li>
+                                <li><a href="/mybatis/knowledgebase/adm-private.jsp">我的文件</a></li>
+                                <li><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
                                 <li><a href="/mybatis/knowledgebase/adm-public.jsp">共有文件</a></li>
                                 <li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
                                 <li><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
-                                <c:if test="${is_manager == 1}">
-                                    <li><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
-                                    <li><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
-                                </c:if>
+                                <li><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>
                             </ul>
                         </div>
                     </div>
@@ -181,6 +176,8 @@ width: 1320px !important;
                             <div class="panel-body" style="padding: 6px 15px;">
                                 <ul class="nav nav-pills nav-stacked"
                                     style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
+                                    <li><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
+                                    <li><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
                                     <li><a href="##">数据还原</a></li>
                                     <li><a href="##">数据备份</a></li>
                                 </ul>
