@@ -29,86 +29,75 @@ public class TestUserInfo {
 	}
 
 	@Test
-	public void TestAddUserInfo() {
+	public void addUserInfoTest() {
 		boolean d = userInfoService.addUserInfo("dddddddffdd");
 		logger.info("===你你你你你==" + d);
 	}
 
 	@Test
-	public void TestRegisterUserInfo() {
+	public void registerUserInfoTest() {
 		userInfoService.registerUserInfo("皇上", "123456");
 	}
 
 	@Test
-	public void TestSelectUserByUserName() {
+	public void delUsersByUserNameTest() {
+		logger.info("====" + userInfoService.delUsersByUserName("wowowowo") + "==");
+	}
+
+	@Test
+	public void selectUserByUserNameTest() {
 		UserInfo userInfo = userInfoService.selectUserByUserName("luxiangd");
 		logger.info("===userInfo==" + JSON.toJSONString(userInfo));
 	}
 
 	@Test
-	public void TestUpdateUsersCheck() {
-		boolean d = userInfoService.batchUsersPass("rr", "ee");
-		logger.info("批量审核通过=" + d);
-	}
-
-	@Test
-	public void TestCheckLogin() {
-		KMessageType messageType = userInfoService.checkLogin("luxiang", "123456");
-		logger.info("===LOL  da====" + messageType + "==");
-	}
-
-	@Test
-	public void TestSelectUserByIsPass() {
-		Page page = new Page(2);
-		
-		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.pass, page);
-
-		logger.info("===HH=====" + JSON.toJSONString(userInfos));
-
-		logger.info("==============haha=============");
-	}
-
-	@Test
-	public void TestGetCountWithNotPass() {
-		int i = userInfoService.getCountWithNotPass();
-
-		logger.info("=======TestGetCountWithNotPass=====" + i);
-	}
-
-	@Test
-	public void TestSelectAllUserInfoByLikeUserName() {
-		List<UserInfo> userInfos = userInfoService.selectAllUserInfoByLikeUserName("李");
-		logger.info("===A====" + userInfos.isEmpty() + "==");
-		logger.info("===B=====" + userInfos.size() + "==");
-		logger.info("===HH=====" + JSON.toJSONString(userInfos) + "==");
-		logger.info("==============haha=============");
-	}
-
-	@Test
-	public void TestDelByUserName() {
-		logger.info("====" + userInfoService.delUsersByUserName("wowowowo") + "==");
-	}
-
-	@Test
-	public void TestResetPassword() {
-		boolean d = userInfoService.resetPassword("q1111");
-		logger.info("===resetPassword====" + d + "==");
-	}
-
-	@Test
-	public void TestAlterPassword() {
-		boolean d = userInfoService.alterPassword("wusongze", "123456", "456789");
-		logger.info("===alterPassword====" + d + "==");
-	}
-
-	@Test
-	public void TestCheckUserIsExist() {
+	public void checkUserIsExistTest() {
 		boolean d = userInfoService.checkUserIsExist("luxiang11");
 		logger.info("===CheckUserIsExist====" + d + "==");
 	}
 
 	@Test
-	public void TestGetUserNames() {
+	public void batchUsersPassTest() {
+		boolean d = userInfoService.batchUsersPass("rr", "ee");
+		logger.info("批量审核通过=" + d);
+	}
+
+	@Test
+	public void checkLoginTest() {
+		KMessageType messageType = userInfoService.checkLogin("luxiang", "123456");
+		logger.info("===LOL  da====" + messageType + "==");
+	}
+
+	@Test
+	public void resetPasswordTest() {
+		boolean d = userInfoService.resetPassword("q1111");
+		logger.info("===resetPassword====" + d + "==");
+	}
+
+	@Test
+	public void alterPasswordTest() {
+		boolean d = userInfoService.alterPassword("wusongze", "123456", "456789");
+		logger.info("===alterPassword====" + d + "==");
+	}
+
+	@Test
+	public void selectUserByIsPassTest() {
+		Page page = new Page(3);
+		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.pass, page, "       ");
+		logger.info("===size============" + userInfos.size());
+		logger.info("===HH==============" + JSON.toJSONString(userInfos));
+		logger.info("==============haha=============");
+	}
+
+	@Test
+	public void getCountWithWaitForCheckTest() {
+		int i = userInfoService.getCountWithWaitForCheck();
+		logger.info("=======TestGetCountWithNotPass=====" + i);
+	}
+
+	// **********用于一些查询的方法**********
+	@Test
+	public void getUserNamesTest() {
 		List<String> userNames = userInfoService.getUserNames("李");
 		logger.info("===A====" + userNames.isEmpty() + "==");
 		logger.info("===B=====" + userNames.size() + "==");

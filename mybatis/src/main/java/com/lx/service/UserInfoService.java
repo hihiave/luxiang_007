@@ -76,29 +76,23 @@ public interface UserInfoService {
 	 * @return boolean，true表示修改密码成功，false表示旧密码不对，修改密码失败
 	 */
 	public boolean alterPassword(String userName, String oldPwd, String newPwd);
-	
+
 	/** 通过审核是否通过查询用户
 	 * @author luxiang
 	 * @param checkType 审核类型，请查看枚举
 	 * @param page 分页
+	 * @param userName 按用户名的查询条件
 	 * @return 一个用户对象列表 UserInfo
 	 */
-	public List<UserInfo> selectUserByIsPass(KCheckType checkType, Page page);
+	public List<UserInfo> selectUserByIsPass(KCheckType checkType, Page page, String userName);
 	
 	/** 获取待审核的用户的数量
 	 * @author luxiang
 	 * @return int
 	 */
-	public int getCountWithNotPass();
+	public int getCountWithWaitForCheck();
 
-	// **********用于一些查询的方法**********
-	/** 通过用户名模糊查询所有用户，比如，查“三”，找到“李三”，“张三”
-	 * @author luxiang
-	 * @param userName 用户名
-	 * @return 一个用户对象列表 UserInfo
-	 */
-	public List<UserInfo> selectAllUserInfoByLikeUserName(String userName);
-
+	// **********用于获取一些智能下拉提示**********
 	/** 通过用户名获取一些智能下拉提示
 	 * @author luxiang
 	 * @param userName 用户名

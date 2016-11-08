@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lx.dao.UserInfoMapper;
-import com.lx.macrofiles.MacroEnum;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KMessageType;
 import com.lx.model.UserInfo;
@@ -107,27 +106,25 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public List<UserInfo> selectUserByIsPass(KCheckType checkType, Page page) {
-		int totalCount = userInfoMapper.selectUserByUserCheckCount(checkType.getValue());
-
-		System.out.println("=============fwsfsgrfgvdhhh========" + totalCount);
-
-		page.setTotalCount(totalCount);
-		page.init();
-		return userInfoMapper.selectUserByUserCheck(checkType.getValue(), page);
+	public List<UserInfo> selectUserByIsPass(KCheckType checkType, Page page, String userName) {
+		if (userName == null) {
+			userName = "";
+		}
+		if (page != null) {
+			int totalCount = userInfoMapper.selectUserByUserCheckCount(checkType.getValue(), userName.trim());
+			page.setTotalCount(totalCount);
+			page.init();
+			return userInfoMapper.selectUserByUserCheck(checkType.getValue(), page, userName.trim());
+		}
+		return null;
 	}
 
 	@Override
-	public int getCountWithNotPass() {
-		return selectUserByIsPass(MacroEnum.KCheckType.waitForCheck, null).size();
+	public int getCountWithWaitForCheck() {
+		return userInfoMapper.selectUserByUserCheckCount(KCheckType.waitForCheck.getValue(), "");
 	}
 
-	// **********用于一些查询的方法**********
-	@Override
-	public List<UserInfo> selectAllUserInfoByLikeUserName(String userName) {
-		return userInfoMapper.selectAllUserInfoByLikeUserName(userName);
-	}
-
+	// **********用于获取一些智能下拉提示**********
 	@Override
 	public List<String> getUserNames(String userName) {
 		return userInfoMapper.getUserNames(userName);

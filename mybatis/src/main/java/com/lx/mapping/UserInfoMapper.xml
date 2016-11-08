@@ -35,29 +35,23 @@
   	update UserInfo set user_password = #{newPwd,jdbcType=VARCHAR} 
   	where user_name = #{userName,jdbcType=VARCHAR} 
   </update>
-  <select id="selectUserByUserCheck" resultMap="BaseResultMap">
-  	select * from UserInfo 
-  	where user_check = #{userCheck,jdbcType=INTEGER}
-  	limit #{page.startPos}, #{page.pageSize}
-  </select>
   <select id="selectUserByUserCheckCount" resultType="java.lang.Integer">
   	select count(*) from UserInfo 
-  	where user_check = #{userCheck,jdbcType=INTEGER}
+  	where user_check = #{userCheck,jdbcType=INTEGER} and 
+  	user_name like CONCAT(CONCAT('%',#{userName},'%'))
   </select>
-  
-  
+  <select id="selectUserByUserCheck" resultMap="BaseResultMap">
+  	select * from UserInfo 
+  	where user_check = #{userCheck,jdbcType=INTEGER} and 
+  	user_name like CONCAT(CONCAT('%',#{userName},'%'))
+  	limit #{page.startPos}, #{page.pageSize}
+  </select>
+
   <!--**********用于获取一些智能下拉提示**********-->
-  <select id="selectAllUserInfoByLikeUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
-  	select user_name from UserInfo 
-  	<where>
-		user_check = '1'
-  		<if test="userName!=null and userName!=''">
-  			and user_name like CONCAT(CONCAT('%',#{userName},'%'))
-  		</if>
-  	</where>
-  </select>
   <select id="getUserNames" resultType="java.lang.String" parameterType="java.lang.String">
-  	select user_name from UserInfo where user_name like CONCAT(CONCAT(#{userName},'%')) and user_check = '1'
+  	select user_name from UserInfo 
+  	where user_name like CONCAT(CONCAT(#{userName},'%')) and 
+  	user_check = '1'
   </select>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
