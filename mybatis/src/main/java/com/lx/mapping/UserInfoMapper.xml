@@ -35,10 +35,16 @@
   	update UserInfo set user_password = #{newPwd,jdbcType=VARCHAR} 
   	where user_name = #{userName,jdbcType=VARCHAR} 
   </update>
-  <select id="selectUserByUserCheck" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  <select id="selectUserByUserCheck" resultMap="BaseResultMap">
   	select * from UserInfo 
   	where user_check = #{userCheck,jdbcType=INTEGER}
+  	limit #{page.startPos}, #{page.pageSize}
   </select>
+  <select id="selectUserByUserCheckCount" resultType="java.lang.Integer">
+  	select count(*) from UserInfo 
+  	where user_check = #{userCheck,jdbcType=INTEGER}
+  </select>
+  
   
   <!--**********用于获取一些智能下拉提示**********-->
   <select id="selectAllUserInfoByLikeUserName" resultMap="BaseResultMap" parameterType="java.lang.String">

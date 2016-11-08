@@ -107,13 +107,19 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public List<UserInfo> selectUserByIsPass(KCheckType checkType) {
-		return userInfoMapper.selectUserByUserCheck(checkType.getValue());
+	public List<UserInfo> selectUserByIsPass(KCheckType checkType, Page page) {
+		int totalCount = userInfoMapper.selectUserByUserCheckCount(checkType.getValue());
+
+		System.out.println("=============fwsfsgrfgvdhhh========" + totalCount);
+
+		page.setTotalCount(totalCount);
+		page.init();
+		return userInfoMapper.selectUserByUserCheck(checkType.getValue(), page);
 	}
 
 	@Override
 	public int getCountWithNotPass() {
-		return selectUserByIsPass(MacroEnum.KCheckType.waitForCheck).size();
+		return selectUserByIsPass(MacroEnum.KCheckType.waitForCheck, null).size();
 	}
 
 	// **********用于一些查询的方法**********

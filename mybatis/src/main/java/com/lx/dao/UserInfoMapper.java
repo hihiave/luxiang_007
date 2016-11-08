@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.lx.model.UserInfo;
+import com.lx.serviceimpl.Page;
 
 public interface UserInfoMapper {
 	
@@ -25,7 +26,8 @@ public interface UserInfoMapper {
 	UserInfo selectUserByUserName(String userName);
 	int updateUsersCheck(@Param("userNames") String... userNames);
 	int updateUserPasswordByUserName(@Param("userName") String userName, @Param("newPwd") String newPwd);
-	List<UserInfo> selectUserByUserCheck(int userCheck);
+	List<UserInfo> selectUserByUserCheck(@Param("userCheck") int userCheck, @Param("page") Page page);
+	int selectUserByUserCheckCount(int userCheck);
 	
 	//**********用于获取一些智能下拉提示**********
 	List<UserInfo> selectAllUserInfoByLikeUserName(@Param("userName") String userName);

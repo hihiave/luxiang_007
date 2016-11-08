@@ -17,6 +17,7 @@ import com.lx.macrofiles.MacroEnum;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.model.UserInfo;
 import com.lx.service.UserInfoService;
+import com.lx.serviceimpl.Page;
 
 @Controller
 @RequestMapping("/UserInfoController")
@@ -40,7 +41,7 @@ public class UserInfoController {
 			httpSession.setAttribute("username", username);
 			httpSession.setAttribute("time", userInfo.getUserRegisterTime());
 			httpSession.setAttribute("userrole", userInfo.getUserRole());
-			httpSession.setAttribute("userid", userInfo.getUserId());
+			// httpSession.setAttribute("userid", userInfo.getUserId());
 			// httpSession.setAttribute("password",password);
 			// httpSession.setAttribute("flag", true);
 			map.put("data", "LoginSuccess");
@@ -116,8 +117,6 @@ public class UserInfoController {
 		return map;
 	}
 
-	// @RequestMapping(value="get_export_select_info", method=
-	// RequestMethod.POST)
 	@RequestMapping(value = "/inquire", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> inquire(String username_search, HttpSession httpSession) {
@@ -143,11 +142,11 @@ public class UserInfoController {
 	 */
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> check(HttpSession httpSession, HttpServletRequest httpServletRequest) {
-		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.waitForCheck);
+	public Map<String, Object> check(HttpSession httpSession, HttpServletRequest request) {
+		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.waitForCheck, null);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("UserInfo_check", userInfos);
-        System.out.println("check+++++++++");
+		System.out.println("check+++++++++");
 		return map;
 	}
 
@@ -156,9 +155,17 @@ public class UserInfoController {
 	 */
 	@RequestMapping(value = "/Is_pass", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> is_pass(HttpSession httpSession, HttpServletRequest httpServletRequest) {
-
-		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.pass);
+	public Map<String, Object> is_pass(HttpServletRequest request) {
+		int pageNow = 1;
+		String temp = request.getParameter("pageNow"); // 动态接收pageNow
+		if (temp != null) {
+			pageNow = Integer.parseInt(temp);
+		}
+		Page page = new Page(pageNow);
+		
+		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.pass, page);
+		
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("UserInfo_check", userInfos);
 		return map;
@@ -172,8 +179,7 @@ public class UserInfoController {
 		System.out.println("修改的用户" + username);
 		System.out.println("修改的用户" + oldpassword);
 		System.out.println("修改的用户" + newpassword);
-		boolean result = false;
-		result = userInfoService.alterPassword(username, oldpassword, newpassword);
+		boolean result = userInfoService.alterPassword(username, oldpassword, newpassword);
 		System.out.println("修改的用户" + result);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", result);
@@ -209,8 +215,6 @@ public class UserInfoController {
 	@RequestMapping(value = "/del_user", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> user_delete(String select_username, HttpServletRequest httpServletRequest) {
-
-
 
 		boolean result = userInfoService.delUsersByUserName(select_username);
 		Map<String, Object> map = new HashMap<String, Object>();

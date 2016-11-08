@@ -13,6 +13,7 @@ import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KMessageType;
 import com.lx.model.UserInfo;
 import com.lx.service.UserInfoService;
+import com.lx.serviceimpl.Page;
 import com.lx.serviceimpl.UserInfoServiceImpl;
 
 public class TestUserInfo {
@@ -58,11 +59,12 @@ public class TestUserInfo {
 
 	@Test
 	public void TestSelectUserByIsPass() {
-		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.waitForCheck);
-		logger.info("===A====" + userInfos.isEmpty() + "==");
-		logger.info("===B=====" + userInfos.size() + "==");
-		logger.info("===HH=====" + JSON.toJSONString(userInfos.get(1)) + "==");
-		logger.info("===E=====" + userInfos.get(2) + "==");
+		Page page = new Page(2);
+		
+		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.pass, page);
+
+		logger.info("===HH=====" + JSON.toJSONString(userInfos));
+
 		logger.info("==============haha=============");
 	}
 

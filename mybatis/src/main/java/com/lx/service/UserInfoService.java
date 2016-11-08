@@ -5,6 +5,7 @@ import java.util.List;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KMessageType;
 import com.lx.model.UserInfo;
+import com.lx.serviceimpl.Page;
 
 public interface UserInfoService {
 	
@@ -79,9 +80,10 @@ public interface UserInfoService {
 	/** 通过审核是否通过查询用户
 	 * @author luxiang
 	 * @param checkType 审核类型，请查看枚举
+	 * @param page 分页
 	 * @return 一个用户对象列表 UserInfo
 	 */
-	public List<UserInfo> selectUserByIsPass(KCheckType checkType);
+	public List<UserInfo> selectUserByIsPass(KCheckType checkType, Page page);
 	
 	/** 获取待审核的用户的数量
 	 * @author luxiang
