@@ -186,7 +186,7 @@
         <div class="col-md-8" style="margin-left:50px;">
             <div class="panel panel-primary" style="height:625px;">
                 <div class="panel-heading">
-                    <h3 class="panel-title">我的上传</h3>
+                    <h3 class="panel-title">我的文件</h3>
                 </div>
                 <div class="panel-body" style="padding-top:0px;">
                     <table class="table table-striped">

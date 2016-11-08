@@ -30,13 +30,13 @@ function cb_get_all(obj){
         var td_3 = "<td style='padding-top:15px;width:180px;' >"+get_file_check(all_wait_file[each].fileCheck)+"</td>";
         var td_4 = "<td><button class='btn btn-primary' onclick='delete_one_file(this)' value="+all_wait_file[each].fileId+">删除</button></td>";
         var td_5 = "<td><button class='btn btn-primary' onclick='' value="+all_wait_file[each].fileId+">下载</button></td>";
-        var td_6 = "";
-        if(all_wait_file[each].fileCheck == -1){
-            td_6 = "<td><button class='btn btn-primary' onclick='' value="+all_wait_file[each].fileId+">提交</button></td>";
-        }else if(all_wait_file[each].fileCheck == 0){
-            td_6 = "<td></td>"
-        }
-        var content = tr_begin  + td_1 + td_2 + td_3 + td_4 + td_5 +td_6+ tr_end;
+        //var td_6 = "";
+        //if(all_wait_file[each].fileCheck == -1){
+        //    td_6 = "<td><button class='btn btn-primary' onclick='' value="+all_wait_file[each].fileId+">提交</button></td>";
+        //}else if(all_wait_file[each].fileCheck == 0){
+        //    td_6 = "<td></td>"
+        //}
+        var content = tr_begin  + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
         $("#waitforcheck_file").append(content);
     }
 }

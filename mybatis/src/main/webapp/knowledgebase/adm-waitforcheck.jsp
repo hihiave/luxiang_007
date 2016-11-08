@@ -207,9 +207,7 @@
                             <th>
                                 <button class="btn btn-primary" data-toggle="modal">下载</button>
                             </th>
-                            <th>
-                                提交
-                            </th>
+
                         </tr>
                         </thead>
                         <tbody id="waitforcheck_file">

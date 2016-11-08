@@ -206,17 +206,17 @@ public class UserInfoController {
 	}
 
 	// 批量删除用户
-//	@RequestMapping(value = "/del_user", method = RequestMethod.POST)
-//	@ResponseBody
-//	public Map<String, Object> user_delete(String select_username, HttpServletRequest httpServletRequest) {
-//
-//		 批量删除用户 select_username 请定义为数组
-//
-//		boolean result = userInfoService.delUsersByUserName(select_username);
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("flag", result);
-//		return map;
-//	}
+	@RequestMapping(value = "/del_user", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> user_delete(String select_username, HttpServletRequest httpServletRequest) {
+
+
+
+		boolean result = userInfoService.delUsersByUserName(select_username);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("flag", result);
+		return map;
+	}
 
 	/**
 	 * 批量用户名审核通过
