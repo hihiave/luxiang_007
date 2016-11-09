@@ -120,7 +120,8 @@ function resetUserPassword(obj){
                     console.log(data["flag"]);
                     if(data){
 
-                        alert("修改密码成功！");
+                        $("#add_user_result").html("重置密码成功");
+                        $("#tianjia_result").modal('show');
                     }
                 }
             }

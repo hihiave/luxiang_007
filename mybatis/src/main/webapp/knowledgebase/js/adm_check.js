@@ -9,27 +9,26 @@ $(function(){
 
 //请求全部待审核用户
 function get_all_user_is_check(){
-    $.ajax({
-        type:'post',
-        url:"/mybatis/UserInfoController/check.do",
-        dataType:"json",
-        success:function get_all_check_user(data){
-            var _table = $("#check_result>tr");
-            _table.remove();
-            var all_check_user = data["UserInfo_check"];
-            for(var i = 0;i < all_check_user.length;i++){
-                var tr_begin = "<tr>";
-                var tr_end = "</tr>";
-                var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll'></td>";
-                var td_2 = "<td class='Name' style='padding-top:15px;'>" + all_check_user[i].userName +"</td>";
-                var td_3 = "<td style='padding-top:15px;padding-left:15px;'>待审核</td>";
-                var td_4 = "<td><button class='btn btn-primary' onclick='check_one_pick(this)'>通过</button></td>";
-                var td_5 = "<td><button class='btn btn-primary'>拒绝</button></td>";
-                var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
-                $("#check_result").append(content);
-            }
-        }
-    })
+    var src = "/mybatis/UserInfoController/check.do";
+    sendAjaxRequest(src,{"page_Now":1},get_all_check_user_one,function(data){});
+}
+
+function get_all_check_user_one(data){
+    var _table = $("#check_result>tr");
+    _table.remove();
+    var all_check_user = data["UserInfo_check"];
+    for(var i = 0;i < all_check_user.length;i++){
+        var tr_begin = "<tr>";
+        var tr_end = "</tr>";
+        var td_1 = "<td ><input type='checkbox' name='checkAll'></td>";
+        var td_2 = "<td class='Name' >" + all_check_user[i].userName +"</td>";
+        var td_3 = "<td padding-left:15px;'>待审核</td>";
+        var td_4 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary' onclick='check_one_pick(this)'>通过</button></td>";
+        var td_5 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary'>拒绝</button></td>";
+        var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
+        $("#check_result").append(content);
+        createNewPagination(data,"inquire_check","/mybatis/UserInfoController/check.do",get_all_check_user_one,"first_check_click","last_check_click","page-two","");
+    }
 }
 
 
@@ -72,16 +71,9 @@ function pass_all_selected(){
         }
     });
     console.log(check_array);
-    $.ajax({
-        type:'post',
-        url:"/mybatis/UserInfoController/check_pass_user.do",
-        dataType:"json",
-        traditional:true,
-        data:{"check_user_array":check_array},
-        success:function(data){
-            get_all_user_is_check();
-        }
-    })
+    sendAjaxRequest("/mybatis/UserInfoController/check_pass_user.do",{"check_user_array":check_array},get_all_user_is_check,function(data){});
+
+
 }
 //审核选中的用户（单个用户）
 function check_one_pick(obj){
@@ -98,17 +90,8 @@ function check_one_pick(obj){
 //确认通过单个用户
 function pass_one_selected(){
     var check_user = $("#check_info").attr("class");
-    $.ajax({
-        type:'post',
-        url:"/mybatis/UserInfoController/check_pass_user.do",
-        dataType:"json",
-        data:{"check_user_array":check_user},
-        success:function(data){
-            if(data){
-                get_all_user_is_check();
-            }
-        }
-    })
+    sendAjaxRequest("/mybatis/UserInfoController/check_pass_user.do",{"check_user_array":check_user},get_all_user_is_check,function(data){});
+
 }
 
 //确认通过按钮

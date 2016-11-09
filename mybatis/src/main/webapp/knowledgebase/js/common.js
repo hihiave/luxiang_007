@@ -152,7 +152,6 @@ function createPaginationHtml(page_begin, page_end, page_now, page_total_num, cl
     var elem = "";
 
     if(page_now != 1 && page_total_num != 0) {
-        //log("page now are %s", page_now );
 
         elem += "<li> <a id = '" + left_arrow_id  + "' href='#' aria-label='Previous'> <span aria-hidden='true'>&laquo;</span> </a>";
     }
@@ -198,16 +197,11 @@ function createNewPagination(data, class_name,src,deal_cb,left_arrow_id, right_a
 
     $("#"+ul_id+">li").remove();
     $("#"+ul_id).append(elem);
-    //$("#"+ul_id).html(elem);
 
-    //addition_data = Object.create(addition_data);
+    var send_left_data = $.extend({"page_Now": 1},addition_data);
+    var send_right_data = $.extend({"page_Now": page_total_num},addition_data);
 
-    var send_left_data = $.extend({"page_now": 1},addition_data);
-    var send_right_data = $.extend({"page_now": page_total_num},addition_data);
-    //
-    //
     $("#"+left_arrow_id).click(function() {
-        console.log("fanhuidiyiye");
         sendAjaxRequest(src, send_left_data, deal_cb, function (data) {
 
         });
@@ -215,24 +209,18 @@ function createNewPagination(data, class_name,src,deal_cb,left_arrow_id, right_a
 
     // 添加click 事件
     $("."+ class_name).each(function () {
-
-
         $(this).click(function () {
             var text = $(this).text();
-            //log(text);
             text = $.trim(text);
-            //log("text are %s", text);
-            var send_data = $.extend({"page_now": text},addition_data);
+            var send_data = $.extend({"page_Now": text},addition_data);
             sendAjaxRequest(src, send_data, deal_cb, function (data) {
 
             });
 
         });
     });
-    //
-    //
+
     $("#"+right_arrow_id).click(function() {
-        console.log("qianwangzuihouyiye");
         sendAjaxRequest(src, send_right_data, deal_cb, function(data) {
         });
     });

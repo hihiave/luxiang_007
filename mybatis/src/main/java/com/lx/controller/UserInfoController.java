@@ -151,7 +151,12 @@ public class UserInfoController {
         Page page = new Page(pageNow);
 		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.waitForCheck, page,username);
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("UserInfo_check", userInfos);
+        int totalCount = page.getTotalCount();
+        int pageCount = page.getTotalPageCount();
+        map.put("totalCount",totalCount);
+        map.put("pageNow",pageNow);
+        map.put("pageCount",pageCount);
+        map.put("UserInfo_check", userInfos);
 		System.out.println("check+++++++++");
 		return map;
 	}

@@ -217,12 +217,12 @@
                 <div class="panel-body" style="padding-top:0px;">
                     <table class="table table-striped">
                         <thead>
-                        <tr>
-                            <th style="padding-left: 28px;border-bottom-width: 2px;padding-bottom: 4px;width: 78px;">
-                                <label class="checkbox"><input type="checkbox" id="selAll" onclick="selectAll()">全选
-                                </label></th>
-                            <th style="padding-bottom:15px;">用户名</th>
-                            <th style="padding-bottom:15px;">审核状态</th>
+                        <tr >
+                            <th style="border-bottom-width: 2px;width: 78px;">
+                                <input type="checkbox" id="selAll" onclick="selectAll()">全选
+                                </th>
+                            <th >用户名</th>
+                            <th >审核状态</th>
                             <th style="width:116px;">
                                 <button class="btn btn-primary" onclick="check_all_pick(this)">通过</button>
                             </th>
@@ -267,7 +267,19 @@
 
                         </tbody>
                     </table>
+                    <div style="margin-top: -20px;float: right;">
+                        <ul class="pagination" id="page-two">
+                            <%--<li><a href="#">&laquo;</a></li>--%>
+                            <%--<li><a href="#">1</a></li>--%>
+                            <%--<li><a href="#">2</a></li>--%>
+                            <%--<li><a href="#">3</a></li>--%>
+                            <%--<li><a href="#">4</a></li>--%>
+                            <%--<li><a href="#">5</a></li>--%>
+                            <%--<li><a href="#">&raquo;</a></li>--%>
+                        </ul>
+                    </div>
                 </div>
+
             </div>
         </div>
         <div class="modal fade" id="pass_check" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-person_ok">
