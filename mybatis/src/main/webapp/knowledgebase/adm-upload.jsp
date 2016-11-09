@@ -37,6 +37,7 @@
     <script src="/mybatis/knowledgebase/js/html5shiv.min.js"></script>
     <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
     <script src="/mybatis/knowledgebase/js/public_search.js"></script>
+    <script src="/mybatis/knowledgebase/js/adm_upload.js"></script>
 
     <style type="text/css">
         .nav {
@@ -71,9 +72,16 @@
             $("#aim3").val("");
             var file1 = $('#file1'),
                     aim1 = $('#aim1');
+//            console.log(file1.val());
             file1.on('change', function (e) {
-                var name = e.currentTarget.files[0].name;
-                aim1.val(name);
+
+                if(file1.val == null){
+                    aim1.val("");
+                }else{
+                    var name = e.currentTarget.files[0].name;
+                    aim1.val(name);
+                }
+
             });
             var file2 = $('#file2'),
                     aim2 = $('#aim2');
@@ -256,7 +264,7 @@
                     <h3 class="panel-title">文件上传</h3>
                 </div>
                 <div class="panel-body" style="height:580px;overflow-y:auto;">
-                    <form action="/mybatis/Uploadservlet" name="name1" enctype="multipart/form-data" method="post">
+                    <form action="/mybatis/FileUploadController/fileUpload.do" name="name1" enctype="multipart/form-data" method="post">
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -268,22 +276,53 @@
                             </div>
                             <div id="upload1" class="panel-collapse collapse">
                                 <div class="panel-body form-inline">
-                                    <input type="file" class="upload" name="file" id="file1"><br>
-                                    <span>资料名称：</span><input class="form-control" style="width:40%;" type="text"
-                                                             id="aim1" readonly="true">&nbsp;&nbsp;
+                                    <div class="row-fluid" >
+                                        <div class="col-md-12" style="margin-bottom: 25px;">
+                                            <input type="file" class="upload" name="file" id="file1">
+                                        </div>
 
-                                    <span>上传者：</span><input class="form-control" style="width:40%;" type="text"
-                                                            placeholder="<%=session.getAttribute("username")%>"
-                                                            readonly="true"><br><br>
-                                    <span>上传时间：</span><input class="form-control" style="width:40%;" type="text"
-                                                             placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
-                                    <span>关键词：</span><input class="form-control" style="width:40%;"
-                                                            placeholder="多个关键词以空格分开" type="text" id="word1"><br><br>
-                                    <span>资料属性：</span><input type="radio" name="type1" checked>公有&nbsp;&nbsp;<input
-                                        type="radio" name="type1">私有<br><br>
-                                    <span>资料描述：</span><textarea type="textarea" class="form-control"
-                                                                style="width:89.5%;" rows="3" id="area1"></textarea>
+                                    </div>
 
+                                    <div class="row-fluid" >
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>资料名称：</span><input class="form-control" style="width:75%;" type="text"
+                                                                     id="aim1" readonly="true">&nbsp;&nbsp;
+                                        </div>
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>上传者：</span><input class="form-control" style="width:75%;" type="text"
+                                                                    placeholder="<%=session.getAttribute("username")%>"
+                                                                    readonly="true">
+                                        </div>
+                                    </div>
+
+                                    <div class="row-fluid" >
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>上传时间：</span><input class="form-control" style="width:75%;" type="text"
+                                                                     placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
+                                        </div>
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>关键词：</span><input class="form-control" style="width:75%;"
+                                                                    placeholder="多个关键词以空格分开" type="text" id="word1">
+                                        </div>
+                                    </div>
+
+                                    <div class="row-fluid" >
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>资料属性：</span><input type="radio" name="type1" checked>公有&nbsp;&nbsp;<input
+                                                type="radio" name="type1">私有
+                                        </div>
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>类&nbsp;&nbsp;&nbsp;别：</span><select class="form-control select-class-name" onchange="value" style="width:75%;" ></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-fluid" >
+                                        <div class="col-md-12" style="margin-bottom: 25px;">
+                                            <span>资料描述：</span><textarea type="textarea" class="form-control"
+                                                                        style="width:95%;" rows="3" id="area1"></textarea>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -297,22 +336,53 @@
                             </div>
                             <div id="upload2" class="panel-collapse collapse">
                                 <div class="panel-body form-inline">
-                                    <input type="file" class="upload" name="file" id="file2"><br>
-                                    <span>资料名称：</span><input class="form-control" style="width:40%;" type="text"
-                                                             id="aim2" readonly="true">&nbsp;&nbsp;
+                                    <div class="row-fluid" >
+                                        <div class="col-md-12" style="margin-bottom: 25px;">
+                                            <input type="file" class="upload" name="file" id="file2">
+                                        </div>
 
-                                    <span>上传者：</span><input class="form-control" style="width:40%;" type="text"
-                                                            placeholder="<%=session.getAttribute("username")%>"
-                                                            readonly="true"><br><br>
-                                    <span>上传时间：</span><input class="form-control" style="width:40%;" type="text"
-                                                             placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
-                                    <span>关键词：</span><input class="form-control" style="width:40%;"
-                                                            placeholder="多个关键词以空格分开" type="text" id="word2"><br><br>
-                                    <span>资料属性：</span><input type="radio" name="type2" checked>公有&nbsp;&nbsp;<input
-                                        type="radio" name="type2">私有<br><br>
-                                    <span>资料描述：</span><textarea type="textarea" class="form-control"
-                                                                style="width:89.5%;" rows="3" id="area2"></textarea>
+                                    </div>
 
+                                    <div class="row-fluid" >
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>资料名称：</span><input class="form-control" style="width:75%;" type="text"
+                                                                     id="aim2" readonly="true">&nbsp;&nbsp;
+                                        </div>
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>上传者：</span><input class="form-control" style="width:75%;" type="text"
+                                                                    placeholder="<%=session.getAttribute("username")%>"
+                                                                    readonly="true">
+                                        </div>
+                                    </div>
+
+                                    <div class="row-fluid" >
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>上传时间：</span><input class="form-control" style="width:75%;" type="text"
+                                                                     placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
+                                        </div>
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>关键词：</span><input class="form-control" style="width:75%;"
+                                                                    placeholder="多个关键词以空格分开" type="text" id="word2">
+                                        </div>
+                                    </div>
+
+                                    <div class="row-fluid" >
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>资料属性：</span><input type="radio" name="type2" checked>公有&nbsp;&nbsp;<input
+                                                type="radio" name="type2">私有
+                                        </div>
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>类&nbsp;&nbsp;&nbsp;别：</span><select class="form-control select-class-name" onchange="value" style="width:75%;" ></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-fluid" >
+                                        <div class="col-md-12" style="margin-bottom: 25px;">
+                                            <span>资料描述：</span><textarea type="textarea" class="form-control"
+                                                                        style="width:95%;" rows="3" id="area2"></textarea>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -326,22 +396,53 @@
                             </div>
                             <div id="upload3" class="panel-collapse collapse">
                                 <div class="panel-body form-inline">
-                                    <input type="file" class="upload" name="file" id="file3"><br>
-                                    <span>资料名称：</span><input class="form-control" style="width:40%;" type="text"
-                                                             id="aim3" readonly="true">&nbsp;&nbsp;
+                                    <div class="row-fluid" >
+                                        <div class="col-md-12" style="margin-bottom: 25px;">
+                                            <input type="file" class="upload" name="file" id="file3">
+                                        </div>
 
-                                    <span>上传者：</span><input class="form-control" style="width:40%;" type="text"
-                                                            placeholder="<%=session.getAttribute("username")%>"
-                                                            readonly="true"><br><br>
-                                    <span>上传时间：</span><input class="form-control" style="width:40%;" type="text"
-                                                             placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
-                                    <span>关键词：</span><input class="form-control" style="width:40%;"
-                                                            placeholder="多个关键词以空格分开" type="text" id="word3"><br><br>
-                                    <span>资料属性：</span><input type="radio" name="type3" checked>公有&nbsp;&nbsp;<input
-                                        type="radio" name="type3">私有<br><br>
-                                    <span>资料描述：</span><textarea type="textarea" class="form-control"
-                                                                style="width:89.5%;" rows="3" id="area3"></textarea>
+                                    </div>
 
+                                    <div class="row-fluid" >
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>资料名称：</span><input class="form-control" style="width:75%;" type="text"
+                                                                     id="aim3" readonly="true">&nbsp;&nbsp;
+                                        </div>
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>上传者：</span><input class="form-control" style="width:75%;" type="text"
+                                                                    placeholder="<%=session.getAttribute("username")%>"
+                                                                    readonly="true">
+                                        </div>
+                                    </div>
+
+                                    <div class="row-fluid" >
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>上传时间：</span><input class="form-control" style="width:75%;" type="text"
+                                                                     placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
+                                        </div>
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>关键词：</span><input class="form-control" style="width:75%;"
+                                                                    placeholder="多个关键词以空格分开" type="text" id="word3">
+                                        </div>
+                                    </div>
+
+                                    <div class="row-fluid" >
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>资料属性：</span><input type="radio" name="type3" checked>公有&nbsp;&nbsp;<input
+                                                type="radio" name="type3">私有
+                                        </div>
+                                        <div class="col-md-6" style="margin-bottom: 25px;">
+                                            <span>类&nbsp;&nbsp;&nbsp;别：</span><select class="form-control select-class-name" onchange="value" style="width:75%;" ></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-fluid" >
+                                        <div class="col-md-12" style="margin-bottom: 25px;">
+                                            <span>资料描述：</span><textarea type="textarea" class="form-control"
+                                                                        style="width:95%;" rows="3" id="area3"></textarea>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -363,9 +464,9 @@
 
 
 <style type="text/css">
-    th.btn-primary {
-        width: 116px;
-    }
+    /*th.btn-primary {*/
+        /*width: 116px;*/
+    /*}*/
 </style>
 
 
@@ -381,28 +482,28 @@
         padding: 5px 0px;
     }
 
-    #username1, #password1 {
-        font-size: 15px;
+    /*#username1, #password1 {*/
+        /*font-size: 15px;*/
 
-    }
+    /*}*/
 
-    .footer {
-        position: absolute;
-        top: 94%;
-        height: 6%;
-        background-color: #e1e1e1;
-        width: 100%;
+    /*.footer {*/
+        /*position: absolute;*/
+        /*top: 94%;*/
+        /*height: 6%;*/
+        /*background-color: #e1e1e1;*/
+        /*width: 100%;*/
 
-        text-align: center;
-        min-width: 1190px;
-    }
+        /*text-align: center;*/
+        /*min-width: 1190px;*/
+    /*}*/
 
-    .footer span.footerText {
-        font-size: 14px;
-        margin-top: 0.5%;
-        color: #606060;
-        display: inline-block;
-    }
+    /*.footer span.footerText {*/
+        /*font-size: 14px;*/
+        /*margin-top: 0.5%;*/
+        /*color: #606060;*/
+        /*display: inline-block;*/
+    /*}*/
 </style>
 <%--<div class="footer"> <span class="footerText">Copyright © 1956-2016 电子科技大学</span> </div>--%>
 </body>

@@ -119,6 +119,122 @@ function logout(){
         }
     })
 }
+function sendAjaxRequest(src,data,success_cb,err_cb,is_async){
+    if(arguments.length != 5){
+        is_async = true;
+    }
+    $.ajax({
+        'type':"POST",
+        'url':src,
+        'data':data,
+        'dataType':"json",
+        async:is_async,
+        'success':success_cb,
+        'error':err_cb,
+        'traditional':true
+    });
+}
+
+/**
+ * 分页
+ * page_begin
+ * page_end
+ * page_now
+ * page_total
+ * class_name
+ */
+function createPaginationHtml(page_begin, page_end, page_now, page_total_num, class_name, left_arrow_id, right_arrow_id) {
+    console.log("创建分页+++++");
+    var li_active_begin_elem = "<li class='active'>" + "<a href='#' class='" + class_name + "' >";
+    var li_non_active_begin =  "<li><a href='#' class = '" + class_name + "' >";
+    var li_end =  " </a> </li>";
+
+    var elem = "";
+
+    if(page_now != 1 && page_total_num != 0) {
+        //log("page now are %s", page_now );
+
+        elem += "<li> <a id = '" + left_arrow_id  + "' href='#' aria-label='Previous'> <span aria-hidden='true'>&laquo;</span> </a>";
+    }
+
+    for(var i = page_begin ; i <= page_end ; i++) {
+        if(i != page_now) {
+            var whole_li = li_non_active_begin + i + li_end;
+            elem += whole_li;
+        } else {
+            whole_li = li_active_begin_elem + i + li_end;
+            elem += whole_li;
+        }
+    }
+
+    if(page_now != page_total_num && page_total_num != 0) {
+        elem += "<li> <a href='#' id ='" + right_arrow_id + "' aria-label='Next'> <span aria-hidden='true'>&raquo;</span> </a> </li>"
+
+    }
+
+    return elem;
+}
+
+/*
+ * class_name：     给分页链接命名的样式类名
+ * deal_func_name:  是给后台的名称
+ * deal_cb:         是用来处理后台给前台数据的回调
+ * left_arrow_id:   是给最左箭头取的新id
+ * right_arrow_id:  是给最右键头取的新id
+ */
+function createNewPagination(data, class_name,src,deal_cb,left_arrow_id, right_arrow_id, ul_id,addition_data) {
+
+    var page_now = data["pageNow"];
+    var page_total_num = data["pageCount"];
+    console.log(page_now);
+    console.log(page_total_num);
+
+    var page_begin = Math.max(1, page_now - 3);
+    var page_end = Math.min(page_total_num, page_now + 3);
+
+    var elem = createPaginationHtml(page_begin, page_end, page_now, page_total_num, class_name,
+        left_arrow_id, right_arrow_id);
 
 
+    $("#"+ul_id+">li").remove();
+    $("#"+ul_id).append(elem);
+    //$("#"+ul_id).html(elem);
 
+    //addition_data = Object.create(addition_data);
+
+    var send_left_data = $.extend({"page_now": 1},addition_data);
+    var send_right_data = $.extend({"page_now": page_total_num},addition_data);
+    //
+    //
+    $("#"+left_arrow_id).click(function() {
+        console.log("fanhuidiyiye");
+        sendAjaxRequest(src, send_left_data, deal_cb, function (data) {
+
+        });
+    });
+
+    // 添加click 事件
+    $("."+ class_name).each(function () {
+
+
+        $(this).click(function () {
+            var text = $(this).text();
+            //log(text);
+            text = $.trim(text);
+            //log("text are %s", text);
+            var send_data = $.extend({"page_now": text},addition_data);
+            sendAjaxRequest(src, send_data, deal_cb, function (data) {
+
+            });
+
+        });
+    });
+    //
+    //
+    $("#"+right_arrow_id).click(function() {
+        console.log("qianwangzuihouyiye");
+        sendAjaxRequest(src, send_right_data, deal_cb, function(data) {
+        });
+    });
+
+}

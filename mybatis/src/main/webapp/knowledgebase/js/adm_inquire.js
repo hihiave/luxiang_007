@@ -1,30 +1,37 @@
 //页面加载完毕加载表格
 $(function(){
-    get_all_is_ckeck();
+    get_all_is_check();
 })
 //获取全部通过用户
-function get_all_is_ckeck(){
-    $.ajax({
-        type:'post',
-        url:"/mybatis/UserInfoController/Is_pass.do",
-        dataType:"json",
-        success:function get_all_check_user(data){
-            var _table = $("#search_result>tr");
-            _table.remove();
-            var all_pass_user = data["UserInfo_check"];
-            for(var i = 0;i < all_pass_user.length;i++){
-                var tr_begin = "<tr>";
-                var tr_end = "</tr>";
-                var td_1 = "<td>"+(i+1)+"</td>";
-                var td_2 = "<td class='Name'>"+all_pass_user[i].userName+"</td>"
-                var td_3 = "<td></td>";
-                var td_4 = "<td style='padding-bottom:3px;padding-top:3px;width:116px;'>"+"<button class='btn btn-primary' data-toggle='modal' data-target='' onclick='deleteUser(this)'>删除用户</button>"+"</td>";
-                var td_5 = "<td style='padding-bottom:3px;padding-top:3px;width:116px;'>"+"<button class='btn btn-primary' data-toggle='modal' data-target='' onclick='user_selected(this)' >重置密码</button>"+"</td>";
-                var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
-                $("#search_result").append(content);
-            }
-        }
-    })
+function get_all_is_check(){
+    var src = "/mybatis/UserInfoController/Is_pass.do";
+    sendAjaxRequest(src,{"page_Now":1,"username":null},function(data){
+        get_all_check_user(data)
+    },function(data){});
+}
+
+
+
+
+function get_all_check_user(obj){
+    var name = $.trim($("#search-in").val());
+    var _table = $("#search_result>tr");
+    _table.remove();
+    var all_pass_user = obj["UserInfo_check"];
+    //console.log(all_pass_user[0].userName);
+    for(var i = 0;i < all_pass_user.length;i++){
+        var tr_begin = "<tr>";
+        var tr_end = "</tr>";
+        var td_1 = "<td>"+(i+1)+"</td>";
+        var td_2 = "<td class='Name'>"+all_pass_user[i].userName+"</td>"
+        var td_3 = "<td></td>";
+        var td_4 = "<td style='padding-bottom:3px;padding-top:3px;width:116px;'>"+"<button class='btn btn-primary' data-toggle='modal' data-target='' onclick='deleteUser(this)'>删除用户</button>"+"</td>";
+        var td_5 = "<td style='padding-bottom:3px;padding-top:3px;width:116px;'>"+"<button class='btn btn-primary' data-toggle='modal' data-target='' onclick='user_selected(this)' >重置密码</button>"+"</td>";
+        var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
+        $("#search_result").append(content);
+
+    }
+    createNewPagination(obj,"inquire_query","/mybatis/UserInfoController/Is_pass.do",get_all_check_user,"first_inquire_click","last_inquire_click","page-one",{"username":name});
 }
 /**
  * wsz
@@ -44,7 +51,7 @@ function admadduser(){
                         if(data["flag"] == "chenggong"){
                             $("#add_user_result").html("添加用户成功");
                             $("#tianjia_result").modal('show');
-                            get_all_is_ckeck();
+                            get_all_is_check();
                         }else if(data["flag"] == "shibai"){
                             $("#add_user_result").html("添加用户失败");
                             $("#tianjia_result").modal('show');
@@ -58,6 +65,7 @@ function admadduser(){
 
         }
 
+
 }
 
 /**
@@ -66,41 +74,10 @@ function admadduser(){
  */
 function searchuser(){
     var name = $.trim($("#search-in").val());
-    if(name != "") {
-        console.log("sssssss"+name);
-        $.ajax(
-            {
-                type:'post',
-                url:"/mybatis/UserInfoController/inquire.do",
-                data:{username_search:name},
-                dataType:"json",
-                success:function(data){
-                    $("#search_result>tr").remove();
-//                                                console.log(data["UserInfo_search"]);
-                    var searchuser = data["UserInfo_search"];
-
-                    console.log(searchuser.length);
-                    //console.log(searchuser[0].userName);
-
-                    for(var i = 0; i < searchuser.length; i++){
-                        var tr_begin = "<tr>";
-                        var tr_end = "</tr>";
-                        var td_1 = "<td>"+(i+1)+"</td>";
-                        var td_2 = "<td class='Name'>"+searchuser[i].userName+"</td>"
-                        var td_3 = "<td></td>";
-                        var pid = searchuser[i].userId;
-                        var td_4 = "<td style='padding-bottom:3px;padding-top:3px;width:116px;'>"+"<button class='btn btn-primary' data-toggle='modal' data-target='' onclick='deleteUser(this)'>删除用户</button>"+"</td>";
-                        var td_5 = "<td style='padding-bottom:3px;padding-top:3px;width:116px;'>"+"<button class='btn btn-primary' data-toggle='modal' data-target='' onclick='user_selected(this)' >重置密码</button>"+"</td>";
-                        var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
-                        $("#search_result").append(content);
-                    }
-                }
-            }
-        )
-
-    }else{
-        return;
-    }
+    var src = "/mybatis/UserInfoController/Is_pass.do";
+    sendAjaxRequest(src,{"page_Now":1,"username":name},function(data){
+        get_all_check_user(data)
+    },function(data){});
 }
 /**
  * wsz
@@ -176,9 +153,10 @@ function delete_ok(obj){
                 console.log(data["flag"]);
                 if(data["flag"]==true){
 
-                    get_all_is_ckeck();
+                    get_all_is_check();
                 }
             }
         }
     )
 }
+

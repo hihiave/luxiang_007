@@ -117,33 +117,39 @@ public class UserInfoController {
 		return map;
 	}
 
-	@RequestMapping(value = "/inquire", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> inquire(String username_search, HttpSession httpSession) {
-
-		System.out.println(username_search + "!!!!!!!!!!!!!!!!!!___________");
-		List<UserInfo> userInfos = userInfoService.selectAllUserInfoByLikeUserName(username_search);
-		System.out.println(userInfos.size() + "个匹配选项");
-		for (int i = 0; i < userInfos.size(); i++) {
-			System.out.println("第" + (i + 1) + "个匹配" + userInfos.get(i).getUserName());
-		}
-		// ModelAndView modelAndView = new ModelAndView();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("UserInfo_search", userInfos);
-		// System.out.println(map.get(userInfos) + "wowowowo");
-		// modelAndView.addAllObjects(map);
-		// httpSession.setAttribute("UserInfo", userInfos);
-		return map;
-
-	}
+//	@RequestMapping(value = "/inquire", method = RequestMethod.POST)
+//	@ResponseBody
+//	public Map<String, Object> inquire(String username_search, HttpSession httpSession) {
+//
+//		System.out.println(username_search + "!!!!!!!!!!!!!!!!!!___________");
+//		List<UserInfo> userInfos = userInfoService.selectAllUserInfoByLikeUserName(username_search);
+//		System.out.println(userInfos.size() + "个匹配选项");
+//		for (int i = 0; i < userInfos.size(); i++) {
+//			System.out.println("第" + (i + 1) + "个匹配" + userInfos.get(i).getUserName());
+//		}
+//		// ModelAndView modelAndView = new ModelAndView();
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("UserInfo_search", userInfos);
+//		// System.out.println(map.get(userInfos) + "wowowowo");
+//		// modelAndView.addAllObjects(map);
+//		// httpSession.setAttribute("UserInfo", userInfos);
+//		return map;
+//
+//	}
 
 	/**
 	 * 用户待审核
 	 */
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> check(HttpSession httpSession, HttpServletRequest request) {
-		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.waitForCheck, null);
+	public Map<String, Object> check(Integer page_Now,String username,HttpSession httpSession, HttpServletRequest request) {
+        int pageNow = 1;
+        // 动态接收pageNow
+        if (page_Now != null) {
+            pageNow = page_Now;
+        }
+        Page page = new Page(pageNow);
+		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.waitForCheck, page,username);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("UserInfo_check", userInfos);
 		System.out.println("check+++++++++");
@@ -155,18 +161,22 @@ public class UserInfoController {
 	 */
 	@RequestMapping(value = "/Is_pass", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> is_pass(HttpServletRequest request) {
+	public Map<String, Object> is_pass(Integer page_Now,String username,HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<String, Object>();
 		int pageNow = 1;
-		String temp = request.getParameter("pageNow"); // 动态接收pageNow
-		if (temp != null) {
-			pageNow = Integer.parseInt(temp);
+		// 动态接收pageNow
+		if (page_Now != null) {
+			pageNow = page_Now;
 		}
 		Page page = new Page(pageNow);
 		
-		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.pass, page);
-		
-		
-		Map<String, Object> map = new HashMap<String, Object>();
+		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.pass, page ,username);
+        System.out.println("查询到的用户数："+userInfos.size());
+		int pageCount = page.getTotalPageCount();
+        int totalCount = page.getTotalCount();
+		map.put("totalCount",totalCount);
+        map.put("pageNow",pageNow);
+        map.put("pageCount",pageCount);
 		map.put("UserInfo_check", userInfos);
 		return map;
 

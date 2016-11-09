@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,18 +18,22 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/FileUploadController")
 public class FileUploadController {
 
-	@RequestMapping("/fileUpload")
-	public void fileUpload(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping(value = "/fileUpload",method = RequestMethod.POST)
+    @ResponseBody
+	public Map<String,Object> fileUpload(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+        Map<String,Object> map = new HashMap<String, Object>();
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
 		// 上传的地址
-		String savePath = "F:/Users";
+		String savePath = "C:/Users";
 		File saveFile = new File(savePath);
 		if (!saveFile.exists()) {
 			saveFile.mkdirs();
@@ -45,7 +51,7 @@ public class FileUploadController {
 		// String
 		// tempPath=this.getServletContext().getRealPath("/WEB-INF/temp");
 
-		String tempPath = "F:/temp";
+		String tempPath = "C:/temp";
 		File tempFile = new File(tempPath);
 		if (!tempFile.exists()) {
 			System.out.println(tempPath + "临时目录不存在，需要创建");
@@ -60,7 +66,8 @@ public class FileUploadController {
 			ServletFileUpload upload = new ServletFileUpload(factory);// 创建文件上传解析器
 			upload.setHeaderEncoding("UTF-8");
 			if (!ServletFileUpload.isMultipartContent(request)) {
-				return;
+                map.put("message", message);
+				return map;
 			}
 			upload.setFileSizeMax(1024 * 1024);// 单个文件的最大大小 这里是1M
 			upload.setSizeMax(1024 * 1024 * 10);// 文件总大小 这里设为10M
@@ -115,20 +122,24 @@ public class FileUploadController {
 			}
 		} catch (FileUploadBase.FileSizeLimitExceededException e) {
 			e.printStackTrace();
-			request.setAttribute("message", "单个文件超出最大值");
-			request.getRequestDispatcher("/message.jsp").forward(request, response);
-			return;
+//			request.setAttribute("message", "单个文件超出最大值");
+//			request.getRequestDispatcher("/message.jsp").forward(request, response);
+            map.put("message","单个文件超出最大值");
+			return map;
 		} catch (FileUploadBase.SizeLimitExceededException e) {
 			e.printStackTrace();
-			request.setAttribute("message", "上传文件的总大小超出最大值");
-			request.getRequestDispatcher("/message.jsp").forward(request, response);
-			return;
+//			request.setAttribute("message", "上传文件的总大小超出最大值");
+//			request.getRequestDispatcher("/message.jsp").forward(request, response);
+            map.put("message", "上传文件的总大小超出最大值");
+			return map;
 		} catch (Exception e) {
 			message = "文件上传失败";
 			e.printStackTrace();
 		}
-		request.setAttribute("message", message);
-		request.getRequestDispatcher("/message.jsp").forward(request, response);
+//		request.setAttribute("message", message);
+//		request.getRequestDispatcher("/message.jsp").forward(request, response);
+        map.put("message", message);
+        return map;
 		// System.out.println;
 	}
 
