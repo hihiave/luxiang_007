@@ -27,8 +27,9 @@ function get_all_check_user_one(data){
         var td_5 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary'>拒绝</button></td>";
         var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
         $("#check_result").append(content);
-        createNewPagination(data,"inquire_check","/mybatis/UserInfoController/check.do",get_all_check_user_one,"first_check_click","last_check_click","page-two","");
+
     }
+    createNewPagination(data,"inquire_check","/mybatis/UserInfoController/check.do",get_all_check_user_one,"first_check_click","last_check_click","page-two","");
 }
 
 

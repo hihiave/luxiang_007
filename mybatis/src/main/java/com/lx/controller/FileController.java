@@ -177,20 +177,27 @@ public class FileController {
     }
 
 
-    // **********查询**********
-//	public String ddd(){
-//		String param1 = "";  // 类别
-//		String param2 = "author";  // 属性(标题，作者……)
-//		String param3 = "";  // 值 是什么
-//
-//
-//
-//		// 将第二个String转化成枚举类型的 , 注意： param2  只能是枚举里面有的。
-//		KFilePropertyType filePropertyType = KFilePropertyType.valueOf(param2);
-//		fileInfoService.getFileByLikeFileProperty(fileCategory, filePropertyType, value);
-//		return null;
-//	}
-//
+    /**
+     * 查询
+     * @param fileCategory 类别
+     * @param fileProperty 属性
+     * @param fileIn 搜索值
+     * @param httpServletRequest
+     * @return
+     */
+    @RequestMapping(value = "/search_file", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    @ResponseBody
+	public Map<String,Object> ddd(String fileCategory,String fileProperty,String fileIn,HttpServletRequest httpServletRequest){
+
+        System.out.println("类别" + fileCategory + "属性" + fileProperty + "搜索值" + fileIn);
+        Map<String,Object> map = new HashMap<String, Object>();
+		// 将第二个String转化成枚举类型的 , 注意： param2  只能是枚举里面有的。
+		KFilePropertyType filePropertyType = KFilePropertyType.valueOf(fileProperty);
+		List<FileInfo> fileList = fileInfoService.getFileByLikeFileProperty(fileCategory, filePropertyType, fileIn);
+        map.put("filelist",fileList);
+		return map;
+	}
+
 
 
 

@@ -38,6 +38,7 @@
     <script src="/mybatis/knowledgebase/js/bootstrap.min.js"></script>
     <script src="/mybatis/knowledgebase/js/html5shiv.min.js"></script>
     <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
+    <script src="/mybatis/knowledgebase/js/common.js"></script>
     <script src="/mybatis/knowledgebase/js/public_search.js"></script>
     <script src="/mybatis/knowledgebase/js/adm_checkfile.js"></script>
 
@@ -85,7 +86,7 @@
         <div class="col-md-3" style="width:283px;margin-right:16px;">
             <img src="/mybatis/knowledgebase/img/zhishiku_2.png" style="margin-left:30px;">
         </div>
-        <div class="col-md-9 " style="margin-top:16px;">
+        <div class="col-md-9" style="margin-top:16px;">
             <div style="float:left;margin-right:0px;">
                 <select class="form-control" onchange="value" id="category_select">
 
@@ -93,15 +94,18 @@
             </div>
             <div style="float:left;margin-right:0px;">
                 <select class="form-control" onchange="value" id="key_select">
-                    <option value='' selected>全文</option>
-                    <option value=''>标题</option>
-                    <option value=''>作者</option>
-                    <option value=''>关键字</option>
+                    <option value='fullText' selected>全文</option>
+                    <option value='title'>标题</option>
+                    <option value='author'>作者</option>
+                    <option value='keyword'>关键字</option>
                 </select>
             </div>
             <div class="input-group input-group-md" style="float:left;">
-                <input type="text" class="form-control" aria-describedby="sizing-addon1" style="width:521px;">
-                <button class="btn btn-primary" style="width:78px;margin-left:5px;">搜&nbsp;索</button>
+                <input type="text" class="form-control" aria-describedby="sizing-addon1" style="width:521px;"
+                       id="file_search_input">
+                <button class="btn btn-primary" style="width:78px;margin-left:5px;" id="file_search_sub"
+                        onclick="send_search_info()">搜&nbsp;索
+                </button>
             </div>
         </div>
     </div>
@@ -193,7 +197,7 @@
         <div class="col-xs-8" style="margin-left:50px;">
 
 
-            <div class="panel panel-primary" style="height:625px;">
+            <div class="panel panel-primary" style="height:625px;" id="default_panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">资源审核</h3>
                 </div>
@@ -241,11 +245,12 @@
                     </table>
                 </div>
             </div>
+            <jsp:include page="search-result.jsp" flush="true"/>
         </div>
 
     </div>
 </div>
-</div>
+
 
 
 <div class="modal fade" id="pass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-check-1">
@@ -267,7 +272,7 @@
         </div>
     </div>
 </div>
-</div>
+
 
 <div class="modal fade" id="pass_remind" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-person_remind">
     <div class="modal-dialog modal-sm" role="document">
@@ -305,8 +310,24 @@
         </div>
     </div>
 </div>
-</div>
 
+<div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-logout">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel-logout">退出提示</h4>
+            </div>
+            <div class="modal-body">
+                <p id="logout-username"></p>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary " data-dismiss="modal" id="logout-dismiss">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
 <style type="text/css">
     .modal {
         margin-top: 20%;

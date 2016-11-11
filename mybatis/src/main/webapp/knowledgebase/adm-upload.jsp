@@ -62,76 +62,76 @@
         java.util.Date currentTime = new java.util.Date();
         String time = simpleDateFormat.format(currentTime).toString();
     %>
-    <script type="text/javascript">
-        window.onload = function () {
-            $("#file1").val("");
-            $("#file2").val("");
-            $("#file3").val("");
-            $("#aim1").val("");
-            $("#aim2").val("");
-            $("#aim3").val("");
-            var file1 = $('#file1'),
-                    aim1 = $('#aim1');
-//            console.log(file1.val());
-            file1.on('change', function (e) {
+    <%--<script type="text/javascript">--%>
+        <%--window.onload = function () {--%>
+            <%--$("#file1").val("");--%>
+            <%--$("#file2").val("");--%>
+            <%--$("#file3").val("");--%>
+            <%--$("#aim1").val("");--%>
+            <%--$("#aim2").val("");--%>
+            <%--$("#aim3").val("");--%>
+            <%--var file1 = $('#file1'),--%>
+                    <%--aim1 = $('#aim1');--%>
+<%--//            console.log(file1.val());--%>
+            <%--file1.on('change', function (e) {--%>
 
-                if(file1.val == null){
-                    aim1.val("");
-                }else{
-                    var name = e.currentTarget.files[0].name;
-                    aim1.val(name);
-                }
+                <%--if(file1.val == null){--%>
+                    <%--aim1.val("");--%>
+                <%--}else{--%>
+                    <%--var name = e.currentTarget.files[0].name;--%>
+                    <%--aim1.val(name);--%>
+                <%--}--%>
 
-            });
-            var file2 = $('#file2'),
-                    aim2 = $('#aim2');
-            file2.on('change', function (e) {
-                var name = e.currentTarget.files[0].name;
-                aim2.val(name);
-            });
-            var file3 = $('#file3'),
-                    aim3 = $('#aim3');
-            file3.on('change', function (e) {
-                var name = e.currentTarget.files[0].name;
-                aim3.val(name);
-            });
-            sub.onclick = check;
-            function check() {
+            <%--});--%>
+            <%--var file2 = $('#file2'),--%>
+                    <%--aim2 = $('#aim2');--%>
+            <%--file2.on('change', function (e) {--%>
+                <%--var name = e.currentTarget.files[0].name;--%>
+                <%--aim2.val(name);--%>
+            <%--});--%>
+            <%--var file3 = $('#file3'),--%>
+                    <%--aim3 = $('#aim3');--%>
+            <%--file3.on('change', function (e) {--%>
+                <%--var name = e.currentTarget.files[0].name;--%>
+                <%--aim3.val(name);--%>
+            <%--});--%>
+            <%--sub.onclick = check;--%>
+            <%--function check() {--%>
 
-                var aim1 = document.getElementById("aim1"),
-                        aim2 = document.getElementById("aim2"), aim3 = document.getElementById("aim3");
-                var word1 = document.getElementById("word1"),
-                        word2 = document.getElementById("word2"), word3 = document.getElementById("word3");
-                var area1 = document.getElementById("area1"),
-                        area2 = document.getElementById("area2"), area3 = document.getElementById("area3");
+                <%--var aim1 = document.getElementById("aim1"),--%>
+                        <%--aim2 = document.getElementById("aim2"), aim3 = document.getElementById("aim3");--%>
+                <%--var word1 = document.getElementById("word1"),--%>
+                        <%--word2 = document.getElementById("word2"), word3 = document.getElementById("word3");--%>
+                <%--var area1 = document.getElementById("area1"),--%>
+                        <%--area2 = document.getElementById("area2"), area3 = document.getElementById("area3");--%>
 
-                if (aim1.value == "" & aim2.value == "" & aim3.value == "") {
-                    alert("请选择上传的文件");
-                    return false;
-                }
-                else {
-                    if (aim2.value != "") {
-                        if ((area2.value == "") || (word2.value == "")) {
-                            alert("请完善文件信息");
-                            return false;
-                        }
-                    }
-                    else if (aim1.value != "") {
-                        if ((area1.value == "") || (word1.value == "")) {
-                            alert("请完善文件信息");
-                            return false;
-                        }
-                    }
-                    else if (aim3.value != "") {
-                        if ((area3.value == "") || (word3.value == "")) {
-                            alert("请完善文件信息");
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+                <%--if (aim1.value == "" & aim2.value == "" & aim3.value == "") {--%>
+                    <%--alert("请选择上传的文件");--%>
+                    <%--return false;--%>
+                <%--}--%>
+                <%--else {--%>
+                    <%--if (aim2.value != "") {--%>
+                        <%--if ((area2.value == "") || (word2.value == "")) {--%>
+                            <%--alert("请完善文件信息");--%>
+                            <%--return false;--%>
+                        <%--}--%>
+                    <%--}--%>
+                    <%--else if (aim1.value != "") {--%>
+                        <%--if ((area1.value == "") || (word1.value == "")) {--%>
+                            <%--alert("请完善文件信息");--%>
+                            <%--return false;--%>
+                        <%--}--%>
+                    <%--}--%>
+                    <%--else if (aim3.value != "") {--%>
+                        <%--if ((area3.value == "") || (word3.value == "")) {--%>
+                            <%--alert("请完善文件信息");--%>
+                            <%--return false;--%>
+                        <%--}--%>
+                    <%--}--%>
+                <%--}--%>
+            <%--}--%>
+        <%--}--%>
+    <%--</script>--%>
 </head>
 <body>
 
@@ -264,6 +264,7 @@
                     <h3 class="panel-title">文件上传</h3>
                 </div>
                 <div class="panel-body" style="height:580px;overflow-y:auto;">
+
                     <form action="/mybatis/FileUploadController/fileUpload.do" name="name1" enctype="multipart/form-data" method="post">
 
                         <div class="panel panel-default">
@@ -276,14 +277,27 @@
                             </div>
                             <div id="upload1" class="panel-collapse collapse">
                                 <div class="panel-body form-inline">
-                                    <div class="row-fluid" >
+                                    <div class="row" style="display: none;">
                                         <div class="col-md-12" style="margin-bottom: 25px;">
-                                            <input type="file" class="upload" name="file" id="file1">
+                                            <input type="file" class="upload" name="file" id="file1" pid="aim1" onchange="changeFile(this)">
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1" style="margin-bottom: 25px;">
+                                            <button type="button" class="btn btn-default" bid="file1" pid="aim1"
+                                                    onclick="add_one_click(this)">上传
+                                            </button>
+                                        </div>
+                                        <div class="col-md-1" style="margin-bottom: 25px;">
+                                            <button type="button" class="btn btn-default" bid="file1" pid="aim1"
+                                                    onclick="del_one_click(this)">移除
+                                            </button>
                                         </div>
 
                                     </div>
 
-                                    <div class="row-fluid" >
+                                    <div class="row" >
                                         <div class="col-md-6" style="margin-bottom: 25px;">
                                             <span>资料名称：</span><input class="form-control" style="width:75%;" type="text"
                                                                      id="aim1" readonly="true">&nbsp;&nbsp;
@@ -295,7 +309,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row-fluid" >
+                                    <div class="row" >
                                         <div class="col-md-6" style="margin-bottom: 25px;">
                                             <span>上传时间：</span><input class="form-control" style="width:75%;" type="text"
                                                                      placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
@@ -306,17 +320,23 @@
                                         </div>
                                     </div>
 
-                                    <div class="row-fluid" >
+                                    <div class="row">
                                         <div class="col-md-6" style="margin-bottom: 25px;">
-                                            <span>资料属性：</span><input type="radio" name="type1" checked>公有&nbsp;&nbsp;<input
-                                                type="radio" name="type1">私有
+                                            <span>资料属性：</span>
+                                            <select class="form-control " id="proto1" onchange="value"
+                                                    style="width:75%;margin-left: -3px;">
+                                                <option value='私有' selected>私有</option>
+                                                <option value='公有'>公有</option>
+                                            </select>
                                         </div>
                                         <div class="col-md-6" style="margin-bottom: 25px;">
-                                            <span>类&nbsp;&nbsp;&nbsp;别：</span><select class="form-control select-class-name" onchange="value" style="width:75%;" ></select>
+                                            <span>类&nbsp;&nbsp;&nbsp;&nbsp;别：</span><select
+                                                class="form-control select-class-name" id="cate1" onchange="value"
+                                                style="width:75%;margin-left: -2px;"></select>
                                         </div>
                                     </div>
 
-                                    <div class="row-fluid" >
+                                    <div class="row" >
                                         <div class="col-md-12" style="margin-bottom: 25px;">
                                             <span>资料描述：</span><textarea type="textarea" class="form-control"
                                                                         style="width:95%;" rows="3" id="area1"></textarea>
@@ -336,14 +356,27 @@
                             </div>
                             <div id="upload2" class="panel-collapse collapse">
                                 <div class="panel-body form-inline">
-                                    <div class="row-fluid" >
+                                    <div class="row" style="display: none;">
                                         <div class="col-md-12" style="margin-bottom: 25px;">
-                                            <input type="file" class="upload" name="file" id="file2">
+                                            <input type="file" class="upload" name="file" id="file2" pid="aim2" onchange="changeFile(this)">
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1" style="margin-bottom: 25px;">
+                                            <button type="button" class="btn btn-default" bid="file2" pid="aim2"
+                                                    onclick="add_one_click(this)">上传
+                                            </button>
+                                        </div>
+                                        <div class="col-md-1" style="margin-bottom: 25px;">
+                                            <button type="button" class="btn btn-default" bid="file2" pid="aim2"
+                                                    onclick="del_one_click(this)">移除
+                                            </button>
                                         </div>
 
                                     </div>
 
-                                    <div class="row-fluid" >
+                                    <div class="row" >
                                         <div class="col-md-6" style="margin-bottom: 25px;">
                                             <span>资料名称：</span><input class="form-control" style="width:75%;" type="text"
                                                                      id="aim2" readonly="true">&nbsp;&nbsp;
@@ -355,7 +388,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row-fluid" >
+                                    <div class="row" >
                                         <div class="col-md-6" style="margin-bottom: 25px;">
                                             <span>上传时间：</span><input class="form-control" style="width:75%;" type="text"
                                                                      placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
@@ -366,17 +399,23 @@
                                         </div>
                                     </div>
 
-                                    <div class="row-fluid" >
+                                    <div class="row">
                                         <div class="col-md-6" style="margin-bottom: 25px;">
-                                            <span>资料属性：</span><input type="radio" name="type2" checked>公有&nbsp;&nbsp;<input
-                                                type="radio" name="type2">私有
+                                            <span>资料属性：</span>
+                                            <select class="form-control " id="proto2" onchange="value"
+                                                    style="width:75%;margin-left: -3px;">
+                                                <option value='私有' selected>私有</option>
+                                                <option value='公有'>公有</option>
+                                            </select>
                                         </div>
                                         <div class="col-md-6" style="margin-bottom: 25px;">
-                                            <span>类&nbsp;&nbsp;&nbsp;别：</span><select class="form-control select-class-name" onchange="value" style="width:75%;" ></select>
+                                            <span>类&nbsp;&nbsp;&nbsp;&nbsp;别：</span><select
+                                                class="form-control select-class-name" id="cate2" onchange="value"
+                                                style="width:75%;margin-left: -2px;"></select>
                                         </div>
                                     </div>
 
-                                    <div class="row-fluid" >
+                                    <div class="row" >
                                         <div class="col-md-12" style="margin-bottom: 25px;">
                                             <span>资料描述：</span><textarea type="textarea" class="form-control"
                                                                         style="width:95%;" rows="3" id="area2"></textarea>
@@ -396,14 +435,26 @@
                             </div>
                             <div id="upload3" class="panel-collapse collapse">
                                 <div class="panel-body form-inline">
-                                    <div class="row-fluid" >
+                                    <div class="row" style="display: none;">
                                         <div class="col-md-12" style="margin-bottom: 25px;">
-                                            <input type="file" class="upload" name="file" id="file3">
+                                            <input type="file" class="upload" name="file" id="file3" pid="aim3" onchange="changeFile(this)">
                                         </div>
 
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-1" style="margin-bottom: 25px;">
+                                            <button type="button" class="btn btn-default" bid="file3" pid="aim3"
+                                                    onclick="add_one_click(this)">上传
+                                            </button>
+                                        </div>
+                                        <div class="col-md-1" style="margin-bottom: 25px;">
+                                            <button type="button" class="btn btn-default" bid="file3" pid="aim3"
+                                                    onclick="del_one_click(this)">移除
+                                            </button>
+                                        </div>
 
-                                    <div class="row-fluid" >
+                                    </div>
+                                    <div class="row" >
                                         <div class="col-md-6" style="margin-bottom: 25px;">
                                             <span>资料名称：</span><input class="form-control" style="width:75%;" type="text"
                                                                      id="aim3" readonly="true">&nbsp;&nbsp;
@@ -415,7 +466,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row-fluid" >
+                                    <div class="row" >
                                         <div class="col-md-6" style="margin-bottom: 25px;">
                                             <span>上传时间：</span><input class="form-control" style="width:75%;" type="text"
                                                                      placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
@@ -426,17 +477,23 @@
                                         </div>
                                     </div>
 
-                                    <div class="row-fluid" >
+                                    <div class="row">
                                         <div class="col-md-6" style="margin-bottom: 25px;">
-                                            <span>资料属性：</span><input type="radio" name="type3" checked>公有&nbsp;&nbsp;<input
-                                                type="radio" name="type3">私有
+                                            <span>资料属性：</span>
+                                            <select class="form-control " id="proto3" onchange="value"
+                                                    style="width:75%;margin-left: -3px;">
+                                                <option value='私有' selected>私有</option>
+                                                <option value='公有'>公有</option>
+                                            </select>
                                         </div>
                                         <div class="col-md-6" style="margin-bottom: 25px;">
-                                            <span>类&nbsp;&nbsp;&nbsp;别：</span><select class="form-control select-class-name" onchange="value" style="width:75%;" ></select>
+                                            <span>类&nbsp;&nbsp;&nbsp;&nbsp;别：</span><select
+                                                class="form-control select-class-name" id="cate3" onchange="value"
+                                                style="width:75%;margin-left: -2px;"></select>
                                         </div>
                                     </div>
 
-                                    <div class="row-fluid" >
+                                    <div class="row" >
                                         <div class="col-md-12" style="margin-bottom: 25px;">
                                             <span>资料描述：</span><textarea type="textarea" class="form-control"
                                                                         style="width:95%;" rows="3" id="area3"></textarea>
@@ -449,7 +506,7 @@
 
 
                         <div align="center">
-                            <input type="submit" value="上传文件" id="sub" class="btn btn-primary">
+                            <input type="submit" value="上传文件" id="sub"  class="btn btn-primary">
                         </div>
                     </form>
 

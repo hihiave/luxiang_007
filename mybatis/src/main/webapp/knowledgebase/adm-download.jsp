@@ -84,15 +84,18 @@
             </div>
             <div style="float:left;margin-right:0px;">
                 <select class="form-control" onchange="value" id="key_select">
-                    <option value='' selected>全文</option>
-                    <option value=''>标题</option>
-                    <option value=''>作者</option>
-                    <option value=''>关键字</option>
+                    <option value='fullText' selected>全文</option>
+                    <option value='title'>标题</option>
+                    <option value='author'>作者</option>
+                    <option value='keyword'>关键字</option>
                 </select>
             </div>
             <div class="input-group input-group-md" style="float:left;">
-                <input type="text" class="form-control" aria-describedby="sizing-addon1" style="width:521px;">
-                <button class="btn btn-primary" style="width:78px;margin-left:5px;">搜&nbsp;索</button>
+                <input type="text" class="form-control" aria-describedby="sizing-addon1" style="width:521px;"
+                       id="file_search_input">
+                <button class="btn btn-primary" style="width:78px;margin-left:5px;" id="file_search_sub"
+                        onclick="send_search_info()">搜&nbsp;索
+                </button>
             </div>
         </div>
     </div>
@@ -181,11 +184,40 @@
             </div>
         </div>
         <div class="col-md-8" style="margin-left:50px;">
-            <div class="panel panel-primary" style="height:625px;">
+            <div class="panel panel-primary" style="height:625px;" id="default_panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">我的下载</h3>
                 </div>
                 <div class="panel-body" style="padding-top:0px;">
+                    <div  >
+                        <input  type="text" id="download-test" name="filename" value="" style="width:90%;">
+
+                        <button class="btn btn-primary" onclick="download()">下载</button>
+                    </div>
+                    <script type="text/javascript">
+                        function download(){
+                            if($("#download-test").val() == ""){
+                                return;
+                            }else{
+                                var form = $("<form>");   //定义一个form表单
+                                form.attr('style', 'display:none');   //在form表单中添加查询参数
+
+                                form.attr('method', 'post');
+                                form.attr('id', 'form-add');
+                                form.attr('action', "/mybatis/FileDownloadController/fileDownload.do");
+
+                                var input1 = $('<input>');
+                                input1.attr('type', 'hidden');
+                                input1.attr('name', 'filename');
+                                input1.attr('value', $("#download-test").val());
+                                $('.container').append(form);  //将表单放置在web中
+                                form.append(input1);   //将查询参数控件提交到表单上
+                                form.submit();
+                                $("#form-add").remove();
+
+                            }
+                        }
+                    </script>
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -223,6 +255,7 @@
                     </table>
                 </div>
             </div>
+            <jsp:include page="search-result.jsp" flush="true"/>
 
         </div>
     </div>

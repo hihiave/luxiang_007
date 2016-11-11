@@ -84,7 +84,7 @@ width: 1320px !important;
         <div class="col-md-3" style="width:283px;margin-right:16px;">
             <img src="/mybatis/knowledgebase/img/zhishiku_2.png" style="margin-left:30px;">
         </div>
-        <div class="col-md-9 " style="margin-top:16px;">
+        <div class="col-md-9" style="margin-top:16px;">
             <div style="float:left;margin-right:0px;">
                 <select class="form-control" onchange="value" id="category_select">
 
@@ -92,15 +92,18 @@ width: 1320px !important;
             </div>
             <div style="float:left;margin-right:0px;">
                 <select class="form-control" onchange="value" id="key_select">
-                    <option value='' selected>全文</option>
-                    <option value=''>标题</option>
-                    <option value=''>作者</option>
-                    <option value=''>关键字</option>
+                    <option value='fullText' selected>全文</option>
+                    <option value='title'>标题</option>
+                    <option value='author'>作者</option>
+                    <option value='keyword'>关键字</option>
                 </select>
             </div>
             <div class="input-group input-group-md" style="float:left;">
-                <input type="text" class="form-control" aria-describedby="sizing-addon1" style="width:521px;">
-                <button class="btn btn-primary" style="width:78px;margin-left:5px;">搜&nbsp;索</button>
+                <input type="text" class="form-control" aria-describedby="sizing-addon1" style="width:521px;"
+                       id="file_search_input">
+                <button class="btn btn-primary" style="width:78px;margin-left:5px;" id="file_search_sub"
+                        onclick="send_search_info()">搜&nbsp;索
+                </button>
             </div>
         </div>
     </div>
@@ -190,7 +193,7 @@ width: 1320px !important;
         </div>
         <div class="col-xs-8" style="margin-left:50px;">
 
-            <div class="panel panel-primary" style="height:625px;">
+            <div class="panel panel-primary" style="height:625px;" id="default_panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">用户查询</h3>
                 </div>
@@ -263,7 +266,7 @@ width: 1320px !important;
 
 
             </div>
-
+            <jsp:include page="search-result.jsp" flush="true"/>
         </div>
     </div>
 </div>

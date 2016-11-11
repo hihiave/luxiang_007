@@ -24,12 +24,17 @@ function get_category_select(){
 }
 
 function send_search_info(){
-    var _category = $("#category_select").val();
-    var _key = $("#key_select").val();
+    var _category = $.trim($("#category_select").val());
+    var _key = $.trim($("#key_select").val());
     var _search_input = $.trim($("#file_search_input").val());
-    console.log(_category);
-    console.log(_key);
-    console.log(_search_input);
+    var src = "/mybatis/FileInfoController/search_file.do"
+    if(_search_input != ""){
+        var dataPost = {"fileCategory":_category,"fileProperty":_key,"fileIn":_search_input};
+        //console.log(dataPost);
+        sendAjaxRequest(src,dataPost,function(data){},function(data){});
+        $("#default_panel").css("display","none");
+        $("#search_panel").css("display","block");
+    }
 }
 
 

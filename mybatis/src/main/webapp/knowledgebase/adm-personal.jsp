@@ -17,6 +17,12 @@
 <%
     }
 %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";
+    System.out.println("路径"+path);
+    System.out.println("路径"+basePath);
+%>
 <c:set value="0" var="is_manager"/>
 <c:set value="0" var="is_worker"/>
 <c:forEach items="${userrole}" var="role">
@@ -71,6 +77,7 @@
             var time = timeStampFormatDay(register_time * 1000);
             console.log(time);
             $("#show_user_name").html("${username}");
+            $("#show_user_name").html("${username}");
             $("#show_user_role").html("${userrole}");
             $("#show_register_time").html(time);
 
@@ -79,7 +86,8 @@
 
 </head>
 <body>
-
+<input type="hidden" id="base" value="<%=path %>"/>
+<input type="hidden" id="basePath" value="<%=basePath %>"/>
 <div style="margin:10px 20px;">
     <button type="button" class="btn btn-md btn-default" style="border:0px;float:right;" data-toggle="tooltip"
             data-placement="bottom" title="退出登录" onclick="logout()">
@@ -106,10 +114,10 @@
             </div>
             <div style="float:left;margin-right:0px;">
                 <select class="form-control" onchange="value" id="key_select">
-                    <option value='全文' selected>全文</option>
-                    <option value='标题'>标题</option>
-                    <option value='作者'>作者</option>
-                    <option value='关键字'>关键字</option>
+                    <option value='fullText' selected>全文</option>
+                    <option value='title'>标题</option>
+                    <option value='author'>作者</option>
+                    <option value='keyword'>关键字</option>
                 </select>
             </div>
             <div class="input-group input-group-md" style="float:left;">
@@ -206,33 +214,10 @@
                 </c:if>
             </div>
 
-            <%--<ul class="nav nav-pills nav-stacked" >--%>
-            <%--<li class="active"><a href="/mybatis/knowledgebase/adm-personal.jsp">个人中心</a></li>--%>
-            <%----%>
-            <%--</ul>--%>
-            <%--<ul class="nav nav-pills nav-stacked">--%>
-            <%--<li class="active" readonly="true"><a href="##">用户管理</a></li>--%>
-            <%--<li><a href="/mybatis/knowledgebase/adm-inquire.jsp">用户查询</a></li>--%>
-            <%--<li><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核</a></li>--%>
-            <%--</ul>--%>
-            <%--<ul class="nav nav-pills nav-stacked">--%>
-            <%--<li class="active"><a href="##">资源管理</a></li>--%>
-            <%--<li><a href="/mybatis/knowledgebase/adm-private.jsp">私有文件</a></li>--%>
-            <%--<li><a href="/mybatis/knowledgebase/adm-public.jsp">公有文件</a></li>--%>
-            <%--<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>--%>
-            <%--<li><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>--%>
-            <%--<li><a href="##">类别管理</a></li>--%>
-            <%--<li><a href="##">资源审核</a></li>--%>
-            <%--</ul>--%>
-            <%--<ul class="nav nav-pills nav-stacked">--%>
-            <%--<li class="active"><a href="##">系统管理</a></li>--%>
-            <%--<li><a href="##">数据还原</a></li>--%>
-            <%--<li><a href="##">数据备份</a></li>--%>
-            <%--</ul>--%>
         </div>
         <div class="col-md-8" style="margin-left:50px;">
 
-            <div class="panel panel-primary" style="height:625px;">
+            <div class="panel panel-primary" style="height:625px;" id="default_panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">个人信息</h3>
                 </div>
@@ -256,6 +241,7 @@
                     </div>
                 </div>
             </div>
+            <jsp:include page="search-result.jsp" flush="true"/>
         </div>
     </div>
     <div class="modal fade" id="changepsw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

@@ -29,7 +29,7 @@ public class FileDownloadController {
 		System.out.println(fileName);
 
 		/* 获取文件的路径 */
-		String filePath = "F:/Users";
+		String filePath = "c:/Users";
 		File file = new File(filePath);
 		if (!file.exists()) {
 			request.setAttribute("message", "资源不存在");

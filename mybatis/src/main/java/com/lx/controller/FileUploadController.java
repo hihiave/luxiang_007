@@ -30,6 +30,7 @@ public class FileUploadController {
 	public Map<String,Object> fileUpload(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
         Map<String,Object> map = new HashMap<String, Object>();
+        System.out.println(request.getParameter("file"));
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
 		// 上传的地址

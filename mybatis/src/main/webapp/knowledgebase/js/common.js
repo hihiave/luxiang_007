@@ -93,9 +93,14 @@ function getFormatTime (date, format) {
     var time = date.Format(format);
     return time;
 }
-
+function getBasePath() {
+    var base = $("#base").val();
+    return base;
+}
 //退出登录
 function logout(){
+    var logout_src = getBasePath()+"/UserInfoController/logout.do";
+    console.log(logout_src);
     $.ajax({
         type:'post',
         url:"/mybatis/UserInfoController/logout.do",
