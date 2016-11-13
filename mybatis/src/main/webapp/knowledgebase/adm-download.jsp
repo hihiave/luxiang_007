@@ -151,7 +151,7 @@
                                 style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
                                 <li><a href="/mybatis/knowledgebase/adm-private.jsp">我的文件</a></li>
                                 <li><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
-                                <li><a href="/mybatis/knowledgebase/adm-public.jsp">共有文件</a></li>
+                                <li><a href="/mybatis/knowledgebase/adm-public.jsp">公有文件</a></li>
                                 <li class="active"><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
                                 <li><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
                                 <li><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>

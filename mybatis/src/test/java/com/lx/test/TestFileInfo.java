@@ -49,21 +49,40 @@ public class TestFileInfo {
 	}
 
 	@Test
-	public void TestDeleteFileInfoById() {
+	public void deleteFileInfoByIdTest() {
 		logger.info("===============TestDeleteFileInfoById=============");
 		boolean d = fileInfoService.delFilesById(23, 22);
 		logger.info("=========删除======" + d);
 	}
 
 	@Test
-	public void TestCheckFileIsExist() {
+	public void getFileByFileIdTest() {
+		logger.info("===============getFileByFileNameTest=============");
+		FileInfo fileInfo = fileInfoService.getFileByFileId(11);
+		logger.info("=========通过文件id查询文件======" + JSON.toJSONString(fileInfo));
+	}
+
+	@Test
+	public void updateFileByFileIdTest() {
+		logger.info("===============updateFileByFileIdTest=============");
+		
+		FileInfo fileInfo = new FileInfo();
+		fileInfo.setFileName("===哈哈");
+
+		boolean flag = fileInfoService.updateFileByFileId(40, fileInfo);
+
+		logger.info("=========更新文件文件======" + flag);
+	}
+
+	@Test
+	public void checkFileIsExistTest() {
 		logger.info("===============TestCheckFileIsExist=============");
 		boolean d = fileInfoService.checkFileIsExist("西游记1");
 		logger.info("=========检查======" + d);
 	}
 
 	@Test
-	public void TestBatchFilesIsPass() {
+	public void batchFilesIsPassTest() {
 		logger.info("===============TestBatchFilesIsPass=============");
 		boolean d = fileInfoService.batchFilesIsPass(KCheckType.pass, 1, 2);
 		// .batchFilesIsPass(1, 1);
@@ -71,14 +90,14 @@ public class TestFileInfo {
 	}
 
 	@Test
-	public void TestSelectFileByIsPass() {
+	public void selectFileByIsPassTest() {
 		logger.info("===============TestSelectFileByIsPass=============");
 		List<FileInfo> fileInfos = fileInfoService.selectFileByIsPass(KCheckType.pass);
 		logger.info("=========通过审核文件======" + JSON.toJSONString(fileInfos));
 	}
 
 	@Test
-	public void TestSelectMyFileInfo() {
+	public void selectMyFileInfoTest() {
 		logger.info("===============TestSelectMyFileInfo=============");
 		List<FileInfo> fileInfos = fileInfoService.selectMyFileInfo("luxiang", KCheckType.notPass);
 		logger.info("=========查询======" + JSON.toJSONString(fileInfos));
@@ -87,13 +106,10 @@ public class TestFileInfo {
 
 	// **********用于一些查询的方法**********
 	@Test
-	public void TestSelectFileInfo() {
-		logger.info("===============TestSelectFileInfo=============");
-		FileInfo fileInfo = new FileInfo();
-		// fileInfo.setFileName("十三五");
-		fileInfo.setFileAuthor("luxiang");
-		// fileInfo.setFileCategory("科技成果");
-		fileInfo.setFileIsVisible(KFileVisibleType.PUBLIC_FILE);
+	public void getFileByLikeFilePropertyTest() {
+
+		
+		
 	}
 
 }

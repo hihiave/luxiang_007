@@ -18,7 +18,7 @@ public class FileInfoServiceImpl implements FileInfoService {
 	@Autowired
 	private FileInfoMapper fileInfoMapper;
 
-	//**********用于处理一些业务逻辑的方法**********
+	// **********用于处理一些业务逻辑的方法**********
 	@Override
 	public boolean addFileInfo(FileInfo fileInfo) {
 		if (fileInfoMapper.insertSelective(fileInfo) == 1) {
@@ -36,8 +36,22 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	@Override
+	public FileInfo getFileByFileId(Integer fileId) {
+		return fileInfoMapper.selectByPrimaryKey(fileId);
+	}
+
+	@Override
+	public boolean updateFileByFileId(Integer fileId, FileInfo fileInfo) {
+		fileInfo.setFileId(fileId);
+		if (fileInfoMapper.updateByPrimaryKeySelective(fileInfo) == 1) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public boolean checkFileIsExist(String fileName) {
-		if (fileInfoMapper.getFileByFileName(fileName) != null) {
+		if (fileInfoMapper.selectFileByFileName(fileName) != null) {
 			return true;
 		}
 		return false;
@@ -89,4 +103,5 @@ public class FileInfoServiceImpl implements FileInfoService {
 
 		return getFileInfo(fileInfo);
 	}
+
 }

@@ -43,19 +43,19 @@ public class MacroEnum {
 	}
 
 	/**
-	 * 时间单位
-	 */
-	public enum KDateType {
-		year, month, week, day, hour, minute, second;
-	}
-
-	/**
 	 * 文件可见类型
 	 */
 	public interface KFileVisibleType {
 		// 文件公有还是私有
 		public static final String PUBLIC_FILE = "公有";
 		// public static final String PRIVATEFILE = "私有";
+	}
+
+	/**
+	 * 时间单位
+	 */
+	public enum KDateType {
+		year, month, week, day, hour, minute, second;
 	}
 
 }

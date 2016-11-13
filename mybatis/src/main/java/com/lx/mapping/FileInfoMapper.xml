@@ -27,7 +27,7 @@
 			#{fileId}
 		</foreach>
   </delete>
-  <select id="getFileByFileName" resultMap="BaseResultMap" parameterType="java.lang.String">
+  <select id="selectFileByFileName" resultMap="BaseResultMap" parameterType="java.lang.String">
   	select * from File where file_name = #{fileName,jdbcType=VARCHAR} limit 1
   </select>
   <update id="updateFilesCheck">
@@ -74,7 +74,7 @@
     select 
     <include refid="Base_Column_List" />
     from File
-    where file_id = #{fileId,jdbcType=INTEGER}
+    where file_id = #{fileId,jdbcType=INTEGER} limit 1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from File

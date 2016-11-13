@@ -23,6 +23,21 @@ public interface FileInfoService {
 	 */
 	public boolean delFilesById(Integer... fileIds);
 
+	/** 通过文件名获取文件信息
+	 * @author luxiang
+	 * @param fileId 文件id
+	 * @return FileInfo该文件的信息
+	 */
+	public FileInfo getFileByFileId(Integer fileId);
+
+	/** 通过文件id更新文件
+	 * @author luxiang
+	 * @param fileId 待更新的文件id
+	 * @param fileInfo 新的文件信息
+	 * @return boolean，true表示文件更新成功，false表示文件更新失败
+	 */
+	public boolean updateFileByFileId(Integer fileId, FileInfo fileInfo);
+	
 	/** 通过文件名检查文件是否存在
 	 * @author luxiang
 	 * @param fileName 文件名

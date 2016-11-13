@@ -176,7 +176,6 @@ public class UserInfoController {
 		Page page = new Page(pageNow);
 		
 		List<UserInfo> userInfos = userInfoService.selectUserByIsPass(KCheckType.pass, page ,username);
-        System.out.println("查询到的用户数："+userInfos.size());
 		int pageCount = page.getTotalPageCount();
         int totalCount = page.getTotalCount();
 		map.put("totalCount",totalCount);
@@ -184,7 +183,6 @@ public class UserInfoController {
         map.put("pageCount",pageCount);
 		map.put("UserInfo_check", userInfos);
 		return map;
-
 	}
 
 	@RequestMapping(value = "/alterpsw", method = RequestMethod.POST)
