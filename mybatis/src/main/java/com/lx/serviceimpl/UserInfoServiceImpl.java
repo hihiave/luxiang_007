@@ -106,6 +106,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
+	public int getCountWithWaitForCheck() {
+		return userInfoMapper.selectUserByUserCheckCount(KCheckType.waitForCheck.getValue(), "");
+	}
+
+	// **********用于一些查询的方法**********
+	@Override
 	public List<UserInfo> selectUserByIsPass(KCheckType checkType, Page page, String userName) {
 		if (userName == null) {
 			userName = "";
@@ -117,11 +123,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 			return userInfoMapper.selectUserByUserCheck(checkType.getValue(), page, userName.trim());
 		}
 		return null;
-	}
-
-	@Override
-	public int getCountWithWaitForCheck() {
-		return userInfoMapper.selectUserByUserCheckCount(KCheckType.waitForCheck.getValue(), "");
 	}
 
 	// **********用于获取一些智能下拉提示**********

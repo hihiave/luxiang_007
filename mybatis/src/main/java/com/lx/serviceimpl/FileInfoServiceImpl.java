@@ -66,58 +66,64 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	@Override
-	public List<FileInfo> selectFileByIsPass(KCheckType checkType) {
-		return fileInfoMapper.selectFileByfileCheck(checkType.getValue());
+	public int getCountWithWaitForCheck() {
+		return fileInfoMapper.getFileInfoCount(KCheckType.waitForCheck.getValue(), null);
 	}
 
+	// **********用于一些查询的方法**********
 	@Override
 	public List<FileInfo> selectMyFileInfo(String userName, Page page, KCheckType... checkTypes) {
-		if (userName == null) {
-			userName = "";
-		}
-		if (page != null) {
+		if (page != null && userName != null) {
 			Integer[] fileChecks = new Integer[checkTypes.length];
 			for (int i = 0; i < checkTypes.length; i++) {
 				fileChecks[i] = checkTypes[i].getValue();
 			}
-
 			int totalCount = fileInfoMapper.selectFileByfileAuthorWithFileCheckCount(userName.trim(), fileChecks);
 			page.setTotalCount(totalCount);
 			page.init();
 
-			return fileInfoMapper.selectFileByfileAuthorWithFileCheck(userName.trim(), page, fileChecks);
+			return fileInfoMapper.selectFileByFileAuthorWithFileCheck(userName.trim(), page, fileChecks);
 		}
 		return null;
 
 	}
 
-	// **********用于一些查询的方法**********
-	private List<FileInfo> getFileInfo(FileInfo fileInfo) {
-		System.out.println("fileInfo============" + JSON.toJSON(fileInfo));
-		return fileInfoMapper.getFileInfo(fileInfo);
-
+	@Override
+	public List<FileInfo> getFileByFilePropertyWithPass(String fileCategory, KFilePropertyType filePropertyType,
+			String value, Page page) {
+		if (page != null && value != null) {
+			FileInfo fileInfo = new FileInfo();
+			switch (filePropertyType) {
+			case title:
+				fileInfo.setFileName(value.trim());
+				break;
+			case author:
+				fileInfo.setFileAuthor(value.trim());
+				break;
+			case keyword:
+				fileInfo.setFileKeywords(value.trim());
+				break;
+			default:
+				break;
+			}
+			fileInfo.setFileCategory(fileCategory);
+			int totalCount = fileInfoMapper.getFileInfoCount(KCheckType.pass.getValue(), fileInfo);
+			page.setTotalCount(totalCount);
+			page.init();
+			return fileInfoMapper.getFileInfo(KCheckType.pass.getValue(), fileInfo, page);
+		}
+		return null;
 	}
 
 	@Override
-	public List<FileInfo> getFileByLikeFileProperty(String fileCategory, KFilePropertyType filePropertyType,
-			String value) {
-		FileInfo fileInfo = new FileInfo();
-		fileInfo.setFileCategory(fileCategory);
-		switch (filePropertyType) {
-		case title:
-			fileInfo.setFileName(value);
-			break;
-		case author:
-			fileInfo.setFileAuthor(value);
-			break;
-		case keyword:
-			fileInfo.setFileKeywords(value);
-			break;
-		default:
-			break;
+	public List<FileInfo> getFileWithWaitForCheck(Page page) {
+		if (page != null) {
+			int totalCount = getCountWithWaitForCheck();
+			page.setTotalCount(totalCount);
+			page.init();
+			return fileInfoMapper.getFileInfo(KCheckType.waitForCheck.getValue(), null, page);
 		}
-
-		return getFileInfo(fileInfo);
+		return null;
 	}
 
 }

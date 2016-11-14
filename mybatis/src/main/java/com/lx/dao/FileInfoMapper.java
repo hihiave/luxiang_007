@@ -25,15 +25,22 @@ public interface FileInfoMapper {
 	int delFilesById(@Param("fileIds") Integer... fileIds);
 	FileInfo selectFileByFileName(String fileName);
 	int updateFilesCheck(@Param("fileCheck") int fileCheck, @Param("fileIds") Integer... fileIds);
-	List<FileInfo> selectFileByfileCheck(int fileCheck);
-	
-	int selectFileByfileAuthorWithFileCheckCount(@Param("fileAuthor") String fileAuthor,
-			@Param("fileChecks") Integer... fileChecks);
-	List<FileInfo> selectFileByfileAuthorWithFileCheck(@Param("fileAuthor") String fileAuthor, @Param("page") Page page,
-			@Param("fileChecks") Integer... fileChecks);
 
 	// **********用于一些查询的方法**********
-	List<FileInfo> getFileInfo(FileInfo fileInfo);
+	// 我的
+	int selectFileByfileAuthorWithFileCheckCount(@Param("fileAuthor") String fileAuthor,
+			@Param("fileChecks") Integer... fileChecks);
+	List<FileInfo> selectFileByFileAuthorWithFileCheck(@Param("fileAuthor") String fileAuthor, 
+			@Param("page") Page page, @Param("fileChecks") Integer... fileChecks);
+
+	// 文件
+	int getFileInfoCount(@Param("fileCheck") int fileCheck, 
+			@Param("fileInfo") FileInfo fileInfo);
+	List<FileInfo> getFileInfo(@Param("fileCheck") int fileCheck, 
+			@Param("fileInfo") FileInfo fileInfo, @Param("page") Page page);
+	
+	
+	
 	// List<FileInfo> getFileInfoByKeywords(@Param("keywords") String...
 	// keywords);
 

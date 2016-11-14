@@ -54,13 +54,13 @@ public interface FileInfoService {
 	 */
 	public boolean batchFilesIsPass(KCheckType checkType, Integer... fileIds);
 	
-	/** 通过审核类型查询文件(公有:待审核WaitForCheck,公有文件Pass)
+	/** 获取待审核的文件的数量
 	 * @author luxiang
-	 * @param checkType 审核类型，请查看枚举
-	 * @return 一个文件对象列表 FileInfo
+	 * @return int 待审核文件数量
 	 */
-	public List<FileInfo> selectFileByIsPass(KCheckType checkType);
+	public int getCountWithWaitForCheck();
 	
+	//**********用于一些查询的方法**********
 	/** 通过用户名查询我的文件信息(我的上传pass,我的待审核waitforcheck,我的未通过notpass,已删除文件Invalid)
 	 * @author luxiang
 	 * @param userName 我的用户名
@@ -70,14 +70,22 @@ public interface FileInfoService {
 	 */
 	List<FileInfo> selectMyFileInfo(String userName, Page page, KCheckType... checkTypes);
 	
-	//**********用于一些查询的方法**********
-	/** 通过文件属性(标题,作者等等)模糊查询文件
+	/** 通过文件属性(标题,作者等等)模糊查询文件(公有,通过审核)
 	 * @author luxiang
+	 * @param page 分页
 	 * @param fileCategory 文件类别(若不指定,则传入null)
 	 * @param filePropertyType 文件属性类型，请查看枚举
 	 * @param value 文件属性类型的值
 	 * @return 一个文件对象列表 FileInfo
 	 */
-	public List<FileInfo> getFileByLikeFileProperty(String fileCategory, KFilePropertyType filePropertyType, String value);
+	public List<FileInfo> getFileByFilePropertyWithPass(String fileCategory, KFilePropertyType filePropertyType,
+			String value, Page page);
+	
+	/** 查询文件(待审核)
+	 * @author luxiang
+	 * @param page 分页
+	 * @return
+	 */
+	public List<FileInfo> getFileWithWaitForCheck(Page page);
 	
 }

@@ -77,6 +77,13 @@ public interface UserInfoService {
 	 */
 	public boolean alterPassword(String userName, String oldPwd, String newPwd);
 
+	/** 获取待审核的用户的数量
+	 * @author luxiang
+	 * @return int
+	 */
+	public int getCountWithWaitForCheck();
+	
+	//**********用于一些查询的方法**********
 	/** 通过审核是否通过查询用户
 	 * @author luxiang
 	 * @param checkType 审核类型，请查看枚举
@@ -86,12 +93,6 @@ public interface UserInfoService {
 	 */
 	public List<UserInfo> selectUserByIsPass(KCheckType checkType, Page page, String userName);
 	
-	/** 获取待审核的用户的数量
-	 * @author luxiang
-	 * @return int
-	 */
-	public int getCountWithWaitForCheck();
-
 	// **********用于获取一些智能下拉提示**********
 	/** 通过用户名获取一些智能下拉提示
 	 * @author luxiang

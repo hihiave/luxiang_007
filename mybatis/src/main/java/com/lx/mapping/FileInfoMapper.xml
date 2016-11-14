@@ -36,12 +36,8 @@
   			#{fileId}
   		</foreach>
   </update>
-  <select id="selectFileByfileCheck" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-  	select * from File where 
-  	file_check = #{fileCheck,jdbcType=INTEGER} and 
-  	file_is_visible = '公有'
-  </select>
-  
+
+  <!--*********用于一些查询的方法*********-->
   <select id="selectFileByfileAuthorWithFileCheckCount" resultType="java.lang.Integer">
   	select count(*) from File where file_author = #{fileAuthor,jdbcType=VARCHAR} and file_check in
   		<foreach collection="fileChecks" item="fileCheck" index="fileCheck" open="(" close=")" separator=",">
@@ -56,27 +52,36 @@
   		  	limit #{page.startPos}, #{page.pageSize}
   </select>
 
-  <!--*********用于一些查询的方法*********-->
   <sql id="query_condition">
-  	<if test="fileName!=null and fileName!=''">
-  		and file_name like CONCAT(CONCAT('%',#{fileName},'%'))
-  	</if>
-  	<if test="fileAuthor!=null and fileAuthor!=''">
-  		and file_author like CONCAT(CONCAT('%',#{fileAuthor},'%'))
-  	</if> 	
-  	<if test="fileKeywords!=null and fileKeywords!=''">
-  		and file_keywords like CONCAT(CONCAT('%',#{fileKeywords},'%'))
-  	</if> 	
-  	<if test="fileCategory!=null and fileCategory!=''">
-  		and file_category = #{fileCategory}
+  	<if test="fileInfo!=null">
+  		<if test="fileInfo.fileName!=null and fileInfo.fileName!=''">
+  			and file_name like CONCAT(CONCAT('%',#{fileInfo.fileName},'%'))
+	  	</if>
+	  	<if test="fileInfo.fileAuthor!=null and fileInfo.fileAuthor!=''">
+	  		and file_author like CONCAT(CONCAT('%',#{fileInfo.fileAuthor},'%'))
+	  	</if> 	
+	  	<if test="fileInfo.fileKeywords!=null and fileInfo.fileKeywords!=''">
+	  		and file_keywords like CONCAT(CONCAT('%',#{fileInfo.fileKeywords},'%'))
+	  	</if> 	
+	  	<if test="fileInfo.fileCategory!=null and fileInfo.fileCategory!=''">
+	  		and file_category = #{fileInfo.fileCategory}
+	  	</if>
   	</if>
   </sql>
-  <select id="getFileInfo" resultMap="BaseResultMap" parameterType="com.lx.model.FileInfo">
-  	select * from File
+  <select id="getFileInfoCount" resultType="java.lang.Integer">
+  	select count(*) from File
   	<where>
-  		file_check = '1' and file_is_visible = '公有'
+  		file_check = #{fileCheck,jdbcType=INTEGER} and file_is_visible = '公有'
   		<include refid="query_condition" />
   	</where>
+  </select> 
+  <select id="getFileInfo" resultMap="BaseResultMap">
+  	select * from File
+  	<where>
+  		file_check = #{fileCheck,jdbcType=INTEGER} and file_is_visible = '公有'
+  		<include refid="query_condition" />
+  	</where>
+  	limit #{page.startPos}, #{page.pageSize}
   </select>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
