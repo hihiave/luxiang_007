@@ -188,19 +188,19 @@
         </div>
         <div class="col-md-8" style="margin-left:50px;">
 
-            <div class="panel panel-primary" style="height:625px;" id="default_panel">
+            <div class="panel panel-primary" style="min-height:625px;" id="default_panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">草稿箱</h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" style="padding-top:0px;">
                     <table class="table table-striped">
                         <thead>
                         <tr>
                             <th><input type="checkbox" id="selAll" onclick="selectAll()"></th>
-                            <th>文件名</th>
+                            <th style="padding-bottom:15px;">文件名</th>
 
-                            <th style="padding-left:20px;">下载</th>
-                            <th style="padding-left:20px;">预览</th>
+                            <th style="padding-bottom:15px;">下载</th>
+                            <th style="padding-bottom:15px;">预览</th>
                             <th ><button class="btn btn-primary" onclick="delete_all_file_modal(this)">删除</button></th>
                             <th ><button class="btn btn-primary" onclick="recovery_all_file_modal(this)">恢复</button></th>
                         </tr>
@@ -209,6 +209,17 @@
 
                         </tbody>
                     </table>
+                    <div style="margin-top: -20px;float: right;">
+                        <ul class="pagination" id="page-file-draft">
+                            <%--<li><a href="#">&laquo;</a></li>--%>
+                            <%--<li><a href="#">1</a></li>--%>
+                            <%--<li><a href="#">2</a></li>--%>
+                            <%--<li><a href="#">3</a></li>--%>
+                            <%--<li><a href="#">4</a></li>--%>
+                            <%--<li><a href="#">5</a></li>--%>
+                            <%--<li><a href="#">&raquo;</a></li>--%>
+                        </ul>
+                    </div>
 
 
                 </div>

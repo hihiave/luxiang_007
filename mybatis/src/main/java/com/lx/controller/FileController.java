@@ -48,7 +48,7 @@ public class FileController {
 	@RequestMapping(value = "/publicfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> publicfile(String fileCategory, String fileProperty, String fileIn, Integer page_Now) {
-		你看一下，完善这个方法
+//		你看一下，完善这个方法
 		System.out.println("类别" + fileCategory + "属性" + fileProperty + "搜索值" + fileIn);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -60,9 +60,21 @@ public class FileController {
 		Page page = new Page(pageNow);
 
 		// 将第二个String转化成枚举类型的 , 注意： param2 只能是枚举里面有的。
-		KFilePropertyType filePropertyType = KFilePropertyType.valueOf(fileProperty);
+        System.out.println(fileProperty+"!!!!!!!!文件属性");
+        KFilePropertyType filePropertyType;
+        if (fileProperty == null){
+            filePropertyType = null;
+        }else {
+            filePropertyType = KFilePropertyType.valueOf(fileProperty);
+        }
+//		KFilePropertyType filePropertyType = KFilePropertyType.valueOf(fileProperty);
 		List<FileInfo> pub_file = fileInfoService.getFileByFilePropertyWithPass(fileCategory, filePropertyType, fileIn,
-				page);
+                page);
+        int pageCount = page.getTotalPageCount();
+        int totalCount = page.getTotalCount();
+        map.put("totalCount", totalCount);
+        map.put("pageNow", page_Now);
+        map.put("pageCount", pageCount);
 		map.put("pub_file", pub_file);
 		return map;
 	}
@@ -70,13 +82,13 @@ public class FileController {
 	/**
 	 * 查询
 	 */
-	@RequestMapping(value = "/search_file", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	@ResponseBody
-	public Map<String, Object> search_file() {
-		
-
-		return map;  //   这个方法不要了     查询的 方法-----也提交到上面的  /publicfile  处
-	}
+//	@RequestMapping(value = "/search_file", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+//	@ResponseBody
+//	public Map<String, Object> search_file() {
+//
+//
+//		return map;  //   这个方法不要了     查询的 方法-----也提交到上面的  /publicfile  处
+//	}
 
 	/**
 	 * 我的上传
@@ -237,7 +249,7 @@ public class FileController {
 	@RequestMapping(value = "/get_all_checkfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> get_all_checkfile(Integer page_Now) {
-		你看一下，完善这个方法
+//		你看一下，完善这个方法
 		Map<String, Object> map = new HashMap<String, Object>();
 		int pageNow = 1;
 		if (page_Now != null) {

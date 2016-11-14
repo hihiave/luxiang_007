@@ -187,7 +187,7 @@
             </div>
         </div>
         <div class="col-md-8" style="margin-left:50px;">
-            <div class="panel panel-primary" style="height:625px;" id="default_panel">
+            <div class="panel panel-primary" style="min-height:625px;" id="default_panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">我的文件</h3>
                 </div>
@@ -195,9 +195,7 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th style="padding-left: 28px;border-bottom-width: 2px;padding-bottom: 4px;width: 78px;">
-                                <label class="checkbox"><input type="checkbox" id="selAll" onclick="selectAll()">全选
-                                </label></th>
+                            <th><input type="checkbox" id="selAll" onclick="selectAll()"></th>
                             <th style="padding-bottom:15px;">文件名</th>
                             <th style="padding-bottom:15px;">文件属性</th>
                             <th style="padding-bottom:15px;">上传时间</th>
@@ -209,7 +207,7 @@
                             <th>
                                 <button class="btn btn-primary" data-toggle="modal">下载</button>
                             </th>
-                            <th style="padding-bottom:15px;">&nbsp;&nbsp;预览</th>
+                            <%--<th style="padding-bottom:15px;">&nbsp;&nbsp;预览</th>--%>
                         </tr>
                         </thead>
                         <tbody id="pri_file">
@@ -227,6 +225,17 @@
                         </tr> -->
                         </tbody>
                     </table>
+                    <div style="margin-top: -20px;float: right;">
+                        <ul class="pagination" id="page-file-one">
+                            <%--<li><a href="#">&laquo;</a></li>--%>
+                            <%--<li><a href="#">1</a></li>--%>
+                            <%--<li><a href="#">2</a></li>--%>
+                            <%--<li><a href="#">3</a></li>--%>
+                            <%--<li><a href="#">4</a></li>--%>
+                            <%--<li><a href="#">5</a></li>--%>
+                            <%--<li><a href="#">&raquo;</a></li>--%>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <jsp:include page="search-result.jsp" flush="true"/>

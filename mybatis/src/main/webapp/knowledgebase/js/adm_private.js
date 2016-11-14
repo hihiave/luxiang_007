@@ -9,31 +9,31 @@ $(function(){
 
 //获取公有文件
 function get_all_private_file(){
-    $.ajax({
-        type:'post',
-        url:"/mybatis/FileInfoController/myuploadfile.do",
-        dataType:"json",
-        success:function get_all_private_file(data){
-            var _table = $("#pri_file>tr");
-            _table.remove();
-            var all_pri_file = data["pri_file"];
-            for(var i = 0;i < all_pri_file.length;i++){
-                var tr_begin = "<tr>";
-                var tr_end = "</tr>";
-                var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' value="+all_pri_file[i].fileId+"></td>"
-                var td_2 = "<td style='padding-top:15px;width:180px;' id="+all_pri_file[i].fileId+">"+all_pri_file[i].fileName+"</td>";
-                var td_3 = "<td style='padding-top:15px;'>"+all_pri_file[i].fileIsVisible+"</td>";
-                var td_4 = "<td style='padding-top:15px;'>"+timeStampFormatDay(all_pri_file[i].fileUploadTime*1000)+"</td>";
-                var td_6 = "<td><button class='btn btn-primary' data-toggle='modal'data-target='' onclick='down_file(this)'>下载</button></td>";
-                var td_5 = "<td><button class='btn btn-primary' data-toggle='modal' data-target='' onclick='delete_one_pick(this)'>删除</button></td>";
-                var td_7 = "<td><button class='btn btn-primary' data-toggle='modal' data-target='' onclick='pre_file(this)'>预览</button></td>";
-                var content = tr_begin  + td_1 + td_2 + td_3 + td_4  + td_5 + td_6 + td_7 + tr_end;
-                $("#pri_file").append(content);
-            }
-        }
-    })
+    var src = "/mybatis/FileInfoController/myuploadfile.do";
+    sendAjaxRequest(src,{"page_Now":1},get_all_private_file_table);
+
 }
 
+
+function get_all_private_file_table(data){
+    var _table = $("#pri_file>tr");
+    _table.remove();
+    var all_pri_file = data["pri_file"];
+    for(var i = 0;i < all_pri_file.length;i++){
+        var tr_begin = "<tr>";
+        var tr_end = "</tr>";
+        var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' value="+all_pri_file[i].fileId+"></td>"
+        var td_2 = "<td style='padding-top:15px;width:180px;' id="+all_pri_file[i].fileId+"><a href='##'>"+all_pri_file[i].fileName+"</a></td>";
+        var td_3 = "<td style='padding-top:15px;'>"+all_pri_file[i].fileIsVisible+"</td>";
+        var td_4 = "<td style='padding-top:15px;'>"+timeStampFormatDay(all_pri_file[i].fileUploadTime*1000)+"</td>";
+        var td_6 = "<td><button class='btn btn-primary' data-toggle='modal'data-target='' onclick='down_file(this)'>下载</button></td>";
+        var td_5 = "<td><button class='btn btn-primary' data-toggle='modal' data-target='' onclick='delete_one_pick(this)'>删除</button></td>";
+        //var td_7 = "<td><button class='btn btn-primary' data-toggle='modal' data-target='' onclick='pre_file(this)'>预览</button></td>";
+        var content = tr_begin  + td_1 + td_2 + td_3 + td_4  + td_5 + td_6 + tr_end;
+        $("#pri_file").append(content);
+    }
+    createNewPagination(data,"file_private","/mybatis/FileInfoController/myuploadfile.do",get_all_private_file_table,"first_file_click","last_file_click","page-file-one",{})
+}
 
 
 

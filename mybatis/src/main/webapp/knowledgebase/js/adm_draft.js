@@ -10,29 +10,29 @@ $(function(){
 
 
 //获取我的所有草稿箱文件
-function get_all_draft_file(){
-    $.ajax({
-        type:'post',
-        url:"/mybatis/FileInfoController/draftfile.do",
-        dataType:"json",
-        success:function(data){
-            var _table = $("#draft_file>tr");
-            _table.remove();
-            var all_draft_file = data["all_file"];
-            for(var i = 0;i < all_draft_file.length;i++){
-                var tr_begin = "<tr>";
-                var tr_end = "</tr>";
-                var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' onclick='select_one(this)' value="+all_draft_file[i].fileId+"></td>"
-                var td_2 = "<td style='padding-top:15px;width:180px;' id="+all_draft_file[i].fileId+">"+all_draft_file[i].fileName+"</td>";
-                var td_3 = "<td><button class='btn btn-primary' data-toggle='modal'data-target='' onclick=''>下载</button></td>";
-                var td_4 = "<td><button class='btn btn-primary' data-toggle='modal'data-target='' onclick=''>预览</button></td>";
-                var td_5 = "<td><button class='btn btn-primary' onclick='delete_one_file(this)' value="+all_draft_file[i].fileId+">删除</button></td>";
-                var td_6 = "<td><button class='btn btn-primary'  onclick='recovery_one_file(this)' value="+all_draft_file[i].fileId+">恢复</button></td>";
-                var content = tr_begin  + td_1 + td_2 + td_3 + td_4 + td_5 +td_6+ tr_end;
-                $("#draft_file").append(content);
-            }
-        }
-    })
+function get_all_draft_file() {
+    var src = "/mybatis/FileInfoController/draftfile.do";
+    sendAjaxRequest(src, {"page_Now": 1}, get_all_draft_file_table);
+}
+
+
+function get_all_draft_file_table(data){
+    var _table = $("#draft_file>tr");
+    _table.remove();
+    var all_draft_file = data["all_file"];
+    for(var i = 0;i < all_draft_file.length;i++){
+        var tr_begin = "<tr>";
+        var tr_end = "</tr>";
+        var td_1 = "<td ><input type='checkbox' name='checkAll' onclick='select_one(this)' value="+all_draft_file[i].fileId+"></td>"
+        var td_2 = "<td style='width:440px;' id="+all_draft_file[i].fileId+">"+all_draft_file[i].fileName+"</td>";
+        var td_3 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary' data-toggle='modal'data-target='' onclick=''>下载</button></td>";
+        var td_4 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary' data-toggle='modal'data-target='' onclick=''>预览</button></td>";
+        var td_5 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary' onclick='delete_one_file(this)' value="+all_draft_file[i].fileId+">删除</button></td>";
+        var td_6 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary'  onclick='recovery_one_file(this)' value="+all_draft_file[i].fileId+">恢复</button></td>";
+        var content = tr_begin  + td_1 + td_2 + td_3 + td_4 + td_5 +td_6+ tr_end;
+        $("#draft_file").append(content);
+    }
+    createNewPagination(data,"file_draft","/mybatis/FileInfoController/draftfile.do",get_all_draft_file_table,"first_file_click","last_file_click","page-file-draft",{})
 }
 
 function recovery(recovery_array){

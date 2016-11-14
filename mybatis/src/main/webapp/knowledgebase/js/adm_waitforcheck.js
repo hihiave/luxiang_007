@@ -5,14 +5,8 @@ $(function(){
     get_all_wait_file();
 })
 function get_all_wait_file(){
-    $.ajax({
-        type:'post',
-        url:"/mybatis/FileInfoController/waitforcheckfile.do",
-        dataType:"json",
-        success:function(data){
-            cb_get_all(data);
-        }
-    })
+    var src = "/mybatis/FileInfoController/waitforcheckfile.do";
+    sendAjaxRequest(src,{"page_Now":1},cb_get_all);
 }
 function cb_get_all(obj){
     var _table_wait = $("#waitforcheck_file>tr");
@@ -39,6 +33,7 @@ function cb_get_all(obj){
         var content = tr_begin  + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
         $("#waitforcheck_file").append(content);
     }
+    createNewPagination(obj,"file_waitforcheck","/mybatis/FileInfoController/waitforcheckfile.do",cb_get_all,"first_file_click","last_file_click","page-file-two",{})
 }
 function get_file_check(obj){
     if(obj == -1){

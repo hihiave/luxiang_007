@@ -220,6 +220,17 @@
                         </tr> -->
                         </tbody>
                     </table>
+                    <div style="margin-top: -20px;float: right;">
+                        <ul class="pagination" id="page-file-three">
+                            <%--<li><a href="#">&laquo;</a></li>--%>
+                            <%--<li><a href="#">1</a></li>--%>
+                            <%--<li><a href="#">2</a></li>--%>
+                            <%--<li><a href="#">3</a></li>--%>
+                            <%--<li><a href="#">4</a></li>--%>
+                            <%--<li><a href="#">5</a></li>--%>
+                            <%--<li><a href="#">&raquo;</a></li>--%>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <jsp:include page="search-result.jsp" flush="true"/>
