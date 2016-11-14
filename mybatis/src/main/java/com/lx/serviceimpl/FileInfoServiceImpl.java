@@ -78,15 +78,10 @@ public class FileInfoServiceImpl implements FileInfoService {
 			for (int i = 0; i < checkTypes.length; i++) {
 				fileChecks[i] = checkTypes[i].getValue();
 			}
-			
 			int totalCount = fileInfoMapper.selectFileByfileAuthorWithFileCheckCount(userName.trim(), fileChecks);
-			
 			page.setTotalCount(totalCount);
 			page.init();
-
-			System.out.println("=========================" + totalCount);
 			return fileInfoMapper.selectFileByFileAuthorWithFileCheck(userName.trim(), page, fileChecks);
-			
 		}
 		return null;
 

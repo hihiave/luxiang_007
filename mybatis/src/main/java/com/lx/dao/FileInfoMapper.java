@@ -30,8 +30,6 @@ public interface FileInfoMapper {
 	// 我的
 	int selectFileByfileAuthorWithFileCheckCount(@Param("fileAuthor") String fileAuthor,
 			@Param("fileChecks") Integer... fileChecks);
-	
-	
 	List<FileInfo> selectFileByFileAuthorWithFileCheck(@Param("fileAuthor") String fileAuthor, @Param("page") Page page,
 			@Param("fileChecks") Integer... fileChecks);
 
@@ -40,21 +38,5 @@ public interface FileInfoMapper {
 			@Param("fileInfo") FileInfo fileInfo);
 	List<FileInfo> getFileInfo(@Param("fileCheck") int fileCheck, 
 			@Param("fileInfo") FileInfo fileInfo, @Param("page") Page page);
-	
-	
-	
-	// List<FileInfo> getFileInfoByKeywords(@Param("keywords") String...
-	// keywords);
-
-	// <select id="selectFileByKeywords" resultMap="BaseResultMap">
-	// select * from File e where e.file_id in
-	// <foreach collection="keywords" item="keyword" index="index"
-	// open="(" close=")" separator=",">
-	//
-	// select file_id from File where file_keywords like
-	// CONCAT(CONCAT('%',#{keyword},'%'))
-	//
-	// </foreach>
-	// </select>
 
 }
