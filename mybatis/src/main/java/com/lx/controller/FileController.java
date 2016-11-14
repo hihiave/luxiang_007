@@ -48,8 +48,18 @@ public class FileController {
 	@RequestMapping(value = "/publicfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> publicfile(String fileCategory, String fileProperty, String fileIn, Integer page_Now) {
+        if (fileIn==null)
+        {
+            fileIn="";
+        }
+
+
 //		你看一下，完善这个方法
 		System.out.println("类别" + fileCategory + "属性" + fileProperty + "搜索值" + fileIn);
+
+
+
+
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -61,15 +71,12 @@ public class FileController {
 
 		// 将第二个String转化成枚举类型的 , 注意： param2 只能是枚举里面有的。
         System.out.println(fileProperty+"!!!!!!!!文件属性");
-        KFilePropertyType filePropertyType;
-        if (fileProperty == null){
-            filePropertyType = null;
-        }else {
-            filePropertyType = KFilePropertyType.valueOf(fileProperty);
-        }
-//		KFilePropertyType filePropertyType = KFilePropertyType.valueOf(fileProperty);
+
+
+		KFilePropertyType filePropertyType = KFilePropertyType.valueOf(fileProperty);
 		List<FileInfo> pub_file = fileInfoService.getFileByFilePropertyWithPass(fileCategory, filePropertyType, fileIn,
                 page);
+        System.out.println(pub_file.size()+"大小");
         int pageCount = page.getTotalPageCount();
         int totalCount = page.getTotalCount();
         map.put("totalCount", totalCount);

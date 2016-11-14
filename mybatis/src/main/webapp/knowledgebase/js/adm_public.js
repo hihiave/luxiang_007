@@ -8,7 +8,7 @@ $(function(){
 //获取公有文件
 function get_all_public_file(){
     var src = "/mybatis/FileInfoController/publicfile.do";
-    sendAjaxRequest(src,{"page_Now":1},get_all_public_file_table);
+    sendAjaxRequest(src,{"page_Now":1,"fileProperty":"fullText"},get_all_public_file_table);
 }
 
 function get_all_public_file_table(data){
@@ -27,7 +27,7 @@ function get_all_public_file_table(data){
         var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + td_6 + tr_end;
         $("#pub_file").append(content);
     }
-    createNewPagination(data,"file_public","/mybatis/FileInfoController/publicfile.do",get_all_public_file_table,"first_file_click","last_file_click","page-file-three",{});
+    createNewPagination(data,"file_public","/mybatis/FileInfoController/publicfile.do",get_all_public_file_table,"first_file_click","last_file_click","page-file-three",{"fileProperty":"fullText"});
 }
 
 function down_file(obj){
