@@ -76,16 +76,20 @@ public class FileController {
 	 */
 	@RequestMapping(value = "/myuploadfile", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> myuploadfile(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+	public Map<String, Object> myuploadfile(Integer page_Now,HttpSession httpSession, HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String username = (String) httpSession.getAttribute("username");
 		System.out.println(username + "hahahaha");
 		
 		
-		Page page = new Page(1);d
+		Page page = new Page(page_Now);
 		
 		List<FileInfo> pri_file = fileInfoService.selectMyFileInfo(username, page, KCheckType.pass);
-
+        int pageCount = page.getTotalPageCount();
+        int totalCount = page.getTotalCount();
+        map.put("totalCount",totalCount);
+        map.put("pageNow",page_Now);
+        map.put("pageCount",pageCount);
 		map.put("pri_file", pri_file);
 		return map;
 	}
@@ -103,17 +107,20 @@ public class FileController {
 	 */
 	@RequestMapping(value = "/waitforcheckfile", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> waitforcheckfile(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+	public Map<String, Object> waitforcheckfile(Integer page_Now,HttpSession httpSession, HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String username = (String) httpSession.getAttribute("username");
 		System.out.println(username + "hahahaha");
 
-		Page page = new Page(1);d
+		Page page = new Page(page_Now);
 
 		List<FileInfo> wait_file = fileInfoService.selectMyFileInfo(username, page, KCheckType.waitForCheck,
 				KCheckType.notPass);
-
-
+        int pageCount = page.getTotalPageCount();
+        int totalCount = page.getTotalCount();
+        map.put("totalCount",totalCount);
+        map.put("pageNow",page_Now);
+        map.put("pageCount",pageCount);
 		map.put("wait_file", wait_file);
 		return map;
 	}
@@ -123,15 +130,20 @@ public class FileController {
 	 */
 	@RequestMapping(value = "/draftfile", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> draftfile(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+	public Map<String, Object> draftfile(Integer page_Now,HttpSession httpSession, HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String username = (String) httpSession.getAttribute("username");
 
-		Page page = new Page(1);d
+		Page page = new Page(page_Now);
 		
 		List<FileInfo> draft_file = fileInfoService.selectMyFileInfo(username, page, KCheckType.invalid);
-		
-		
+
+        int pageCount = page.getTotalPageCount();
+        int totalCount = page.getTotalCount();
+        map.put("totalCount",totalCount);
+        map.put("pageNow",page_Now);
+        map.put("pageCount",pageCount);
+
 		
 		map.put("all_file", draft_file);
 		return map;
