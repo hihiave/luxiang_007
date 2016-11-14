@@ -93,8 +93,8 @@ public class TestFileInfo {
 	@Test
 	public void selectMyFileInfoTest() {
 		logger.info("===============TestSelectMyFileInfo=============");
-		Page page = new Page(1);
-		List<FileInfo> fileInfos = fileInfoService.selectMyFileInfo("wusongze", page, KCheckType.pass);
+		Page page = new Page(2);
+		List<FileInfo> fileInfos = fileInfoService.selectMyFileInfo("wusongze", page, KCheckType.pass, KCheckType.notPass);
 
 		logger.info("=========查询======" + JSON.toJSONString(fileInfos));
 	}

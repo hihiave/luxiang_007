@@ -19,6 +19,22 @@
     file_id, file_name, file_author, file_upload_time, file_keywords, file_category, 
     file_desc, file_check, file_is_visible, file_download_count, file_url, file_status
   </sql>
+  <sql id="query_condition">
+  	<if test="fileInfo!=null">
+  		<if test="fileInfo.fileName!=null and fileInfo.fileName!=''">
+  			and file_name like CONCAT(CONCAT('%',#{fileInfo.fileName},'%'))
+	  	</if>
+	  	<if test="fileInfo.fileAuthor!=null and fileInfo.fileAuthor!=''">
+	  		and file_author like CONCAT(CONCAT('%',#{fileInfo.fileAuthor},'%'))
+	  	</if> 	
+	  	<if test="fileInfo.fileKeywords!=null and fileInfo.fileKeywords!=''">
+	  		and file_keywords like CONCAT(CONCAT('%',#{fileInfo.fileKeywords},'%'))
+	  	</if> 	
+	  	<if test="fileInfo.fileCategory!=null and fileInfo.fileCategory!=''">
+	  		and file_category = #{fileInfo.fileCategory}
+	  	</if>
+  	</if>
+  </sql>
 
   <!--*********用于处理一些业务逻辑的方法*********-->
   <delete id="delFilesById">
@@ -44,37 +60,20 @@
   			#{fileCheck}
   		</foreach>
   </select>
-  <select id="selectFileByfileAuthorWithFileCheck" resultMap="BaseResultMap">
+  <select id="selectFileByFileAuthorWithFileCheck" resultMap="BaseResultMap">
   	select * from File where file_author = #{fileAuthor,jdbcType=VARCHAR} and file_check in
   		<foreach collection="fileChecks" item="fileCheck" index="fileCheck" open="(" close=")" separator=",">
   			#{fileCheck}
   		</foreach>
-  		  	limit #{page.startPos}, #{page.pageSize}
+  		limit #{page.startPos}, #{page.pageSize}
   </select>
-
-  <sql id="query_condition">
-  	<if test="fileInfo!=null">
-  		<if test="fileInfo.fileName!=null and fileInfo.fileName!=''">
-  			and file_name like CONCAT(CONCAT('%',#{fileInfo.fileName},'%'))
-	  	</if>
-	  	<if test="fileInfo.fileAuthor!=null and fileInfo.fileAuthor!=''">
-	  		and file_author like CONCAT(CONCAT('%',#{fileInfo.fileAuthor},'%'))
-	  	</if> 	
-	  	<if test="fileInfo.fileKeywords!=null and fileInfo.fileKeywords!=''">
-	  		and file_keywords like CONCAT(CONCAT('%',#{fileInfo.fileKeywords},'%'))
-	  	</if> 	
-	  	<if test="fileInfo.fileCategory!=null and fileInfo.fileCategory!=''">
-	  		and file_category = #{fileInfo.fileCategory}
-	  	</if>
-  	</if>
-  </sql>
   <select id="getFileInfoCount" resultType="java.lang.Integer">
   	select count(*) from File
   	<where>
   		file_check = #{fileCheck,jdbcType=INTEGER} and file_is_visible = '公有'
   		<include refid="query_condition" />
   	</where>
-  </select> 
+  </select>
   <select id="getFileInfo" resultMap="BaseResultMap">
   	select * from File
   	<where>

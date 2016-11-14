@@ -30,8 +30,10 @@ public interface FileInfoMapper {
 	// 我的
 	int selectFileByfileAuthorWithFileCheckCount(@Param("fileAuthor") String fileAuthor,
 			@Param("fileChecks") Integer... fileChecks);
-	List<FileInfo> selectFileByFileAuthorWithFileCheck(@Param("fileAuthor") String fileAuthor, 
-			@Param("page") Page page, @Param("fileChecks") Integer... fileChecks);
+	
+	
+	List<FileInfo> selectFileByFileAuthorWithFileCheck(@Param("fileAuthor") String fileAuthor, @Param("page") Page page,
+			@Param("fileChecks") Integer... fileChecks);
 
 	// 文件
 	int getFileInfoCount(@Param("fileCheck") int fileCheck, 
