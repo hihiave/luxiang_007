@@ -47,10 +47,22 @@ public class FileController {
 	 */
 	@RequestMapping(value = "/publicfile", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> publicfile() {
+	public Map<String, Object> publicfile(String fileCategory, String fileProperty, String fileIn, Integer page_Now) {
+		你看一下，完善这个方法
+		System.out.println("类别" + fileCategory + "属性" + fileProperty + "搜索值" + fileIn);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		List<FileInfo> pub_file = fileInfoService.selectFileByIsPass(KCheckType.pass);
+		int pageNow = 1;
+		if (page_Now != null) {
+			pageNow = page_Now;
+		}
+		Page page = new Page(pageNow);
+
+		// 将第二个String转化成枚举类型的 , 注意： param2 只能是枚举里面有的。
+		KFilePropertyType filePropertyType = KFilePropertyType.valueOf(fileProperty);
+		List<FileInfo> pub_file = fileInfoService.getFileByFilePropertyWithPass(fileCategory, filePropertyType, fileIn,
+				page);
 		map.put("pub_file", pub_file);
 		return map;
 	}
@@ -60,15 +72,10 @@ public class FileController {
 	 */
 	@RequestMapping(value = "/search_file", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public Map<String, Object> search_file(String fileCategory, String fileProperty, String fileIn) {
+	public Map<String, Object> search_file() {
+		
 
-		System.out.println("类别" + fileCategory + "属性" + fileProperty + "搜索值" + fileIn);
-		Map<String, Object> map = new HashMap<String, Object>();
-		// 将第二个String转化成枚举类型的 , 注意： param2 只能是枚举里面有的。
-		KFilePropertyType filePropertyType = KFilePropertyType.valueOf(fileProperty);
-		List<FileInfo> fileList = fileInfoService.getFileByLikeFileProperty(fileCategory, filePropertyType, fileIn);
-		map.put("filelist", fileList);
-		return map;
+		return map;  //   这个方法不要了     查询的 方法-----也提交到上面的  /publicfile  处
 	}
 
 	/**
@@ -76,20 +83,20 @@ public class FileController {
 	 */
 	@RequestMapping(value = "/myuploadfile", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> myuploadfile(Integer page_Now,HttpSession httpSession, HttpServletRequest httpServletRequest) {
+	public Map<String, Object> myuploadfile(Integer page_Now, HttpSession httpSession,
+			HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String username = (String) httpSession.getAttribute("username");
 		System.out.println(username + "hahahaha");
-		
-		
+
 		Page page = new Page(page_Now);
-		
+
 		List<FileInfo> pri_file = fileInfoService.selectMyFileInfo(username, page, KCheckType.pass);
-        int pageCount = page.getTotalPageCount();
-        int totalCount = page.getTotalCount();
-        map.put("totalCount",totalCount);
-        map.put("pageNow",page_Now);
-        map.put("pageCount",pageCount);
+		int pageCount = page.getTotalPageCount();
+		int totalCount = page.getTotalCount();
+		map.put("totalCount", totalCount);
+		map.put("pageNow", page_Now);
+		map.put("pageCount", pageCount);
 		map.put("pri_file", pri_file);
 		return map;
 	}
@@ -107,7 +114,8 @@ public class FileController {
 	 */
 	@RequestMapping(value = "/waitforcheckfile", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> waitforcheckfile(Integer page_Now,HttpSession httpSession, HttpServletRequest httpServletRequest) {
+	public Map<String, Object> waitforcheckfile(Integer page_Now, HttpSession httpSession,
+			HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String username = (String) httpSession.getAttribute("username");
 		System.out.println(username + "hahahaha");
@@ -116,11 +124,11 @@ public class FileController {
 
 		List<FileInfo> wait_file = fileInfoService.selectMyFileInfo(username, page, KCheckType.waitForCheck,
 				KCheckType.notPass);
-        int pageCount = page.getTotalPageCount();
-        int totalCount = page.getTotalCount();
-        map.put("totalCount",totalCount);
-        map.put("pageNow",page_Now);
-        map.put("pageCount",pageCount);
+		int pageCount = page.getTotalPageCount();
+		int totalCount = page.getTotalCount();
+		map.put("totalCount", totalCount);
+		map.put("pageNow", page_Now);
+		map.put("pageCount", pageCount);
 		map.put("wait_file", wait_file);
 		return map;
 	}
@@ -130,21 +138,21 @@ public class FileController {
 	 */
 	@RequestMapping(value = "/draftfile", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> draftfile(Integer page_Now,HttpSession httpSession, HttpServletRequest httpServletRequest) {
+	public Map<String, Object> draftfile(Integer page_Now, HttpSession httpSession,
+			HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String username = (String) httpSession.getAttribute("username");
 
 		Page page = new Page(page_Now);
-		
+
 		List<FileInfo> draft_file = fileInfoService.selectMyFileInfo(username, page, KCheckType.invalid);
 
-        int pageCount = page.getTotalPageCount();
-        int totalCount = page.getTotalCount();
-        map.put("totalCount",totalCount);
-        map.put("pageNow",page_Now);
-        map.put("pageCount",pageCount);
+		int pageCount = page.getTotalPageCount();
+		int totalCount = page.getTotalCount();
+		map.put("totalCount", totalCount);
+		map.put("pageNow", page_Now);
+		map.put("pageCount", pageCount);
 
-		
 		map.put("all_file", draft_file);
 		return map;
 	}
@@ -228,10 +236,15 @@ public class FileController {
 	 */
 	@RequestMapping(value = "/get_all_checkfile", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> get_all_checkfile(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+	public Map<String, Object> get_all_checkfile(Integer page_Now) {
+		你看一下，完善这个方法
 		Map<String, Object> map = new HashMap<String, Object>();
-
-		List<FileInfo> all_checkfile = fileInfoService.selectFileByIsPass(KCheckType.waitForCheck);
+		int pageNow = 1;
+		if (page_Now != null) {
+			pageNow = page_Now;
+		}
+		Page page = new Page(pageNow);
+		List<FileInfo> all_checkfile = fileInfoService.getFileWithWaitForCheck(page);
 
 		map.put("checkfile", all_checkfile);
 		return map;
