@@ -15,6 +15,7 @@ import com.lx.macrofiles.MacroEnum.KFileVisibleType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.serviceimpl.FileInfoServiceImpl;
+import com.lx.serviceimpl.Page;
 import com.lx.tool.ToolDate;
 
 public class TestFileInfo {
@@ -65,7 +66,7 @@ public class TestFileInfo {
 	@Test
 	public void updateFileByFileIdTest() {
 		logger.info("===============updateFileByFileIdTest=============");
-		
+
 		FileInfo fileInfo = new FileInfo();
 		fileInfo.setFileName("===哈哈");
 
@@ -99,17 +100,16 @@ public class TestFileInfo {
 	@Test
 	public void selectMyFileInfoTest() {
 		logger.info("===============TestSelectMyFileInfo=============");
-		List<FileInfo> fileInfos = fileInfoService.selectMyFileInfo("luxiang", KCheckType.notPass);
-		logger.info("=========查询======" + JSON.toJSONString(fileInfos));
+		Page page = new Page(1);
+		List<FileInfo> fileInfos = fileInfoService.selectMyFileInfo("wusongze", page, KCheckType.pass);
 
+		logger.info("=========查询======" + JSON.toJSONString(fileInfos));
 	}
 
 	// **********用于一些查询的方法**********
 	@Test
 	public void getFileByLikeFilePropertyTest() {
 
-		
-		
 	}
 
 }

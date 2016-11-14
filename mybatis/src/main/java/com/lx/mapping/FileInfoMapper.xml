@@ -41,10 +41,19 @@
   	file_check = #{fileCheck,jdbcType=INTEGER} and 
   	file_is_visible = '公有'
   </select>
+  
+  <select id="selectFileByfileAuthorWithFileCheckCount" resultType="java.lang.Integer">
+  	select count(*) from File where file_author = #{fileAuthor,jdbcType=VARCHAR} and file_check in
+  		<foreach collection="fileChecks" item="fileCheck" index="fileCheck" open="(" close=")" separator=",">
+  			#{fileCheck}
+  		</foreach>
+  </select>
   <select id="selectFileByfileAuthorWithFileCheck" resultMap="BaseResultMap">
-  	select * from File where 
-  	file_author = #{fileAuthor,jdbcType=VARCHAR} and 
-  	file_check = #{fileCheck,jdbcType=INTEGER} 
+  	select * from File where file_author = #{fileAuthor,jdbcType=VARCHAR} and file_check in
+  		<foreach collection="fileChecks" item="fileCheck" index="fileCheck" open="(" close=")" separator=",">
+  			#{fileCheck}
+  		</foreach>
+  		  	limit #{page.startPos}, #{page.pageSize}
   </select>
 
   <!--*********用于一些查询的方法*********-->

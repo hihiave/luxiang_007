@@ -71,8 +71,24 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	@Override
-	public List<FileInfo> selectMyFileInfo(String userName, KCheckType checkType) {
-		return fileInfoMapper.selectFileByfileAuthorWithFileCheck(userName, checkType.getValue());
+	public List<FileInfo> selectMyFileInfo(String userName, Page page, KCheckType... checkTypes) {
+		if (userName == null) {
+			userName = "";
+		}
+		if (page != null) {
+			Integer[] fileChecks = new Integer[checkTypes.length];
+			for (int i = 0; i < checkTypes.length; i++) {
+				fileChecks[i] = checkTypes[i].getValue();
+			}
+
+			int totalCount = fileInfoMapper.selectFileByfileAuthorWithFileCheckCount(userName.trim(), fileChecks);
+			page.setTotalCount(totalCount);
+			page.init();
+
+			return fileInfoMapper.selectFileByfileAuthorWithFileCheck(userName.trim(), page, fileChecks);
+		}
+		return null;
+
 	}
 
 	// **********用于一些查询的方法**********

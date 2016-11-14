@@ -17,6 +17,7 @@ import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
+import com.lx.serviceimpl.Page;
 
 @Controller
 @RequestMapping("/FileInfoController")
@@ -79,7 +80,11 @@ public class FileController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String username = (String) httpSession.getAttribute("username");
 		System.out.println(username + "hahahaha");
-		List<FileInfo> pri_file = fileInfoService.selectMyFileInfo(username, KCheckType.pass);
+		
+		
+		Page page = new Page(1);d
+		
+		List<FileInfo> pri_file = fileInfoService.selectMyFileInfo(username, page, KCheckType.pass);
 
 		map.put("pri_file", pri_file);
 		return map;
@@ -102,9 +107,13 @@ public class FileController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String username = (String) httpSession.getAttribute("username");
 		System.out.println(username + "hahahaha");
-		List<FileInfo> wait_file = fileInfoService.selectMyFileInfo(username, KCheckType.waitForCheck);
-		List<FileInfo> pri_file_3 = fileInfoService.selectMyFileInfo(username, KCheckType.notPass);
-		wait_file.addAll(pri_file_3);
+
+		Page page = new Page(1);d
+
+		List<FileInfo> wait_file = fileInfoService.selectMyFileInfo(username, page, KCheckType.waitForCheck,
+				KCheckType.notPass);
+
+
 		map.put("wait_file", wait_file);
 		return map;
 	}
@@ -117,8 +126,13 @@ public class FileController {
 	public Map<String, Object> draftfile(HttpSession httpSession, HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String username = (String) httpSession.getAttribute("username");
+
+		Page page = new Page(1);d
 		
-		List<FileInfo> draft_file = fileInfoService.selectMyFileInfo(username, KCheckType.invalid);
+		List<FileInfo> draft_file = fileInfoService.selectMyFileInfo(username, page, KCheckType.invalid);
+		
+		
+		
 		map.put("all_file", draft_file);
 		return map;
 	}

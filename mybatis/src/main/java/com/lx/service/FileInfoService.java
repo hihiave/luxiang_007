@@ -5,6 +5,7 @@ import java.util.List;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.model.FileInfo;
+import com.lx.serviceimpl.Page;
 
 public interface FileInfoService {
 
@@ -63,10 +64,11 @@ public interface FileInfoService {
 	/** 通过用户名查询我的文件信息(我的上传pass,我的待审核waitforcheck,我的未通过notpass,已删除文件Invalid)
 	 * @author luxiang
 	 * @param userName 我的用户名
-	 * @param checkType 审核类型，请查看枚举
+	 * @param page 分页
+	 * @param checkTypes 审核类型，请查看枚举
 	 * @return 一个文件对象列表 FileInfo
 	 */
-	List<FileInfo> selectMyFileInfo(String userName, KCheckType checkType);
+	List<FileInfo> selectMyFileInfo(String userName, Page page, KCheckType... checkTypes);
 	
 	//**********用于一些查询的方法**********
 	/** 通过文件属性(标题,作者等等)模糊查询文件
