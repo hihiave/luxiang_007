@@ -32,5 +32,5 @@ public interface CategoryService {
 	 * @return 一个类别列表 Category
 	 */
 	public List<Category> getAllCategory();
-	
+
 }

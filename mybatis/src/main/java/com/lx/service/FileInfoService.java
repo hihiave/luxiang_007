@@ -87,5 +87,5 @@ public interface FileInfoService {
 	 * @return
 	 */
 	public List<FileInfo> getFileWithWaitForCheck(Page page);
-	
+
 }

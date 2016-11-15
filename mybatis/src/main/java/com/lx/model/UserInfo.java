@@ -1,6 +1,7 @@
 package com.lx.model;
 
 public class UserInfo {
+	
 	private Integer userId;
 
 	private String userName;

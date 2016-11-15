@@ -1,6 +1,7 @@
 package com.lx.model;
 
 public class Category {
+	
 	private Integer categoryId;
 
 	private String categoryName;

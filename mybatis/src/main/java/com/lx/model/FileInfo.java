@@ -1,6 +1,7 @@
 package com.lx.model;
 
 public class FileInfo {
+	
 	private Integer fileId;
 
 	private String fileName;
