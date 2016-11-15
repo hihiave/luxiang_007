@@ -46,7 +46,7 @@ public class TestUserInfo {
 
 	@Test
 	public void selectUserByUserNameTest() {
-		UserInfo userInfo = userInfoService.selectUserByUserName("luxiangd");
+		UserInfo userInfo = userInfoService.selectUserByUserName("wusongze");
 		logger.info("===userInfo==" + JSON.toJSONString(userInfo));
 	}
 

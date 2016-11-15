@@ -10,7 +10,7 @@ import com.lx.serviceimpl.Page;
 public interface FileInfoService {
 
 	//**********用于处理一些业务逻辑的方法**********
-	/** 添加一个文件信息，必须指定文件名
+	/** 添加一个文件信息,必须指定文件名
 	 * @author luxiang
 	 * @param fileInfo
 	 * @return boolean，true表示添加成功，false表示添加失败
@@ -20,16 +20,16 @@ public interface FileInfoService {
 	/** 通过文件id批量删除文件
 	 * @author luxiang
 	 * @param fileIds
-	 * @return boolean，true表示删除成功，false表示删除失败
+	 * @return boolean,true表示删除成功,false表示删除失败
 	 */
 	public boolean delFilesById(Integer... fileIds);
 
-	/** 通过文件名获取文件信息
+	/** 通过文件id获取文件信息
 	 * @author luxiang
-	 * @param fileId 文件id
+	 * @param fileIds 文件id
 	 * @return FileInfo该文件的信息
 	 */
-	public FileInfo getFileByFileId(Integer fileId);
+	public List<FileInfo> getFileByFileId(Integer... fileIds);
 
 	/** 通过文件id更新文件
 	 * @author luxiang
@@ -68,7 +68,7 @@ public interface FileInfoService {
 	 * @param checkTypes 审核类型，请查看枚举
 	 * @return 一个文件对象列表 FileInfo
 	 */
-	List<FileInfo> selectMyFileInfo(String userName, Page page, KCheckType... checkTypes);
+	public List<FileInfo> selectMyFileInfo(String userName, Page page, KCheckType... checkTypes);
 	
 	/** 通过文件属性(标题,作者等等)模糊查询文件(公有,通过审核)
 	 * @author luxiang

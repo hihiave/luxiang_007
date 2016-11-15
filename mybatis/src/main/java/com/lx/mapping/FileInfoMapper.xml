@@ -43,6 +43,12 @@
 			#{fileId}
 		</foreach>
   </delete>
+  <select id="selectAllFileByFileId" resultMap="BaseResultMap">
+  	select * from File where file_id in
+		<foreach collection="fileIds" item="fileId" index="index" open="(" close=")" separator=",">
+			#{fileId}
+		</foreach>
+  </select>
   <select id="selectFileByFileName" resultMap="BaseResultMap" parameterType="java.lang.String">
   	select * from File where file_name = #{fileName,jdbcType=VARCHAR} limit 1
   </select>

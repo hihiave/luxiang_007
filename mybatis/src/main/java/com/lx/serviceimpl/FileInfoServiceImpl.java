@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
 import com.lx.dao.FileInfoMapper;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KFilePropertyType;
@@ -36,8 +35,8 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	@Override
-	public FileInfo getFileByFileId(Integer fileId) {
-		return fileInfoMapper.selectByPrimaryKey(fileId);
+	public List<FileInfo> getFileByFileId(Integer... fileIds) {
+		return fileInfoMapper.selectAllFileByFileId(fileIds);
 	}
 
 	@Override
