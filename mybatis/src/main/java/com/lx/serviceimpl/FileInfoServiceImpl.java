@@ -14,6 +14,7 @@ import com.lx.service.FileInfoService;
 @Service
 public class FileInfoServiceImpl implements FileInfoService {
 
+
 	@Autowired
 	private FileInfoMapper fileInfoMapper;
 
