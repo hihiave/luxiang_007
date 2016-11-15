@@ -39,5 +39,4 @@ public interface FileInfoMapper {
 			@Param("fileInfo") FileInfo fileInfo);
 	List<FileInfo> getFileInfo(@Param("fileCheck") int fileCheck, 
 			@Param("fileInfo") FileInfo fileInfo, @Param("page") Page page);
-
 }

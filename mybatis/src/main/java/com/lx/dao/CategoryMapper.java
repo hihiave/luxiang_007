@@ -21,5 +21,5 @@ public interface CategoryMapper {
 	int deleteByCategoryName(String categoryName);
 	Category selectByCategoryName(String categoryName);
 	public List<Category> getAllCategory();
-	
+
 }
