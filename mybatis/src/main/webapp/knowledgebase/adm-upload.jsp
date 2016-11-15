@@ -35,6 +35,7 @@
     <script src="/mybatis/knowledgebase/js/jquery.min.js"></script>
     <script src="/mybatis/knowledgebase/js/bootstrap.min.js"></script>
     <script src="/mybatis/knowledgebase/js/html5shiv.min.js"></script>
+    <script src="/mybatis/knowledgebase/js/ajaxfileupload.js"></script>
     <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
     <script src="/mybatis/knowledgebase/js/public_search.js"></script>
     <script src="/mybatis/knowledgebase/js/adm_upload.js"></script>
@@ -146,33 +147,7 @@
     </button>
 </div>
 <div class="container">
-    <div class="row" style="text-align:center;margin:40px auto;">
-        <img src="/mybatis/knowledgebase/img/img_3.jpg" width="725px" height="80px">
-    </div>
-    <div class="row" style="margin:0px">
-        <div class="col-md-3" style="width:283px;margin-right:16px;">
-            <img src="/mybatis/knowledgebase/img/zhishiku_2.png" style="margin-left:30px;">
-        </div>
-        <div class="col-md-9" style="margin-top:16px;">
-            <div style="float:left;margin-right:0px;">
-                <select class="form-control" onchange="value" id="category_select">
-
-                </select>
-            </div>
-            <div style="float:left;margin-right:0px;">
-                <select class="form-control" onchange="value" id="key_select">
-                    <option value='' selected>全文</option>
-                    <option value=''>标题</option>
-                    <option value=''>作者</option>
-                    <option value=''>关键字</option>
-                </select>
-            </div>
-            <div class="input-group input-group-md" style="float:left;">
-                <input type="text" class="form-control" aria-describedby="sizing-addon1" style="width:521px;">
-                <button class="btn btn-primary" style="width:78px;margin-left:5px;">搜&nbsp;索</button>
-            </div>
-        </div>
-    </div>
+    <jsp:include page="public-part.jsp" flush="true"/>
     <hr>
     <div class="row" style="margin-left:80px;">
         <div class="col-md-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
@@ -259,13 +234,13 @@
         </div>
         <div class="col-md-8" style="margin-left:50px;">
 
-            <div class="panel panel-primary" style="height:625px;">
+            <div class="panel panel-primary" style="min-height:625px;">
                 <div class="panel-heading">
                     <h3 class="panel-title">文件上传</h3>
                 </div>
                 <div class="panel-body" style="height:580px;overflow-y:auto;">
 
-                    <form action="/mybatis/FileUploadController/fileUpload.do" name="name1" enctype="multipart/form-data" method="post">
+
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -279,18 +254,24 @@
                                 <div class="panel-body form-inline">
                                     <div class="row" style="display: none;">
                                         <div class="col-md-12" style="margin-bottom: 25px;">
-                                            <input type="file" class="upload" name="file" id="file1" pid="aim1" onchange="changeFile(this)">
+                                            <input type="file" name="file-test" id="file-test" pid="aim1" onchange="changeFile(this)">
+                                        </div>
+
+                                    </div>
+                                    <div class="row" style="display: none;">
+                                        <div class="col-md-12" style="margin-bottom: 25px;">
+                                            <input type="input"  name="file_result" id="file_result1" >
                                         </div>
 
                                     </div>
                                     <div class="row">
                                         <div class="col-md-1" style="margin-bottom: 25px;">
-                                            <button type="button" class="btn btn-default" bid="file1" pid="aim1"
-                                                    onclick="add_one_click(this)">上传
+                                            <button type="button" class="btn btn-default" bid="file-test" pid="aim1"
+                                                    onclick="add_one_click(this)">添加
                                             </button>
                                         </div>
                                         <div class="col-md-1" style="margin-bottom: 25px;">
-                                            <button type="button" class="btn btn-default" bid="file1" pid="aim1"
+                                            <button type="button" class="btn btn-default" bid="file-test" pid="aim1"
                                                     onclick="del_one_click(this)">移除
                                             </button>
                                         </div>
@@ -358,18 +339,18 @@
                                 <div class="panel-body form-inline">
                                     <div class="row" style="display: none;">
                                         <div class="col-md-12" style="margin-bottom: 25px;">
-                                            <input type="file" class="upload" name="file" id="file2" pid="aim2" onchange="changeFile(this)">
+                                            <input type="file" name="file-test2" id="file-tes2" pid="aim2" onchange="changeFile(this)">
                                         </div>
 
                                     </div>
                                     <div class="row">
                                         <div class="col-md-1" style="margin-bottom: 25px;">
-                                            <button type="button" class="btn btn-default" bid="file2" pid="aim2"
-                                                    onclick="add_one_click(this)">上传
+                                            <button type="button" class="btn btn-default" bid="file-tes2" pid="aim2"
+                                                    onclick="add_one_click(this)">添加
                                             </button>
                                         </div>
                                         <div class="col-md-1" style="margin-bottom: 25px;">
-                                            <button type="button" class="btn btn-default" bid="file2" pid="aim2"
+                                            <button type="button" class="btn btn-default" bid="file-tes2" pid="aim2"
                                                     onclick="del_one_click(this)">移除
                                             </button>
                                         </div>
@@ -437,14 +418,14 @@
                                 <div class="panel-body form-inline">
                                     <div class="row" style="display: none;">
                                         <div class="col-md-12" style="margin-bottom: 25px;">
-                                            <input type="file" class="upload" name="file" id="file3" pid="aim3" onchange="changeFile(this)">
+                                            <input type="file"  name="file3" id="file3" pid="aim3" onchange="changeFile(this)">
                                         </div>
 
                                     </div>
                                     <div class="row">
                                         <div class="col-md-1" style="margin-bottom: 25px;">
                                             <button type="button" class="btn btn-default" bid="file3" pid="aim3"
-                                                    onclick="add_one_click(this)">上传
+                                                    onclick="add_one_click(this)">添加
                                             </button>
                                         </div>
                                         <div class="col-md-1" style="margin-bottom: 25px;">
@@ -508,9 +489,12 @@
                         <div align="center">
                             <input type="submit" value="上传文件" id="sub"  class="btn btn-primary">
                         </div>
-                    </form>
 
 
+                    <%--<div style="padding-top: 20px;">--%>
+                        <%--<input type="file" name="file-test" id="file-test" onchange="changeFile_test(this)">--%>
+                        <%--<button class="btn btn-primary">提交</button>--%>
+                    <%--</div>--%>
                 </div>
             </div>
 
@@ -518,7 +502,25 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-info">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
 
+                <h4 class="modal-title" id="myModalLabel-info">提示</h4>
+            </div>
+            <div class="modal-body">
+                <p id="info-p"></p>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" data-dismiss="modal" >
+                    是
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <style type="text/css">
     /*th.btn-primary {*/

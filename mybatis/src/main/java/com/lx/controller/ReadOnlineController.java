@@ -20,10 +20,10 @@ public class ReadOnlineController {
 	protected void readOnline(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String temp = "F:/Users/";
+		String temp = "C:/Users/";
 		String fileName = request.getParameter("filename");
 		String from = temp + fileName;
-		String savePath = "D:/SWFTools";
+		String savePath = "C:/SWFTools";
 
 		System.out.println("+++++======" + from);
 
@@ -37,7 +37,7 @@ public class ReadOnlineController {
 
 		System.out.println("nice++++" + docConverter.getSwfFilePath());
 
-		String savePath2 = "E:/swf文件";
+		String savePath2 = "C:/swf文件";
 		FileTransfer fileTransfer2 = new FileTransfer(savePath2, docConverter.getSwfFilePath());
 		fileTransfer2.transfer();
 		request.getSession().setAttribute("swfPath", fileTransfer2.getSavePath());

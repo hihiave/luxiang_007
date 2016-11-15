@@ -231,3 +231,12 @@ function createNewPagination(data, class_name,src,deal_cb,left_arrow_id, right_a
     });
 
 }
+
+
+//在线阅读
+function ReadOnLine(){
+    var filename = "阅读.docx";
+    var src = "/mybatis/ReadOnlineController/readOnline.do";
+    console.log("hah");
+    sendAjaxRequest(src,{"filename":filename});
+}

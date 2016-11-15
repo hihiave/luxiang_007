@@ -7,29 +7,28 @@ $(function(){
 
 //获取所有未审核的文件
 function get_all_checkfile(){
-    $.ajax({
-        type:'post',
-        url:"/mybatis/FileInfoController/get_all_checkfile.do",
-        dataType:"json",
-        success:function get_all_checkfile(data){
-            var _table = $("#file_result>tr");
-            _table.remove();
-            var checkfile = data["checkfile"];
-            for(var i = 0;i < checkfile.length;i++){
-                var tr_begin = "<tr>";
-                var tr_end = "</tr>";
-                var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' value="+checkfile[i].fileId+"></td>";
-                var td_2 = "<td style='padding-top:15px;width:280px;' id="+checkfile[i].fileId+">"+checkfile[i].fileName+"</td>";
-                var td_3 = "<td style='padding-top:15px;'>"+checkfile[i].fileAuthor+"</td>";
-                var td_4 = "<td><button class='btn btn-primary' onclick='check_one_file(this)'>通过</button></td>";
-            	var td_5 = "<td><button class='btn btn-primary' onclick='notpass_one_file(this)' value="+checkfile[i].fileId+">拒绝</button></td>";
-                var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
-                $("#file_result").append(content);
-            }
-        }
-    })
+    var src = "/mybatis/FileInfoController/get_all_checkfile.do";
+    sendAjaxRequest(src,{"page_Now":1},get_all_checkfile_table);
 }
 
+
+function get_all_checkfile_table(data){
+    var _table = $("#file_result>tr");
+    _table.remove();
+    var checkfile = data["checkfile"];
+    for(var i = 0;i < checkfile.length;i++){
+        var tr_begin = "<tr>";
+        var tr_end = "</tr>";
+        var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' value="+checkfile[i].fileId+"></td>";
+        var td_2 = "<td style='padding-top:15px;width:280px;' id="+checkfile[i].fileId+"><a href='##'>"+checkfile[i].fileName+"</a></td>";
+        var td_3 = "<td style='padding-top:15px;'>"+checkfile[i].fileAuthor+"</td>";
+        //var td_4 = "<td><button class='btn btn-primary' onclick='check_one_file(this)'>通过</button></td>";
+        //var td_5 = "<td><button class='btn btn-primary' onclick='notpass_one_file(this)' value="+checkfile[i].fileId+">拒绝</button></td>";
+        var content = tr_begin + td_1 + td_2 + td_3 + tr_end;
+        $("#file_result").append(content);
+    }
+    createNewPagination(data,"file_checkfile","/mybatis/FileInfoController/get_all_checkfile.do",get_all_checkfile_table,"first_file_click","last_file_click","page-file-checkfile",{});
+}
 function check_all_file(obj){
 	   var check_num_1 = 0;
 	    $("input[name=checkAll]").each(function(){

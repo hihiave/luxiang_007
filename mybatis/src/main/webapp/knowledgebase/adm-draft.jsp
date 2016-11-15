@@ -70,36 +70,7 @@
     </button>
 </div>
 <div class="container">
-    <div class="row" style="text-align:center;margin:40px auto;">
-        <img src="/mybatis/knowledgebase/img/img_3.jpg" width="725px" height="80px">
-    </div>
-    <div class="row" style="margin:0px">
-        <div class="col-md-3" style="width:283px;margin-right:16px;">
-            <img src="/mybatis/knowledgebase/img/zhishiku_2.png" style="margin-left:30px;">
-        </div>
-        <div class="col-md-9" style="margin-top:16px;">
-            <div style="float:left;margin-right:0px;">
-                <select class="form-control" onchange="value" id="category_select">
-
-                </select>
-            </div>
-            <div style="float:left;margin-right:0px;">
-                <select class="form-control" onchange="value" id="key_select">
-                    <option value='fullText' selected>全文</option>
-                    <option value='title'>标题</option>
-                    <option value='author'>作者</option>
-                    <option value='keyword'>关键字</option>
-                </select>
-            </div>
-            <div class="input-group input-group-md" style="float:left;">
-                <input type="text" class="form-control" aria-describedby="sizing-addon1" style="width:521px;"
-                       id="file_search_input">
-                <button class="btn btn-primary" style="width:78px;margin-left:5px;" id="file_search_sub"
-                        onclick="send_search_info()">搜&nbsp;索
-                </button>
-            </div>
-        </div>
-    </div>
+    <jsp:include page="public-part.jsp" flush="true"/>
     <hr>
     <div class="row" style="margin-left:80px;">
         <div class="col-md-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
@@ -193,16 +164,19 @@
                     <h3 class="panel-title">草稿箱</h3>
                 </div>
                 <div class="panel-body" style="padding-top:0px;">
+                    <div style="padding-top: 10px;">
+                        <button class="btn btn-primary" onclick="delete_all_file_modal(this)">删除</button>
+                        <button class="btn btn-primary" onclick="recovery_all_file_modal(this)">恢复</button>
+                    </div>
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th><input type="checkbox" id="selAll" onclick="selectAll()"></th>
-                            <th style="padding-bottom:15px;">文件名</th>
+                            <th style="width: 5%;"><input type="checkbox" id="selAll" onclick="selectAll()"></th>
+                            <th style="width: 80%;">文件名</th>
 
-                            <th style="padding-bottom:15px;">下载</th>
-                            <th style="padding-bottom:15px;">预览</th>
-                            <th ><button class="btn btn-primary" onclick="delete_all_file_modal(this)">删除</button></th>
-                            <th ><button class="btn btn-primary" onclick="recovery_all_file_modal(this)">恢复</button></th>
+                            <th style="width: 15%;">下载</th>
+
+
                         </tr>
                         </thead>
                         <tbody id="draft_file">

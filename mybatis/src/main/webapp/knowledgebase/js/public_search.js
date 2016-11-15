@@ -10,8 +10,8 @@ function get_category_select(){
         url:"/mybatis/CategoryController/get_category.do",
         dataType:"json",
         success:function(data){
-            var _select = $("#category_select>option");
-            _select.remove();
+            //var _select = $("#category_select>option");
+            //_select.remove();
             var all_select_category = data["category"];
             //console.log(all_select_category.length);
             for(var i = 0;i < all_select_category.length;i++){

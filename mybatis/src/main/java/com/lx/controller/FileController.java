@@ -41,7 +41,7 @@ public class FileController {
 		// System.out.println;
 	}
 
-	// ********************普通用户操作权限********************
+	// ********************普通用户操作权限*****************                                              ***
 	/**
 	 * 公有文件,包括查询
 	 */
@@ -230,22 +230,22 @@ public class FileController {
 
 		// author luxiang
 		// 根据文件id查询文件
-		FileInfo fileInfo = fileInfoService.getFileByFileId(40);
+//		FileInfo fileInfo = fileInfoService.getFileByFileId(40);
 
-		fileInfo.getFileUrl(); // 获取url
+//		fileInfo.getFileUrl(); // 获取url
 
 		// ..... 执行一些下载的代码
 		// .....
 		// .....
 
 		// 下载成功后, 将 下载次数 +1
-		int count = fileInfo.getFileDownloadCount();
-		count++;
+//		int count = fileInfo.getFileDownloadCount();
+//		count++;
 
-		fileInfo.setFileDownloadCount(count);
+//		fileInfo.setFileDownloadCount(count);
 
 		// 更新文件信息
-		fileInfoService.updateFileByFileId(fileInfo.getFileId(), fileInfo);
+//		fileInfoService.updateFileByFileId(fileInfo.getFileId(), fileInfo);
 
 	}
 
@@ -264,7 +264,11 @@ public class FileController {
 		}
 		Page page = new Page(pageNow);
 		List<FileInfo> all_checkfile = fileInfoService.getFileWithWaitForCheck(page);
-
+        int pageCount = page.getTotalPageCount();
+        int totalCount = page.getTotalCount();
+        map.put("totalCount", totalCount);
+        map.put("pageNow", page_Now);
+        map.put("pageCount", pageCount);
 		map.put("checkfile", all_checkfile);
 		return map;
 	}

@@ -24,12 +24,12 @@ function get_all_draft_file_table(data){
         var tr_begin = "<tr>";
         var tr_end = "</tr>";
         var td_1 = "<td ><input type='checkbox' name='checkAll' onclick='select_one(this)' value="+all_draft_file[i].fileId+"></td>"
-        var td_2 = "<td style='width:440px;' id="+all_draft_file[i].fileId+">"+all_draft_file[i].fileName+"</td>";
+        var td_2 = "<td style='width:440px;' id="+all_draft_file[i].fileId+"><a href='##'>"+all_draft_file[i].fileName+"</a></td>";
         var td_3 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary' data-toggle='modal'data-target='' onclick=''>下载</button></td>";
-        var td_4 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary' data-toggle='modal'data-target='' onclick=''>预览</button></td>";
-        var td_5 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary' onclick='delete_one_file(this)' value="+all_draft_file[i].fileId+">删除</button></td>";
-        var td_6 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary'  onclick='recovery_one_file(this)' value="+all_draft_file[i].fileId+">恢复</button></td>";
-        var content = tr_begin  + td_1 + td_2 + td_3 + td_4 + td_5 +td_6+ tr_end;
+        //var td_4 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary' data-toggle='modal'data-target='' onclick=''>预览</button></td>";
+        //var td_5 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary' onclick='delete_one_file(this)' value="+all_draft_file[i].fileId+">删除</button></td>";
+        //var td_6 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary'  onclick='recovery_one_file(this)' value="+all_draft_file[i].fileId+">恢复</button></td>";
+        var content = tr_begin  + td_1 + td_2 + td_3 + tr_end;
         $("#draft_file").append(content);
     }
     createNewPagination(data,"file_draft","/mybatis/FileInfoController/draftfile.do",get_all_draft_file_table,"first_file_click","last_file_click","page-file-draft",{})

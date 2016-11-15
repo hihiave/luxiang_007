@@ -45,6 +45,34 @@ function changeFile(obj){
     var input_text = $(obj).attr("pid");
     var arr = file.split('\\');
     $("#"+input_text).val(arr[arr.length - 1]);
+    var fileid = $(obj).attr("id");
+    console.log(file);
+    $.ajaxFileUpload({
+        url:"/mybatis/FileUploadController/fileUpload.do",
+        secureuri:false,
+        fileElementId:fileid,
+        data:{},
+        dataType:'json',
+        success:function(data){
+            $("#info-p").html(data["message"]);
+            $("#info-modal").modal("show");
+        }
+    })
+}
+
+function changeFile_test(obj){
+    var file = $(obj).val();
+    console.log(file);
+    $.ajaxFileUpload({
+        url:"/mybatis/FileUploadController/fileUpload.do",
+        secureuri:false,
+        data:{"filename":"hahah","age":"12","sex":"man"},
+        fileElementId:'file-test',
+        dataType:'json',
+        success:function(data){
+            alert(data["message"]);
+        }
+    })
 }
 
 

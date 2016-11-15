@@ -20,9 +20,9 @@ function cb_get_all(obj){
         var tr_begin = "<tr>";
         var tr_end = "</tr>";
         var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' onclick='select_one(this)' value="+all_wait_file[each].fileId+"></td>";
-        var td_2 = "<td style='padding-top:15px;width:180px;' value="+all_wait_file[each].fileId+">"+all_wait_file[each].fileName+"</td>";
+        var td_2 = "<td style='padding-top:15px;width:180px;' value="+all_wait_file[each].fileId+"><a href='##'>"+all_wait_file[each].fileName+"</a></td>";
         var td_3 = "<td style='padding-top:15px;width:180px;' >"+get_file_check(all_wait_file[each].fileCheck)+"</td>";
-        var td_4 = "<td><button class='btn btn-primary' onclick='delete_one_file(this)' value="+all_wait_file[each].fileId+">删除</button></td>";
+        //var td_4 = "<td><button class='btn btn-primary' onclick='delete_one_file(this)' value="+all_wait_file[each].fileId+">删除</button></td>";
         var td_5 = "<td><button class='btn btn-primary' onclick='' value="+all_wait_file[each].fileId+">下载</button></td>";
         //var td_6 = "";
         //if(all_wait_file[each].fileCheck == -1){
@@ -30,7 +30,7 @@ function cb_get_all(obj){
         //}else if(all_wait_file[each].fileCheck == 0){
         //    td_6 = "<td></td>"
         //}
-        var content = tr_begin  + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
+        var content = tr_begin  + td_1 + td_2 + td_3 + td_5 + tr_end;
         $("#waitforcheck_file").append(content);
     }
     createNewPagination(obj,"file_waitforcheck","/mybatis/FileInfoController/waitforcheckfile.do",cb_get_all,"first_file_click","last_file_click","page-file-two",{})

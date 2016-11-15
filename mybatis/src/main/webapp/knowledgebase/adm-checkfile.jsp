@@ -79,36 +79,7 @@
     </button>
 </div>
 <div class="container">
-    <div class="row" style="text-align:center;margin:40px auto;">
-        <img src="/mybatis/knowledgebase/img/img_3.jpg" width="725px" height="80px">
-    </div>
-    <div class="row" style="margin:0px ">
-        <div class="col-md-3" style="width:283px;margin-right:16px;">
-            <img src="/mybatis/knowledgebase/img/zhishiku_2.png" style="margin-left:30px;">
-        </div>
-        <div class="col-md-9" style="margin-top:16px;">
-            <div style="float:left;margin-right:0px;">
-                <select class="form-control" onchange="value" id="category_select">
-
-                </select>
-            </div>
-            <div style="float:left;margin-right:0px;">
-                <select class="form-control" onchange="value" id="key_select">
-                    <option value='fullText' selected>全文</option>
-                    <option value='title'>标题</option>
-                    <option value='author'>作者</option>
-                    <option value='keyword'>关键字</option>
-                </select>
-            </div>
-            <div class="input-group input-group-md" style="float:left;">
-                <input type="text" class="form-control" aria-describedby="sizing-addon1" style="width:521px;"
-                       id="file_search_input">
-                <button class="btn btn-primary" style="width:78px;margin-left:5px;" id="file_search_sub"
-                        onclick="send_search_info()">搜&nbsp;索
-                </button>
-            </div>
-        </div>
-    </div>
+    <jsp:include page="public-part.jsp" flush="true"/>
     <hr>
     <div class="row" style="margin-left:80px;">
         <div class="col-md-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
@@ -197,25 +168,22 @@
         <div class="col-xs-8" style="margin-left:50px;">
 
 
-            <div class="panel panel-primary" style="height:625px;" id="default_panel">
+            <div class="panel panel-primary" style="min-height:625px;" id="default_panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">资源审核</h3>
                 </div>
                 <div class="panel-body" style="padding-top:0px;">
+                    <div style="padding-top: 10px;">
+                        <button class="btn btn-primary" onclick="check_all_file(this)">通过</button>
+                        <button class="btn btn-primary" onclick="notpass_all_selected_file_modal(this)">拒绝</button>
+                    </div>
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th style="padding-left: 28px;border-bottom-width: 2px;padding-bottom: 4px;width: 78px;">
-                                <label class="checkbox"><input type="checkbox" id="selAll" onclick="selectAll()">全选
-                                </label></th>
-                            <th style="padding-bottom:15px;">资源名</th>
-                            <th style="padding-bottom:15px;">上传者</th>
-                            <th style="width:116px;">
-                                <button class="btn btn-primary" onclick="check_all_file(this)">通过</button>
-                            </th>
-                            <th style="width:116px;">
-                                <button class="btn btn-primary" onclick="notpass_all_selected_file_modal(this)">拒绝</button>
-                            </th>
+                            <th style="width: 5%;"><input type="checkbox" id="selAll" onclick="selectAll()"></th>
+                            <th style="width: 80%;">资源名</th>
+                            <th style="width: 15%;">上传者</th>
+
                         </tr>
                         </thead>
                         <tbody id="file_result">
@@ -243,6 +211,17 @@
 
                         </tbody>
                     </table>
+                    <div style="margin-top: -20px;float: right;">
+                        <ul class="pagination" id="page-file-checkfile">
+                            <%--<li><a href="#">&laquo;</a></li>--%>
+                            <%--<li><a href="#">1</a></li>--%>
+                            <%--<li><a href="#">2</a></li>--%>
+                            <%--<li><a href="#">3</a></li>--%>
+                            <%--<li><a href="#">4</a></li>--%>
+                            <%--<li><a href="#">5</a></li>--%>
+                            <%--<li><a href="#">&raquo;</a></li>--%>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <jsp:include page="search-result.jsp" flush="true"/>

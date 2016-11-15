@@ -24,8 +24,8 @@ function get_all_check_user_one(data){
         var td_2 = "<td class='Name' >" + all_check_user[i].userName +"</td>";
         var td_3 = "<td padding-left:15px;'>待审核</td>";
         var td_4 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary' onclick='check_one_pick(this)'>通过</button></td>";
-        var td_5 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary'>拒绝</button></td>";
-        var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
+        //var td_5 = "<td style='padding-bottom:3px;padding-top:3px;'><button class='btn btn-primary'>拒绝</button></td>";
+        var content = tr_begin + td_1 + td_2 + td_3 + td_4 + tr_end;
         $("#check_result").append(content);
 
     }

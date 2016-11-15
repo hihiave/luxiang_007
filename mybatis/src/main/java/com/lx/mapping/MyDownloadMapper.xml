@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lx.dao.MyDownloadMapper" >
+  <resultMap id="BaseResultMap" type="com.lx.model.MyDownload" >
+    <id column="my_download_id" property="myDownloadId" jdbcType="INTEGER" />
+    <result column="my_download_user_name" property="myDownloadUserName" jdbcType="VARCHAR" />
+    <result column="my_download_file_id" property="myDownloadFileId" jdbcType="INTEGER" />
+    <result column="my_download_time" property="myDownloadTime" jdbcType="INTEGER" />
+    <result column="my_download_status" property="myDownloadStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    my_download_id, my_download_user_name, my_download_file_id, my_download_time, my_download_status
+  </sql>
+
+  <resultMap id="FileInfoVoMap" type="com.lx.model.FileInfoVo" >
+    <id column="file_id" property="fileId" jdbcType="INTEGER" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="file_author" property="fileAuthor" jdbcType="VARCHAR" />
+    <result column="file_upload_time" property="fileUploadTime" jdbcType="INTEGER" />
+    <result column="file_keywords" property="fileKeywords" jdbcType="VARCHAR" />
+    <result column="file_category" property="fileCategory" jdbcType="VARCHAR" />
+    <result column="file_desc" property="fileDesc" jdbcType="VARCHAR" />
+    <result column="file_check" property="fileCheck" jdbcType="INTEGER" />
+    <result column="file_is_visible" property="fileIsVisible" jdbcType="CHAR" />
+    <result column="file_download_count" property="fileDownloadCount" jdbcType="INTEGER" />
+    <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
+    <result column="file_status" property="fileStatus" jdbcType="INTEGER" />
+    <result column="my_download_id" property="myDownloadId" jdbcType="INTEGER" />
+    <result column="my_download_time" property="myDownloadTime" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="FileInfoVo_Column_List" >
+    file_id, file_name, file_author, file_upload_time, file_keywords, file_category, 
+    file_desc, file_check, file_is_visible, file_download_count, file_url, file_status, 
+    my_download_id, my_download_time
+  </sql>
+
+  <delete id="delMyDownloadByMyDownloadId">
+  	delete from MyDownload where my_download_id in
+		<foreach collection="myDownloadIds" item="myDownloadId" index="index" open="(" close=")" separator=",">
+			#{myDownloadId}
+		</foreach>
+  </delete>
+  <select id="selectMyDownloadByMyDownloadUserNameCount" resultType="java.lang.Integer">
+  	select count(*) from MyDownload where my_download_user_name = #{myDownloadUserName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectMyDownloadByMyDownloadUserName" resultMap="FileInfoVoMap">
+  	select 
+  	<include refid="FileInfoVo_Column_List"/>
+  	from File,MyDownload 
+  	where File.file_id = MyDownload.my_download_file_id and
+  	MyDownload.my_download_user_name = #{myDownloadUserName,jdbcType=VARCHAR}
+  	ORDER BY my_download_time DESC
+  	limit #{page.startPos}, #{page.pageSize}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from MyDownload
+    where my_download_id = #{myDownloadId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from MyDownload
+    where my_download_id = #{myDownloadId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lx.model.MyDownload" >
+    insert into MyDownload (my_download_id, my_download_user_name, 
+      my_download_file_id, my_download_time, my_download_status
+      )
+    values (#{myDownloadId,jdbcType=INTEGER}, #{myDownloadUserName,jdbcType=VARCHAR}, 
+      #{myDownloadFileId,jdbcType=INTEGER}, #{myDownloadTime,jdbcType=INTEGER}, #{myDownloadStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lx.model.MyDownload" >
+    insert into MyDownload
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="myDownloadId != null" >
+        my_download_id,
+      </if>
+      <if test="myDownloadUserName != null" >
+        my_download_user_name,
+      </if>
+      <if test="myDownloadFileId != null" >
+        my_download_file_id,
+      </if>
+      <if test="myDownloadTime != null" >
+        my_download_time,
+      </if>
+      <if test="myDownloadStatus != null" >
+        my_download_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="myDownloadId != null" >
+        #{myDownloadId,jdbcType=INTEGER},
+      </if>
+      <if test="myDownloadUserName != null" >
+        #{myDownloadUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="myDownloadFileId != null" >
+        #{myDownloadFileId,jdbcType=INTEGER},
+      </if>
+      <if test="myDownloadTime != null" >
+        #{myDownloadTime,jdbcType=INTEGER},
+      </if>
+      <if test="myDownloadStatus != null" >
+        #{myDownloadStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lx.model.MyDownload" >
+    update MyDownload
+    <set >
+      <if test="myDownloadUserName != null" >
+        my_download_user_name = #{myDownloadUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="myDownloadFileId != null" >
+        my_download_file_id = #{myDownloadFileId,jdbcType=INTEGER},
+      </if>
+      <if test="myDownloadTime != null" >
+        my_download_time = #{myDownloadTime,jdbcType=INTEGER},
+      </if>
+      <if test="myDownloadStatus != null" >
+        my_download_status = #{myDownloadStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where my_download_id = #{myDownloadId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lx.model.MyDownload" >
+    update MyDownload
+    set my_download_user_name = #{myDownloadUserName,jdbcType=VARCHAR},
+      my_download_file_id = #{myDownloadFileId,jdbcType=INTEGER},
+      my_download_time = #{myDownloadTime,jdbcType=INTEGER},
+      my_download_status = #{myDownloadStatus,jdbcType=INTEGER}
+    where my_download_id = #{myDownloadId,jdbcType=INTEGER}
+  </update>
+</mapper>
