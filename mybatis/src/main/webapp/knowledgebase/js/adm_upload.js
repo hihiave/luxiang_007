@@ -3,7 +3,7 @@
  */
 $(function(){
     get_category_select_file();
-    sub.onclick = uploadFile;
+    //sub.onclick = uploadFile;
 })
 function get_category_select_file(){
     $.ajax({
@@ -43,6 +43,7 @@ function del_one_click(obj){
 function changeFile(obj){
     var file = $(obj).val();
     var input_text = $(obj).attr("pid");
+    var result_text = $(obj).attr("rid");
     var arr = file.split('\\');
     $("#"+input_text).val(arr[arr.length - 1]);
     var fileid = $(obj).attr("id");
@@ -54,6 +55,10 @@ function changeFile(obj){
         data:{},
         dataType:'json',
         success:function(data){
+            console.log(data["savePath"]);
+            $("#"+result_text).val(data["savePath"]);
+        },
+        error:function(data){
             $("#info-p").html(data["message"]);
             $("#info-modal").modal("show");
         }
@@ -77,17 +82,19 @@ function changeFile_test(obj){
 
 
 function uploadFile(){
-    var src = "/mybatis/FileUploadController/fileUpload.do";
+    //var src = "/mybatis/FileUploadController/fileUpload.do";
     var aim1 = $("#aim1"),
         aim2 = $("#aim2"), aim3 = $("#aim3");
     var word1 = $("#word1"),
         word2 = $("#word2"), word3 = $("#word3");
     var area1 = $("#area1"),
         area2 = $("#area2"), area3 = $("#area3");
-    var file1 = $("#file1").val();
-    var file2 = $("#file2").val();
-    var file3 = $("#file3").val();
-
+    var file1 = $("#file-test1").val();
+    var file2 = $("#file-test2").val();
+    var file3 = $("#file-test3").val();
+    var path1 = $("#file_result1").val();
+    var path2 = $("#file_result2").val();
+    var path3 = $("#file_result3").val();
     if (aim1.val() == "" && aim2.val() == "" && aim3.val() == "") {
         alert("请选择上传的文件");
         return false;
@@ -109,59 +116,64 @@ function uploadFile(){
         alert("请完善文件3信息");
         return false;
     }
-//    else{
-//        var data = new FormData();
-//        if(file1 != "" && aim1.val() != "" && area1.val() != ""){
-//            data.append("filepath1",file1);
-//            //data.filepath1 = file1;
-//            data.filename1 = aim1.val();
-//            data.author1 = $("#author1").attr("placeholder");
-//            data.time1 = $("#time1").attr("placeholder");
-//            data.word1 = word1.val();
-//            data.pro1 = $("#proto1").val();
-//            data.cate1 = $("#cate1").val();
-//            data.area1 = area1.val();
-//
-//        }
-//        if(file2 != "" && aim2.val() != "" && area2.val() != ""){
-//            data.filepath2 = file2;
-//            data.filename2 = aim2.val();
-//            data.author2 = $("#author2").attr("placeholder");
-//            data.time2 = $("#time2").attr("placeholder");
-//            data.word2 = word2.val();
-//            data.pro2 = $("#proto2").val();
-//            data.cate2 = $("#cate2").val();
-//            data.area2 = area2.val();
-//        }
-//        if(file3 != "" && aim3.val() != "" && area3.val() != ""){
-//            data.filepath3 = file3;
-//            data.filename3 = aim3.val();
-//            data.author3 = $("#author3").attr("placeholder");
-//            data.time3 = $("#time3").attr("placeholder");
-//            data.word3 = word3.val();
-//            data.pro3 = $("#proto3").val();
-//            data.cate3 = $("#cate3").val();
-//            data.area3 = area3.val();
-//        }
-//        console.log(data);
-//        data.append("HHH","nihao");
-//
-//        $.ajax({
-//            url:src,
-//            type:'post',
-//            data:data,
-//            processData : false,
-//            contentType : false,
-//            dataType:"json",
-//            success:function(data){
-//                console.log(data["message"]);
-//            }
-//
-//        })
-//
-//    }
+    else {
+        var data = {};
+        if (aim1.val() != "" && area1.val() != "" && word1.val() != "") {
+
+            data.filepath1 = path1;
+            var name1 = aim1.val().split(".");
+            //console.log(name1[0]);
+            data.filename1 = name1[0];
+            data.author1 = $("#author1").attr("placeholder");
+            //console.log($("#author1").val()+"!!!!!!!");
+            //data.time1 = $("#time1").attr("placeholder");
+            data.word1 = word1.val();
+            data.pro1 = $("#proto1").val();
+            data.cate1 = $("#cate1").val();
+            //data.area1 = area1.val();
+
+        }
+        if(aim2.val() != "" && area2.val() != "" && word2.val() != ""){
+            data.filepath2 = path2;
+            var name2 = aim2.val().split(".");
+            //console.log(name1[0]);
+            data.filename2 = name2[0];
+            data.author2 = $("#author2").attr("placeholder");
+            //data.time2 = $("#time2").attr("placeholder");
+            data.word2 = word2.val();
+            data.pro2 = $("#proto2").val();
+            data.cate2 = $("#cate2").val();
+            //data.area2 = area2.val();
+        }
+        if(aim3.val() != "" && area3.val() != "" && word3.val() != ""){
+            data.filepath3 = path3;
+            var name3 = aim3.val().split(".");
+            //console.log(name1[0]);
+            data.filename3 = name3[0];
+            data.author3 = $("#author3").attr("placeholder");
+            //data.time3 = $("#time3").attr("placeholder");
+            data.word3 = word3.val();
+            data.pro3 = $("#proto3").val();
+            data.cate3 = $("#cate3").val();
+            //data.area3 = area2.val();
+
+        }
+        console.log(data);
+        sendAjaxRequest("/mybatis/FileInfoController/add_file_info.do", data, upload_success_cb);
+    }
 //
 //
 //
 //
+}
+function upload_success_cb(data){
+    if(data["message1"] != null){
+        console.log(data["result1"]);
+    }
+    if(data["message2"] != null){
+        console.log(data["result2"]);
+    }
+    if(data["message3"] != null){
+        console.log(data["result3"]);
+    }
 }

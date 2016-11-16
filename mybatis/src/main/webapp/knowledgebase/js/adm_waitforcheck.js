@@ -23,7 +23,7 @@ function cb_get_all(obj){
         var td_2 = "<td style='padding-top:15px;width:180px;' value="+all_wait_file[each].fileId+"><a href='##'>"+all_wait_file[each].fileName+"</a></td>";
         var td_3 = "<td style='padding-top:15px;width:180px;' >"+get_file_check(all_wait_file[each].fileCheck)+"</td>";
         //var td_4 = "<td><button class='btn btn-primary' onclick='delete_one_file(this)' value="+all_wait_file[each].fileId+">删除</button></td>";
-        var td_5 = "<td><button class='btn btn-primary' onclick='' value="+all_wait_file[each].fileId+">下载</button></td>";
+        var td_5 = "<td><button class='btn btn-primary' onclick='download(this)' path='"+all_wait_file[each].fileUrl+"'>下载</button></td>";
         //var td_6 = "";
         //if(all_wait_file[each].fileCheck == -1){
         //    td_6 = "<td><button class='btn btn-primary' onclick='' value="+all_wait_file[each].fileId+">提交</button></td>";

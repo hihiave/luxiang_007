@@ -38,6 +38,7 @@
     <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
     <script src="/mybatis/knowledgebase/js/public_search.js"></script>
     <script src="/mybatis/knowledgebase/js/common.js"></script>
+    <script src="/mybatis/knowledgebase/js/adm_download.js"></script>
 
     <style type="text/css">
         .nav {
@@ -160,70 +161,81 @@
                     <h3 class="panel-title">我的下载</h3>
                 </div>
                 <div class="panel-body" style="padding-top:0px;">
-                    <div  >
-                        <input  type="text" id="download-test" name="filename" value="" style="width:90%;">
+                    <%--<div  >--%>
+                        <%--<input  type="text" id="download-test" name="filename" value="" style="width:90%;">--%>
 
-                        <button class="btn btn-primary" onclick="download()">下载</button>
-                    </div>
-                    <script type="text/javascript">
-                        function download(){
-                            if($("#download-test").val() == ""){
-                                return;
-                            }else{
-                                var form = $("<form>");   //定义一个form表单
-                                form.attr('style', 'display:none');   //在form表单中添加查询参数
+                        <%--<button class="btn btn-primary" onclick="download()">下载</button>--%>
+                    <%--</div>--%>
+                    <%--<script type="text/javascript">--%>
+                        <%--function download(){--%>
+                            <%--if($("#download-test").val() == ""){--%>
+                                <%--return;--%>
+                            <%--}else{--%>
+                                <%--var form = $("<form>");   //定义一个form表单--%>
+                                <%--form.attr('style', 'display:none');   //在form表单中添加查询参数--%>
 
-                                form.attr('method', 'post');
-                                form.attr('id', 'form-add');
-                                form.attr('action', "/mybatis/FileDownloadController/fileDownload.do");
+                                <%--form.attr('method', 'post');--%>
+                                <%--form.attr('id', 'form-add');--%>
+                                <%--form.attr('action', "/mybatis/FileDownloadController/fileDownload.do");--%>
 
-                                var input1 = $('<input>');
-                                input1.attr('type', 'hidden');
-                                input1.attr('name', 'filename');
-                                input1.attr('value', $("#download-test").val());
-                                $('.container').append(form);  //将表单放置在web中
-                                form.append(input1);   //将查询参数控件提交到表单上
-                                form.submit();
-                                $("#form-add").remove();
+                                <%--var input1 = $('<input>');--%>
+                                <%--input1.attr('type', 'hidden');--%>
+                                <%--input1.attr('name', 'filename');--%>
+                                <%--input1.attr('value', $("#download-test").val());--%>
+                                <%--$('.container').append(form);  //将表单放置在web中--%>
+                                <%--form.append(input1);   //将查询参数控件提交到表单上--%>
+                                <%--form.submit();--%>
+                                <%--$("#form-add").remove();--%>
 
-                            }
-                        }
-                    </script>
+                            <%--}--%>
+                        <%--}--%>
+                    <%--</script>--%>
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>文件名</th>
-                            <th style="padding-left:0px;">上传者</th>
-                            <th>下载时间</th>
-                            <th style="padding-left:20px;">下载</th>
-                            <th style="padding-left:20px;">预览</th>
+                            <th style="width: 70%;">文件名</th>
+                            <th style="width: 15%;">上传者</th>
+                            <th style="width: 15%;">下载时间</th>
+                            <%--<th style="padding-left:20px;">下载</th>--%>
+                            <%--<th style="padding-left:20px;">预览</th>--%>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td style="padding-top:15px;">第八次人民代表大会</td>
-                            <td style="padding-top:15px;">张三</td>
-                            <td style="padding-top:15px;">2016-8-1</td>
-                            <td>
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#download">下载</button>
-                            </td>
-                            <td><a href="preview.html">
-                                <button class="btn btn-primary">预览</button>
-                            </a></td>
-                        </tr>
-                        <tr>
-                            <td style="padding-top:15px;">第N次人民代表大会</td>
-                            <td style="padding-top:15px;">李四</td>
-                            <td style="padding-top:15px;">2016-8-1</td>
-                            <td>
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#download">下载</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-primary">预览</button>
-                            </td>
-                        </tr>
+                        <tbody id="down-file">
+                        <%--<tr>--%>
+                            <%--<td style="padding-top:15px;">第八次人民代表大会</td>--%>
+                            <%--<td style="padding-top:15px;">张三</td>--%>
+                            <%--<td style="padding-top:15px;">2016-8-1</td>--%>
+                            <%--<td>--%>
+                                <%--<button class="btn btn-primary" data-toggle="modal" data-target="#download">下载</button>--%>
+                            <%--</td>--%>
+                            <%--<td><a href="preview.html">--%>
+                                <%--<button class="btn btn-primary">预览</button>--%>
+                            <%--</a></td>--%>
+                        <%--</tr>--%>
+                        <%--<tr>--%>
+                            <%--<td style="padding-top:15px;">第N次人民代表大会</td>--%>
+                            <%--<td style="padding-top:15px;">李四</td>--%>
+                            <%--<td style="padding-top:15px;">2016-8-1</td>--%>
+                            <%--<td>--%>
+                                <%--<button class="btn btn-primary" data-toggle="modal" data-target="#download">下载</button>--%>
+                            <%--</td>--%>
+                            <%--<td>--%>
+                                <%--<button class="btn btn-primary">预览</button>--%>
+                            <%--</td>--%>
+                        <%--</tr>--%>
                         </tbody>
                     </table>
+                    <div style="margin-top: -20px;float: right;">
+                        <ul class="pagination" id="page-file-mydownload">
+                            <%--<li><a href="#">&laquo;</a></li>--%>
+                            <%--<li><a href="#">1</a></li>--%>
+                            <%--<li><a href="#">2</a></li>--%>
+                            <%--<li><a href="#">3</a></li>--%>
+                            <%--<li><a href="#">4</a></li>--%>
+                            <%--<li><a href="#">5</a></li>--%>
+                            <%--<li><a href="#">&raquo;</a></li>--%>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <jsp:include page="search-result.jsp" flush="true"/>

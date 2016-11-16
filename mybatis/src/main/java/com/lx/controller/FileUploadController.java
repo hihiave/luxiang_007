@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.lx.tool.ToolDate;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -30,7 +31,7 @@ public class FileUploadController {
 	public Map<String,Object> fileUpload(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
         Map<String,Object> map = new HashMap<String, Object>();
-        System.out.println(request.getParameter("file"));
+//        System.out.println(request.getParameter("file"));
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
 		// 上传的地址
@@ -70,8 +71,8 @@ public class FileUploadController {
                 map.put("message", message);
 				return map;
 			}
-			upload.setFileSizeMax(1024 * 1024);// 单个文件的最大大小 这里是1M
-			upload.setSizeMax(1024 * 1024 * 10);// 文件总大小 这里设为10M
+			upload.setFileSizeMax(1024 * 1024 * 10);// 单个文件的最大大小 这里是1M
+			upload.setSizeMax(1024 * 1024 * 100);// 文件总大小 这里设为10M
 			List<FileItem> list = upload.parseRequest(request);// 用ServletFileUpload解析上传数据
 																// 返回一个List<FileItem>集合
 																// 每一个FileItem对应一个Form表单的输入项
@@ -95,18 +96,20 @@ public class FileUploadController {
 					fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
 					
 					int index = fileName.lastIndexOf(".");
-					String realName=fileName.substring(0, index); //文件名
+					//String realName=fileName.substring(0, index); //文件名
 					
-					System.out.println("=======fileName========="  + fileName);
-					System.out.println("=======realName========="  + realName);
+					//System.out.println("=======fileName========="  + fileName);
+					//System.out.println("=======realName========="  + realName);
 					
 					
 					String fileExtName = fileName.substring(index + 1);
-					System.out.println("上传文件的扩展名是" + fileExtName);
+					//System.out.println("上传文件的扩展名是" + fileExtName);
+                    String saveName = savePath + "/" + String.valueOf(ToolDate.getCurrentTimestamp()) + "." + fileExtName;
+                    System.out.println(saveName);
 					// 获取item中上传文件的输入流
 					InputStream in = item.getInputStream();
 					// 创建一个文件输出流
-					FileOutputStream out = new FileOutputStream(savePath + "/" + fileName);
+					FileOutputStream out = new FileOutputStream(saveName);
 					// 创建一个缓存区
 					byte buffer[] = new byte[1024];
 					// 建立一个标志判断输入流中的数据是否已经读完
@@ -118,6 +121,7 @@ public class FileUploadController {
 					in.close();
 					out.close();
 					item.delete();
+                    map.put("savePath",saveName);
 					message = "文件上传成功！";
 				}
 			}

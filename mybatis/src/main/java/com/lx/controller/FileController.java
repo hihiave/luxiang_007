@@ -1,5 +1,6 @@
 package com.lx.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.lx.tool.ToolDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -217,8 +219,103 @@ public class FileController {
 	/**
 	 * 上传文件
 	 */
-	public String uploadFile() {
-		return null;
+    @RequestMapping(value = "/add_file_info", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    @ResponseBody
+	public Map<String,Object> uploadFile(HttpServletRequest request) {
+        Map<String ,Object> map = new HashMap<String, Object>();
+//        System.out.println(request.getParameter("filename1"));
+//        System.out.println(request.getParameter("filename2"));
+//        System.out.println(request.getParameter("filename3"));
+        boolean result1;
+        boolean result2;
+        boolean result3;
+        if (request.getParameter("filename1") != null){
+            String filename1 =  request.getParameter("filename1");
+            String fileauthor1 =  request.getParameter("author1");
+            String filekeys1 =  request.getParameter("word1");
+            String filecate1 =  request.getParameter("cate1");
+            String filevisible1 =  request.getParameter("pro1");
+            FileInfo fileInfo1 = new FileInfo();
+            fileInfo1.setFileName(filename1);
+            fileInfo1.setFileAuthor(fileauthor1);
+            fileInfo1.setFileCategory(filecate1);
+            if(filevisible1 == "私有"){
+                fileInfo1.setFileCheck(1);
+            }else if (filevisible1 == "公有"){
+                fileInfo1.setFileCheck(0);
+            }
+
+            fileInfo1.setFileDownloadCount(0);
+            fileInfo1.setFileUploadTime(1);
+            fileInfo1.setFileKeywords(filekeys1);
+            fileInfo1.setFileIsVisible(filevisible1);
+            fileInfo1.setFileUrl(request.getParameter("filepath1"));
+            fileInfo1.setFileStatus(1);
+            fileInfo1.setFileDesc("");
+
+            result1 = fileInfoService.addFileInfo(fileInfo1);
+            map.put("message1","hahaha");
+            map.put("result1",result1);
+        }
+        if (request.getParameter("filename2") != null){
+            String filename2 =  request.getParameter("filename2");
+            String fileauthor2 =  request.getParameter("author2");
+            String filekeys2 =  request.getParameter("word2");
+            String filecate2 =  request.getParameter("cate2");
+            String filevisible2 =  request.getParameter("pro2");
+            FileInfo fileInfo2 = new FileInfo();
+            fileInfo2.setFileName(filename2);
+            fileInfo2.setFileAuthor(fileauthor2);
+            fileInfo2.setFileCategory(filecate2);
+            if(filevisible2 == "私有"){
+                fileInfo2.setFileCheck(1);
+            }else if (filevisible2 == "公有"){
+                fileInfo2.setFileCheck(0);
+            }
+            fileInfo2.setFileDownloadCount(0);
+            fileInfo2.setFileUploadTime(1);
+            fileInfo2.setFileKeywords(filekeys2);
+            fileInfo2.setFileIsVisible(filevisible2);
+            fileInfo2.setFileUrl(request.getParameter("filepath2"));
+            fileInfo2.setFileStatus(1);
+            fileInfo2.setFileDesc("");
+
+            result2 = fileInfoService.addFileInfo(fileInfo2);
+            map.put("message2","hahaha");
+            map.put("result2",result2);
+        }
+        if (request.getParameter("filename3") != null){
+            String filename3 =  request.getParameter("filename3");
+            String fileauthor3 =  request.getParameter("author3");
+            String filekeys3 =  request.getParameter("word3");
+            String filecate3 =  request.getParameter("cate3");
+            String filevisible3 =  request.getParameter("pro3");
+            FileInfo fileInfo3 = new FileInfo();
+            fileInfo3.setFileName(filename3);
+            fileInfo3.setFileAuthor(fileauthor3);
+            fileInfo3.setFileCategory(filecate3);
+            if(filevisible3 == "私有"){
+                fileInfo3.setFileCheck(1);
+            }else if (filevisible3 == "公有"){
+                fileInfo3.setFileCheck(0);
+            }
+            fileInfo3.setFileDownloadCount(0);
+            fileInfo3.setFileUploadTime(1);
+            fileInfo3.setFileKeywords(filekeys3);
+            fileInfo3.setFileIsVisible(filevisible3);
+            fileInfo3.setFileUrl(request.getParameter("filepath3"));
+            fileInfo3.setFileStatus(1);
+            fileInfo3.setFileDesc("");
+
+            result3 = fileInfoService.addFileInfo(fileInfo3);
+            map.put("message3","hahaha");
+            map.put("result3",result3);
+        }
+
+
+
+
+		return map;
 	}
 
 	/**

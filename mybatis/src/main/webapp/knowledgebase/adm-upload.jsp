@@ -37,6 +37,7 @@
     <script src="/mybatis/knowledgebase/js/html5shiv.min.js"></script>
     <script src="/mybatis/knowledgebase/js/ajaxfileupload.js"></script>
     <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
+    <script src="/mybatis/knowledgebase/js/common.js"></script>
     <script src="/mybatis/knowledgebase/js/public_search.js"></script>
     <script src="/mybatis/knowledgebase/js/adm_upload.js"></script>
 
@@ -133,9 +134,27 @@
             <%--}--%>
         <%--}--%>
     <%--</script>--%>
+
 </head>
 <body>
+<%--<input type="hidden" id="username_file" value="<%=session.getAttribute("username") %>"/>--%>
+<%--<input type="hidden" id="time_file" value="<%=time%>"/>--%>
+<%--<script type="text/javascript">--%>
+    <%--window.onload = function () {--%>
+        <%--&lt;%&ndash;var register_time = "${time}";&ndash;%&gt;--%>
+<%--//            var time = timeStampFormatDay(register_time * 1000);--%>
+<%--//            console.log(time);--%>
+        <%--$("#author1").html("${username}");--%>
+        <%--$("#author2").html("${username}");--%>
+        <%--$("#author3").html("${username}");--%>
+        <%--&lt;%&ndash;$("#show_user_name").html("${username}");&ndash;%&gt;--%>
+        <%--$("#time2").html("<%=time%>>");--%>
+        <%--$("#time3").html("<%=time%>>");--%>
+        <%--$("#time1").html("<%=time%>>");--%>
+<%--//            $("#show_register_time").html(time);--%>
 
+    <%--}--%>
+<%--</script>--%>
 <div style="margin:10px 20px;">
     <button type="button" class="btn btn-md btn-default" style="border:0px;float:right;" data-toggle="tooltip"
             data-placement="bottom" title="退出登录" onclick="logout()">
@@ -254,7 +273,7 @@
                                 <div class="panel-body form-inline">
                                     <div class="row" style="display: none;">
                                         <div class="col-md-12" style="margin-bottom: 25px;">
-                                            <input type="file" name="file-test" id="file-test" pid="aim1" onchange="changeFile(this)">
+                                            <input type="file" name="file-test1" id="file-test1" pid="aim1" rid="file_result1" onchange="changeFile(this)">
                                         </div>
 
                                     </div>
@@ -266,12 +285,12 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-1" style="margin-bottom: 25px;">
-                                            <button type="button" class="btn btn-default" bid="file-test" pid="aim1"
+                                            <button type="button" class="btn btn-default" bid="file-test1" pid="aim1"
                                                     onclick="add_one_click(this)">添加
                                             </button>
                                         </div>
                                         <div class="col-md-1" style="margin-bottom: 25px;">
-                                            <button type="button" class="btn btn-default" bid="file-test" pid="aim1"
+                                            <button type="button" class="btn btn-default" bid="file-test1" pid="aim1"
                                                     onclick="del_one_click(this)">移除
                                             </button>
                                         </div>
@@ -284,7 +303,7 @@
                                                                      id="aim1" readonly="true">&nbsp;&nbsp;
                                         </div>
                                         <div class="col-md-6" style="margin-bottom: 25px;">
-                                            <span>上传者：</span><input class="form-control" style="width:75%;" type="text"
+                                            <span>上传者：</span><input class="form-control" style="width:75%;" type="text" id="author1"
                                                                     placeholder="<%=session.getAttribute("username")%>"
                                                                     readonly="true">
                                         </div>
@@ -292,7 +311,7 @@
 
                                     <div class="row" >
                                         <div class="col-md-6" style="margin-bottom: 25px;">
-                                            <span>上传时间：</span><input class="form-control" style="width:75%;" type="text"
+                                            <span>上传时间：</span><input class="form-control" style="width:75%;" type="text" id="time1"
                                                                      placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
                                         </div>
                                         <div class="col-md-6" style="margin-bottom: 25px;">
@@ -339,18 +358,24 @@
                                 <div class="panel-body form-inline">
                                     <div class="row" style="display: none;">
                                         <div class="col-md-12" style="margin-bottom: 25px;">
-                                            <input type="file" name="file-test2" id="file-tes2" pid="aim2" onchange="changeFile(this)">
+                                            <input type="file" name="file-test2" id="file-test2" pid="aim2" rid="file_result2" onchange="changeFile(this)">
+                                        </div>
+
+                                    </div>
+                                    <div class="row" style="display: none;">
+                                        <div class="col-md-12" style="margin-bottom: 25px;">
+                                            <input type="input"  name="file_result" id="file_result2" >
                                         </div>
 
                                     </div>
                                     <div class="row">
                                         <div class="col-md-1" style="margin-bottom: 25px;">
-                                            <button type="button" class="btn btn-default" bid="file-tes2" pid="aim2"
+                                            <button type="button" class="btn btn-default" bid="file-test2" pid="aim2"
                                                     onclick="add_one_click(this)">添加
                                             </button>
                                         </div>
                                         <div class="col-md-1" style="margin-bottom: 25px;">
-                                            <button type="button" class="btn btn-default" bid="file-tes2" pid="aim2"
+                                            <button type="button" class="btn btn-default" bid="file-test2" pid="aim2"
                                                     onclick="del_one_click(this)">移除
                                             </button>
                                         </div>
@@ -363,7 +388,7 @@
                                                                      id="aim2" readonly="true">&nbsp;&nbsp;
                                         </div>
                                         <div class="col-md-6" style="margin-bottom: 25px;">
-                                            <span>上传者：</span><input class="form-control" style="width:75%;" type="text"
+                                            <span>上传者：</span><input class="form-control" style="width:75%;" type="text" id="author2"
                                                                     placeholder="<%=session.getAttribute("username")%>"
                                                                     readonly="true">
                                         </div>
@@ -371,7 +396,7 @@
 
                                     <div class="row" >
                                         <div class="col-md-6" style="margin-bottom: 25px;">
-                                            <span>上传时间：</span><input class="form-control" style="width:75%;" type="text"
+                                            <span>上传时间：</span><input class="form-control" style="width:75%;" type="text" id="time2"
                                                                      placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
                                         </div>
                                         <div class="col-md-6" style="margin-bottom: 25px;">
@@ -418,18 +443,24 @@
                                 <div class="panel-body form-inline">
                                     <div class="row" style="display: none;">
                                         <div class="col-md-12" style="margin-bottom: 25px;">
-                                            <input type="file"  name="file3" id="file3" pid="aim3" onchange="changeFile(this)">
+                                            <input type="file" name="file-test3" id="file-test3" pid="aim3" rid="file_result3" onchange="changeFile(this)">
+                                        </div>
+
+                                    </div>
+                                    <div class="row" style="display: none;">
+                                        <div class="col-md-12" style="margin-bottom: 25px;">
+                                            <input type="input"  name="file_result" id="file_result3" >
                                         </div>
 
                                     </div>
                                     <div class="row">
                                         <div class="col-md-1" style="margin-bottom: 25px;">
-                                            <button type="button" class="btn btn-default" bid="file3" pid="aim3"
+                                            <button type="button" class="btn btn-default" bid="file-test3" pid="aim3"
                                                     onclick="add_one_click(this)">添加
                                             </button>
                                         </div>
                                         <div class="col-md-1" style="margin-bottom: 25px;">
-                                            <button type="button" class="btn btn-default" bid="file3" pid="aim3"
+                                            <button type="button" class="btn btn-default" bid="file-test3" pid="aim3"
                                                     onclick="del_one_click(this)">移除
                                             </button>
                                         </div>
@@ -441,7 +472,7 @@
                                                                      id="aim3" readonly="true">&nbsp;&nbsp;
                                         </div>
                                         <div class="col-md-6" style="margin-bottom: 25px;">
-                                            <span>上传者：</span><input class="form-control" style="width:75%;" type="text"
+                                            <span>上传者：</span><input class="form-control" style="width:75%;" type="text" id="author3"
                                                                     placeholder="<%=session.getAttribute("username")%>"
                                                                     readonly="true">
                                         </div>
@@ -449,7 +480,7 @@
 
                                     <div class="row" >
                                         <div class="col-md-6" style="margin-bottom: 25px;">
-                                            <span>上传时间：</span><input class="form-control" style="width:75%;" type="text"
+                                            <span>上传时间：</span><input class="form-control" style="width:75%;" type="text" id="time3"
                                                                      placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
                                         </div>
                                         <div class="col-md-6" style="margin-bottom: 25px;">
@@ -487,7 +518,8 @@
 
 
                         <div align="center">
-                            <input type="submit" value="上传文件" id="sub"  class="btn btn-primary">
+                            <%--<input type="submit" value="上传文件" id="sub"   class="btn btn-primary">--%>
+                            <button class="btn btn-primary" onclick="uploadFile()">上传</button>
                         </div>
 
 

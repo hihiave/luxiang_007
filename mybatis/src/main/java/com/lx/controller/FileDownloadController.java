@@ -39,8 +39,7 @@ public class FileDownloadController {
 		// 设置响应头
 		response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
 		// 读取要下载的文件 保存到文件输入流
-		FileInputStream in = new FileInputStream(filePath + "/" + fileName);
-		System.out.println(filePath + "/" + fileName);
+		FileInputStream in = new FileInputStream(fileName);
 		// 创建输出流
 		OutputStream out = response.getOutputStream();
 		byte buffer[] = new byte[1024];

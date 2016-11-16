@@ -21,7 +21,7 @@ function get_all_public_file_table(data){
         var td_1 = "<td style='padding-top:15px;'><a href='##'>"+all_pub_file[i].fileName+"</a></td>";
         var td_2 = "<td style='padding-top:15px;'>"+all_pub_file[i].fileAuthor+"</td>";
         var td_3 = "<td style='padding-top:15px;'>"+timeStampFormatDay(all_pub_file[i].fileUploadTime*1000)+"</td>";
-        var td_4 = "<td><button class='btn btn-primary' data-toggle='modal' data-target='#download' onclick='down_file(this)'>下载</button></td>";
+        var td_4 = "<td><button class='btn btn-primary'  onclick='download(this)' path='"+all_pub_file[i].fileUrl+"'>下载</button></td>";
         //var td_5 = "<td><button class='btn btn-primary' data-toggle='modal' data-target='#preview' onclick='pre_file(this)'>预览</button></td>";
         var td_6="<td style='padding-top:15px;'>"+all_pub_file[i].fileDownloadCount+"</td>"
         var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_6 + tr_end;
@@ -30,40 +30,40 @@ function get_all_public_file_table(data){
     createNewPagination(data,"file_public","/mybatis/FileInfoController/publicfile.do",get_all_public_file_table,"first_file_click","last_file_click","page-file-three",{"fileProperty":"fullText"});
 }
 
-function down_file(obj){
-    var btn_name = $(obj);
-    var file_name = btn_name.parent().siblings()[0].innerHTML;
+//function down_file(obj){
+//    var btn_name = $(obj);
+//    var file_name = btn_name.parent().siblings()[0].innerHTML;
+//
+//    btn_name.attr("data-target","#download");
+//    $("#download_file").html("是否下载："+file_name+"？");
+//    $("#download_file").removeClass();
+//    $("#download_file").addClass(file_name);
+//}
 
-    btn_name.attr("data-target","#download");
-    $("#download_file").html("是否下载："+file_name+"？");
-    $("#download_file").removeClass();
-    $("#download_file").addClass(file_name);
-}
-
-function pre_file(obj){
-    var btn_name = $(obj);
-    var file_name = btn_name.parent().siblings()[0].innerHTML;
-
-    btn_name.attr("data-target","#preview");
-    $("#preview_file").html("是否预览："+file_name+"？");
-    $("#preview_file").removeClass();
-    $("#preview_file").addClass(file_name);
-}
-//下载
-function downloadFile(obj){
-	var attr_d = $("#download_file").attr("class");
-	/*$.ajax(
-			{
-		type:'post',
-        url:"/mybatis/FileDownloadController/fileDownload.do",
-        data:{"filename":attr_d},
-        dataType:"json",
-		
-	}
-			)*/
-}
+//function pre_file(obj){
+//    var btn_name = $(obj);
+//    var file_name = btn_name.parent().siblings()[0].innerHTML;
+//
+//    btn_name.attr("data-target","#preview");
+//    $("#preview_file").html("是否预览："+file_name+"？");
+//    $("#preview_file").removeClass();
+//    $("#preview_file").addClass(file_name);
+//}
+////下载
+//function downloadFile(obj){
+//	var attr_d = $("#download_file").attr("class");
+//	/*$.ajax(
+//			{
+//		type:'post',
+//        url:"/mybatis/FileDownloadController/fileDownload.do",
+//        data:{"filename":attr_d},
+//        dataType:"json",
+//
+//	}
+//			)*/
+//}
 //预览
-function previewFile(obj){
-	var attr_p=$("preview_file").attr("class");
-	$.ajax()
-}
+//function previewFile(obj){
+//	var attr_p=$("preview_file").attr("class");
+//	$.ajax()
+//}
