@@ -41,6 +41,18 @@ public class MyDownloadController {
 		
 		return map;
 	}
+
+    /**
+     * 添加我的下载记录
+     */
+    @RequestMapping(value = "/add_my_download", method = RequestMethod.POST)
+
+    @ResponseBody
+    public Map<String,Object> addMydownload(HttpSession httpSession,Integer fileid){
+        String username =(String) httpSession.getAttribute("username");
+        myDownloadService.addMyDownload(username,fileid);
+        return null;
+    }
 	
 	/**
 	 * 获取我的下载记录

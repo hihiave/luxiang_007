@@ -234,11 +234,28 @@ function createNewPagination(data, class_name,src,deal_cb,left_arrow_id, right_a
 
 
 //在线阅读
-function ReadOnLine(){
-    var filename = "阅读.docx";
-    var src = "/mybatis/ReadOnlineController/readOnline.do";
-    console.log("hah");
-    sendAjaxRequest(src,{"filename":filename});
+function ReadOnLine(obj){
+    //var filename = $(obj).attr("path");
+    //var src = "/mybatis/ReadOnlineController/readOnline.do";
+    //console.log(filename);
+    //sendAjaxRequest(src,{"filename":filename},function(data){
+    //});
+
+    var form = $("<form>");   //定义一个form表单
+    form.attr('style', 'display:none');   //在form表单中添加查询参数
+
+    form.attr('method', 'post');
+    form.attr('id', 'form-readonline');
+    form.attr('action', "/mybatis/ReadOnlineController/readOnline.do");
+
+    var input1 = $('<input>');
+    input1.attr('type', 'hidden');
+    input1.attr('name', 'filename');
+    input1.attr('value', $(obj).attr("path"));
+    $('.container').append(form);  //将表单放置在web中
+    form.append(input1);   //将查询参数控件提交到表单上
+    form.submit();
+    $("#form-readonline").remove();
 }
 
 
@@ -259,4 +276,16 @@ function download(obj){
         form.append(input1);   //将查询参数控件提交到表单上
         form.submit();
         $("#form-add").remove();
+
+        var fileid = $(obj).attr("bid");
+        sendAjaxRequest("/mybatis/MyDownloadController/add_my_download.do",{"fileid":fileid},function(){console.log("下载成功")});
+        sendAjaxRequest("/mybatis/FileInfoController/download_count_add.do",{"fileid":fileid},function(data){
+            console.log("下载次数"+data["count"]);
+            if($(obj).attr("did") == "public"){
+                var src = "/mybatis/FileInfoController/publicfile.do";
+                var page = $("ul.pagination li.active>a").text();
+                console.log(page);
+                sendAjaxRequest(src,{"page_Now":page,"fileProperty":"fullText"},get_all_public_file_table);
+            }
+        });
 }

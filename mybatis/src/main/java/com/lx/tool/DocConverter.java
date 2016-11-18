@@ -63,7 +63,9 @@ public class DocConverter {
 						+ "soffice.exe -headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\" -nofirststartwizard";
 				System.out.println(command);
 				Process pro = Runtime.getRuntime().exec(command);
+                System.out.println(command);
 				OpenOfficeConnection connection = new SocketOpenOfficeConnection(8100);// 创建一个连接对象
+                System.out.println(command);
 				try {
 					connection.connect();// 建立连接
 					DocumentConverter converter = new OpenOfficeDocumentConverter(connection);// 创建一个文件转换器
@@ -101,7 +103,7 @@ public class DocConverter {
 		if (!swfFile.exists()) {
 			if (pdfFile.exists()) {
 				try {
-					String swftoolsHome = "D:/SWFTools/pdf2swf.exe ";
+					String swftoolsHome = "C:/SWFTools/pdf2swf.exe ";
 					String command = swftoolsHome + pdfFile.getPath() + " -o " + swfFile.getPath()
 							+ " -s flashversion=9";
 					// String command="F:\\SWFTools\\2.bat";

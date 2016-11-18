@@ -11,19 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lx.tool.DocConverter;
 import com.lx.tool.FileTransfer;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/ReadOnlineController")
 public class ReadOnlineController {
 
-	@RequestMapping("/readOnline")
+	@RequestMapping(value = "/readOnline",method = RequestMethod.POST)
 	protected void readOnline(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String temp = "C:/Users/";
-		String fileName = request.getParameter("filename");
-		String from = temp + fileName;
-		String savePath = "C:/SWFTools";
+
+		String from = request.getParameter("filename");
+//        String from = "C:/Users/1479264893.doc";
+		String savePath = "C:/temp";
 
 		System.out.println("+++++======" + from);
 
@@ -37,14 +38,17 @@ public class ReadOnlineController {
 
 		System.out.println("nice++++" + docConverter.getSwfFilePath());
 
-		String savePath2 = "C:/swf文件";
+		String savePath2 = "C:/程序/Knowledge/luxiang_007/mybatis/target/mybatis-0.0.1-SNAPSHOT/swf";
 		FileTransfer fileTransfer2 = new FileTransfer(savePath2, docConverter.getSwfFilePath());
 		fileTransfer2.transfer();
 		request.getSession().setAttribute("swfPath", fileTransfer2.getSavePath());
 		response.sendRedirect("../Flexpaper2.10/documentView.jsp");
-		// request.getRequestDispatcher("/Flexpaper2.10/documentView.jsp").forward(request,response);
+//        return "../Flexpaper2.10/documentView";
+//        request.getRequestDispatcher("../Flexpaper2.10/documentView.jsp").forward(request,response);
 		// TODO Auto-generated method stub
 
 	}
+
+
 
 }

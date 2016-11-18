@@ -239,14 +239,14 @@ public class FileController {
             fileInfo1.setFileName(filename1);
             fileInfo1.setFileAuthor(fileauthor1);
             fileInfo1.setFileCategory(filecate1);
-            if(filevisible1 == "私有"){
+            if(filevisible1.equals("私有")){
                 fileInfo1.setFileCheck(1);
-            }else if (filevisible1 == "公有"){
+            }else if (filevisible1.equals("公有")){
                 fileInfo1.setFileCheck(0);
             }
 
             fileInfo1.setFileDownloadCount(0);
-            fileInfo1.setFileUploadTime(1);
+            fileInfo1.setFileUploadTime(ToolDate.getCurrentTimestamp());
             fileInfo1.setFileKeywords(filekeys1);
             fileInfo1.setFileIsVisible(filevisible1);
             fileInfo1.setFileUrl(request.getParameter("filepath1"));
@@ -267,13 +267,13 @@ public class FileController {
             fileInfo2.setFileName(filename2);
             fileInfo2.setFileAuthor(fileauthor2);
             fileInfo2.setFileCategory(filecate2);
-            if(filevisible2 == "私有"){
+            if(filevisible2.equals("私有")){
                 fileInfo2.setFileCheck(1);
-            }else if (filevisible2 == "公有"){
+            }else if (filevisible2.equals("公有")){
                 fileInfo2.setFileCheck(0);
             }
             fileInfo2.setFileDownloadCount(0);
-            fileInfo2.setFileUploadTime(1);
+            fileInfo2.setFileUploadTime(ToolDate.getCurrentTimestamp());
             fileInfo2.setFileKeywords(filekeys2);
             fileInfo2.setFileIsVisible(filevisible2);
             fileInfo2.setFileUrl(request.getParameter("filepath2"));
@@ -294,13 +294,13 @@ public class FileController {
             fileInfo3.setFileName(filename3);
             fileInfo3.setFileAuthor(fileauthor3);
             fileInfo3.setFileCategory(filecate3);
-            if(filevisible3 == "私有"){
+            if(filevisible3.equals("私有")){
                 fileInfo3.setFileCheck(1);
-            }else if (filevisible3 == "公有"){
+            }else if (filevisible3.equals("公有")){
                 fileInfo3.setFileCheck(0);
             }
             fileInfo3.setFileDownloadCount(0);
-            fileInfo3.setFileUploadTime(1);
+            fileInfo3.setFileUploadTime(ToolDate.getCurrentTimestamp());
             fileInfo3.setFileKeywords(filekeys3);
             fileInfo3.setFileIsVisible(filevisible3);
             fileInfo3.setFileUrl(request.getParameter("filepath3"));
@@ -321,29 +321,20 @@ public class FileController {
 	/**
 	 * 下载文件
 	 */
-	@RequestMapping(value = "/down_check_file", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+	@RequestMapping(value = "/download_count_add", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public void down_check_file(String select_filename, HttpServletRequest httpServletRequest) {
+	public Map<String,Object> down_check_file(Integer fileid, HttpServletRequest httpServletRequest) {
 
 		// author luxiang
 		// 根据文件id查询文件
-//		FileInfo fileInfo = fileInfoService.getFileByFileId(40);
+        Map<String,Object> map = new HashMap<String, Object>();
+		List<FileInfo> fileInfo = fileInfoService.getFileByFileId(fileid);
 
-//		fileInfo.getFileUrl(); // 获取url
-
-		// ..... 执行一些下载的代码
-		// .....
-		// .....
-
-		// 下载成功后, 将 下载次数 +1
-//		int count = fileInfo.getFileDownloadCount();
-//		count++;
-
-//		fileInfo.setFileDownloadCount(count);
-
-		// 更新文件信息
-//		fileInfoService.updateFileByFileId(fileInfo.getFileId(), fileInfo);
-
+		int countnum = fileInfo.get(0).getFileDownloadCount() + 1; // 获取url
+        fileInfo.get(0).setFileDownloadCount(countnum);
+		fileInfoService.updateFileByFileId(fileInfo.get(0).getFileId(), fileInfo.get(0));
+        map.put("count",countnum);
+        return map;
 	}
 
 	// ********************管理员操作权限********************

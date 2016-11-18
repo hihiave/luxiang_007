@@ -20,7 +20,7 @@ function get_all_checkfile_table(data){
         var tr_begin = "<tr>";
         var tr_end = "</tr>";
         var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' value="+checkfile[i].fileId+"></td>";
-        var td_2 = "<td style='padding-top:15px;width:280px;' id="+checkfile[i].fileId+"><a href='##'>"+checkfile[i].fileName+"</a></td>";
+        var td_2 = "<td style='padding-top:15px;width:280px;' id="+checkfile[i].fileId+"><a href='##' onclick='ReadOnLine(this)' path='"+checkfile[i].fileUrl+"'>"+checkfile[i].fileName+"</a></td>";
         var td_3 = "<td style='padding-top:15px;'>"+checkfile[i].fileAuthor+"</td>";
         //var td_4 = "<td><button class='btn btn-primary' onclick='check_one_file(this)'>通过</button></td>";
         //var td_5 = "<td><button class='btn btn-primary' onclick='notpass_one_file(this)' value="+checkfile[i].fileId+">拒绝</button></td>";

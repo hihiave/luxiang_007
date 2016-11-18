@@ -2,6 +2,7 @@ package com.lx.serviceimpl;
 
 import java.util.List;
 
+import com.lx.tool.ToolDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class MyDownloadServiceImpl implements MyDownloadService {
 		MyDownload myDownload = new MyDownload();
 		myDownload.setMyDownloadUserName(myDownloadUserName);
 		myDownload.setMyDownloadFileId(myDownloadFileId);
+        myDownload.setMyDownloadTime(ToolDate.getCurrentTimestamp());
 
 		if (myDownloadMapper.insertSelective(myDownload) == 1) {
 			return true;

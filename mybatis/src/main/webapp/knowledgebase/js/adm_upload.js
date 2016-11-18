@@ -45,7 +45,16 @@ function changeFile(obj){
     var input_text = $(obj).attr("pid");
     var result_text = $(obj).attr("rid");
     var arr = file.split('\\');
-    $("#"+input_text).val(arr[arr.length - 1]);
+    var filename = arr[arr.length - 1];
+    var realname_arr = filename.split('.');
+    var file_last = realname_arr[realname_arr.length-1];
+    if(file_last != "pdf" && file_last != "doc" && file_last != "docx" && file_last != "xls" && file_last != "xlsx" && file_last != "ppt" && file_last != "pptx" && file_last != "txt" ){
+        alert("不支持选中文件格式！！");
+        $(obj).val("");
+        return;
+    }
+    console.log("上传文件"+file_last);
+    $("#"+input_text).val(filename);
     var fileid = $(obj).attr("id");
     console.log(file);
     $.ajaxFileUpload({
@@ -55,11 +64,12 @@ function changeFile(obj){
         data:{},
         dataType:'json',
         success:function(data){
-            console.log(data["savePath"]);
+            $("#info-p").html(data["message"]);
+            $("#info-modal").modal("show");
             $("#"+result_text).val(data["savePath"]);
         },
         error:function(data){
-            $("#info-p").html(data["message"]);
+            $("#info-p").html("网络故障，请稍后重试！！！");
             $("#info-modal").modal("show");
         }
     })

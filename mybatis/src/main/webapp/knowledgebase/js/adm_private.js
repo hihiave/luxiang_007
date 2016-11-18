@@ -23,10 +23,10 @@ function get_all_private_file_table(data){
         var tr_begin = "<tr>";
         var tr_end = "</tr>";
         var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' value="+all_pri_file[i].fileId+"></td>"
-        var td_2 = "<td style='padding-top:15px;width:180px;' id="+all_pri_file[i].fileId+"><a href='##' onclick='ReadOnLine()'>"+all_pri_file[i].fileName+"</a></td>";
+        var td_2 = "<td style='padding-top:15px;width:180px;' id="+all_pri_file[i].fileId+"><a href='##'  onclick='ReadOnLine(this)' path='"+all_pri_file[i].fileUrl+"' >"+all_pri_file[i].fileName+"</a></td>";
         var td_3 = "<td style='padding-top:15px;'>"+all_pri_file[i].fileIsVisible+"</td>";
         var td_4 = "<td style='padding-top:15px;'>"+timeStampFormatDay(all_pri_file[i].fileUploadTime*1000)+"</td>";
-        var td_5 = "<td><button class='btn btn-primary' data-toggle='modal'data-target='' onclick='download(this)' path='"+all_pri_file[i].fileUrl+"'>下载</button></td>";
+        var td_5 = "<td><button class='btn btn-primary' bid='"+all_pri_file[i].fileId+"'  onclick='download(this)' path='"+all_pri_file[i].fileUrl+"'>下载</button></td>";
         //var td_5 = "<td><button class='btn btn-primary' data-toggle='modal' data-target='' onclick='delete_one_pick(this)'>删除</button></td>";
         //var td_6 = "<td ></td>";
         //var td_7 = "<td><button class='btn btn-primary' data-toggle='modal' data-target='' onclick='pre_file(this)'>预览</button></td>";

@@ -103,7 +103,20 @@ public class FileUploadController {
 					
 					
 					String fileExtName = fileName.substring(index + 1);
-					//System.out.println("上传文件的扩展名是" + fileExtName);
+					System.out.println("上传文件的扩展名是" + fileExtName);
+                    if(fileExtName.equals( "docx" )){
+                        fileExtName = "doc";
+                        System.out.println("上传文件的扩展名是" + fileExtName);
+                    }
+                    if(fileExtName.equals("xlsx")){
+                        fileExtName = "xls";
+                        System.out.println("上传文件的扩展名是" + fileExtName);
+                    }
+                    if(fileExtName.equals("pptx")){
+                        fileExtName = "ppt";
+                        System.out.println("上传文件的扩展名是" + fileExtName);
+                    }
+
                     String saveName = savePath + "/" + String.valueOf(ToolDate.getCurrentTimestamp()) + "." + fileExtName;
                     System.out.println(saveName);
 					// 获取item中上传文件的输入流
@@ -122,7 +135,7 @@ public class FileUploadController {
 					out.close();
 					item.delete();
                     map.put("savePath",saveName);
-					message = "文件上传成功！";
+					message = "添加文件成功，请完善信息上传！";
 				}
 			}
 		} catch (FileUploadBase.FileSizeLimitExceededException e) {
