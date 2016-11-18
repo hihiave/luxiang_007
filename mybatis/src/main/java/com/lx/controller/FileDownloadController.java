@@ -22,14 +22,14 @@ public class FileDownloadController {
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		// 得到下载的文件名
-		String fileName = request.getParameter("filename");
+		//String fileName = 
 
 		
 		// fileName=new String(fileName.getBytes("ISO8859_1"),"UTF-8");
-		System.out.println(fileName);
+		//System.out.println( "得到下载的文件名============" + fileName);
 
 		/* 获取文件的路径 */
-		String filePath = "c:/Users";
+		String filePath = request.getParameter("filename");
 		File file = new File(filePath);
 		if (!file.exists()) {
 			request.setAttribute("message", "资源不存在");
@@ -37,9 +37,9 @@ public class FileDownloadController {
 			return;
 		}
 		// 设置响应头
-		response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+		response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(filePath, "UTF-8"));
 		// 读取要下载的文件 保存到文件输入流
-		FileInputStream in = new FileInputStream(fileName);
+		FileInputStream in = new FileInputStream(filePath);
 		// 创建输出流
 		OutputStream out = response.getOutputStream();
 		byte buffer[] = new byte[1024];

@@ -71,8 +71,8 @@ public class FileUploadController {
                 map.put("message", message);
 				return map;
 			}
-			upload.setFileSizeMax(1024 * 1024 * 10);// 单个文件的最大大小 这里是1M
-			upload.setSizeMax(1024 * 1024 * 100);// 文件总大小 这里设为10M
+			upload.setFileSizeMax(1024 * 1024 * 10);// 单个文件的最大大小 这里是10M
+			upload.setSizeMax(1024 * 1024 * 30);// 文件总大小 这里设为30M
 			List<FileItem> list = upload.parseRequest(request);// 用ServletFileUpload解析上传数据
 																// 返回一个List<FileItem>集合
 																// 每一个FileItem对应一个Form表单的输入项

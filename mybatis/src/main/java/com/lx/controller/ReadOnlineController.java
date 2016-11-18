@@ -17,38 +17,40 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/ReadOnlineController")
 public class ReadOnlineController {
 
-	@RequestMapping(value = "/readOnline",method = RequestMethod.POST)
+	@RequestMapping(value = "/readOnline", method = RequestMethod.POST)
 	protected void readOnline(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
-		String from = request.getParameter("filename");
-//        String from = "C:/Users/1479264893.doc";
-		String savePath = "C:/temp";
+		// "C:/Users/" 文件所在的地址 filename文件名
+		String from = "C:/Users/" + request.getParameter("filename");
+		String savePath = "D:/SWFTools";
 
 		System.out.println("+++++======" + from);
 
 		FileTransfer fileTransfer = new FileTransfer(savePath, from);
-		fileTransfer.transfer();// 将文件移动到swftools文件夹
+		fileTransfer.transfer();// 将文件移动到swftools文件夹  savePath
 
 		System.out.println("//////////" + fileTransfer.getSavePath());
 
+		// fileTransfer.getSavePath() 当前文件所在的地址xxxxxx.doc
 		DocConverter docConverter = new DocConverter(fileTransfer.getSavePath());
 		docConverter.convert();// 生成swf文件
 
 		System.out.println("nice++++" + docConverter.getSwfFilePath());
 
-		String savePath2 = "C:/程序/Knowledge/luxiang_007/mybatis/target/mybatis-0.0.1-SNAPSHOT/swf";
+		String savePath2 = "E:/swf文件";
+		
+		
 		FileTransfer fileTransfer2 = new FileTransfer(savePath2, docConverter.getSwfFilePath());
 		fileTransfer2.transfer();
+		
+		
 		request.getSession().setAttribute("swfPath", fileTransfer2.getSavePath());
 		response.sendRedirect("../Flexpaper2.10/documentView.jsp");
-//        return "../Flexpaper2.10/documentView";
-//        request.getRequestDispatcher("../Flexpaper2.10/documentView.jsp").forward(request,response);
+		// return "../Flexpaper2.10/documentView";
+		// request.getRequestDispatcher("../Flexpaper2.10/documentView.jsp").forward(request,response);
 		// TODO Auto-generated method stub
 
 	}
-
-
 
 }

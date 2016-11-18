@@ -9,7 +9,7 @@
 <%
 	String swfFilePath = session.getAttribute("swfPath").toString();
 	String fileName = swfFilePath.substring(swfFilePath.lastIndexOf("/") + 1);//
-	String savePath = "../swf/" + fileName;
+	String savePath = "/swf文件/" + fileName;
 	System.out.println("++不错++" + savePath);
 	System.out.println("=++不错++=" + swfFilePath);
 %>

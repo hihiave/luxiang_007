@@ -10,6 +10,7 @@ import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 
+// doc -- > pdf
 public class DocConverter {
 	private String filePath;// (doc文件的位置)
 	private String outputPath;// swf 文件的输出位置
@@ -94,7 +95,7 @@ public class DocConverter {
 	}
 
 	/**
-	 * 专为swf
+	 * 转换为swf
 	 * 
 	 * @throws Exception
 	 */
@@ -103,7 +104,7 @@ public class DocConverter {
 		if (!swfFile.exists()) {
 			if (pdfFile.exists()) {
 				try {
-					String swftoolsHome = "C:/SWFTools/pdf2swf.exe ";
+					String swftoolsHome = "D:/SWFTools/pdf2swf.exe ";
 					String command = swftoolsHome + pdfFile.getPath() + " -o " + swfFile.getPath()
 							+ " -s flashversion=9";
 					// String command="F:\\SWFTools\\2.bat";
