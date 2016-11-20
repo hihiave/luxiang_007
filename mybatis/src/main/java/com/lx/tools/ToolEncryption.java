@@ -1,4 +1,4 @@
-package com.lx.tool;
+package com.lx.tools;
 
 import java.security.MessageDigest;
 

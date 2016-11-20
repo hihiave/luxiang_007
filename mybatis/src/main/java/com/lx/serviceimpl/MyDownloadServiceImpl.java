@@ -2,7 +2,6 @@ package com.lx.serviceimpl;
 
 import java.util.List;
 
-import com.lx.tool.ToolDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +9,7 @@ import com.lx.dao.MyDownloadMapper;
 import com.lx.model.FileInfoVo;
 import com.lx.model.MyDownload;
 import com.lx.service.MyDownloadService;
+import com.lx.tools.ToolDate;
 
 @Service
 public class MyDownloadServiceImpl implements MyDownloadService {

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lx.tool.ToolDate;
+import com.lx.tools.ToolDate;
 
 @Controller
 @RequestMapping("/FileUploadController")

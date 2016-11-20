@@ -1,4 +1,4 @@
-package com.lx.tool;
+package com.lx.tools;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -10,7 +10,9 @@ import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 
-// doc -- > pdf
+/**
+ * 文件转换器
+ */
 public class ToolDocConverter {
 	private String filePath;// (doc文件的位置)
 	private String outputPath;// swf 文件的输出位置
@@ -19,9 +21,7 @@ public class ToolDocConverter {
 	private File pdfFile;
 	private File swfFile;
 
-	/**
-	 * 构造函数
-	 */
+	//构造函数
 	public ToolDocConverter(String filePath) {
 		init(filePath);
 		System.out.println("文件路径:" + filePath);

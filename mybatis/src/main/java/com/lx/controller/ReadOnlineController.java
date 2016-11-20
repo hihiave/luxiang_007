@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.lx.tool.ToolDocConverter;
-import com.lx.tool.ToolFileTransfer;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.lx.tools.ToolDocConverter;
+import com.lx.tools.ToolFileTransfer;
 
 @Controller
 @RequestMapping("/ReadOnlineController")

@@ -1,4 +1,4 @@
-package com.lx.tool;
+package com.lx.tools;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * 文件转移
+ */
 public class ToolFileTransfer {
 	private String savePath;// 转移地址
 	private String from;// 源文件地址
