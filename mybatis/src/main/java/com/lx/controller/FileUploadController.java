@@ -26,6 +26,12 @@ import com.lx.tools.ToolDate;
 @Controller
 @RequestMapping("/FileUploadController")
 public class FileUploadController {
+	// String fileName = "西游记"
+	// String fileNameExtension = ".png"
+	// String fileNameFull = fileName + fileNameExtension;
+
+	// String dirPath = "c:/a/b";
+	// String filePath = dirPath + "/" + fileNameFull;
 
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	@ResponseBody
@@ -38,7 +44,6 @@ public class FileUploadController {
 
 		String dirPath = "C:/Users"; // 上传的地址
 
-		// String filePath = dirPath + "/" + fileName + ".png";
 		File file = new File(dirPath);
 		if (!file.exists()) {
 			file.mkdirs();
@@ -69,10 +74,9 @@ public class FileUploadController {
 			// 每一个FileItem对应一个Form表单的输入项
 			List<FileItem> fileItems = upload.parseRequest(request);
 
-			System.out.println("fileItems ======= " + fileItems.size());
+			System.out.println("fileItems ==================== " + fileItems.size());
 
 			for (FileItem fileItem : fileItems) {
-
 				// 如果fileitem中封装的是普通输入项的数据
 				if (fileItem.isFormField()) {
 					System.out.println("");
@@ -80,47 +84,44 @@ public class FileUploadController {
 					String name = fileItem.getFieldName();
 					String value = fileItem.getString("UTF-8");
 					System.out.println(name + "=" + value);
-				} else {// 如果fileitem中封装的是上传文件
-					String fileName = fileItem.getName();
-					if (fileName == null || fileName.trim().equals("")) {
+				}
+				// 如果fileitem中封装的是上传文件
+				else {
+					String filePath = fileItem.getName();
+
+					System.out.println("String filePath =========" + filePath);
+					if (filePath == null || filePath.trim().equals("")) {
 						continue;
 					}
-					// 注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的，//
+					// 注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的
 					// 如：
 					// c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt处理获取到的上传文件的文件名的路径部分，只保留文件名部分
 
-					fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
+					String fileNameFull = filePath.substring(filePath.lastIndexOf("\\") + 1);
 
-					int index = fileName.lastIndexOf(".");
-					// String realName=fileName.substring(0, index); //文件名
+					System.out.println("=======fileNameFull=====" + fileNameFull);
 
-					// System.out.println("=======fileName=========" +
-					// fileName);
-					// System.out.println("=======realName=========" +
-					// realName);
-
-					String fileExtName = fileName.substring(index + 1);
-					System.out.println("上传文件的扩展名是====" + fileExtName);
-					if (fileExtName.equals("docx")) {
-						fileExtName = "doc";
-						System.out.println("上传文件的扩展名是" + fileExtName);
+					String fileNameExtension = fileNameFull.substring(fileNameFull.lastIndexOf(".") + 1);
+					System.out.println("上传文件的扩展名是====" + fileNameExtension);
+					if (fileNameExtension.equals("docx")) {
+						fileNameExtension = "doc";
+						System.out.println("上传文件的扩展名是" + fileNameExtension);
 					}
-					if (fileExtName.equals("xlsx")) {
-						fileExtName = "xls";
-						System.out.println("上传文件的扩展名是" + fileExtName);
+					if (fileNameExtension.equals("xlsx")) {
+						fileNameExtension = "xls";
+						System.out.println("上传文件的扩展名是" + fileNameExtension);
 					}
-					if (fileExtName.equals("pptx")) {
-						fileExtName = "ppt";
-						System.out.println("上传文件的扩展名是" + fileExtName);
+					if (fileNameExtension.equals("pptx")) {
+						fileNameExtension = "ppt";
+						System.out.println("上传文件的扩展名是" + fileNameExtension);
 					}
 
-					String saveName = dirPath + "/" + String.valueOf(ToolDate.getCurrentTimestamp()) + "."
-							+ fileExtName;
-					System.out.println(saveName);
+					filePath = dirPath + "/" + ToolDate.getCurrentTimestamp() + "." + fileNameExtension;
+					System.out.println(filePath);
 					// 获取item中上传文件的输入流
 					InputStream in = fileItem.getInputStream();
 					// 创建一个文件输出流
-					FileOutputStream out = new FileOutputStream(saveName);
+					FileOutputStream out = new FileOutputStream(filePath);
 					// 创建一个缓存区
 					byte buffer[] = new byte[1024];
 					// 建立一个标志判断输入流中的数据是否已经读完
@@ -132,7 +133,7 @@ public class FileUploadController {
 					in.close();
 					out.close();
 					fileItem.delete();
-					map.put("dirPath", saveName);
+					map.put("dirPath", filePath);
 					message = "添加文件成功，请完善信息上传！";
 				}
 			}
