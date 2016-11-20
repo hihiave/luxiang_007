@@ -60,12 +60,8 @@ public class TestFileInfo {
 	@Test
 	public void getFileByFileIdTest() {
 		logger.info("===============getFileByFileNameTest=============");
-		Integer[] integers = new Integer[2];
-		integers[0] = 1;
-		integers[1] = 2;
-		
-		List<FileInfo> fileInfos = fileInfoService.getFileByFileId(integers);
-		logger.info("=========通过文件id查询文件======" + JSON.toJSONString(fileInfos));
+		FileInfo fileInfo = fileInfoService.getFileByFileId(1);
+		logger.info("=========通过文件id查询文件======" + JSON.toJSONString(fileInfo));
 	}
 
 	@Test

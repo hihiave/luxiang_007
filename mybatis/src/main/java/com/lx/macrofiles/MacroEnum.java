@@ -52,6 +52,13 @@ public class MacroEnum {
 	}
 
 	/**
+	 * 支持上传的文件格式
+	 */
+	public enum KFileExtension {
+		doc, xls, ppt, pdf, txt
+	}
+
+	/**
 	 * 时间单位
 	 */
 	public enum KDateType {

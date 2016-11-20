@@ -14,7 +14,6 @@ import com.lx.service.FileInfoService;
 @Service
 public class FileInfoServiceImpl implements FileInfoService {
 
-
 	@Autowired
 	private FileInfoMapper fileInfoMapper;
 
@@ -36,8 +35,8 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	@Override
-	public List<FileInfo> getFileByFileId(Integer... fileIds) {
-		return fileInfoMapper.selectAllFileByFileId(fileIds);
+	public FileInfo getFileByFileId(Integer fileId) {
+		return fileInfoMapper.selectByPrimaryKey(fileId);
 	}
 
 	@Override

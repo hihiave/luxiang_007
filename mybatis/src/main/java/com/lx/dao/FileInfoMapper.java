@@ -23,7 +23,6 @@ public interface FileInfoMapper {
 
 	// **********用于处理一些业务逻辑的方法**********
 	int delFilesById(@Param("fileIds") Integer... fileIds);
-	List<FileInfo> selectAllFileByFileId(@Param("fileIds") Integer... fileIds);
 	FileInfo selectFileByFileName(String fileName);
 	int updateFilesCheck(@Param("fileCheck") int fileCheck, @Param("fileIds") Integer... fileIds);
 

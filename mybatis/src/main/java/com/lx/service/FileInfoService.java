@@ -26,10 +26,10 @@ public interface FileInfoService {
 
 	/** 通过文件id获取文件信息
 	 * @author luxiang
-	 * @param fileIds 文件id
+	 * @param fileId 文件id
 	 * @return FileInfo该文件的信息
 	 */
-	public List<FileInfo> getFileByFileId(Integer... fileIds);
+	public FileInfo getFileByFileId(Integer fileId);
 
 	/** 通过文件id更新文件
 	 * @author luxiang
