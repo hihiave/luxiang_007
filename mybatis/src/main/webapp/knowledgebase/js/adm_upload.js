@@ -39,7 +39,7 @@ function del_one_click(obj){
     //console.log($("#"+input_id).val());
 
 }
-
+//
 function changeFile(obj){
     var file = $(obj).val();
     var input_text = $(obj).attr("pid");
@@ -48,7 +48,7 @@ function changeFile(obj){
     var filename = arr[arr.length - 1];
     var realname_arr = filename.split('.');
     var file_last = realname_arr[realname_arr.length-1];
-    if(file_last != "pdf" && file_last != "doc" && file_last != "docx" && file_last != "xls" && file_last != "xlsx" && file_last != "ppt" && file_last != "pptx" && file_last != "txt" ){
+    if(file_last != "pdf" && file_last != "doc" && file_last != "xls"  && file_last != "ppt" && file_last != "txt" ){
         alert("不支持选中文件格式！！");
         $(obj).val("");
         return;
@@ -74,7 +74,7 @@ function changeFile(obj){
         }
     })
 }
-
+//
 function changeFile_test(obj){
     var file = $(obj).val();
     console.log(file);
@@ -90,7 +90,7 @@ function changeFile_test(obj){
     })
 }
 
-
+//上传文件信息
 function uploadFile(){
     //var src = "/mybatis/FileUploadController/fileUpload.do";
     var aim1 = $("#aim1"),
@@ -140,7 +140,7 @@ function uploadFile(){
             data.word1 = word1.val();
             data.pro1 = $("#proto1").val();
             data.cate1 = $("#cate1").val();
-            //data.area1 = area1.val();
+            data.area1 = area1.val();
 
         }
         if(aim2.val() != "" && area2.val() != "" && word2.val() != ""){
@@ -153,7 +153,7 @@ function uploadFile(){
             data.word2 = word2.val();
             data.pro2 = $("#proto2").val();
             data.cate2 = $("#cate2").val();
-            //data.area2 = area2.val();
+            data.area2 = area2.val();
         }
         if(aim3.val() != "" && area3.val() != "" && word3.val() != ""){
             data.filepath3 = path3;
@@ -165,25 +165,73 @@ function uploadFile(){
             data.word3 = word3.val();
             data.pro3 = $("#proto3").val();
             data.cate3 = $("#cate3").val();
-            //data.area3 = area2.val();
+            data.area3 = area3.val();
 
         }
         console.log(data);
-        sendAjaxRequest("/mybatis/FileInfoController/add_file_info.do", data, upload_success_cb);
+        sendAjaxRequest("/mybatis/FileInfoController/add_file_info.do", data, upload_success_cb,function(){alert("网络故障，请稍后重试！！！")});
     }
 //
 //
 //
 //
 }
+
+//文件上传成功，清空页面内容
 function upload_success_cb(data){
+    var message1 = "";
+    var message2 = "";
+    var message3 = "";
+    var cate = $("#cate1>option:eq(0)").val();
+    var info = "";
     if(data["message1"] != null){
-        console.log(data["result1"]);
+        //console.log(data["result1"]);
+        if(data["result1"] == true){
+            message1 = "文件1上传成功!";
+            $("#file-test1").val("");
+            $("#file-result1").val("");
+            $("#aim1").val("");
+            $("#proto1").val("私有");
+            $("#word1").val("");
+            $("#area1").val("");
+            $("#cate1").val(cate);
+        }else{
+            message1 = "文件1上传失败!";
+        }
     }
     if(data["message2"] != null){
-        console.log(data["result2"]);
+        //console.log(data["result2"]);
+        if(data["result2"] == true){
+            message2 = "文件2上传成功!";
+            $("#file-test2").val("");
+            $("#file-result2").val("");
+            $("#aim2").val("");
+            $("#proto2").val("私有");
+            $("#word2").val("");
+            $("#area2").val("");
+            $("#cate2").val(cate);
+        }else{
+            message2 = "文件2上传失败!";
+        }
     }
     if(data["message3"] != null){
-        console.log(data["result3"]);
+        //console.log(data["result3"]);
+        if(data["result3"] == true){
+            message3 = "文件3上传成功!";
+            $("#file-test3").val("");
+            $("#file-result3").val("");
+            $("#aim3").val("");
+            $("#proto3").val("私有");
+            $("#word3").val("");
+            $("#area3").val("");
+            $("#cate3").val(cate);
+        }else{
+            message3 = "文件3上传失败!";
+        }
+    }
+    info = message1 + message2 + message3;
+    if(info != ""){
+        $("#info-p").html(info);
+        $("#info-modal").modal("show");
     }
 }

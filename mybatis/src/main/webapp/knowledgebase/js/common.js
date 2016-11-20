@@ -272,8 +272,13 @@ function download(obj){
         input1.attr('type', 'hidden');
         input1.attr('name', 'filename');
         input1.attr('value', $(obj).attr("path"));
+        var input2 = $('<input>');
+        input2.attr('type', 'hidden');
+        input2.attr('name', 'fileid');
+        input2.attr('value', $(obj).attr("bid"));
         $('.container').append(form);  //将表单放置在web中
         form.append(input1);   //将查询参数控件提交到表单上
+        form.append(input2);   //将查询参数控件提交到表单上
         form.submit();
         $("#form-add").remove();
 

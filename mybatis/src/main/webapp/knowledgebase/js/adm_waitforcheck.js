@@ -14,7 +14,7 @@ function cb_get_all(obj){
     var all_wait_file = obj["wait_file"];
     //console.log(all_wait_file[0].fileName);
     for(var each in all_wait_file){
-        console.log(all_wait_file[each].fileName);
+        //console.log(all_wait_file[each].fileName);
         //console.log(each.fileName);
         //上面这种写法不对
         var tr_begin = "<tr>";
