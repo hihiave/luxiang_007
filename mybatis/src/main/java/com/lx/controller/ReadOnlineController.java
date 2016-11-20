@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.lx.tool.DocConverter;
-import com.lx.tool.FileTransfer;
+import com.lx.tool.ToolDocConverter;
+import com.lx.tool.ToolFileTransfer;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
@@ -27,13 +27,13 @@ public class ReadOnlineController {
 
 		System.out.println("+++++======" + from);
 
-		FileTransfer fileTransfer = new FileTransfer(savePath, from);
+		ToolFileTransfer fileTransfer = new ToolFileTransfer(savePath, from);
 		fileTransfer.transfer();// 将文件移动到swftools文件夹  savePath
 
 		System.out.println("//////////" + fileTransfer.getSavePath());
 
 		// fileTransfer.getSavePath() 当前文件所在的地址xxxxxx.doc
-		DocConverter docConverter = new DocConverter(fileTransfer.getSavePath());
+		ToolDocConverter docConverter = new ToolDocConverter(fileTransfer.getSavePath());
 		docConverter.convert();// 生成swf文件
 
 		System.out.println("nice++++" + docConverter.getSwfFilePath());
@@ -41,7 +41,7 @@ public class ReadOnlineController {
 		String savePath2 = "E:/swf文件";
 		
 		
-		FileTransfer fileTransfer2 = new FileTransfer(savePath2, docConverter.getSwfFilePath());
+		ToolFileTransfer fileTransfer2 = new ToolFileTransfer(savePath2, docConverter.getSwfFilePath());
 		fileTransfer2.transfer();
 		
 		

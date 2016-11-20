@@ -6,13 +6,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class FileTransfer {
+public class ToolFileTransfer {
 	private String savePath;// 转移地址
 	private String from;// 源文件地址
 	private File file;// 文件类型
 	private String fileName;// 文件名称
 
-	public FileTransfer(String savePath, String from) {
+	public ToolFileTransfer(String savePath, String from) {
 		init(savePath, from);
 	}
 

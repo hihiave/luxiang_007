@@ -11,7 +11,7 @@ import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConne
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 
 // doc -- > pdf
-public class DocConverter {
+public class ToolDocConverter {
 	private String filePath;// (doc文件的位置)
 	private String outputPath;// swf 文件的输出位置
 	private String fileName;
@@ -22,7 +22,7 @@ public class DocConverter {
 	/**
 	 * 构造函数
 	 */
-	public DocConverter(String filePath) {
+	public ToolDocConverter(String filePath) {
 		init(filePath);
 		System.out.println("文件路径:" + filePath);
 	}
