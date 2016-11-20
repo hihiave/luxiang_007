@@ -101,6 +101,7 @@ public class FileUploadController {
 
 					System.out.println("=======fileNameFull=====" + fileNameFull);
 
+					
 					String fileNameExtension = fileNameFull.substring(fileNameFull.lastIndexOf(".") + 1);
 					System.out.println("上传文件的扩展名是====" + fileNameExtension);
 					if (fileNameExtension.equals("docx")) {
