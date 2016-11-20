@@ -97,7 +97,7 @@ public class FileUploadController {
 					// 如：
 					// c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt处理获取到的上传文件的文件名的路径部分，只保留文件名部分
 
-					String fileNameFull = filePath.substring(filePath.lastIndexOf("\\") + 1);
+					String fileNameFull = filePath.substring(filePath.lastIndexOf("/") + 1);
 
 					System.out.println("=======fileNameFull=====" + fileNameFull);
 
@@ -117,7 +117,7 @@ public class FileUploadController {
 					}
 
 					filePath = dirPath + "/" + ToolDate.getCurrentTimestamp() + "." + fileNameExtension;
-					System.out.println(filePath);
+					System.out.println("=======文件存储路径=====" + filePath);
 					// 获取item中上传文件的输入流
 					InputStream in = fileItem.getInputStream();
 					// 创建一个文件输出流
