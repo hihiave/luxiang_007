@@ -10,36 +10,45 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.lx.model.FileInfo;
+import com.lx.service.FileInfoService;
 
 @Controller
 @RequestMapping("/FileDownloadController")
 public class FileDownloadController {
 
+	@Autowired
+	FileInfoService fileInfoService;
+
 	@RequestMapping("/fileDownload")
 	protected void fileDownload(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
-		// 得到下载的文件名
-		//String fileName = 
 
-		
-		// fileName=new String(fileName.getBytes("ISO8859_1"),"UTF-8");
-		//System.out.println( "得到下载的文件名============" + fileName);
+		FileInfo fileInfo = fileInfoService.getFileByFileId(Integer.parseInt(request.getParameter("fileid")));
 
-		/* 获取文件的路径 */
-		String filePath = request.getParameter("filename");
-		File file = new File(filePath);
-		if (!file.exists()) {
+		// 获取下载文件的url
+		String fileUrl = request.getParameter("filename");
+		// String fileNameFull = fileUrl.substring(fileUrl.lastIndexOf("/") +
+		// 1);
+		String fileNameExtension = fileUrl.substring(fileUrl.lastIndexOf(".") + 1);
+		String downloadName = fileInfo.getFileName() + "." + fileNameExtension;
+		fileUrl = new String(fileUrl.getBytes("ISO8859_1"), "UTF-8");
+
+		// 判定资源是否存在
+		if (!new File(fileUrl).exists()) {
 			request.setAttribute("message", "资源不存在");
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 			return;
 		}
 		// 设置响应头
-		response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(filePath, "UTF-8"));
+		response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(downloadName, "UTF-8"));
 		// 读取要下载的文件 保存到文件输入流
-		FileInputStream in = new FileInputStream(filePath);
+		FileInputStream in = new FileInputStream(fileUrl);
 		// 创建输出流
 		OutputStream out = response.getOutputStream();
 		byte buffer[] = new byte[1024];
@@ -49,8 +58,6 @@ public class FileDownloadController {
 		}
 		in.close();
 		out.close();
-		// System.out.println;
-
 	}
 
 }

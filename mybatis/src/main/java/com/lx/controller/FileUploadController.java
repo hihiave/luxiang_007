@@ -31,7 +31,7 @@ public class FileUploadController {
 	// String fileNameFull = fileName + fileNameExtension;
 
 	// String dirPath = "c:/a/b";
-	// String filePath = dirPath + "/" + fileNameFull;
+	// String filePath = dirPath + "/" + fileNameFull; filePath = fileUrl
 
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	@ResponseBody
@@ -42,17 +42,16 @@ public class FileUploadController {
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
 
-		String dirPath = "C:/Users"; // 上传的地址
+		String dirPath = "C:/Users/qqq"; // 上传的地址
 
 		File file = new File(dirPath);
 		if (!file.exists()) {
 			file.mkdirs();
 		}
-		System.out.println("=====================================");
+
 		String tempPath = "C:/temp";
 		file = new File(tempPath);
 		if (!file.exists()) {
-			System.out.println(tempPath + "临时目录不存在，需要创建");
 			file.mkdirs(); // 创建临时目录
 		}
 
@@ -101,7 +100,6 @@ public class FileUploadController {
 
 					System.out.println("=======fileNameFull=====" + fileNameFull);
 
-					
 					String fileNameExtension = fileNameFull.substring(fileNameFull.lastIndexOf(".") + 1);
 					System.out.println("上传文件的扩展名是====" + fileNameExtension);
 					if (fileNameExtension.equals("docx")) {

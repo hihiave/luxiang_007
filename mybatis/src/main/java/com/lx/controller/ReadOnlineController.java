@@ -1,5 +1,6 @@
 package com.lx.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -20,37 +21,34 @@ public class ReadOnlineController {
 	@RequestMapping(value = "/readOnline", method = RequestMethod.POST)
 	protected void readOnline(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		// "C:/Users/" 文件所在的地址 filename文件名
-		String from = "C:/Users/" + request.getParameter("filename");
-		String savePath = "D:/SWFTools";
-
-		System.out.println("+++++======" + from);
-
-		ToolFileTransfer fileTransfer = new ToolFileTransfer(savePath, from);
-		fileTransfer.transfer();// 将文件移动到swftools文件夹  savePath
-
-		System.out.println("//////////" + fileTransfer.getSavePath());
-
-		// fileTransfer.getSavePath() 当前文件所在的地址xxxxxx.doc
-		ToolDocConverter docConverter = new ToolDocConverter(fileTransfer.getSavePath());
-		docConverter.convert();// 生成swf文件
-
-		System.out.println("nice++++" + docConverter.getSwfFilePath());
-
-		String savePath2 = "E:/swf文件";
+		// 获取预览文件的url
+		String fileUrl = request.getParameter("filename");
+		String dirPath = "E:/swf哈哈哈/"; // 转移地址
 		
-		
-		ToolFileTransfer fileTransfer2 = new ToolFileTransfer(savePath2, docConverter.getSwfFilePath());
-		fileTransfer2.transfer();
-		
-		
-		request.getSession().setAttribute("swfPath", fileTransfer2.getSavePath());
-		response.sendRedirect("../Flexpaper2.10/documentView.jsp");
-		// return "../Flexpaper2.10/documentView";
-		// request.getRequestDispatcher("../Flexpaper2.10/documentView.jsp").forward(request,response);
-		// TODO Auto-generated method stub
+		File file = new File(dirPath);
+		if (!file.exists()) {
+			file.mkdirs();
+		}
+		System.out.println("=========fileUrl=======" + fileUrl);
 
+		if (ToolFileTransfer.transfer(fileUrl, dirPath)) {
+			if (ToolDocConverter.converter(ToolFileTransfer.getToFilePath())) {
+
+				System.out.println("==============转换成功===========");
+				fileUrl = ToolDocConverter.getSwfFilePath();
+				
+				String errorMessage = ToolDocConverter.getErrorMessage();
+				System.err.println("===============错误==============" + errorMessage);
+				System.out.println("========swf文件目的地址=====Q======" + fileUrl);
+				
+				request.getSession().setAttribute("swfPath", "E:/lu/swf文件/1479781384.swf");
+				response.sendRedirect("../Flexpaper2.10/documentView.jsp");
+				// return "../Flexpaper2.10/documentView";
+				// request.getRequestDispatcher("../Flexpaper2.10/documentView.jsp").forward(request,response);
+				// TODO Auto-generated method stub
+			}
+		} else {
+
+		}
 	}
-
 }

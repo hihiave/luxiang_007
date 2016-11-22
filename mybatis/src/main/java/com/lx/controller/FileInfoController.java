@@ -85,8 +85,7 @@ public class FileInfoController {
 	 */
 	@RequestMapping(value = "/myuploadfile", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> myuploadfile(Integer page_Now, HttpSession httpSession,
-			HttpServletRequest httpServletRequest) {
+	public Map<String, Object> myuploadfile(Integer page_Now, HttpSession httpSession) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String username = (String) httpSession.getAttribute("username");
 		System.out.println(username + "hahahaha");

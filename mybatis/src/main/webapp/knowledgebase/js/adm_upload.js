@@ -68,7 +68,7 @@ function changeFile(obj) {
 		success : function(data) {
 			$("#info-p").html(data["message"]);
 			$("#info-modal").modal("show");
-			$("#" + result_text).val(data["savePath"]);
+			$("#" + result_text).val(data["dirPath"]);
 		},
 		error : function(data) {
 			$("#info-p").html("网络故障，请稍后重试！！！");
