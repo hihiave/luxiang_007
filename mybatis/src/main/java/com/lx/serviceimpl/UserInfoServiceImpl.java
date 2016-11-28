@@ -128,7 +128,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 	// **********用于获取一些智能下拉提示**********
 	@Override
 	public List<String> getUserNames(String userName) {
-		return userInfoMapper.getUserNames(userName);
+		if (userName == null) {
+			userName = "";
+		}
+		return userInfoMapper.getUserNames(userName.trim());
 	}
-	
+
 }
