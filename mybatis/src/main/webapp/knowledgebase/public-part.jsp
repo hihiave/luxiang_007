@@ -29,8 +29,8 @@
             </select>
         </div>
         <div class="input-group input-group-md" style="float:left;">
-            <input type="text" class="form-control" aria-describedby="sizing-addon1" style="width:521px;"
-                   id="file_search_input" oninput="myfunction()">
+            <input type="text" class="form-control" aria-describedby="sizing-addon1"  style="width:521px;"
+                   id="file_search_input" onfocus="myfunction()" oninput="myfunction()">
             <button class="btn btn-primary" style="width:78px;margin-left:5px;" id="file_search_sub"
                     onclick="send_search_info()">搜&nbsp;索
             </button>
