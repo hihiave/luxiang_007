@@ -38,4 +38,9 @@ public interface FileInfoMapper {
 			@Param("fileInfo") FileInfo fileInfo);
 	List<FileInfo> getFileInfo(@Param("fileCheck") int fileCheck, 
 			@Param("fileInfo") FileInfo fileInfo, @Param("page") Page page);
+	
+	// **********用于获取一些智能下拉提示**********
+	List<String> getFileNames(String fileName);
+	List<String> getfileAuthors(String fileAuthor);
+	
 }

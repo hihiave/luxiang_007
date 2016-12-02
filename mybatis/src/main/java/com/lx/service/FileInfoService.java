@@ -84,8 +84,18 @@ public interface FileInfoService {
 	/** 查询文件(待审核)
 	 * @author luxiang
 	 * @param page 分页
-	 * @return
+	 * @return 一个文件对象列表 FileInfo
 	 */
 	public List<FileInfo> getFileWithWaitForCheck(Page page);
 
+	//**********用于获取一些智能下拉提示**********
+	/** 获取一些智能下拉提示(根据filePropertyType文件属性类型的不同,提示内容也不同)
+	 * @author luxiang
+	 * @param filePropertyType 文件属性类型，请查看枚举
+	 * @param value 提示值
+	 * @return
+	 */
+	List<String> getIntelligentPrompt(KFilePropertyType filePropertyType, String value);
+	
+	
 }

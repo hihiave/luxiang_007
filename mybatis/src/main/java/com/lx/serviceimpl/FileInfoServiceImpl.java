@@ -124,4 +124,20 @@ public class FileInfoServiceImpl implements FileInfoService {
 		return null;
 	}
 
+	// **********用于获取一些智能下拉提示**********
+	@Override
+	public List<String> getIntelligentPrompt(KFilePropertyType filePropertyType, String value) {
+		if (value == null) {
+			value = "";
+		}
+		switch (filePropertyType) {
+		case author:
+			return fileInfoMapper.getfileAuthors(value.trim());
+		case keyword:
+			return null;
+		default:
+			return fileInfoMapper.getFileNames(value.trim());
+		}
+	}
+
 }

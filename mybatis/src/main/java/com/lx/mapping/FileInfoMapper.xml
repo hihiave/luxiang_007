@@ -83,6 +83,18 @@
   	limit #{page.startPos}, #{page.pageSize}
   </select>
   
+  <!--**********用于获取一些智能下拉提示**********-->
+  <select id="getFileNames" resultType="java.lang.String" parameterType="java.lang.String">
+  	select file_name from File
+  	where file_name like CONCAT(CONCAT('%',#{fileName},'%')) and 
+  	file_check = '1' and file_is_visible = '公有'
+  </select>
+  <select id="getfileAuthors" resultType="java.lang.String" parameterType="java.lang.String">
+  	select file_author from File
+  	where file_author like CONCAT(CONCAT('%',#{fileAuthor},'%')) and 
+  	file_check = '1' and file_is_visible = '公有'
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

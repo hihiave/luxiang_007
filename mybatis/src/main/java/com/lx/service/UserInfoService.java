@@ -93,7 +93,7 @@ public interface UserInfoService {
 	 */
 	public List<UserInfo> selectUserByIsPass(KCheckType checkType, Page page, String userName);
 	
-	// **********用于获取一些智能下拉提示**********
+	//**********用于获取一些智能下拉提示**********
 	/** 通过用户名获取一些智能下拉提示
 	 * @author luxiang
 	 * @param userName 用户名
