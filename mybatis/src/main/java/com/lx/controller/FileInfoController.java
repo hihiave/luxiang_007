@@ -1,6 +1,7 @@
 package com.lx.controller;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +42,24 @@ public class FileInfoController {
 		return "showFileInfo";
 		// System.out.println;
 	}
-
+	
+	@RequestMapping(value = "/get_file_points", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> get_file_points(KFilePropertyType filePropertyType, String value) {
+		System.out.println("xxxxx");
+		System.out.println("++++++++" + filePropertyType);
+		System.out.println("!!!!!!!!" + value);
+		List<String> fileInfos = fileInfoService.getIntelligentPrompt(filePropertyType, value);
+		Map<String, Object> map = new HashMap<String, Object>();
+		/*Iterator<String> x=fileInfos.iterator();
+		while(x.hasNext())
+		{
+			System.out.println(x.next());
+		}*/
+        map.put("FileInfo_check", fileInfos);
+		//System.out.println("check+++++++++"+userInfos.size());
+		return map;
+	}
 	// ********************普通用户操作权限***************** ***
 	/**
 	 * 公有文件,包括查询

@@ -136,7 +136,21 @@ public class UserInfoController {
 //		return map;
 //
 //	}
-
+	/**
+	 * 用户搜索智能提示
+	 */
+	@RequestMapping(value = "/get_user_points", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> get_user_points(HttpSession httpSession, HttpServletRequest request) {
+       
+		List<String> userInfos = userInfoService.getUserNames("");
+		Map<String, Object> map = new HashMap<String, Object>();
+       
+        map.put("UserInfo_check", userInfos);
+		//System.out.println("check+++++++++"+userInfos.size());
+		return map;
+	}
+	
 	/**
 	 * 用户待审核
 	 */
@@ -245,6 +259,21 @@ public class UserInfoController {
 		boolean result = userInfoService.batchUsersPass(check_user_array);
 		System.out.println("审核结果========" + result);
 		// boolean result = userInfoService.delByUserName(select_username);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("flag", result);
+		return map;
+	}
+	
+	/**
+	 * 批量用户名审核拒绝
+	 */
+	@RequestMapping(value = "/check_refuse_user", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> checkrefuseuser(String[] check_user_array, HttpServletRequest httpServletRequest) {
+		System.out.println("传入数据=========" + check_user_array.toString());
+		boolean result = userInfoService.delUsersByUserName(check_user_array);
+		System.out.println("审核结果========" + result);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", result);
 		return map;

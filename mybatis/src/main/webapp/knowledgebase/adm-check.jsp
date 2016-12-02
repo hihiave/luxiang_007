@@ -100,7 +100,7 @@
     <jsp:include page="public-part.jsp" flush="true"/>
     <hr>
     <div class="row" style="margin-left:80px;">
-        <div class="col-md-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
+        <div class="col-xs-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
             <div class="panel-group" id="accordion">
                 <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
                     <div class="panel-heading">
@@ -167,7 +167,7 @@
                                                                                          style="float:right;margin-top: 7px;margin-right: -11px;"></span></a>
                             </h4>
                         </div>
-                        <div id="system-manage" class="panel-collapse collapse in">
+                        <div id="system-manage" class="panel-collapse collapse ">
                             <div class="panel-body" style="padding: 6px 15px;">
                                 <ul class="nav nav-pills nav-stacked"
                                     style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
@@ -183,7 +183,7 @@
             </div>
 
         </div>
-        <div class="col-md-8" style="margin-left:50px;">
+        <div class="col-xs-8" style="margin-left:50px;">
             <div class="panel panel-primary" style="min-height:625px;" id="default_panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">用户审核</h3>
@@ -197,12 +197,12 @@
                                 </th>
                             <th >用户名</th>
                             <th >审核状态</th>
-                            <th style="width:116px;">
-                                <button class="btn btn-primary" onclick="check_all_pick(this)">通过</button>
+                            <th style="width:80px;">
+                                <button class="btn btn-success btn-block" onclick="check_all_pick(this)">通过</button>
                             </th>
-                            <%--<th style="width:116px;">--%>
-                                <%--<button class="btn btn-primary" data-toggle="modal" data-target="#jujue">拒绝</button>--%>
-                            <%--</th>--%>
+                            <th style="width:80px;">
+                                <button class="btn btn-block btn-info" onclick="refuse_all_pick(this)">拒绝</button>
+                            </th>
                         </tr>
                         </thead>
                         <tbody id="check_result">
@@ -262,7 +262,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
 
-                        <h4 class="modal-title" id="myModalLabel-person_ok">通过审核</h4>
+                        <h4 class="modal-title" id="myModalLabel-person_ok">审核提示</h4>
                     </div>
                     <div class="modal-body">
                         <p id="check_info">确定通过选中的用户么？</p>
@@ -271,6 +271,26 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                         <button type="button" class="btn btn-primary " id="pass_click" data-dismiss="modal"
                                 onclick="pass_info_ok()">确认
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+         <div class="modal fade" id="refuse_check" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-person_ok">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title" id="myModalLabel-person_ok">审核提示</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="refuse_info">确定拒绝选中的用户么？</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary " id="refuse_click" data-dismiss="modal"
+                                onclick="refuse_info_ok()">确认
                         </button>
                     </div>
                 </div>

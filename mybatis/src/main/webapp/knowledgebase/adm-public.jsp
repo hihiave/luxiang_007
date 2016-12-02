@@ -73,7 +73,7 @@
     <jsp:include page="public-part.jsp" flush="true"/>
     <hr>
     <div class="row" style="margin-left:80px;">
-        <div class="col-md-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
+        <div class="col-xs-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
             <div class="panel-group" id="accordion">
                 <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
                     <div class="panel-heading">
@@ -139,7 +139,7 @@
                                                                                          style="float:right;margin-top: 7px;margin-right: -11px;"></span></a>
                             </h4>
                         </div>
-                        <div id="system-manage" class="panel-collapse collapse in">
+                        <div id="system-manage" class="panel-collapse collapse ">
                             <div class="panel-body" style="padding: 6px 15px;">
                                 <ul class="nav nav-pills nav-stacked"
                                     style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
@@ -155,7 +155,7 @@
 
             </div>
         </div>
-        <div class="col-md-8" style="margin-left:50px;">
+        <div class="col-xs-8" style="margin-left:50px;">
             <div class="panel panel-primary" style="min-height:625px;" id="default_panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">公有文件</h3>

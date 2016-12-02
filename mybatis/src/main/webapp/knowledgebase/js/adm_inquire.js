@@ -1,6 +1,7 @@
 //页面加载完毕加载表格
 $(function(){
     get_all_is_check();
+    get_points();
 })
 //获取全部通过用户
 function get_all_is_check(){
@@ -10,6 +11,28 @@ function get_all_is_check(){
     },function(data){});
 }
 
+function get_points(){
+	var userpoints=new Array();
+	
+	  $.ajax({
+          type:'post',
+          url:"/mybatis/UserInfoController/get_user_points.do",          
+          dataType:"json",
+          success:function(data){
+          
+        	   var all_pass_user =data["UserInfo_check"];
+        	  
+        	   for(var i = 0;i < all_pass_user.length;i++){
+        	    	userpoints.unshift(all_pass_user[i]);
+        	    	
+        	   }
+           }
+          
+      })
+      $("#search-in").autocomplete({
+          source:userpoints
+        });
+}
 
 
 
@@ -18,8 +41,10 @@ function get_all_check_user(obj){
     var _table = $("#search_result>tr");
     _table.remove();
     var all_pass_user = obj["UserInfo_check"];
+
     //console.log(all_pass_user[0].userName);
     for(var i = 0;i < all_pass_user.length;i++){
+
         var tr_begin = "<tr>";
         var tr_end = "</tr>";
         var td_1 = "<td>"+(i+1)+"</td>";
@@ -31,7 +56,9 @@ function get_all_check_user(obj){
         $("#search_result").append(content);
 
     }
+
     createNewPagination(obj,"inquire_query","/mybatis/UserInfoController/Is_pass.do",get_all_check_user,"first_inquire_click","last_inquire_click","page-one",{"username":name});
+   
 }
 /**
  * wsz

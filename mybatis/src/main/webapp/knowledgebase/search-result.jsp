@@ -19,7 +19,7 @@
                 <th>上传时间</th>
                 <th style="padding-left:20px;">下载</th>
                 <th style="padding-left:20px;">预览</th>
-                <th style="padding-left:0px;">下载量ddddddddd</th>
+                <th style="padding-left:0px;">下载量</th>
             </tr>
             </thead>
             <tbody id="search_file">

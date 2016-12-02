@@ -82,7 +82,7 @@
     <jsp:include page="public-part.jsp" flush="true"/>
     <hr>
     <div class="row" style="margin-left:80px;">
-        <div class="col-md-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
+        <div class="col-xs-2" style=" border-radius:10px;width:170px;font-size:16px;border-right:1px solid #eee">
             <div class="panel-group" id="accordion">
 
                 <div class="panel panel-info" style="border-color: #eeeeee;background-color: #f9f9f9;">
@@ -150,7 +150,7 @@
                                                                                          style="float:right;margin-top: 7px;margin-right: -11px;"></span></a>
                             </h4>
                         </div>
-                        <div id="system-manage" class="panel-collapse collapse in">
+                        <div id="system-manage" class="panel-collapse collapse">
                             <div class="panel-body" style="padding: 6px 15px;">
                                 <ul class="nav nav-pills nav-stacked"
                                     style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">

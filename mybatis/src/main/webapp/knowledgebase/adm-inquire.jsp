@@ -36,6 +36,7 @@
 <html> 
 <head>
 <link rel="stylesheet" type="text/css" href="/mybatis/knowledgebase/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/mybatis/knowledgebase/css/jquery-ui.min.css">
 <script src="/mybatis/knowledgebase/js/jquery.min.js"></script>
 <script src="/mybatis/knowledgebase/js/bootstrap.min.js"></script>
 <script src="/mybatis/knowledgebase/js/html5shiv.min.js"></script>
@@ -43,6 +44,8 @@
 <script src="/mybatis/knowledgebase/js/common.js"></script>
 <script src="/mybatis/knowledgebase/js/public_search.js"></script>
 <script src="/mybatis/knowledgebase/js/adm_inquire.js"></script>
+<script src="/mybatis/knowledgebase/js/jquery-ui.min.js"></script>
+
 
 <style type="text/css">
 .nav{
@@ -68,7 +71,7 @@ width: 1320px !important;
     <%--SELECT * from UserInfo where user_check=1;--%>
 <%--</sql:query>--%>
 
-<div style="margin:10px 20px;">
+<div class="container" style="margin:10px 20px;">
 	<button type="button" class="btn btn-md btn-default" style="border:0px;float:right;" data-toggle="tooltip" data-placement="bottom" title="退出登录" onclick="logout()">
  		<span class="glyphicon glyphicon-off"></span>&nbsp;退出
 	</button>
@@ -146,7 +149,7 @@ width: 1320px !important;
                                                                                          style="float:right;margin-top: 7px;margin-right: -11px;"></span></a>
                             </h4>
                         </div>
-                        <div id="system-manage" class="panel-collapse collapse in">
+                        <div id="system-manage" class="panel-collapse collapse ">
                             <div class="panel-body" style="padding: 6px 15px;">
                                 <ul class="nav nav-pills nav-stacked"
                                     style="margin-left: -15px;margin-right: -15px;margin-bottom: 0px;font-size: inherit;">
@@ -164,6 +167,8 @@ width: 1320px !important;
         </div>
         <div class="col-xs-8" style="margin-left:50px;">
 
+
+				
             <div class="panel panel-primary" style="min-height:625px;" id="default_panel">
                 <div class="panel-heading">
                     <h3 class="panel-title">用户查询</h3>
@@ -179,10 +184,10 @@ width: 1320px !important;
                                                                                                style="height:34px;width:273px;">
                             </th>
                             <th style="padding-bottom:5px;padding-top:0px;width:116px;">
-                                <button class="btn btn-info" id="search-user" onclick="searchuser()">搜索用户</button>
+                                <button class="btn btn-success" id="search-user" onclick="searchuser()">搜索用户</button>
                             </th>
                             <th style="padding-bottom:5px;padding-top:0px;width:116px;">
-                                <button class="btn btn-info" data-toggle="modal" data-target="#tianjia">添加用户</button>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#tianjia">添加用户</button>
                             </th>
                         </tr>
                         </thead>
