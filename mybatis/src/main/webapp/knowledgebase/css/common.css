@@ -1,0 +1,52 @@
+		.pub_top{
+			min-width: 1200px !important;
+			position: fixed;
+			top:0;
+			left: 0;
+			right: 0;
+			border-bottom:1px solid #F5F5F5;
+			padding-top: 15px;
+   			padding-bottom: 25px;
+		}
+		.top-img{
+			padding-left: 18px;
+		}
+		
+		.index{
+ 		 float: left;
+  		margin: 1.1em 0 0 1em;
+  		margin-top: 7px;
+		}
+		.index a{
+		padding: 8px 20px;
+	    background: #21DEEF;
+	    color: #FFF;
+	    font-size: 16px;
+	    text-decoration: none;
+	    border-radius: 3px;
+		}
+		.index a:hover{
+			text-decoration:none;
+			color:#272C2E;
+			background:#F7F7F7;
+		}
+		.index a:focus {
+		    outline: none;
+		}
+		.upload {
+  		float: left;
+  		margin: 1.1em 0 0 0;
+  		margin-top: 7px;
+}
+
+	.upload a{
+	    padding: 8px 20px;
+	    background: #F7F7F7;
+	    color: #272C2E;
+	    font-size: 16px;
+	    border-radius: 3px;
+	    text-decoration: none;
+	}
+	.upload a:hover {
+	  opacity: 0.8;
+	}
