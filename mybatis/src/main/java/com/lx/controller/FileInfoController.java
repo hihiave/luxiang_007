@@ -48,7 +48,7 @@ public class FileInfoController {
 	public Map<String, Object> get_file_points(KFilePropertyType filePropertyType, String value) {
 		System.out.println("xxxxx");
 		System.out.println("++++++++" + filePropertyType);
-		System.out.println("!!!!!!!!" + value);
+		System.out.println("1" + value);
 		List<String> fileInfos = fileInfoService.getIntelligentPrompt(filePropertyType, value);
 		Map<String, Object> map = new HashMap<String, Object>();
 		/*Iterator<String> x=fileInfos.iterator();
