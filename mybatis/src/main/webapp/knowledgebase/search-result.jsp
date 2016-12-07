@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="panel panel-primary" style="height:625px;display: none;" id="search_panel" >
+<div class="panel panel-primary" style="display: none;" id="search_panel" >
     <div class="panel-heading">
         <h3 class="panel-title">搜索结果</h3>
     </div>
