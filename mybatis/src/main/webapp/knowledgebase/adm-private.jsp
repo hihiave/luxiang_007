@@ -87,7 +87,7 @@
 						</c:if>
 					
 						<c:if test="${is_manager == 1}">
-						<li><a href="#source-manager" data-toggle="collapse">资源中心<span class="glyphicon glyphicon-menu-down" ></span></a></li>
+						<li><a href="#source-manager" data-toggle="collapse">资源管理<span class="glyphicon glyphicon-menu-down" ></span></a></li>
 						<ul id="source-manager" class="panel-collapse collapse in ">
 							<li><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>

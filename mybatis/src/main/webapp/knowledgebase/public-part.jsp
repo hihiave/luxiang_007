@@ -46,7 +46,7 @@
 		</div>
 	    <div class="col-xs-9" style="margin-top:10px;">
         <div style="float:left;margin-right:0px;">
-            <select class="form-control" onchange="value" id="category_select" style="width: 100px;">
+            <select class="form-control" onchange="value" id="category_select" style="width: 105px;">
                 <option value='类别' >类别</option>
             </select>
         </div>
@@ -68,7 +68,7 @@
 
         		<div style="float: right;margin-right: 10px;">
         		<div class="upload">
-					<a href="/mybatis/knowledgebase/adm-upload.jsp">上传</a>
+					<a href="/mybatis/knowledgebase/adm-upload.jsp"><span class="glyphicon glyphicon-cloud-upload"></span>上传</a>
 				</div>	
 				<div class="index">
 					<a href="/mybatis/knowledgebase/adm-personal.jsp">主页</a>

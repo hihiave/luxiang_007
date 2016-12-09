@@ -104,7 +104,7 @@
 						</c:if>
 					
 						<c:if test="${is_manager == 1}">
-						<li><a href="#source-manager" data-toggle="collapse">资源中心<span class="glyphicon glyphicon-menu-down" ></span></a></li>
+						<li><a href="#source-manager" data-toggle="collapse">资源管理<span class="glyphicon glyphicon-menu-down" ></span></a></li>
 						<ul id="source-manager" class="panel-collapse collapse in ">
 							<li><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
@@ -133,9 +133,9 @@
 
 
                     <div style="float:left;margin-top:50px;margin-left:100px;">
-                        <img src="/mybatis/knowledgebase/img/1.png">
+                        <img src="/mybatis/knowledgebase/img/defaultUser.jpg">
                     </div>
-                    <div style="font-size:15px;float:right;margin-top:120px;margin-right:150px;">
+                    <div style="font-size:17px;font-weight:600;float:right;margin-top:120px;margin-right:150px;">
                         <p>用户名：<span id="show_user_name">xxxx</span></p>
 
                         <p>用户角色：<span id="show_user_role">xxxx</span></p>
