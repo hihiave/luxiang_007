@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.model.FileInfo;
@@ -84,10 +85,11 @@ public class FileInfoController {
 
 		// 将第二个String转化成枚举类型的 , 注意： param2 只能是枚举里面有的。
 		System.out.println(fileProperty + "!!!!!!!!文件属性");
-
+	
 		KFilePropertyType filePropertyType = KFilePropertyType.valueOf(fileProperty);
 		List<FileInfo> pub_file = fileInfoService.getFileByFilePropertyWithPass(fileCategory, filePropertyType, fileIn,
 				page);
+		System.out.println("文件============"+JSON.toJSONString(pub_file));
 		System.out.println(pub_file.size() + "大小");
 		int pageCount = page.getTotalPageCount();
 		int totalCount = page.getTotalCount();

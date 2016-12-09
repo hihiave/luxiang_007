@@ -65,30 +65,50 @@ text-decoration:none;
 
 		<div class="col-xs-2 left_nav">
 		<ul class="nav nav-menu">
-					<li><a href="/mybatis/knowledgebase/adm-personal.jsp">个人中心&nbsp;&nbsp;&nbsp;</a></li>
-					<li><a href="#user-manage" data-toggle="collapse">用户管理<span class="glyphicon glyphicon-menu-down" ></span></a></li>
-						<ul id="user-manage" class="panel-collapse collapse in">
-							<li><a href="/mybatis/knowledgebase/adm-inquire.jsp">用户查询</a></li>
-							<li><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核</a></li>
+					<li><a href="#user-center" data-toggle="collapse">个人中心<span class="glyphicon glyphicon-menu-down" ></span></a></li>
+						<ul id="user-center" class="panel-collapse collapse in">
+							<li><a href="/mybatis/knowledgebase/adm-personal.jsp">个人信息</a></li>
+							<c:if test="${is_worker == 1}">
+							<li><a href="/mybatis/knowledgebase/adm-private.jsp">我的文件</a></li>					
+							<li><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
+							<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
+							<li><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>
+							</c:if>
 						</ul>
 					<c:if test="${is_manager == 1}">
-					<li><a href="#source-manage" data-toggle="collapse">资源管理<span class="glyphicon glyphicon-menu-down" ></span></a></li>
-						<ul id="source-manage" class="panel-collapse collapse in col_a">
-							<li><a href="/mybatis/knowledgebase/adm-private.jsp">我的文件</a></li>
-							<li><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
-							<li><a href="/mybatis/knowledgebase/adm-public.jsp">公有文件</a></li>
-							<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
-							<li class="active"><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
-							<li><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>
+					<li><a href="#user-manage" data-toggle="collapse">用户管理<span class="glyphicon glyphicon-menu-down" ></span></a></li>
+						<ul id="user-manage" class="panel-collapse collapse in">
+							<li ><a href="/mybatis/knowledgebase/adm-inquire.jsp">用户查询</a></li>
+							<li><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核</a></li>
 						</ul>
-					</c:if>
+						</c:if>
+						<c:if test="${is_worker == 1}">
+						<li><a href="#source-center" data-toggle="collapse">资源中心<span class="glyphicon glyphicon-menu-down" ></span></a></li>
+						<ul id="source-center" class="panel-collapse collapse in ">
+						
+							<li><a href="/mybatis/knowledgebase/adm-public.jsp">公有文件</a></li>
+							
+							<li class="active"><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
+						
+						</ul>
+						</c:if>
+					
+						<c:if test="${is_manager == 1}">
+						<li><a href="#source-manager" data-toggle="collapse">资源中心<span class="glyphicon glyphicon-menu-down" ></span></a></li>
+						<ul id="source-manager" class="panel-collapse collapse in ">
+							<li><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
+							<li><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
+						</ul>
+						</c:if>
+					
+					
 					 <c:if test="${is_manager == 1}">
 					<li><a href="#system-manage" data-toggle="collapse">系统管理<span class="glyphicon glyphicon-menu-down" ></span></a></li>
 						<ul id="system-manage" class="panel-collapse collapse in">
-							<li><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
-							<li><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
+						
 							<li><a href="#">数据还原</a></li>
 							<li><a href="#">数据备份</a></li>
+							<li><a href="#">系统配置</a></li>
 						</ul>
 					</c:if>
 					</ul>
@@ -394,7 +414,23 @@ text-decoration:none;
 			</div>
 		</div>
 	</div>
+<div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-logout">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
 
+                <h4 class="modal-title" id="myModalLabel-logout">退出提示</h4>
+            </div>
+            <div class="modal-body">
+                <p id="logout-username"></p>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary " data-dismiss="modal" id="logout-dismiss">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
 	<style type="text/css">
 /*th.btn-primary {*/
 /*width: 116px;*/

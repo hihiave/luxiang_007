@@ -33,12 +33,15 @@ public class UserInfoController {
 	@ResponseBody
 	public Map<String, Object> login(String username, String password, HttpSession httpSession) {
 		MacroEnum.KMessageType result = userInfoService.checkLogin(username, password);
+	
 		Map<String, Object> map = new HashMap<String, Object>();
 		switch (result) {
 		case loginSuccess:
 			UserInfo userInfo = userInfoService.selectUserByUserName(username);
 			// httpSession.setAttribute("userinfo",userInfo);
 			httpSession.setAttribute("username", username);
+			String user=userInfo.getUserRole();
+			System.out.println("name================="+user);
 			httpSession.setAttribute("time", userInfo.getUserRegisterTime());
 			httpSession.setAttribute("userrole", userInfo.getUserRole());
 			// httpSession.setAttribute("userid", userInfo.getUserId());

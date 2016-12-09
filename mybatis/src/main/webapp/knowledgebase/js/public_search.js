@@ -86,16 +86,36 @@ function send_search_info(){
     var _category = $.trim($("#category_select").val());
     var _key = $.trim($("#key_select").val());
     var _search_input = $.trim($("#file_search_input").val());
-    var src = "/mybatis/FileInfoController/search_file.do"
+ 
+    var src = "/mybatis/FileInfoController/publicfile.do"
     if(_search_input != ""){
         var dataPost = {"fileCategory":_category,"fileProperty":_key,"fileIn":_search_input};
         //console.log(dataPost);
-        sendAjaxRequest(src,dataPost,function(data){},function(data){});
         $("#default_panel").css("display","none");
         $("#search_panel").css("display","block");
+        sendAjaxRequest(src,dataPost,get_all_search_file_table);
+       
     }
 }
-
+function get_all_search_file_table(data){
+    var _table = $("#search_file>tr");
+    _table.remove();
+    var all_pub_file = data["pub_file"];
+    for(var i = 0;i < all_pub_file.length;i++){
+        var tr_begin = "<tr>";
+        var tr_end = "</tr>";
+        var td_1 = "<td style='padding-top:15px;'><a href='##' onclick='ReadOnLine(this)' path='"+all_pub_file[i].fileUrl+"'>"+all_pub_file[i].fileName+"</a></td>";
+        var td_2 = "<td style='padding-top:15px;'>"+all_pub_file[i].fileAuthor+"</td>";
+        var td_3 = "<td style='padding-top:15px;'>"+timeStampFormatDay(all_pub_file[i].fileUploadTime*1000)+"</td>";
+        var td_4 = "<td><button class='btn btn-primary' did='public' bid='"+all_pub_file[i].fileId+"'  onclick='download(this)' path='"+all_pub_file[i].fileUrl+"'>下载</button></td>";
+        //var td_5 = "<td><button class='btn btn-primary' data-toggle='modal' data-target='#preview' onclick='pre_file(this)'>预览</button></td>";
+        var td_6="<td style='padding-top:15px;'>"+all_pub_file[i].fileDownloadCount+"</td>"
+     
+        var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_6 +  tr_end;
+        $("#search_file").append(content);
+    }
+   // createNewPagination(data,"file_public","/mybatis/FileInfoController/publicfile.do",get_all_public_file_table,"first_file_click","last_file_click","page-file-three",{"fileProperty":"fullText"});
+}
 
 
 function selectAll() {
