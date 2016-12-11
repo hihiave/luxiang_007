@@ -119,7 +119,7 @@ text-decoration:none;
 					<div class="panel-heading">
 						<h3 class="panel-title">文件上传</h3>
 					</div>
-					<div class="panel-body" style="height: 580px; overflow-y: auto;">
+					<div class="panel-body" style="height: 560px; overflow-y: auto;">
 						<div class="panel panel-default up_panel">
 							<div class="panel-heading">
 								<h4 class="panel-title">

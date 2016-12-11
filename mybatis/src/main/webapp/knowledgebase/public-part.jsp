@@ -68,7 +68,7 @@
 
         		<div style="float: right;margin-right: 10px;">
         		<div class="upload">
-					<a href="/mybatis/knowledgebase/adm-upload.jsp"><span class="glyphicon glyphicon-cloud-upload"></span>上传</a>
+					<a href="/mybatis/knowledgebase/adm-upload.jsp"><span class="glyphicon glyphicon-open"></span>上传</a>
 				</div>	
 				<div class="index">
 					<a href="/mybatis/knowledgebase/adm-personal.jsp">主页</a>

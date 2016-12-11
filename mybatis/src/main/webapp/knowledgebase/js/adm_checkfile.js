@@ -158,13 +158,13 @@ function notpass_all_selected_file_modal(obj){
     })
     if(notpass_count > 0){
         $(obj).attr({"data-toggle":"modal","data-target":"#jujue"});
-        $("#jujue_file_remind").html("确认全部通过所选的文件么？");
+        $("#jujue_remind_info").html("确认全部拒绝所选的文件么？");
         $("#jujue_ok_btn").attr("onclick","notpass_all_selected_file()");
 
 
     }else{
-        $(obj).attr({"data-toggle":"modal","data-target":"#jujue"});
-        $("#jujue_file_remind").html("请选择要拒绝的文件");
+        $(obj).attr({"data-toggle":"modal","data-target":"#pass_remind"});
+        $("#remind_info").html("请选择要拒绝的文件");
     }
 }
 

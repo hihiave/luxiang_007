@@ -115,6 +115,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">类别管理</h3>
                 </div>
+                <c:if test="${is_manager == 1}">
                 <div class="panel-body">
                     <table class="table table-striped">
                         <thead>
@@ -130,6 +131,7 @@
                         </tbody>
                     </table>
                 </div>
+                </c:if>
             </div>
             <jsp:include page="search-result.jsp" flush="true"/>
 			<div style="clear:both;"></div>

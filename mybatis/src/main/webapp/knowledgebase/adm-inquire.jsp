@@ -118,7 +118,9 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">用户查询</h3>
                 </div>
+                <c:if test="${is_manager == 1}">
                 <div class="panel-body">
+                	
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -136,17 +138,19 @@
                             </th>
                         </tr>
                         </thead>
+                        
                         <tbody id="search_result">
                        
                         </tbody>
                     </table>
+                   
                     <div style="margin-top: -20px;float: right;">
                         <ul class="pagination" id="page-one">
                             
                         </ul>
                     </div>
                 </div>
-
+				</c:if>
 
             </div>
             <jsp:include page="search-result.jsp" flush="true"/>

@@ -17,6 +17,20 @@
 <%
 	}
 %>
+<%
+if(session.getAttribute("message")=="noexist"){
+	%>
+	<%
+	request.getSession().removeAttribute("message");
+	%>
+	<script language="javascript">
+	alert("资源不存在！");
+	</script>
+	
+	
+<%
+}
+%>
 <c:set value="0" var="is_manager" />
 <c:set value="0" var="is_worker" />
 <c:forEach items="${userrole}" var="role">

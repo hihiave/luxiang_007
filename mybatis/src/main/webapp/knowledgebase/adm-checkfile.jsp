@@ -114,6 +114,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">资源审核</h3>
                 </div>
+                <c:if test="${is_manager == 1}">
                 <div class="panel-body" style="padding-top:0px;">
                     <div style="padding-top: 10px;">
                         <button class="btn btn-primary" onclick="check_all_file(this)">通过</button>
@@ -144,6 +145,7 @@
                         </ul>
                     </div>
                 </div>
+                </c:if>
             </div>
             <jsp:include page="search-result.jsp" flush="true"/>
             <div style="clear:both;"></div>
