@@ -88,14 +88,13 @@ function send_search_info(){
     var _search_input = $.trim($("#file_search_input").val());
  
     var src = "/mybatis/FileInfoController/publicfile.do"
-    if(_search_input != ""){
+    //if(_search_input != ""){
         var dataPost = {"fileCategory":_category,"fileProperty":_key,"fileIn":_search_input};
         //console.log(dataPost);
         $("#default_panel").css("display","none");
         $("#search_panel").css("display","block");
-        sendAjaxRequest(src,dataPost,get_all_search_file_table);
-       
-    }
+        sendAjaxRequest(src,dataPost,get_all_search_file_table); 
+    //}
 }
 function get_all_search_file_table(data){
     var _table = $("#search_file>tr");

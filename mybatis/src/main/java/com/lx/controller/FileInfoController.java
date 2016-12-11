@@ -43,24 +43,24 @@ public class FileInfoController {
 		return "showFileInfo";
 		// System.out.println;
 	}
-	
+
 	@RequestMapping(value = "/get_file_points", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> get_file_points(KFilePropertyType filePropertyType, String value) {
-		System.out.println("xxxxx");
+		System.out.println("=================get_file_points=============");
 		System.out.println("++++++++" + filePropertyType);
 		System.out.println("1" + value);
 		List<String> fileInfos = fileInfoService.getIntelligentPrompt(filePropertyType, value);
 		Map<String, Object> map = new HashMap<String, Object>();
-		/*Iterator<String> x=fileInfos.iterator();
-		while(x.hasNext())
-		{
-			System.out.println(x.next());
-		}*/
-        map.put("FileInfo_check", fileInfos);
-		//System.out.println("check+++++++++"+userInfos.size());
+		/*
+		 * Iterator<String> x=fileInfos.iterator(); while(x.hasNext()) {
+		 * System.out.println(x.next()); }
+		 */
+		map.put("FileInfo_check", fileInfos);
+		// System.out.println("check+++++++++"+userInfos.size());
 		return map;
 	}
+
 	// ********************普通用户操作权限***************** ***
 	/**
 	 * 公有文件,包括查询
@@ -68,14 +68,8 @@ public class FileInfoController {
 	@RequestMapping(value = "/publicfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> publicfile(String fileCategory, String fileProperty, String fileIn, Integer page_Now) {
-		if (fileIn == null) {
-			fileIn = "";
-		}
-
-		// 你看一下，完善这个方法
-		System.out.println("类别" + fileCategory + "属性" + fileProperty + "搜索值" + fileIn);
-
-		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println("=================publicfile=============");
+		System.out.println("==q===" + "类别" + fileCategory + "属性" + fileProperty + "搜索值" + fileIn);
 
 		int pageNow = 1;
 		if (page_Now != null) {
@@ -83,20 +77,17 @@ public class FileInfoController {
 		}
 		Page page = new Page(pageNow);
 
-		// 将第二个String转化成枚举类型的 , 注意： param2 只能是枚举里面有的。
-		System.out.println(fileProperty + "!!!!!!!!文件属性");
-	
 		KFilePropertyType filePropertyType = KFilePropertyType.valueOf(fileProperty);
-		List<FileInfo> pub_file = fileInfoService.getFileByFilePropertyWithPass(fileCategory, filePropertyType, fileIn,
+		List<FileInfo> fileInfos = fileInfoService.getFileByFilePropertyWithPass(fileCategory, filePropertyType, fileIn,
 				page);
-		System.out.println("文件============"+JSON.toJSONString(pub_file));
-		System.out.println(pub_file.size() + "大小");
-		int pageCount = page.getTotalPageCount();
-		int totalCount = page.getTotalCount();
-		map.put("totalCount", totalCount);
-		map.put("pageNow", page_Now);
-		map.put("pageCount", pageCount);
-		map.put("pub_file", pub_file);
+		System.out.println("文件============" + JSON.toJSONString(fileInfos));
+		System.out.println(fileInfos.size() + "大小");
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("totalCount", page.getTotalCount());
+		map.put("pageNow", pageNow);
+		map.put("pageCount", page.getTotalPageCount());
+		map.put("pub_file", fileInfos);
 		return map;
 	}
 

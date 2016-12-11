@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
 import com.lx.dao.FileInfoMapper;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KFilePropertyType;
@@ -83,18 +84,17 @@ public class FileInfoServiceImpl implements FileInfoService {
 			return fileInfoMapper.selectFileByFileAuthorWithFileCheck(userName.trim(), page, fileChecks);
 		}
 		return null;
-
 	}
 
 	@Override
 	public List<FileInfo> getFileByFilePropertyWithPass(String fileCategory, KFilePropertyType filePropertyType,
 			String value, Page page) {
-		if (page != null && value != null) {
+		if (value == null) {
+			value = "";
+		}
+		if (page != null) {
 			FileInfo fileInfo = new FileInfo();
 			switch (filePropertyType) {
-			case title:
-				fileInfo.setFileName(value.trim());
-				break;
 			case author:
 				fileInfo.setFileAuthor(value.trim());
 				break;
@@ -102,9 +102,14 @@ public class FileInfoServiceImpl implements FileInfoService {
 				fileInfo.setFileKeywords(value.trim());
 				break;
 			default:
+				fileInfo.setFileName(value.trim());
 				break;
 			}
-			fileInfo.setFileCategory(fileCategory);
+			if (fileCategory != null && !fileCategory.equals("类别")) {
+				fileInfo.setFileCategory(fileCategory);
+			}
+
+			System.out.println("=========fileInfo=====" + JSON.toJSONString(fileInfo));
 			int totalCount = fileInfoMapper.getFileInfoCount(KCheckType.pass.getValue(), fileInfo);
 			page.setTotalCount(totalCount);
 			page.init();

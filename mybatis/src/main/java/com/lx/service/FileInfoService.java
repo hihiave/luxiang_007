@@ -97,5 +97,4 @@ public interface FileInfoService {
 	 */
 	List<String> getIntelligentPrompt(KFilePropertyType filePropertyType, String value);
 	
-	
 }

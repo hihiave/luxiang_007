@@ -44,6 +44,12 @@ public class FileUploadController {
 
 		String dirPath = "C:/Users/qqq"; // 上传的地址
 
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+		+ path + "/";
+		
+		System.out.println(" ===================1====" +basePath);
+		
 		File file = new File(dirPath);
 		if (!file.exists()) {
 			file.mkdirs();

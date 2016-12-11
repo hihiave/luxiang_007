@@ -80,6 +80,7 @@
   		file_check = #{fileCheck,jdbcType=INTEGER} and file_is_visible = '公有'
   		<include refid="query_condition" />
   	</where>
+  	ORDER BY file_upload_time DESC
   	limit #{page.startPos}, #{page.pageSize}
   </select>
   
