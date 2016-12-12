@@ -72,7 +72,6 @@
 
 	<jsp:include page="public-part.jsp" flush="true" />
 	<div class="container">
-
 		<div class="col-xs-2 left_nav">
 			<ul class="nav nav-menu">
 				<li><a href="#user-center" data-toggle="collapse">个人中心<span
@@ -99,11 +98,8 @@
 					<li><a href="#source-center" data-toggle="collapse">资源中心<span
 							class="glyphicon glyphicon-menu-down"></span></a></li>
 					<ul id="source-center" class="panel-collapse collapse in ">
-
 						<li><a href="/mybatis/knowledgebase/adm-public.jsp">公有文件</a></li>
-
 						<li><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
-
 					</ul>
 				</c:if>
 
@@ -166,12 +162,12 @@
 			<div style="clear: both;"></div>
 		</div>
 	</div>
+
 	<div class="modal fade" id="changepsw" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-sm" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-
 					<h4 class="modal-title" id="myModalLabel">修改密码</h4>
 				</div>
 				<div class="modal-body">
@@ -210,17 +206,12 @@
 					<p id="logout-username"></p>
 				</div>
 				<div class="modal-footer">
-
 					<button type="button" class="btn btn-primary " data-dismiss="modal"
 						id="logout-dismiss">确认</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-	</div>
-
 
 	<style type="text/css">
 .modal {
