@@ -132,15 +132,15 @@ body {
 
 				 <div class="name2">用户注册</div>
 				 <div class="loginform loginusername" style="margin-bottom:5px;margin-top:5px;">
-				 	<span style="margin-left:14px;color:#000000;">用户名：</span><input type="text"  id="username1" name="username1" placeholder="请输入用户名">
+				 	<span style="margin-left:14px;color:#FFFFFF;">用户名：</span><input type="text"  id="username1" name="username1" placeholder="请输入用户名">
 				 </div>
 				 <div style="height:16px" id="username_span" ></div>
 				 <div class="loginform loginpassword" style="margin-bottom:5px;margin-top:5px;">
-				 	<span style="margin-left:28px;color:#000000;">密码：</span><input type="password"    id="password1" name="password1" placeholder="请输入密码">
+				 	<span style="margin-left:28px;color:#FFFFFF;">密码：</span><input type="password"    id="password1" name="password1" placeholder="请输入密码">
 				 </div>
 				 <div id="passwor1_span" style="height:16px" ></div>
 				 <div class="loginform loginpassword" style="margin-bottom:5px;margin-top:5px;">
-				 	<span style="color:#000000;">重复密码：</span><input type="password"    id="password2" name="password2" placeholder="请再次输入密码">
+				 	<span style="color:#FFFFFF;">重复密码：</span><input type="password"    id="password2" name="password2" placeholder="请再次输入密码">
 				 </div>
 				<div id="password2_span" style="height:16px"></div>
 				<div class="button-group" style="margin-top:5px;">

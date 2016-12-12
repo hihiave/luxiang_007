@@ -135,11 +135,11 @@
             <%--<form action="/mybatis/UserInfoController/login.do" method="post" >--%>
                 <div class="name1">用户平台登录</div>
                 <div class="loginform loginusername" style="margin-top:5px;margin-bottom:5px;">
-                  <span style="color:#000000;">账号：</span> <input type="text" id="username" name="username" placeholder="请输入用户名">
+                  <span style="color:#FFFFFF;">账号：</span> <input type="text" id="username" name="username" placeholder="请输入用户名">
                 </div>
                 <div id="spanusername" style="height:16px"></div>
                 <div class="loginform loginpassword" style="margin-top:5px;margin-bottom:5px;">
-           		 <span style="color:#000000;">密码：</span> <input type="password" name="password" id="password" placeholder="请输入密码">
+           		 <span style="color:#FFFFFF;">密码：</span> <input type="password" name="password" id="password" placeholder="请输入密码">
                 </div>
                 <div id="spanpassword" style="height:16px"></div>
 
