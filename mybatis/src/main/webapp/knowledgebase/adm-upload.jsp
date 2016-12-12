@@ -39,6 +39,7 @@
 <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
 <script src="/mybatis/knowledgebase/js/common.js"></script>
 <script src="/mybatis/knowledgebase/js/public_search.js"></script>
+<script src="/mybatis/knowledgebase/js/ajaxfileupload.js"></script>
 <script src="/mybatis/knowledgebase/js/adm_upload.js"></script>
 <script src="/mybatis/knowledgebase/js/jquery-ui.min.js"></script>
 
