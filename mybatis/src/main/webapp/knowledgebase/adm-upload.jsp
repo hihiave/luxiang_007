@@ -43,7 +43,6 @@
 <script src="/mybatis/knowledgebase/js/adm_upload.js"></script>
 <script src="/mybatis/knowledgebase/js/jquery-ui.min.js"></script>
 
-
 <style type="text/css">
 .up_panel{
 min-height:10px !important;

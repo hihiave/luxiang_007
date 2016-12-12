@@ -4,7 +4,6 @@ jQuery
 			createUploadIframe : function(id, uri) {
 				// create frame
 				var frameId = 'jUploadFrame' + id;
-
 				if (window.ActiveXObject) {
 					var io = document.createElement('<iframe id="' + frameId
 							+ '" name="' + frameId + '" />');
