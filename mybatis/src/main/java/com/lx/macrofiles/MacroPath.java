@@ -4,4 +4,5 @@ public class MacroPath {
 	
 	String basePath = "";
 	
+	
 }
