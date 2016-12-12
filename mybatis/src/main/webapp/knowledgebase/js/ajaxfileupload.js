@@ -142,7 +142,6 @@ jQuery
 							}
 
 						}, 100)
-
 						xml = null
 
 					}
