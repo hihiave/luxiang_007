@@ -196,13 +196,9 @@ jQuery
 					data = r.responseText;
 					var start = data.indexOf(">");
 					if (start != -1) {
-
 						var end = data.indexOf("<", start + 1);
-
 						if (end != -1) {
-
 							data = data.substring(start + 1, end);
-
 						}
 					}
 					eval("data = " + data);

@@ -86,11 +86,8 @@ text-decoration:none;
 						<c:if test="${is_worker == 1}">
 						<li><a href="#source-center" data-toggle="collapse">资源中心<span class="glyphicon glyphicon-menu-down" ></span></a></li>
 						<ul id="source-center" class="panel-collapse collapse in ">
-						
 							<li><a href="/mybatis/knowledgebase/adm-public.jsp">公有文件</a></li>
-							
 							<li class="active"><a href="/mybatis/knowledgebase/adm-upload.jsp">文件上传</a></li>
-						
 						</ul>
 						</c:if>
 					
