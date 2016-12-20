@@ -15,7 +15,6 @@ public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	private CategoryMapper categoryMapper;
 
-	
 	@Override
 	public boolean addCategory(String categoryName) {
 		Category category = new Category();

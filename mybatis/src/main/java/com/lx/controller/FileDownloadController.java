@@ -30,7 +30,6 @@ public class FileDownloadController {
 		response.setCharacterEncoding("UTF-8");
 
 		FileInfo fileInfo = fileInfoService.getFileByFileId(Integer.parseInt(request.getParameter("fileid")));
-
 		// 获取下载文件的url
 		String fileUrl = request.getParameter("filename");
 		// String fileNameFull = fileUrl.substring(fileUrl.lastIndexOf("/") +

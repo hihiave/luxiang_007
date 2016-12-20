@@ -33,6 +33,7 @@ public class FileUploadController {
 	// String dirPath = "c:/a/b";
 	// String filePath = dirPath + "/" + fileNameFull; filePath = fileUrl
 
+
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> fileUpload(HttpServletRequest request, HttpServletResponse response)

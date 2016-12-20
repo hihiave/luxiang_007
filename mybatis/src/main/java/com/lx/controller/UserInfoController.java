@@ -73,7 +73,6 @@ public class UserInfoController {
 		map.put("username", str);
 		System.out.println("登出用户" + str);
 		httpSession.removeAttribute("username");
-
 		map.put("result", "success");
 		return map;
 	}

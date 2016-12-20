@@ -52,7 +52,6 @@ public class CategoryController {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		boolean result = categortservice.delCategory(cate_name);
-
 		map.put("flag", result);
 		return map;
 	}

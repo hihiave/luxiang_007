@@ -15,7 +15,6 @@ public class DocConverterController {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		response.setCharacterEncoding("UTF-8");
 		String fileName = request.getParameter("filename");
 		String filePath = "G:/Users";

@@ -39,7 +39,6 @@ public class FileInfoController {
 		fileInfo.setFileName("哈利波特");
 
 		request.setAttribute("fileInfo", fileInfo);
-
 		return "showFileInfo";
 		// System.out.println;
 	}

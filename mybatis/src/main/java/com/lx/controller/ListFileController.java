@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ListFileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */

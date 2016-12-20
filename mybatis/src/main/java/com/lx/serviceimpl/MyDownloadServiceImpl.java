@@ -25,7 +25,6 @@ public class MyDownloadServiceImpl implements MyDownloadService {
 		myDownload.setMyDownloadUserName(myDownloadUserName);
 		myDownload.setMyDownloadFileId(myDownloadFileId);
         myDownload.setMyDownloadTime(ToolDate.getCurrentTimestamp());
-
 		if (myDownloadMapper.insertSelective(myDownload) == 1) {
 			return true;
 		}

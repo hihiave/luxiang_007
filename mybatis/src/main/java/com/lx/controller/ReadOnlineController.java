@@ -33,7 +33,6 @@ public class ReadOnlineController {
 
 		if (ToolFileTransfer.transfer(fileUrl, dirPath)) {
 			if (ToolDocConverter.converter(ToolFileTransfer.getToFilePath())) {
-
 				System.out.println("==============转换成功===========");
 				fileUrl = ToolDocConverter.getSwfFilePath();
 				

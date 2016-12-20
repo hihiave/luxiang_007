@@ -145,5 +145,4 @@ public class FileInfoServiceImpl implements FileInfoService {
 			return fileInfoMapper.getFileNames(value.trim());
 		}
 	}
-
 }
