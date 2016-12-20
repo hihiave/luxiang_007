@@ -19,7 +19,7 @@ import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
-import com.lx.serviceimpl.Page;
+import com.lx.tools.Page;
 import com.lx.tools.ToolDate;
 
 @Controller

@@ -11,6 +11,7 @@ import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
+import com.lx.tools.Page;
 
 @Service
 public class FileInfoServiceImpl implements FileInfoService {

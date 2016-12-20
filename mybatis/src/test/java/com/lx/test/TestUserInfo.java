@@ -13,8 +13,8 @@ import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KMessageType;
 import com.lx.model.UserInfo;
 import com.lx.service.UserInfoService;
-import com.lx.serviceimpl.Page;
 import com.lx.serviceimpl.UserInfoServiceImpl;
+import com.lx.tools.Page;
 
 public class TestUserInfo {
 

@@ -44,9 +44,11 @@ public class FileUploadController {
 
 		String dirPath = "C:/Users/qqq"; // 上传的地址
 
-		String path = request.getContextPath();
-		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-		+ path + "/";
+		//String path = request.getContextPath();
+		//String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+		//+ path + "/";
+		String basePath = request.getSession().getServletContext().getRealPath("");
+		
 		
 		System.out.println(" ===================1====" +basePath);
 		

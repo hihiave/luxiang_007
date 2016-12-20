@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.lx.model.FileInfoVo;
 import com.lx.model.MyDownload;
-import com.lx.serviceimpl.Page;
+import com.lx.tools.Page;
 
 public interface MyDownloadMapper {
 	int deleteByPrimaryKey(Integer myDownloadId);

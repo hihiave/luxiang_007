@@ -17,7 +17,7 @@ import com.lx.macrofiles.MacroEnum;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.model.UserInfo;
 import com.lx.service.UserInfoService;
-import com.lx.serviceimpl.Page;
+import com.lx.tools.Page;
 
 @Controller
 @RequestMapping("/UserInfoController")

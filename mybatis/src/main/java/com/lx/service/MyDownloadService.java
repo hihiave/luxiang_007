@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.lx.model.FileInfo;
 import com.lx.model.FileInfoVo;
-import com.lx.serviceimpl.Page;
+import com.lx.tools.Page;
 
 public interface MyDownloadService {
 

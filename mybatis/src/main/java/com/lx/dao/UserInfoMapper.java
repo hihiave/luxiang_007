@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.lx.model.UserInfo;
-import com.lx.serviceimpl.Page;
+import com.lx.tools.Page;
 
 public interface UserInfoMapper {
 
