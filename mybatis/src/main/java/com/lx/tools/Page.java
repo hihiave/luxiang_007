@@ -1,4 +1,4 @@
-package com.lx.serviceimpl;
+package com.lx.tools;
 
 public class Page {
 
@@ -12,17 +12,25 @@ public class Page {
 
 	private int startPos; // 分页的开始位置
 
+	private int endPos; // 分页的结束位置
+
 	public Page(int pageNow) {
 		this.pageSize = 10;
 		this.pageNow = pageNow;
 	}
 
-	protected void init() {
+	public Page(int pageNow, int pageSize) {
+		this.pageSize = pageSize;
+		this.pageNow = pageNow;
+	}
+
+	public void init() {
 		// 计算总页数
 		totalPageCount = totalCount / pageSize;
 		totalPageCount = (totalCount % pageSize == 0) ? totalPageCount : totalPageCount + 1;
-		// 计算分页的起始位置
-		startPos = (pageNow - 1) * pageSize;
+
+		startPos = (pageNow - 1) * pageSize; // 计算分页的起始位置
+		endPos = Math.min(pageNow * pageSize, totalCount); // 计算分页的结束位置
 	}
 
 	// 是否有前一页
@@ -36,36 +44,32 @@ public class Page {
 	}
 
 	// get & set
-	public int getPageNow() {
-		return pageNow;
+	public int getStartPos() {
+		return startPos;
 	}
 
-	protected void setPageNow(int pageNow) {
-		this.pageNow = pageNow;
+	public int getEndPos() {
+		return endPos;
+	}
+
+	public int getPageNow() {
+		return pageNow;
 	}
 
 	public int getPageSize() {
 		return pageSize;
 	}
 
-	protected void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
-
 	public int getTotalCount() {
 		return totalCount;
 	}
 
-	protected void setTotalCount(int totalCount) {
+	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
 	}
 
 	public int getTotalPageCount() {
 		return totalPageCount;
-	}
-
-	protected void setTotalPageCount(int totalPageCount) {
-		this.totalPageCount = totalPageCount;
 	}
 
 }

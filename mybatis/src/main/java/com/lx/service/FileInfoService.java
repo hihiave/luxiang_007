@@ -5,7 +5,7 @@ import java.util.List;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.model.FileInfo;
-import com.lx.serviceimpl.Page;
+import com.lx.tools.Page;
 
 public interface FileInfoService {
 

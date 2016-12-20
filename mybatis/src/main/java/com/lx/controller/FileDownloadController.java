@@ -30,7 +30,6 @@ public class FileDownloadController {
 		response.setCharacterEncoding("UTF-8");
 
 		FileInfo fileInfo = fileInfoService.getFileByFileId(Integer.parseInt(request.getParameter("fileid")));
-
 		// 获取下载文件的url
 		String fileUrl = request.getParameter("filename");
 		// String fileNameFull = fileUrl.substring(fileUrl.lastIndexOf("/") +
@@ -38,8 +37,8 @@ public class FileDownloadController {
 		String fileNameExtension = fileUrl.substring(fileUrl.lastIndexOf(".") + 1);
 		String downloadName = fileInfo.getFileName() + "." + fileNameExtension;
 		fileUrl = new String(fileUrl.getBytes("ISO8859_1"), "UTF-8");
-		String retUrl = request.getHeader("Referer"); 
-		System.out.println("url=================="+retUrl);
+		String retUrl = request.getHeader("Referer");
+		System.out.println("url==================" + retUrl);
 		// 判定资源是否存在
 		if (!new File(fileUrl).exists()) {
 			request.getSession().setAttribute("message", "noexist");

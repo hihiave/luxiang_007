@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lx.model.Category;
-import com.lx.model.FileInfo;
 import com.lx.service.CategoryService;
-import com.lx.service.FileInfoService;
 
 @Controller
 @RequestMapping("/CategoryController")
@@ -52,7 +50,6 @@ public class CategoryController {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		boolean result = categortservice.delCategory(cate_name);
-
 		map.put("flag", result);
 		return map;
 	}
@@ -68,5 +65,4 @@ public class CategoryController {
 		map.put("category", category);
 		return map;
 	}
-
 }

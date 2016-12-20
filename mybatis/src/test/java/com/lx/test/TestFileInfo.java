@@ -16,7 +16,7 @@ import com.lx.macrofiles.MacroEnum.KFileVisibleType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.serviceimpl.FileInfoServiceImpl;
-import com.lx.serviceimpl.Page;
+import com.lx.tools.Page;
 import com.lx.tools.ToolDate;
 
 public class TestFileInfo {

@@ -19,7 +19,7 @@ import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
-import com.lx.serviceimpl.Page;
+import com.lx.tools.Page;
 import com.lx.tools.ToolDate;
 
 @Controller
@@ -39,7 +39,6 @@ public class FileInfoController {
 		fileInfo.setFileName("哈利波特");
 
 		request.setAttribute("fileInfo", fileInfo);
-
 		return "showFileInfo";
 		// System.out.println;
 	}
@@ -372,5 +371,4 @@ public class FileInfoController {
 		map.put("flag", flag);
 		return map;
 	}
-
 }

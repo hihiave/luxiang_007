@@ -9,6 +9,7 @@ import com.lx.dao.MyDownloadMapper;
 import com.lx.model.FileInfoVo;
 import com.lx.model.MyDownload;
 import com.lx.service.MyDownloadService;
+import com.lx.tools.Page;
 import com.lx.tools.ToolDate;
 
 @Service
@@ -23,8 +24,7 @@ public class MyDownloadServiceImpl implements MyDownloadService {
 		MyDownload myDownload = new MyDownload();
 		myDownload.setMyDownloadUserName(myDownloadUserName);
 		myDownload.setMyDownloadFileId(myDownloadFileId);
-        myDownload.setMyDownloadTime(ToolDate.getCurrentTimestamp());
-
+		myDownload.setMyDownloadTime(ToolDate.getCurrentTimestamp());
 		if (myDownloadMapper.insertSelective(myDownload) == 1) {
 			return true;
 		}
