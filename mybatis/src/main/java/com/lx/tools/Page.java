@@ -71,4 +71,5 @@ public class Page {
 	public int getTotalPageCount() {
 		return totalPageCount;
 	}
+
 }

@@ -33,7 +33,6 @@ public class FileUploadController {
 	// String dirPath = "c:/a/b";
 	// String filePath = dirPath + "/" + fileNameFull; filePath = fileUrl
 
-
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> fileUpload(HttpServletRequest request, HttpServletResponse response)
@@ -45,14 +44,14 @@ public class FileUploadController {
 
 		String dirPath = "C:/Users/qqq"; // 上传的地址
 
-		//String path = request.getContextPath();
-		//String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-		//+ path + "/";
+		// String path = request.getContextPath();
+		// String basePath = request.getScheme() + "://" +
+		// request.getServerName() + ":" + request.getServerPort()
+		// + path + "/";
 		String basePath = request.getSession().getServletContext().getRealPath("");
-		
-		
-		System.out.println(" ===================1====" +basePath);
-		
+
+		System.out.println(" ===================1====" + basePath);
+
 		File file = new File(dirPath);
 		if (!file.exists()) {
 			file.mkdirs();

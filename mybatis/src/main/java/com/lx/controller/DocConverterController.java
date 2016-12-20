@@ -35,8 +35,6 @@ public class DocConverterController {
 		}
 		in.close();
 		out.close();
-		// System.out.println;
-
 	}
 
 }

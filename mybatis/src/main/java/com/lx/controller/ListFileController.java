@@ -57,5 +57,4 @@ public class ListFileController extends HttpServlet {
 			map.put(file.getName(), realName);
 		}
 	}
-
 }

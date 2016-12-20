@@ -37,8 +37,8 @@ public class FileDownloadController {
 		String fileNameExtension = fileUrl.substring(fileUrl.lastIndexOf(".") + 1);
 		String downloadName = fileInfo.getFileName() + "." + fileNameExtension;
 		fileUrl = new String(fileUrl.getBytes("ISO8859_1"), "UTF-8");
-		String retUrl = request.getHeader("Referer"); 
-		System.out.println("url=================="+retUrl);
+		String retUrl = request.getHeader("Referer");
+		System.out.println("url==================" + retUrl);
 		// 判定资源是否存在
 		if (!new File(fileUrl).exists()) {
 			request.getSession().setAttribute("message", "noexist");

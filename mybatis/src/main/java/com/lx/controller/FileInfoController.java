@@ -371,5 +371,4 @@ public class FileInfoController {
 		map.put("flag", flag);
 		return map;
 	}
-
 }

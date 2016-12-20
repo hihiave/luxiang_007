@@ -23,8 +23,8 @@ public class ReadOnlineController {
 			throws ServletException, IOException {
 		// 获取预览文件的url
 		String fileUrl = request.getParameter("filename");
-		String dirPath = "E:/swf哈哈哈/"; // 转移地址    "E:/swf哈哈哈/"
-		
+		String dirPath = "E:/swf哈哈哈/"; // 转移地址 "E:/swf哈哈哈/"
+
 		File file = new File(dirPath);
 		if (!file.exists()) {
 			file.mkdirs();
@@ -35,12 +35,13 @@ public class ReadOnlineController {
 			if (ToolDocConverter.converter(ToolFileTransfer.getToFilePath())) {
 				System.out.println("==============转换成功===========");
 				fileUrl = ToolDocConverter.getSwfFilePath();
-				
-				//String errorMessage = ToolDocConverter.getErrorMessage();
-				//System.err.println("===============错误==============" + errorMessage);
+
+				// String errorMessage = ToolDocConverter.getErrorMessage();
+				// System.err.println("===============错误==============" +
+				// errorMessage);
 				System.out.println("========swf文件目的地址=====Q======" + fileUrl);
-				
-				// "E:/lu/swf文件/1479781384.swf"  fileUrl
+
+				// "E:/lu/swf文件/1479781384.swf" fileUrl
 				request.getSession().setAttribute("swfPath", fileUrl);
 				response.sendRedirect("../Flexpaper2.10/documentView.jsp");
 				// return "../Flexpaper2.10/documentView";
