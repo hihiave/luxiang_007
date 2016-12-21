@@ -112,11 +112,11 @@ function uploadFile() {
 	if (aim1.val() == "" && aim2.val() == "" && aim3.val() == "") {
 		alert("请选择上传的文件");
 		return false;
-	}else if(((aim1.val() != "")&&(proto1.val()=="私有" ))
+	}/*else if(((aim1.val() != "")&&(proto1.val()=="私有" ))
 			|| ((aim2.val() != "")&&(proto2.val()=="私有" )) 
 			|| ((aim3.val() != "")&&(proto3.val()=="私有" ))){
 		return true;
-	}
+	}*/
 	else if ((aim2.val() != "")
 			&& ((area2.val() == "") || (word2.val() == ""))) {
 
