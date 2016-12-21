@@ -42,7 +42,7 @@
 <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
 <script src="/mybatis/knowledgebase/js/common.js"></script>
 <script src="/mybatis/knowledgebase/js/public_search.js"></script>
-<script src="/mybatis/knowledgebase/js/adm_inquire.js"></script>
+<script src="/mybatis/knowledgebase/js/adm_waitforcheck.js"></script>
 <script src="/mybatis/knowledgebase/js/jquery-ui.min.js"></script>
 
 
@@ -123,12 +123,12 @@
                         <thead>
                         <tr>
                             <th style="width: 5%"><input type="checkbox" id="selAll" onclick="selectAll()"></th>
-                            <th style="width: 70%;">文件名</th>
-                            <th style="width: 15%">审核状态</th>
+                            <th style="width: 55%;">文件名</th>
+                            <th style="width: 20%;text-align:center;">审核状态</th>
                             <%--<th style="padding-bottom:15px;">上传时间</th>--%>
 
-                            <th style="width:10%;">
-                              		 下载
+                            <th style="width:20%;text-align:center;">
+                              		上传时间
                             </th>
 
                         </tr>
