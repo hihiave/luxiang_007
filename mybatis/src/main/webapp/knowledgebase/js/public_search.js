@@ -3,7 +3,7 @@
  */
 $(function() {
 	get_category_select();
-
+	
 	/*
 	 * get_file_points(); $("#file_search_input").oninput(function(){ var
 	 * filepoints=new Array();
@@ -57,6 +57,49 @@ function myfunction() {
  * 
  * ("#file_search_input").autocomplete() }
  */
+function get_child_category_select(){
+	$.ajax({
+		type : 'post',
+		url : "/mybatis/CategoryController/get_child_category.do",
+		dataType : "json",
+		success : function(data) {
+			// var _select = $("#category_select>option");
+			// _select.remove();
+			var child1 = data["child1"];
+			var child2 = data["child2"];
+			if($("#category_select").val()=="专利"){
+			// console.log(all_select_category.length);
+				var obj=document.getElementById('second_category');
+				obj.options.length=0;
+			for (var i = 0; i < child1.length; i++) {
+				var op = "<option value='"
+						+ child1[i].categoryName + "'>"
+						+ child1[i].categoryName + "</option>";
+				$("#second_category").append(op);
+				// console.log(all_select_category[i].categoryName);
+			}
+			}else if($("#category_select").val()=="论文"){
+				var obj=document.getElementById('second_category');
+				obj.options.length=0;
+				for (var i = 0; i < child2.length; i++) {
+					var op = "<option value='"
+							+ child2[i].categoryName + "'>"
+							+ child2[i].categoryName + "</option>";
+					$("#second_category").append(op);
+					// console.log(all_select_category[i].categoryName);
+				}
+			}
+			else{
+				var obj=document.getElementById('second_category');
+				obj.options.length=0;
+				var op="<option value=''>请选择</option>";
+				$("#second_category").append(op);
+			}
+			
+		}
+	})
+}
+
 
 function get_category_select() {
 	$.ajax({

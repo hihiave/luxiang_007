@@ -125,6 +125,9 @@
                                 <input type="checkbox" id="selAll" onclick="selectAll()">全选
                                 </th>
                             <th >用户名</th>
+                            
+                            <th >真实姓名</th>
+                            <th >注册时间</th>
                             <th >审核状态</th>
                             <th style="width:80px;">
                                 <button class="btn btn-success btn-block" onclick="check_all_pick(this)">通过</button>

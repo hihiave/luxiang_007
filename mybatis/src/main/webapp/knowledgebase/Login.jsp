@@ -23,7 +23,7 @@
 
         .login-mid {
             background: url(../knowledgebase/img/img_4.jpg) top center no-repeat #fff;
-            margin-top: 15px;
+            margin-top: 28px;
             height: 480px;
             min-width: 1200px;
         }
@@ -42,14 +42,14 @@
         .name1 {
             font-size: 22px;
             line-height: 33px;
-            color: #ffffff;
+            color: #FFFFFF;
             padding-bottom: 22px;
             height: 35px;
             margin-bottom: 10px;
         }
 
         .footer {
-            position: absolute;
+            position: fixed;
             top: 94%;
             height: 6%;
             background-color: #e1e1e1;
