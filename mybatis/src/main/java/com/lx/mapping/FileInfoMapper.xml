@@ -35,7 +35,7 @@
 	  	</if>
   	</if>
   </sql>
-
+ 
   <!--*********用于处理一些业务逻辑的方法*********-->
   <delete id="delFilesById">
   	delete from File where file_id in

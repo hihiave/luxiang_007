@@ -47,5 +47,5 @@ public interface CategoryService {
 	 * @return boolean,true类别存在,false表示类别不存在
 	 */
 	public boolean checkCategoryIsExist(Integer categoryUserId, String categoryName);
-	
+
 }

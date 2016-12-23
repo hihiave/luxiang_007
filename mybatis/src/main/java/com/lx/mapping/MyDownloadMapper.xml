@@ -33,7 +33,7 @@
     file_desc, file_check, file_is_visible, file_download_count, file_url, file_status, 
     my_download_id, my_download_time
   </sql>
-
+ 
   <delete id="delMyDownloadByMyDownloadId">
   	delete from MyDownload where my_download_id in
 		<foreach collection="myDownloadIds" item="myDownloadId" index="index" open="(" close=")" separator=",">

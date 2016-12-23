@@ -30,5 +30,5 @@ public interface MyDownloadService {
 	 * @return 一个查询结果对象列表 FileInfoVo
 	 */
 	public List<FileInfoVo> getMyDownload(String userName, Page page);
-
+	
 }
