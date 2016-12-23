@@ -71,7 +71,14 @@ public class TestFileInfo {
 		fileInfo.setFileName("===哈哈");
 		boolean flag = fileInfoService.updateFileByFileId(40, fileInfo);
 
-		logger.info("=========更新文件文件======" + flag);
+		logger.info("=========更新文件======" + flag);
+	}
+
+	@Test
+	public void alterFileCategroyTest() {
+		logger.info("===============alterFileCategroyTest=============");
+		boolean d = fileInfoService.alterFileCategroy("kkk", "哈哈呵呵", "中国人民日报");
+		logger.info("=========更新文件所属类别======" + d);
 	}
 
 	@Test

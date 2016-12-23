@@ -51,6 +51,14 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	@Override
+	public boolean alterFileCategroy(String fileAuthor, String oldFileCategory, String newFileCategory) {
+		if (fileInfoMapper.updateFileCategory(fileAuthor, oldFileCategory, newFileCategory) < 0) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
 	public boolean checkFileIsExist(String fileName) {
 		if (fileInfoMapper.selectFileByFileName(fileName) != null) {
 			return true;

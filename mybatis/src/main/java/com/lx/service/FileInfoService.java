@@ -35,14 +35,23 @@ public interface FileInfoService {
 	 * @author luxiang
 	 * @param fileId 待更新的文件id
 	 * @param fileInfo 新的文件信息
-	 * @return boolean，true表示文件更新成功，false表示文件更新失败
+	 * @return boolean,true表示文件更新成功,false表示文件更新失败
 	 */
 	public boolean updateFileByFileId(Integer fileId, FileInfo fileInfo);
-	
+
+	/** 修改文件所属的类别
+	 * @author luxiang
+	 * @param fileAuthor 指定用户
+	 * @param oldFileCategory 文件所属的旧类别名
+	 * @param newFileCategory 文件所属的新类别名
+	 * @return boolean,true表示修改成功,false表示修改失败
+	 */
+	public boolean alterFileCategroy(String fileAuthor, String oldFileCategory, String newFileCategory);
+
 	/** 通过文件名检查文件是否存在
 	 * @author luxiang
 	 * @param fileName 文件名
-	 * @return boolean，true表示存在，false表示不存在
+	 * @return boolean,true表示存在,false表示不存在
 	 */
 	public boolean checkFileIsExist(String fileName);
 	
@@ -50,7 +59,7 @@ public interface FileInfoService {
 	 * @author luxiang
 	 * @param checkType 审核类型，请查看枚举
 	 * @param fileIds 批量文件fileIds
-	 * @return boolean，true表示操作成功，false表示操作失败
+	 * @return boolean,true表示操作成功,false表示操作失败
 	 */
 	public boolean batchFilesIsPass(KCheckType checkType, Integer... fileIds);
 	

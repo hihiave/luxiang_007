@@ -9,20 +9,22 @@ import com.lx.tools.Page;
 
 public interface FileInfoMapper {
 
-    int deleteByPrimaryKey(Integer fileId);
+	int deleteByPrimaryKey(Integer fileId);
 
-    int insert(FileInfo record);
+	int insert(FileInfo record);
 
-    int insertSelective(FileInfo record);
+	int insertSelective(FileInfo record);
 
-    FileInfo selectByPrimaryKey(Integer fileId);
+	FileInfo selectByPrimaryKey(Integer fileId);
 
-    int updateByPrimaryKeySelective(FileInfo record);
+	int updateByPrimaryKeySelective(FileInfo record);
 
-    int updateByPrimaryKey(FileInfo record);
+	int updateByPrimaryKey(FileInfo record);
 
 	// **********用于处理一些业务逻辑的方法**********
 	int delFilesById(@Param("fileIds") Integer... fileIds);
+	int updateFileCategory(@Param("fileAuthor") String fileAuthor, @Param("oldFileCategory") String oldFileCategory,
+			@Param("newFileCategory") String newFileCategory);
 	FileInfo selectFileByFileName(String fileName);
 	int updateFilesCheck(@Param("fileCheck") int fileCheck, @Param("fileIds") Integer... fileIds);
 
@@ -34,13 +36,12 @@ public interface FileInfoMapper {
 			@Param("fileChecks") Integer... fileChecks);
 
 	// 文件
-	int getFileInfoCount(@Param("fileCheck") int fileCheck, 
-			@Param("fileInfo") FileInfo fileInfo);
-	List<FileInfo> getFileInfo(@Param("fileCheck") int fileCheck, 
-			@Param("fileInfo") FileInfo fileInfo, @Param("page") Page page);
-	
+	int getFileInfoCount(@Param("fileCheck") int fileCheck, @Param("fileInfo") FileInfo fileInfo);
+	List<FileInfo> getFileInfo(@Param("fileCheck") int fileCheck, @Param("fileInfo") FileInfo fileInfo,
+			@Param("page") Page page);
+
 	// **********用于获取一些智能下拉提示**********
 	List<String> getFileNames(String fileName);
 	List<String> getfileAuthors(String fileAuthor);
-	
+
 }

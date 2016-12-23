@@ -20,9 +20,17 @@
   </delete>
   <select id="getAllCategory" resultMap="BaseResultMap" parameterType="java.lang.Integer">
   	select * from Category where category_user_id = #{categoryUserId}
-  </select>
-
-  
+  </select> 
+  <update id="updateCategoryName">
+  	update Category set category_name = #{newCategoryName}
+	where category_name = #{oldCategoryName} and 
+	category_user_id = #{categoryUserId}
+  </update>
+  <update id="updateCategoryBelongTo">
+  	update Category set category_name = #{newCategoryName}
+	where category_name = #{oldCategoryName} and 
+	category_user_id = #{categoryUserId}
+  </update>  
   <select id="selectByUserIdAndCategoryName" resultMap="BaseResultMap">
   	select * from Category 
   	where category_user_id = #{categoryUserId} and 
@@ -30,7 +38,6 @@
   	limit 1
   </select>
 
-  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

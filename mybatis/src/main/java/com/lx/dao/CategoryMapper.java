@@ -23,10 +23,11 @@ public interface CategoryMapper {
 	int deleteByCategoryName(@Param("categoryUserId") Integer categoryUserId,
 			@Param("categoryName") String categoryName);
 	public List<Category> getAllCategory(Integer categoryUserId);
-	
+	int updateCategoryName(@Param("categoryUserId") Integer categoryUserId,
+			@Param("oldCategoryName") String oldCategoryName, @Param("newCategoryName") String newCategoryName);
+	int updateCategoryBelongTo(@Param("categoryUserId") Integer categoryUserId,
+			@Param("oldCategoryName") String oldCategoryName, @Param("newCategoryName") String newCategoryName);
+
 	Category selectByUserIdAndCategoryName(@Param("categoryUserId") Integer categoryUserId,
 			@Param("categoryName") String categoryName);
-
-	
-
 }

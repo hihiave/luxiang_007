@@ -1,22 +1,23 @@
 package com.lx.serviceimpl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lx.dao.CategoryMapper;
-import com.lx.macrofiles.MacroConstant;
 import com.lx.model.Category;
 import com.lx.service.CategoryService;
+import com.lx.service.FileInfoService;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 	private CategoryMapper categoryMapper;
+
+	@Autowired
+	private FileInfoService fileInfoService;
 
 	@Override
 	public boolean addCategory(Integer categoryUserId, String categoryName, String categoryBelongTo) {
@@ -41,46 +42,56 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public List<Category> getAllCategory(Integer categoryUserId) {
 		List<Category> categories = categoryMapper.getAllCategory(categoryUserId);
-		if (categories.isEmpty()) {
-			System.out.println("===================空================");
-			return null;
+		if (!categories.isEmpty()) {
+			return categories;
 		}
-
-		HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
-		ArrayList<String> strings = new ArrayList<>();
-		Category category;
-		for (int i = 0; i < categories.size(); i++) {
-			category = categories.get(i);
-			if (category.getCategoryBelongTo().equals(MacroConstant.level0_category)) {
-				strings.add(category.getCategoryName());
-			}
-		}
-
-		hashMap.put(MacroConstant.level0_category, strings);
-
-		// strings A B
-
-		ArrayList<String> strings1 = new ArrayList<>();
-
-		for (int i = 0; i < categories.size(); i++) {
-			category = categories.get(i);
-			for (int j = 0; j < strings.size(); j++) {
-				if (category.getCategoryBelongTo().equals(strings.get(j))) {
-					strings1.add(category.getCategoryName()); // A1 A2
-					break;
-				}
-			}
-
-			// hashMap.put(key, value);
-
-		}
-
-		for (int i = 0; i < strings1.size(); i++) {
-			System.out.println("=======123=======" + strings1.get(i));
-		}
-
 		return null;
 
+		//
+		// HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
+		// ArrayList<String> strings = new ArrayList<>();
+		// Category category;
+		// for (int i = 0; i < categories.size(); i++) {
+		// category = categories.get(i);
+		// if
+		// (category.getCategoryBelongTo().equals(MacroConstant.level0_category))
+		// {
+		// strings.add(category.getCategoryName());
+		// }
+		// }
+		// // 1482422400 ----> A B C
+		// hashMap.put(MacroConstant.level0_category, strings);
+		//
+		// ArrayList<String> list;
+		// for (int i = 0; i < strings.size(); i++) {
+		// list = new ArrayList<>();
+		// for (int j = 0; j < categories.size(); j++) {
+		// category = categories.get(j);
+		// if (category.getCategoryBelongTo().equals(strings.get(i))) {
+		// list.add(category.getCategoryName());
+		// }
+		// }
+		// // A ----> A1 A2
+		// // B ----> B1
+		// // C ----> []
+		// hashMap.put(strings.get(i), list);
+		// }
+
+	}
+
+	@Override
+	public boolean alterCategory(Integer categoryUserId, String UserName, String oldCategoryName,
+			String newCategoryName) {
+		if (categoryMapper.updateCategoryName(categoryUserId, oldCategoryName, newCategoryName) != 1) {
+			return false;
+		}
+		if (categoryMapper.updateCategoryBelongTo(categoryUserId, oldCategoryName, newCategoryName) < 0) {
+			return false;
+		}
+		if (fileInfoService.alterFileCategroy(UserName, oldCategoryName, newCategoryName)) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -90,4 +101,5 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 		return false;
 	}
+
 }

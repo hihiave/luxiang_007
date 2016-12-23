@@ -19,7 +19,7 @@ public interface CategoryService {
 	 * @author luxiang
 	 * @param categoryUserId 指定用户Id
 	 * @param categoryName 指定删除类别的名称
-	 * @return
+	 * @return boolean,true表示删除成功,false表示删除失败
 	 */
 	public boolean delCategory(Integer categoryUserId, String categoryName);
 
@@ -30,11 +30,21 @@ public interface CategoryService {
 	 */
 	public List<Category> getAllCategory(Integer categoryUserId);
 	
+	/** 修改类别名(方法有待完善)
+	 * @author luxiang
+	 * @param categoryUserId 指定用户Id
+	 * @param oldCategoryName 旧类别名
+	 * @param newCategoryName 新类别名
+	 * @return boolean,true表示修改成功,false表示修改失败
+	 */
+	public boolean alterCategory(Integer categoryUserId, String UserName, String oldCategoryName,
+			String newCategoryName);
+	
 	/** 检查类别是否存在,注意:一个用户的所有类别名必须唯一
 	 * @author luxiang
 	 * @param categoryUserId 指定用户Id
 	 * @param categoryName 指定删除类别的名称
-	 * @return
+	 * @return boolean,true类别存在,false表示类别不存在
 	 */
 	public boolean checkCategoryIsExist(Integer categoryUserId, String categoryName);
 	
