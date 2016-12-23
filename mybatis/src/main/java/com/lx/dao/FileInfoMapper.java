@@ -43,5 +43,4 @@ public interface FileInfoMapper {
 	// **********用于获取一些智能下拉提示**********
 	List<String> getFileNames(String fileName);
 	List<String> getfileAuthors(String fileAuthor);
-
 }

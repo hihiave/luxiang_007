@@ -26,5 +26,4 @@ public interface MyDownloadMapper {
 	int selectMyDownloadByMyDownloadUserNameCount(String myDownloadUserName);
 	List<FileInfoVo> selectMyDownloadByMyDownloadUserName(@Param("myDownloadUserName") String myDownloadUserName,
 			@Param("page") Page page);
-
 }
