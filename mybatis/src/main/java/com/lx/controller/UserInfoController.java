@@ -44,7 +44,9 @@ public class UserInfoController {
 			System.out.println("name=================" + user);
 			httpSession.setAttribute("time", userInfo.getUserRegisterTime());
 			httpSession.setAttribute("userrole", userInfo.getUserRole());
-			// httpSession.setAttribute("userid", userInfo.getUserId());
+			httpSession.setAttribute("usertruename",userInfo.getUserRealName());
+			httpSession.setAttribute("email", userInfo.getUserEmail());
+			httpSession.setAttribute("userid", userInfo.getUserId());
 			// httpSession.setAttribute("password",password);
 			// httpSession.setAttribute("flag", true);
 			map.put("data", "LoginSuccess");
@@ -82,16 +84,19 @@ public class UserInfoController {
 	 */
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> regist(String username1, String password1, HttpSession httpSession) {
-		System.out.println("======username=====" + username1);
-		System.out.println("======password=====" + password1);
+	public Map<String, Object> regist(String username, String userpassword,
+			String truename,String email, HttpSession httpSession) {
+		System.out.println("======username=====" + username);
+		System.out.println("======password=====" + userpassword);
+		System.out.println("=====truename=====" + truename);
+		System.out.println("=====email=====" + email);
 		Map<String, Object> map = new HashMap<String, Object>();
-		boolean check_result = userInfoService.checkUserIsExist(username1);
+		boolean check_result = userInfoService.checkUserIsExist(username);
 		map.put("check", check_result);
 		System.out.println("检查结果" + check_result);
 		if (!check_result) {
 
-			boolean regist_result = userInfoService.registerUserInfo(username1, password1);
+			boolean regist_result = userInfoService.registerUserInfo(username, userpassword,truename,email);
 
 			map.put("data", regist_result);
 		}
@@ -303,5 +308,23 @@ public class UserInfoController {
 
 		return map;
 	}
+	@RequestMapping(value = "/change_msg", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> changeUserMsg(Integer userid,String truename, String email, HttpServletRequest httpServletRequest) {
+		System.out.println("++++++++" + truename);
+		System.out.println("!!!!!!!!" + email);
+		System.out.println("........" + userid);
+		UserInfo ui=new UserInfo();
+		ui.setUserEmail(email);
+		ui.setUserRealName(truename);;
+		Boolean result = userInfoService.alterUserInfo(userid,ui);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (result) {
+			map.put("flag", true);
+		} else {
+			map.put("flag", false);
+		}
 
+		return map;
+	}
 }

@@ -152,17 +152,17 @@ function get_all_search_file_table(data) {
 				+ "'>"
 				+ all_pub_file[i].fileName
 				+ "</a></td>";
-		var td_2 = "<td style='padding-top:15px;'>"
+		var td_2 = "<td style='padding-top:15px;text-align:center;'>"
 				+ all_pub_file[i].fileAuthor + "</td>";
-		var td_3 = "<td style='padding-top:15px;'>"
+		var td_3 = "<td style='padding-top:15px;text-align:center;'>"
 				+ timeStampFormatDay(all_pub_file[i].fileUploadTime * 1000)
 				+ "</td>";
-		var td_4 = "<td><button class='btn btn-primary' did='public' bid='"
+		var td_4 = "<td style='text-align:center;'><button class='btn btn-primary'  did='public' bid='"
 				+ all_pub_file[i].fileId + "'  onclick='download(this)' path='"
 				+ all_pub_file[i].fileUrl + "'>下载</button></td>";
 		// var td_5 = "<td><button class='btn btn-primary' data-toggle='modal'
 		// data-target='#preview' onclick='pre_file(this)'>预览</button></td>";
-		var td_6 = "<td style='padding-top:15px;'>"
+		var td_6 = "<td style='padding-top:15px;text-align:center;'>"
 				+ all_pub_file[i].fileDownloadCount + "</td>"
 
 		var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_6 + tr_end;

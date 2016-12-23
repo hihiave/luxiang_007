@@ -121,14 +121,14 @@
                     <table class="table table-striped">
                         <thead>
                         <tr >
-                            <th style="border-bottom-width: 2px;width: 78px;">
+                            <th style="width: 78px;padding-bottom:12px;">
                                 <input type="checkbox" id="selAll" onclick="selectAll()">全选
                                 </th>
-                            <th >用户名</th>
+                            <th style="padding-bottom:12px;">用户名</th>
                             
-                            <th >真实姓名</th>
-                            <th >注册时间</th>
-                            <th >审核状态</th>
+                            <th style="padding-bottom:12px;">真实姓名</th>
+                            <th style="text-align:center;padding-bottom:12px;">注册时间</th>
+                            <th style="padding-bottom:12px;text-align:center;">审核状态</th>
                             <th style="width:80px;">
                                 <button class="btn btn-success btn-block" onclick="check_all_pick(this)">通过</button>
                             </th>

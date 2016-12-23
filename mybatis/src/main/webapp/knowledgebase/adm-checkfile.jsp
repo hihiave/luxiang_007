@@ -124,8 +124,9 @@
                         <thead>
                         <tr>
                             <th style="width: 5%;"><input type="checkbox" id="selAll" onclick="selectAll()"></th>
-                            <th style="width: 80%;">资源名</th>
-                            <th style="width: 15%;">上传者</th>
+                            <th style="width: 60%;">资源名</th>
+                            <th style="width: 15%;text-align:center;">文件信息</th>
+                            <th style="width: 15%;text-align:center;">上传者</th>
 
                         </tr>
                         </thead>

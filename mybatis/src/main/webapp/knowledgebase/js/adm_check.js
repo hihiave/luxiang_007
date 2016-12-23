@@ -22,9 +22,9 @@ function get_all_check_user_one(data){
         var tr_end = "</tr>";
         var td_1 = "<td ><input type='checkbox' name='checkAll'></td>";
         var td_2 = "<td class='Name' >" + all_check_user[i].userName +"</td>";
-        var td_3 = "<td class='trueName' ></td>";      
-        var td_4 = "<td padding-left:15px;'>"+all_check_user[i].userRegisterTime+"</td>";
-        var td_5 = "<td padding-left:15px;'>待审核</td>";
+        var td_3 = "<td class='trueName' >"+all_check_user[i].userRealName+"</td>";      
+        var td_4 = "<td padding-left:15px;' style='text-align:center;'>"+timeStampFormatDay(all_check_user[i].userRegisterTime*1000)+"</td>";
+        var td_5 = "<td padding-left:15px;  style='text-align:center;'>待审核</td>";
         var td_6 = "<td style='padding-bottom:3px;padding-top:3px;'>" +
         		"<button class='btn btn-success' style='width:64px;' onclick='check_one_pick(this)'>通过</button></td>";
         var td_7 = "<td style='padding-bottom:3px;padding-top:3px;'>" +

@@ -172,6 +172,7 @@ body {
                 var username1 = $("#username1").val();
                 var password1 = $("#password1").val();
                 var password2 = $("#password2").val();
+                var truename = $.trim($("#truename").val());
                 var sReg = /[_a-zA-Z\d\-\.]+@[_a-zA-Z\d\-]+(\.[_a-zA-Z\d\-]+)+$/; 
             
                
@@ -205,11 +206,20 @@ body {
                 }else{
                 	$("#email_span").html("");
                 }
+                if(truename==""){
+                	$("#truename_span").html("<font color='red' size='2px'>请填写真实姓名!</font>");
+                    return;
+                }
+                else{
+                	$("#truename_span").html("");
+                }
                 $.ajax({
                     type:'post',
                     url:"/mybatis/UserInfoController/regist.do",
                     dataType:'json',
-                    data:{"username1":username1,"password1":password1},
+                    data:{"username":username1,"userpassword":password1,
+                    	"truename":truename,"email":email	
+                    },
                     success:function(data){
                         if(!data["check"]){
                             alert("注册信息提交审核!");

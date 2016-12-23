@@ -14,12 +14,12 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                            <th style="width: 60%;">文件名</th>
-                            <th style="padding-left:0px;width: 10%;">上传者</th>
-                            <th style="width: 13%;">上传时间</th>
-                            <th style="padding-left:20px;width: 7%;">下载</th>
+                            <th style="width: 50%;">文件名</th>
+                            <th style="width: 10%;text-align:center;">上传者</th>
+                            <th style="width: 18%;text-align:center;">上传时间</th>
+                            <th style="width: 13%;text-align:center;">下载</th>
                             <%--<th style="padding-left:20px;">预览</th>--%>
-                            <th style="padding-left:0px;width: 10%;">下载量</th>
+                            <th style="width: 10%;text-align:center;">下载量</th>
             </tr>
             </thead>
             <tbody id="search_file">
