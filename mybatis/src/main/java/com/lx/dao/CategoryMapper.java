@@ -30,5 +30,4 @@ public interface CategoryMapper {
 
 	Category selectByUserIdAndCategoryName(@Param("categoryUserId") Integer categoryUserId,
 			@Param("categoryName") String categoryName);
-
 }
