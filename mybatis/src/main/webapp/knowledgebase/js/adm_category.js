@@ -19,9 +19,11 @@ function get_category(){
                 var tr_begin = "<tr>";
                 var tr_end = "</tr>";
                 var td_1 = "<td >"+category[i].categoryName+"</td>";
-                var td_2 ="<th style='padding-bottom:3px;padding-top:3px;width:116px;'>" +
+                var td_2 = "<th style='padding-bottom:3px;padding-top:3px;width:116px;'>" +
+        				"<button class='btn btn-primary' onclick='change_cate(this)'>修改类别</button></th>";
+                var td_3 ="<th style='padding-bottom:3px;padding-top:3px;width:116px;'>" +
                 		"<button class='btn btn-primary' onclick='delete_cate(this)'>删除类别</button></th>";
-                var content = tr_begin + td_1 + td_2 + tr_end;
+                var content = tr_begin + td_1 + td_2 + td_3 + tr_end;
                 $("#category_result").append(content);
             }
 

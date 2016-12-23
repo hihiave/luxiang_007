@@ -26,13 +26,13 @@
 	}
 	.biao2{
 		width: 350px;
-		height: 325px;
+		height: auto;
 		background-image:url(../knowledgebase/img/white.png);
 		border-radius: 5px;
-		padding: 22px 30px;
+		padding: 12px 20px;
 		position: absolute;
 		right: 15%;
-		margin-top:80px;
+		margin-top:30px;
 	}
 	.name2{
 		font-size: 22px;
@@ -43,7 +43,7 @@
 		margin-bottom: 10px;
 	}
     .footer {
-        position: absolute;
+        position: fixed;
         top: 94%;
         height: 6%;
         background-color: #e1e1e1;
@@ -134,15 +134,27 @@ body {
 				 <div class="loginform loginusername" style="margin-bottom:5px;margin-top:5px;">
 				 	<span style="margin-left:14px;color:#FFFFFF;">用户名：</span><input type="text"  id="username1" name="username1" placeholder="请输入用户名">
 				 </div>
-				 <div style="height:16px" id="username_span" ></div>
+				 <div style="height:16px;margin-left:25%;" id="username_span" ></div>
 				 <div class="loginform loginpassword" style="margin-bottom:5px;margin-top:5px;">
 				 	<span style="margin-left:28px;color:#FFFFFF;">密码：</span><input type="password"    id="password1" name="password1" placeholder="请输入密码">
 				 </div>
-				 <div id="passwor1_span" style="height:16px" ></div>
+				 <div id="passwor1_span" style="height:16px;margin-left:25%;" ></div>
 				 <div class="loginform loginpassword" style="margin-bottom:5px;margin-top:5px;">
 				 	<span style="color:#FFFFFF;">重复密码：</span><input type="password"    id="password2" name="password2" placeholder="请再次输入密码">
 				 </div>
-				<div id="password2_span" style="height:16px"></div>
+				<div id="password2_span" style="height:16px;margin-left:25%;"></div>
+				
+					<div class="loginform loginusername" style="margin-bottom:5px;margin-top:5px;">
+				 	<span style="color:#FFFFFF;">注册邮箱：</span><input type="text"    id="email" name="email" placeholder="请填写邮箱地址">
+				 </div>
+				<div id="email_span" style="height:16px;margin-left:25%;"></div>
+				
+				<div class="loginform loginusername" style="margin-bottom:5px;margin-top:5px;">
+				 	<span style="color:#FFFFFF;">真实姓名：</span><input type="text"    id="truename" name="truename" placeholder="请输入真实姓名">
+				 </div>
+				<div id="truename_span" style="height:16px;margin-left:25%;"></div>
+			
+				
 				<div class="button-group" style="margin-top:5px;">
 				<input type="button" class="btn btn-primary" id="register" value="注册" >
 				<a href="../knowledgebase/Login.jsp"><input type="button" class="btn btn-primary" value="取消" style="float:right;"></a>
@@ -155,9 +167,15 @@ body {
     <script type="text/javascript">
         $(function(){
             $("#register").click(function(){
+            	
+            	var email =$.trim($("#email").val());
                 var username1 = $("#username1").val();
                 var password1 = $("#password1").val();
                 var password2 = $("#password2").val();
+                var truename = $.trim($("#truename").val());
+                var sReg = /[_a-zA-Z\d\-\.]+@[_a-zA-Z\d\-]+(\.[_a-zA-Z\d\-]+)+$/; 
+            
+               
                 if(username1 == ""){
                     $("#username_span").html("<font color='red' size='2px'>用户名不能为空!</font>");
                     return;
@@ -182,11 +200,26 @@ body {
                 }else{
                     $("#password2_span").html("");
                 }
+                if(!sReg.test(email)){
+                	$("#email_span").html("<font color='red' size='2px'>邮箱格式不正确!</font>");
+                    return;
+                }else{
+                	$("#email_span").html("");
+                }
+                if(truename==""){
+                	$("#truename_span").html("<font color='red' size='2px'>请填写真实姓名!</font>");
+                    return;
+                }
+                else{
+                	$("#truename_span").html("");
+                }
                 $.ajax({
                     type:'post',
                     url:"/mybatis/UserInfoController/regist.do",
                     dataType:'json',
-                    data:{"username1":username1,"password1":password1},
+                    data:{"username":username1,"userpassword":password1,
+                    	"truename":truename,"email":email	
+                    },
                     success:function(data){
                         if(!data["check"]){
                             alert("注册信息提交审核!");

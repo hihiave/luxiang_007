@@ -124,16 +124,16 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th style="font-size:16px;"></th>
-                            <th style="font-size:16px;">用户名</th>
-                            <th style="padding-bottom:5px;padding-top:0px;width:285px;"><input type="text"
-                                                                                               id="search-in" name=""
-                                                                                               style="height:34px;width:273px;">
+                            <th style="font-size:16px;width:5%;"></th>
+                            <th style="font-size:16px;width:35%">用户名</th>
+                            <th style="padding-bottom:5px;padding-top:0px;width:36%;">
+                            <input type="text" id="search-in" name="" style=
+                            "height:34px;padding-left:5px;width:90%">
                             </th>
-                            <th style="padding-bottom:5px;padding-top:0px;width:116px;">
+                            <th style="padding-bottom:5px;padding-top:0px;width:12%;">
                                 <button class="btn btn-success" id="search-user" onclick="searchuser()">搜索用户</button>
                             </th>
-                            <th style="padding-bottom:5px;padding-top:0px;width:116px;">
+                            <th style="padding-bottom:5px;padding-top:0px;width:12%;">
                                 <button class="btn btn-success" data-toggle="modal" data-target="#tianjia">添加用户</button>
                             </th>
                         </tr>

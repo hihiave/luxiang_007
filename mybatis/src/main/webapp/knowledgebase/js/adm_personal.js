@@ -8,6 +8,44 @@
 //    var usernameobj = document.getElementById("show_user_name");
 //    console.log(usernameobj.innerText);
 //}
+//function change_msg(){
+//	var usertruename=document.getElementById("usertruename");
+//	var useremail=document.getElementById("usermail");
+//	var btnobj=document.getElementById("bbtn_changemsg");
+//	btnobj.onclick=changemsg;
+//	function changemsg(){
+//		alert(usertruename.value());
+//	}
+//}
+function changemsg(){
+	var usertruename=document.getElementById("usertruename");
+	var useremail=document.getElementById("useremail");
+	var id=document.getElementById("userid");
+	if((usertruename.value!="")&&(useremail.value!="")){
+        $.ajax({
+            type:'post',
+            url:"/mybatis/UserInfoController/change_msg.do",
+            data:{"truename":usertruename.value,"email":useremail.value,"userid":id.value},
+            dataType:"json",
+            success:function(data){
+                var result = data["flag"];
+                if(result){
+                    alert("修改信息成功！");
+                    $('#changemsg').modal('toggle');
+                   
+                }else{
+                    alert("修改信息失败！");
+                    $('#changemsg').modal('toggle');
+                }
+            }
+        })
+	}
+	else{
+		document.getElementById("checkmsg").innerHTML = "<font color='red' size='2px'>请检查填写是否为空!</font>";
+		
+	}
+}
+
 function change_password(){
     var oldpswobj=document.getElementById("oldpsw");
     var psw1obj=document.getElementById("password1");
@@ -82,8 +120,10 @@ function change_password(){
                         var result = data["flag"];
                         if(result){
                             alert("修改密码成功！");
+                            $('#changepsw').modal('toggle');
                         }else{
                             alert("修改密码失败");
+                            $('#changepsw').modal('toggle');
                         }
                     }
                 }

@@ -3,7 +3,7 @@
 			text-decoration: none;
 		}
 		.pub_top{
-			min-width: 1320px ;
+			min-width: 1348px ;
 			
 			top:0;
 			left: 0;
@@ -13,13 +13,13 @@
    			padding-bottom: 25px;
 		}
 		.top-img{
-			padding-left: 18px;
+		padding:0;
 		}
 		
 		.index{
  		 float: left;
   		margin: 17.6px 0 0 15px;
-  		margin-top: 7px;
+  		margin-top: 6px;
 		}
 		.index a{
 		padding: 8px 20px;
@@ -65,7 +65,7 @@
 	overflow: auto;
 	right: 0;
 	bottom: 0;
-	padding: 0 25px 0 25px;
+	padding: 0 1.94% 0 1.94%;
 
 	}
 
@@ -86,7 +86,7 @@
 		    background: #272c2e;
 		    border: none;
 		    overflow:auto;
-		    min-width: 200px;
+		   
 		    padding:0;
 		   /* padding: 0 20px 20px 20px;*/
 

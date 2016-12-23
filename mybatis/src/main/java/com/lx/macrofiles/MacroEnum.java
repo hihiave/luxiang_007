@@ -49,7 +49,6 @@ public class MacroEnum {
 		// 文件公有还是私有
 		public static final String PUBLIC_FILE = "公有";
 		// public static final String PRIVATEFILE = "私有";
-
 	}
 
 	/**

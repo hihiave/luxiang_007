@@ -37,23 +37,39 @@
         </div>
     </div>
 </div> -->
-
-<!-- <link rel="stylesheet" type="text/css" href="/mybatis/knowledgebase/css/common.min.css"> -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" type="text/css" href="/mybatis/knowledgebase/css/buttons.css"> 
+<c:set value="0" var="is_manager"/>
+<c:set value="0" var="is_worker"/>
+<c:forEach items="${userrole}" var="role">
+    <c:if test="${role == '管理员'}">
+        <c:set value="1" var="is_manager"/>
+    </c:if>
+    <c:if test="${role == '普通用户'}">
+        <c:set value="1" var="is_worker"/>
+    </c:if>
+</c:forEach>
 <div class="pub_top">
 
-	<div class="col-xs-3 top-img">
+	<div class="col-xs-2 top-img">
 		<img src="/mybatis/knowledgebase/img/3.png">
 	</div>
-	<div class="col-xs-9" style="margin-top: 10px;">
+	<div class="col-xs-10" style="margin-top: 0.74%;padding-left:1.94%;">
 		<div style="float: left; margin-right: 0px;">
-			<select class="form-control" onchange="value" id="category_select"
-				style="width: 105px;">
+			<select class="form-control" onchange="get_child_category_select(this)" id="category_select"
+				style="width: 95px;padding:6px;">
 				<option value='类别'>类别</option>
+			</select>
+		</div>
+        <div style="float: left; margin-right: 0px;">
+			<select class="form-control" onchange="value" id="second_category"
+				style="width: 85px;padding:6px;">
+				<option value=''>请选择</option>
 			</select>
 		</div>
 		<div style="float: left; margin-right: 0px;">
 			<select class="form-control" onchange="value" id="key_select"
-				style="width: 100px;">
+				style="width: 80px;padding:6px;">
 				<option value='fullText' selected>全文</option>
 				<option value='title'>标题</option>
 				<option value='author'>作者</option>
@@ -64,17 +80,27 @@
 			<input type="text" class="form-control"
 				aria-describedby="sizing-addon1" style="width: 350px;"
 				id="file_search_input" onfocus="myfunction()" oninput="myfunction()">
-			<button class="btn btn-default"
+			<!-- <button class="btn btn-default"
 				style="width: 78px; margin-left: 5px; background: #808080; color: #FFF"
 				id="file_search_sub" onclick="send_search_info()">搜&nbsp;索
+			</button> -->
+			<button class="button button-action button-pill button-small"
+				style="width: 78px;height:33px; margin-left: 5px; background: #808080;padding:0; color: #FFF"
+				id="file_search_sub" onclick="send_search_info()">搜&nbsp;索
+			</button>
+			<button class="button button-primary button-pill button-small"
+				style="width: 78px;height:33px; margin-left: 5px; padding:0; color: #fff"
+				id="file_search_sub" onclick="send_search_info()">高级搜索
 			</button>
 		</div>
 
 		<div style="float: right; margin-right: 10px;">
+		<c:if test="${is_worker == 1}">
 			<div class="upload">
 				<a href="/mybatis/knowledgebase/adm-upload.jsp"><span
 					class="glyphicon glyphicon-open"></span>上传</a>
 			</div>
+			</c:if>
 			<div class="index">
 				<a href="/mybatis/knowledgebase/adm-personal.jsp">主页</a>
 			</div>

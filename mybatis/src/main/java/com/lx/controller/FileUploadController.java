@@ -26,12 +26,12 @@ import com.lx.tools.ToolDate;
 @Controller
 @RequestMapping("/FileUploadController")
 public class FileUploadController {
-	// String fileName = "西游记"
-	// String fileNameExtension = ".png"
-	// String fileNameFull = fileName + fileNameExtension;
+	// String filename = "西游记"
+	// String filenameExtension = "png"
+	// String filenameFull = filename + "." + filenameExtension;
 
-	// String dirPath = "c:/a/b";
-	// String filePath = dirPath + "/" + fileNameFull; filePath = fileUrl
+	// String dirPath = "c:/a/b/";
+	// String filePath = dirPath + filenameFull; filePath = fileUrl
 
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	@ResponseBody

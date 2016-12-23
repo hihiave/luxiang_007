@@ -102,6 +102,7 @@ function uploadFile() {
 	var aim1 = $("#aim1"), aim2 = $("#aim2"), aim3 = $("#aim3");
 	var word1 = $("#word1"), word2 = $("#word2"), word3 = $("#word3");
 	var area1 = $("#area1"), area2 = $("#area2"), area3 = $("#area3");
+	var proto1 = $("#proto1"), proto2 = $("#proto2"), proto3 = $("#proto3");
 	var file1 = $("#file-test1").val();
 	var file2 = $("#file-test2").val();
 	var file3 = $("#file-test3").val();
@@ -111,7 +112,12 @@ function uploadFile() {
 	if (aim1.val() == "" && aim2.val() == "" && aim3.val() == "") {
 		alert("请选择上传的文件");
 		return false;
-	} else if ((aim2.val() != "")
+	}/*else if(((aim1.val() != "")&&(proto1.val()=="私有" ))
+			|| ((aim2.val() != "")&&(proto2.val()=="私有" )) 
+			|| ((aim3.val() != "")&&(proto3.val()=="私有" ))){
+		return true;
+	}*/
+	else if ((aim2.val() != "")
 			&& ((area2.val() == "") || (word2.val() == ""))) {
 
 		alert("请完善文件2信息");

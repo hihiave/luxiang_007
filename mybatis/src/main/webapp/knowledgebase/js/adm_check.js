@@ -22,12 +22,14 @@ function get_all_check_user_one(data){
         var tr_end = "</tr>";
         var td_1 = "<td ><input type='checkbox' name='checkAll'></td>";
         var td_2 = "<td class='Name' >" + all_check_user[i].userName +"</td>";
-        var td_3 = "<td padding-left:15px;'>待审核</td>";
-        var td_4 = "<td style='padding-bottom:3px;padding-top:3px;'>" +
+        var td_3 = "<td class='trueName' >"+all_check_user[i].userRealName+"</td>";      
+        var td_4 = "<td padding-left:15px;' style='text-align:center;'>"+timeStampFormatDay(all_check_user[i].userRegisterTime*1000)+"</td>";
+        var td_5 = "<td padding-left:15px;  style='text-align:center;'>待审核</td>";
+        var td_6 = "<td style='padding-bottom:3px;padding-top:3px;'>" +
         		"<button class='btn btn-success' style='width:64px;' onclick='check_one_pick(this)'>通过</button></td>";
-        var td_5 = "<td style='padding-bottom:3px;padding-top:3px;'>" +
+        var td_7 = "<td style='padding-bottom:3px;padding-top:3px;'>" +
         		"<button class='btn btn-info' style='width:64px;' onclick='refuse_one_pick(this)'>拒绝</button></td>";
-        var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
+        var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + td_6 + td_7 + tr_end;
         $("#check_result").append(content);
 
     }

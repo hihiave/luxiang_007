@@ -3,25 +3,33 @@
 <mapper namespace="com.lx.dao.CategoryMapper" >
   <resultMap id="BaseResultMap" type="com.lx.model.Category" >
     <id column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="category_user_id" property="categoryUserId" jdbcType="INTEGER" />
     <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+    <result column="category_belong_to" property="categoryBelongTo" jdbcType="VARCHAR" />
     <result column="category_status" property="categoryStatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    category_id, category_name, category_status
+    category_id, category_user_id, category_name, category_belong_to, category_status
   </sql>
   
   <!--*********用于处理一些业务逻辑的方法*********-->
-  <delete id="deleteByCategoryName" parameterType="java.lang.String">
+  <delete id="deleteByCategoryName">
   	delete from Category
-    where category_name = #{categoryName,jdbcType=VARCHAR}
+    where category_user_id = #{categoryUserId} and 
+  	category_name = #{categoryName}
   </delete>
-  <select id="selectByCategoryName" resultMap="BaseResultMap" parameterType="java.lang.String">
-    select * from Category
-    where category_name = #{categoryName,jdbcType=VARCHAR}
+  <select id="getAllCategory" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	select * from Category where category_user_id = #{categoryUserId}
   </select>
-  <select id="getAllCategory" resultMap="BaseResultMap">
-  	select * from Category
+
+  
+  <select id="selectByUserIdAndCategoryName" resultMap="BaseResultMap">
+  	select * from Category 
+  	where category_user_id = #{categoryUserId} and 
+  	category_name = #{categoryName}
+  	limit 1
   </select>
+
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -34,10 +42,10 @@
     where category_id = #{categoryId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lx.model.Category" >
-    insert into Category (category_id, category_name, category_status
-      )
-    values (#{categoryId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}, #{categoryStatus,jdbcType=INTEGER}
-      )
+    insert into Category (category_id, category_user_id, category_name, 
+      category_belong_to, category_status)
+    values (#{categoryId,jdbcType=INTEGER}, #{categoryUserId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}, 
+      #{categoryBelongTo,jdbcType=VARCHAR}, #{categoryStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.lx.model.Category" >
     insert into Category
@@ -45,8 +53,14 @@
       <if test="categoryId != null" >
         category_id,
       </if>
+      <if test="categoryUserId != null" >
+        category_user_id,
+      </if>
       <if test="categoryName != null" >
         category_name,
+      </if>
+      <if test="categoryBelongTo != null" >
+        category_belong_to,
       </if>
       <if test="categoryStatus != null" >
         category_status,
@@ -56,8 +70,14 @@
       <if test="categoryId != null" >
         #{categoryId,jdbcType=INTEGER},
       </if>
+      <if test="categoryUserId != null" >
+        #{categoryUserId,jdbcType=INTEGER},
+      </if>
       <if test="categoryName != null" >
         #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryBelongTo != null" >
+        #{categoryBelongTo,jdbcType=VARCHAR},
       </if>
       <if test="categoryStatus != null" >
         #{categoryStatus,jdbcType=INTEGER},
@@ -67,8 +87,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.lx.model.Category" >
     update Category
     <set >
+      <if test="categoryUserId != null" >
+        category_user_id = #{categoryUserId,jdbcType=INTEGER},
+      </if>
       <if test="categoryName != null" >
         category_name = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryBelongTo != null" >
+        category_belong_to = #{categoryBelongTo,jdbcType=VARCHAR},
       </if>
       <if test="categoryStatus != null" >
         category_status = #{categoryStatus,jdbcType=INTEGER},
@@ -78,7 +104,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lx.model.Category" >
     update Category
-    set category_name = #{categoryName,jdbcType=VARCHAR},
+    set category_user_id = #{categoryUserId,jdbcType=INTEGER},
+      category_name = #{categoryName,jdbcType=VARCHAR},
+      category_belong_to = #{categoryBelongTo,jdbcType=VARCHAR},
       category_status = #{categoryStatus,jdbcType=INTEGER}
     where category_id = #{categoryId,jdbcType=INTEGER}
   </update>

@@ -26,31 +26,31 @@ public class TestCategory {
 	}
 
 	@Test
-	public void TestAddCategory() {
+	public void addCategoryTest() {
 		logger.info("===============TestAddCategory=============");
-		boolean d = categoryService.addCategory("");
+		boolean d = categoryService.addCategory(2, "四川日报", "中国人民日报");
 		logger.info("===========添加=============" + d);
 	}
 
 	@Test
-	public void TestDelCategory() {
+	public void delCategoryTest() {
 		logger.info("===============TestDelCategory=============");
-		boolean d = categoryService.delCategory("jjjpp");
+		boolean d = categoryService.delCategory(1001, "PP");
 		logger.info("===========删除=============" + d);
+	}
+
+	@Test
+	public void getAllCategoryTest() {
+		logger.info("===============TestGetAllCategory=============");
+		List<Category> f = categoryService.getAllCategory(21);
+		logger.info("===========查询=======3======" + JSON.toJSONString(f));
 	}
 
 	@Test
 	public void TestCheckCategoryIsExist() {
 		logger.info("===============TestCheckCategoryIsExist=============");
-		boolean d = categoryService.checkCategoryIsExist("hahahaahq");
+		boolean d = categoryService.checkCategoryIsExist(21, "A");
 		logger.info("===========存在=============" + d);
-	}
-
-	@Test
-	public void TestGetAllCategory() {
-		logger.info("===============TestGetAllCategory=============");
-		List<Category> f = categoryService.getAllCategory();
-		logger.info("===========删除=============" + JSON.toJSONString(f));
 	}
 
 }

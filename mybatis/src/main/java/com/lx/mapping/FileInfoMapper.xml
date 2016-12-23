@@ -100,7 +100,7 @@
     select 
     <include refid="Base_Column_List" />
     from File
-    where file_id = #{fileId,jdbcType=INTEGER} limit 1
+    where file_id = #{fileId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from File

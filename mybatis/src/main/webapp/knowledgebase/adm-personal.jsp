@@ -39,11 +39,14 @@
 <script type="text/javascript">
 	window.onload = function() {
 		var register_time = "${time}";
+		var id = "${userid}";
 		var time = timeStampFormatDay(register_time * 1000);
 		console.log(time);
 		$("#show_user_name").html("${username}");
 		$("#show_user_name").html("${username}");
 		$("#show_user_role").html("${userrole}");
+		$("#show_user_truename").html("${usertruename}");
+		$("#show_register_email").html("${email}");
 		$("#show_register_time").html(time);
 
 	}
@@ -134,15 +137,19 @@
 				<div class="panel-body">
 
 
-					<div style="float: left; margin-top: 50px; margin-left: 100px;">
+					<div style="display: inline-block; padding:5% 0 0 5%">
 						<img src="/mybatis/knowledgebase/img/defaultUser.jpg">
 					</div>
+					
 					<div
-						style="font-size: 17px; font-weight: 600; float: right; margin-top: 120px; margin-right: 150px;">
+						style="font-size: 17px;padding:6% 25% 0 0;
+						 font-weight: 600;display: inline-block;float:right;">
 						<p>
 							用户名：<span id="show_user_name">xxxx</span>
 						</p>
-
+						<p>
+							真实姓名：<span id="show_user_truename">xxxx</span>
+						</p>
 						<p>
 							用户角色：<span id="show_user_role">xxxx</span>
 						</p>
@@ -150,11 +157,21 @@
 						<p>
 							注册时间：<span id="show_register_time">xxxx</span>
 						</p>
+						<p>
+							注册邮箱：<span id="show_register_email">xxxx</span>
+						</p>
+						<input type="hidden" id="userid" value="${userid}">
 					</div>
-					<div align="center" style="margin-top: 400px;">
-						<button class="btn btn-info" data-toggle="modal"
+					<div align="center" style="margin-top: 20%">
+						<button class="btn btn-info" data-toggle="modal" 
+						style="float:left;margin-left:35%;"
+							data-target="#changemsg"  >修改信息
+						</button>
+						<button class="btn btn-info" data-toggle="modal" 
+						style="float:right;margin-right:35%;"
 							data-target="#changepsw" onclick="change_password()">修改密码
 						</button>
+						<div style="clear: both;"></div>
 					</div>
 				</div>
 			</div>
@@ -162,6 +179,35 @@
 			<div style="clear: both;"></div>
 		</div>
 	</div>
+
+	
+	<div class="modal fade" id="changemsg" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">修改个人信息</h4>
+				</div>
+				<div class="modal-body">
+					<ul style="padding-left: 0px;">
+						<li>真实姓名：<input type="text" value="${usertruename}" style="width:70%;display:inline;"
+							class="form-control" id="usertruename" ></li>
+						
+						<li>用户邮箱：<input type="text" id="useremail" style="width:70%;display:inline;"
+							class="form-control" value="${email}"></li>
+						<div id="checkmsg"
+							style="margin-left: 6px; margin-bottom: 10px; height: 6px;"></div>
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary " id="btn_changemsg" onclick="changemsg()"
+						>确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 
 	<div class="modal fade" id="changepsw" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">

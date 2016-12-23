@@ -1,74 +1,93 @@
 package com.lx.model;
 
 public class UserInfo {
-	
-	private Integer userId;
+    private Integer userId;
 
-	private String userName;
+    private String userName;
 
-	private String userPassword;
+    private String userPassword;
 
-	private String userRole;
+    private String userRealName;
 
-	private Integer userCheck;
+    private String userRole;
 
-	private Integer userRegisterTime;
+    private String userEmail;
 
-	private Integer userStatus;
+    private Integer userCheck;
 
-	public Integer getUserId() {
-		return userId;
-	}
+    private Integer userRegisterTime;
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    private Integer userStatus;
 
-	public String getUserName() {
-		return userName;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
-	public void setUserName(String userName) {
-		this.userName = userName == null ? null : userName.trim();
-	}
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public String getUserPassword() {
-		return userPassword;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword == null ? null : userPassword.trim();
-	}
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
+    }
 
-	public String getUserRole() {
-		return userRole;
-	}
+    public String getUserPassword() {
+        return userPassword;
+    }
 
-	public void setUserRole(String userRole) {
-		this.userRole = userRole == null ? null : userRole.trim();
-	}
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword == null ? null : userPassword.trim();
+    }
 
-	public Integer getUserCheck() {
-		return userCheck;
-	}
+    public String getUserRealName() {
+        return userRealName;
+    }
 
-	public void setUserCheck(Integer userCheck) {
-		this.userCheck = userCheck;
-	}
+    public void setUserRealName(String userRealName) {
+        this.userRealName = userRealName == null ? null : userRealName.trim();
+    }
 
-	public Integer getUserRegisterTime() {
-		return userRegisterTime;
-	}
+    public String getUserRole() {
+        return userRole;
+    }
 
-	public void setUserRegisterTime(Integer userRegisterTime) {
-		this.userRegisterTime = userRegisterTime;
-	}
+    public void setUserRole(String userRole) {
+        this.userRole = userRole == null ? null : userRole.trim();
+    }
 
-	public Integer getUserStatus() {
-		return userStatus;
-	}
+    public String getUserEmail() {
+        return userEmail;
+    }
 
-	public void setUserStatus(Integer userStatus) {
-		this.userStatus = userStatus;
-	}
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail == null ? null : userEmail.trim();
+    }
+
+    public Integer getUserCheck() {
+        return userCheck;
+    }
+
+    public void setUserCheck(Integer userCheck) {
+        this.userCheck = userCheck;
+    }
+
+    public Integer getUserRegisterTime() {
+        return userRegisterTime;
+    }
+
+    public void setUserRegisterTime(Integer userRegisterTime) {
+        this.userRegisterTime = userRegisterTime;
+    }
+
+    public Integer getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(Integer userStatus) {
+        this.userStatus = userStatus;
+    }
 }

@@ -30,13 +30,13 @@ public class TestUserInfo {
 
 	@Test
 	public void addUserInfoTest() {
-		boolean d = userInfoService.addUserInfo("dddddddffdd");
-		logger.info("===你你你你你==" + d);
+		boolean d = userInfoService.addUserInfo("皇后");
+		logger.info("==========添加用户=======" + d);
 	}
 
 	@Test
 	public void registerUserInfoTest() {
-		userInfoService.registerUserInfo("皇上", "123456");
+		userInfoService.registerUserInfo("皇上", "123456", "卢享", "305057016@qq.com");
 	}
 
 	@Test
@@ -48,6 +48,15 @@ public class TestUserInfo {
 	public void selectUserByUserNameTest() {
 		UserInfo userInfo = userInfoService.selectUserByUserName("wusongze");
 		logger.info("===userInfo==" + JSON.toJSONString(userInfo));
+	}
+
+	@Test
+	public void alterUserInfoTest() {
+		UserInfo userInfo = new UserInfo();
+		userInfo.setUserRealName("慈溪");
+		userInfo.setUserEmail("123456@qq.com");
+		boolean d = userInfoService.alterUserInfo(209, userInfo);
+		logger.info("==========修改信息=======" + d);
 	}
 
 	@Test

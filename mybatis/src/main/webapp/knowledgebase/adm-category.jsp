@@ -121,6 +121,7 @@
                         <thead>
                         <tr>
                             <th style="font-size:16px;">已有类别</th>
+                            <th></th>
                             <th style="padding-bottom:5px;padding-top:0px;width:116px;">
                                 <button class="btn btn-info" data-toggle="modal" data-target="#tianjia">添加类别</button>
                             </th>

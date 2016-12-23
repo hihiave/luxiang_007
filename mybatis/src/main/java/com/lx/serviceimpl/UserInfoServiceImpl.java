@@ -21,13 +21,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 	private UserInfoMapper userInfoMapper;
 
 	// **********用于处理一些业务逻辑的方法**********
-	private boolean insertUserInfo(String userName, String userPassword, KCheckType checkType) {
+	private boolean insertUserInfo(UserInfo userInfo) {
 		boolean flag = false;
-		UserInfo userInfo = new UserInfo();
-		userInfo.setUserName(userName);
-		userInfo.setUserPassword(userPassword);
 		userInfo.setUserRole("普通用户");
-		userInfo.setUserCheck(checkType.getValue());
 		userInfo.setUserRegisterTime(ToolDate.getCurrentTimestamp());
 		if (userInfoMapper.insertSelective(userInfo) == 1) {
 			flag = true;
@@ -37,12 +33,22 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public boolean addUserInfo(String userName) {
-		return insertUserInfo(userName, ToolEncryption.EncryptMD5("123456"), KCheckType.pass);
+		UserInfo userInfo = new UserInfo();
+		userInfo.setUserName(userName);
+		userInfo.setUserPassword(ToolEncryption.EncryptMD5("123456"));
+		userInfo.setUserCheck(KCheckType.pass.getValue());
+		return insertUserInfo(userInfo);
 	}
 
 	@Override
-	public boolean registerUserInfo(String userName, String userPassword) {
-		return insertUserInfo(userName, ToolEncryption.EncryptMD5(userPassword), KCheckType.waitForCheck);
+	public boolean registerUserInfo(String userName, String userPassword, String userRealName, String userEmail) {
+		UserInfo userInfo = new UserInfo();
+		userInfo.setUserName(userName);
+		userInfo.setUserPassword(ToolEncryption.EncryptMD5(userPassword));
+		userInfo.setUserRealName(userRealName);
+		userInfo.setUserEmail(userEmail);
+		userInfo.setUserCheck(KCheckType.waitForCheck.getValue());
+		return insertUserInfo(userInfo);
 	}
 
 	@Override
@@ -56,6 +62,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	public UserInfo selectUserByUserName(String userName) {
 		return userInfoMapper.selectUserByUserName(userName);
+	}
+
+	@Override
+	public boolean alterUserInfo(Integer userId, UserInfo userInfo) {
+		userInfo.setUserId(userId);
+		if (userInfoMapper.updateByPrimaryKeySelective(userInfo) == 1) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override

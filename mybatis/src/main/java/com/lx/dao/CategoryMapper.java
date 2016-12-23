@@ -2,6 +2,8 @@ package com.lx.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.lx.model.Category;
 
 public interface CategoryMapper {
@@ -17,9 +19,14 @@ public interface CategoryMapper {
 
 	int updateByPrimaryKey(Category record);
 
-	//**********用于处理一些业务逻辑的方法**********
-	int deleteByCategoryName(String categoryName);
-	Category selectByCategoryName(String categoryName);
-	public List<Category> getAllCategory();
+	// **********用于处理一些业务逻辑的方法**********
+	int deleteByCategoryName(@Param("categoryUserId") Integer categoryUserId,
+			@Param("categoryName") String categoryName);
+	public List<Category> getAllCategory(Integer categoryUserId);
+	
+	Category selectByUserIdAndCategoryName(@Param("categoryUserId") Integer categoryUserId,
+			@Param("categoryName") String categoryName);
+
+	
 
 }

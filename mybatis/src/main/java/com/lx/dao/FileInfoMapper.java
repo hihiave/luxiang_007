@@ -9,17 +9,17 @@ import com.lx.tools.Page;
 
 public interface FileInfoMapper {
 
-	int deleteByPrimaryKey(Integer fileId);
+    int deleteByPrimaryKey(Integer fileId);
 
-	int insert(FileInfo record);
+    int insert(FileInfo record);
 
-	int insertSelective(FileInfo record);
+    int insertSelective(FileInfo record);
 
-	FileInfo selectByPrimaryKey(Integer fileId);
+    FileInfo selectByPrimaryKey(Integer fileId);
 
-	int updateByPrimaryKeySelective(FileInfo record);
+    int updateByPrimaryKeySelective(FileInfo record);
 
-	int updateByPrimaryKey(FileInfo record);
+    int updateByPrimaryKey(FileInfo record);
 
 	// **********用于处理一些业务逻辑的方法**********
 	int delFilesById(@Param("fileIds") Integer... fileIds);
