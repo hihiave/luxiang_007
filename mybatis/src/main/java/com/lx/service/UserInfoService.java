@@ -20,10 +20,12 @@ public interface UserInfoService {
 	/** 用户自己注册一个账号
 	 * @author luxiang
 	 * @param userName 用户名
-	 * @param userPassword
-	 * @return boolean，true表示注册成功，等待审核。false表示注册失败
+	 * @param userPassword 密码
+	 * @param userRealName 真实姓名
+	 * @param userEmail 用户邮箱
+	 * @return boolean,true表示注册成功，等待审核.false表示注册失败
 	 */
-	public boolean registerUserInfo(String userName, String userPassword);
+	public boolean registerUserInfo(String userName, String userPassword, String userRealName, String userEmail);
 	
 	/** 通过用户名批量删除用户
 	 * @author luxiang

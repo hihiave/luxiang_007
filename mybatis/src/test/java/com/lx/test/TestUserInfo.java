@@ -36,7 +36,7 @@ public class TestUserInfo {
 
 	@Test
 	public void registerUserInfoTest() {
-		userInfoService.registerUserInfo("皇上", "123456");
+		userInfoService.registerUserInfo("皇上", "123456", "卢享", "305057016@qq.com");
 	}
 
 	@Test
