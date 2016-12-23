@@ -48,5 +48,4 @@ public interface CategoryService {
 	 */
 	public boolean checkCategoryIsExist(Integer categoryUserId, String categoryName);
 	
-
 }
