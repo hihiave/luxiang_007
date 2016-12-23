@@ -43,7 +43,7 @@ public class TestCategory {
 	public void getAllCategoryTest() {
 		logger.info("===============TestGetAllCategory=============");
 		List<Category> f = categoryService.getAllCategory(21);
-		logger.info("===========查询=============" + JSON.toJSONString(f));
+		logger.info("===========查询=======3======" + JSON.toJSONString(f));
 	}
 
 	@Test

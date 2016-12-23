@@ -41,6 +41,10 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public List<Category> getAllCategory(Integer categoryUserId) {
 		List<Category> categories = categoryMapper.getAllCategory(categoryUserId);
+		if (categories.isEmpty()) {
+			System.out.println("===================空================");
+			return null;
+		}
 
 		HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
 		ArrayList<String> strings = new ArrayList<>();
@@ -57,14 +61,22 @@ public class CategoryServiceImpl implements CategoryService {
 		// strings A B
 
 		ArrayList<String> strings1 = new ArrayList<>();
+
 		for (int i = 0; i < categories.size(); i++) {
 			category = categories.get(i);
 			for (int j = 0; j < strings.size(); j++) {
 				if (category.getCategoryBelongTo().equals(strings.get(j))) {
-					strings1.add(category.getCategoryName());
+					strings1.add(category.getCategoryName()); // A1 A2
 					break;
 				}
 			}
+
+			// hashMap.put(key, value);
+
+		}
+
+		for (int i = 0; i < strings1.size(); i++) {
+			System.out.println("=======123=======" + strings1.get(i));
 		}
 
 		return null;

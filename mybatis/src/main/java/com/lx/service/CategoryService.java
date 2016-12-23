@@ -26,7 +26,7 @@ public interface CategoryService {
 	/** 获取所有类别
 	 * @author luxiang
 	 * @param categoryUserId 指定用户Id
-	 * @return
+	 * @return 该用户的分类.注意:若返回null表示该用户还没有分类
 	 */
 	public List<Category> getAllCategory(Integer categoryUserId);
 	
