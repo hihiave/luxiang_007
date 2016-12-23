@@ -9,17 +9,17 @@ import com.lx.model.MyDownload;
 import com.lx.tools.Page;
 
 public interface MyDownloadMapper {
-	int deleteByPrimaryKey(Integer myDownloadId);
+    int deleteByPrimaryKey(Integer myDownloadId);
 
-	int insert(MyDownload record);
+    int insert(MyDownload record);
 
-	int insertSelective(MyDownload record);
+    int insertSelective(MyDownload record);
 
-	MyDownload selectByPrimaryKey(Integer myDownloadId);
+    MyDownload selectByPrimaryKey(Integer myDownloadId);
 
-	int updateByPrimaryKeySelective(MyDownload record);
+    int updateByPrimaryKeySelective(MyDownload record);
 
-	int updateByPrimaryKey(MyDownload record);
+    int updateByPrimaryKey(MyDownload record);
 
 	// **********用于处理一些业务逻辑的方法**********
 	int delMyDownloadByMyDownloadId(@Param("myDownloadIds") Integer... myDownloadIds);

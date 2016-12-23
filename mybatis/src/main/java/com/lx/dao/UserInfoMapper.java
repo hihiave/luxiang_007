@@ -9,17 +9,17 @@ import com.lx.tools.Page;
 
 public interface UserInfoMapper {
 
-	int deleteByPrimaryKey(Integer userId);
+    int deleteByPrimaryKey(Integer userId);
 
-	int insert(UserInfo record);
+    int insert(UserInfo record);
 
-	int insertSelective(UserInfo record);
+    int insertSelective(UserInfo record);
 
-	UserInfo selectByPrimaryKey(Integer userId);
+    UserInfo selectByPrimaryKey(Integer userId);
 
-	int updateByPrimaryKeySelective(UserInfo record);
+    int updateByPrimaryKeySelective(UserInfo record);
 
-	int updateByPrimaryKey(UserInfo record);
+    int updateByPrimaryKey(UserInfo record);
 
 	// **********用于处理一些业务逻辑的方法**********
 	int delUsersByUserName(@Param("userNames") String... userNames);
