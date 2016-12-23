@@ -13,17 +13,23 @@
   </sql>
   
   <!--*********用于处理一些业务逻辑的方法*********-->
-  <delete id="deleteByCategoryName" parameterType="java.lang.String">
+  <delete id="deleteByCategoryName">
   	delete from Category
-    where category_name = #{categoryName,jdbcType=VARCHAR}
+    where category_user_id = #{categoryUserId} and 
+  	category_name = #{categoryName}
   </delete>
-  <select id="selectByCategoryName" resultMap="BaseResultMap" parameterType="java.lang.String">
-    select * from Category
-    where category_name = #{categoryName,jdbcType=VARCHAR}
+  <select id="getAllCategory" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	select * from Category where category_user_id = #{categoryUserId}
   </select>
-  <select id="getAllCategory" resultMap="BaseResultMap">
-  	select * from Category
+
+  
+  <select id="selectByUserIdAndCategoryName" resultMap="BaseResultMap">
+  	select * from Category 
+  	where category_user_id = #{categoryUserId} and 
+  	category_name = #{categoryName}
+  	limit 1
   </select>
+
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
