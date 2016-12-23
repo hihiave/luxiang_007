@@ -65,6 +65,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
+	public boolean alterUserInfo(Integer userId, UserInfo userInfo) {
+		userInfo.setUserId(userId);
+		if (userInfoMapper.updateByPrimaryKeySelective(userInfo) == 1) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public boolean checkUserIsExist(String userName) {
 		if (selectUserByUserName(userName) != null) {
 			return true;
