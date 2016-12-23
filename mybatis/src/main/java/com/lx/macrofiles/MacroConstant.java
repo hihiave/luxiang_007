@@ -9,7 +9,6 @@ public interface MacroConstant {
 	public static final String level0_category = "1482422400";
 
 	// 管理员用户名
-	//public static final String admin = "admin";
-	
-	
+	// public static final String admin = "admin";
+
 }

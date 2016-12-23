@@ -55,15 +55,14 @@ public class CategoryServiceImpl implements CategoryService {
 		hashMap.put(MacroConstant.level0_category, strings);
 
 		// strings A B
-		
-		
+
 		ArrayList<String> strings1 = new ArrayList<>();
 		for (int i = 0; i < categories.size(); i++) {
 			category = categories.get(i);
 			for (int j = 0; j < strings.size(); j++) {
 				if (category.getCategoryBelongTo().equals(strings.get(j))) {
 					strings1.add(category.getCategoryName());
-					continue;
+					break;
 				}
 			}
 		}
