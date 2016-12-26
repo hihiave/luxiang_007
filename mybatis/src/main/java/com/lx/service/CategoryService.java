@@ -30,9 +30,10 @@ public interface CategoryService {
 	 */
 	public List<Category> getAllCategory(Integer categoryUserId);
 	
-	/** 修改类别名(方法有待完善)
+	/** 修改类别名(方法有待完善,没有回滚)
 	 * @author luxiang
 	 * @param categoryUserId 指定用户Id
+	 * @param UserName 指定用户名
 	 * @param oldCategoryName 旧类别名
 	 * @param newCategoryName 新类别名
 	 * @return boolean,true表示修改成功,false表示修改失败
