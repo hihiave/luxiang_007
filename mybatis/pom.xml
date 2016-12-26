@@ -138,6 +138,7 @@
 			<artifactId>elasticsearch-analysis-paoding</artifactId>
 			<version>1.4.2.1</version>
 		</dependency>
+
 	</dependencies>
 	<build>
 	</build>
