@@ -133,13 +133,11 @@
 			<version>4.4.0</version>
 		</dependency>
 		<!-- 中文分词器 -->
-		<!-- <dependency>
-			<groupId>net.paoding</groupId>
-			<artifactId>paoding-analysis</artifactId>
-			<version>4.2.0</version>
-		</dependency> -->
-
-
+		<dependency>
+			<groupId>com.thihy</groupId>
+			<artifactId>elasticsearch-analysis-paoding</artifactId>
+			<version>1.4.2.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 	</build>
