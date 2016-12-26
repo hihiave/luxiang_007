@@ -13,7 +13,7 @@ public class Page {
 	private int startPos; // 分页的开始位置
 
 	private int endPos; // 分页的结束位置
-
+	
 	public Page(int pageNow) {
 		this.pageSize = 10;
 		this.pageNow = pageNow;

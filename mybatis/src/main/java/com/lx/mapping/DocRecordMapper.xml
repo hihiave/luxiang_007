@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ssms.dao.DocRecordMapper">
+	<resultMap id="docRecordMap" type="cn.ssms.model.DocRecord">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="filename" property="fileName" jdbcType="VARCHAR" />
+		<result column="doctype" property="docType" jdbcType="VARCHAR" />
+		<result column="lastmodify" property="lastModify" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<!-- *********************已使用********************* -->
+	<insert id="createDoc" parameterType="cn.ssms.model.DocRecord">
+		insert into
+		t_docrecord(filename,doctype,lastmodify)
+		values
+		(#{fileName,jdbcType=VARCHAR},
+		#{docType,jdbcType=VARCHAR},
+		#{lastModify,jdbcType=INTEGER})
+	</insert>
+	
+	<select id="getDocByFileName" parameterType="java.lang.String" resultType="cn.ssms.model.DocRecord">
+		select * from t_docrecord where filename=#{fileName}
+	</select>
+	
+	<select id="getDocById" parameterType="int" resultType="cn.ssms.model.DocRecord">
+		select * from t_docrecord where id=#{id}
+	</select>
+
+	<!-- *********************已使用********************* -->
+	<select id="getDocTopOne" parameterType="java.lang.String" resultType="cn.ssms.model.DocRecord">
+		select * from t_docrecord where doctype=#{docType} order by lastmodify 
+		desc limit 0,1
+	</select>
+
+	<delete id="deleteDocById" parameterType="int">
+		DELETE FROM t_docrecord
+		WHERE id=#{id}
+	</delete>
+	<delete id="deleteAllDoc">
+		DELETE FROM t_docrecord
+	</delete>
+</mapper>
