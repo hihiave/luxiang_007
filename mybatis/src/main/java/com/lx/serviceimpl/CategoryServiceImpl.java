@@ -81,13 +81,16 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public boolean alterCategory(Integer categoryUserId, String UserName, String oldCategoryName,
 			String newCategoryName) {
-		if (categoryMapper.updateCategoryName(categoryUserId, oldCategoryName, newCategoryName) != 1) {
+		int i = categoryMapper.updateCategoryName(categoryUserId, oldCategoryName, newCategoryName);
+		if (i != 1) {
 			return false;
 		}
-		if (categoryMapper.updateCategoryBelongTo(categoryUserId, oldCategoryName, newCategoryName) < 0) {
+		int j = categoryMapper.updateCategoryBelongTo(categoryUserId, oldCategoryName, newCategoryName);
+		if (j < 0) {
 			return false;
 		}
-		if (fileInfoService.alterFileCategroy(UserName, oldCategoryName, newCategoryName)) {
+		boolean flag = fileInfoService.alterFileCategroy(UserName, oldCategoryName, newCategoryName);
+		if (!flag) {
 			return false;
 		}
 		return true;
