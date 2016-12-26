@@ -9,6 +9,8 @@ import com.artofsolving.jodconverter.DocumentConverter;
 import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
+import com.lx.macrofiles.MacroConstant;
+import com.lx.macrofiles.MacroEnum;
 
 /**
  * 文件转换器
@@ -17,7 +19,6 @@ public class ToolDocConverter {
 	private static File docFile;
 	private static File pdfFile;
 	private static File swfFile;
-	private static String errorMessage;
 
 	/** 转换主方法 Converter
 	 * @author luxiang
@@ -67,15 +68,15 @@ public class ToolDocConverter {
 			process.destroy();
 		} catch (java.net.ConnectException e) {
 			flag = false;
-			errorMessage = "openoffice服务未启动,连接错误!";
+			MacroEnum.ErrMessage = "openoffice服务未启动,连接错误!";
 			e.printStackTrace();
 		} catch (com.artofsolving.jodconverter.openoffice.connection.OpenOfficeException e) {
 			flag = false;
-			errorMessage = "openoffice服务器异常,读取文件错误!";
+			MacroEnum.ErrMessage = "openoffice服务器异常,读取文件错误!";
 			e.printStackTrace();
 		} catch (Exception e) {
 			flag = false;
-			errorMessage = "doc转pdf文件错误!";
+			MacroEnum.ErrMessage = "doc转pdf文件错误!";
 			e.printStackTrace();
 		}
 		return flag;
@@ -90,7 +91,7 @@ public class ToolDocConverter {
 			loadStream(process.getInputStream());
 		} catch (IOException e) {
 			flag = false;
-			errorMessage = "pdf转swf文件错误!";
+			MacroEnum.ErrMessage = "pdf转swf文件错误!";
 			e.printStackTrace();
 		}
 		return flag;
@@ -110,35 +111,5 @@ public class ToolDocConverter {
 	public static String getSwfFilePath() {
 		return swfFile.exists() ? swfFile.getPath().replaceAll("\\\\", "/") : "swfFile不存在!";
 	}
-
-	public static String getErrorMessage() {
-		return errorMessage;
-	}
-
-	// public void setOutputPath(String outputPath) {
-	// this.outputPath = outputPath;
-	// if (!outputPath.equals("")) {
-	// String realName = fileName.substring(fileName.lastIndexOf("/"),
-	// fileName.lastIndexOf("."));
-	// if (outputPath.charAt(outputPath.length()) == '/') {
-	// swfFile = new File(outputPath + realName + ".swf");
-	// } else {
-	// swfFile = new File(outputPath + realName + ".swf");
-	// }
-	// }
-	// }
-
-	// public static void main(String[] args) throws Exception{
-	// String from="G:/Users/qmd/论文.doc";
-	// String savePath="F:/SWFTools";
-	// FileTransfer fileTransfer=new FileTransfer(savePath,from);
-	// fileTransfer.transfer();
-	// System.out.println("****************"+fileTransfer.getSavePath()+"
-	// **************");
-	// DocConverter docConverter=new DocConverter(fileTransfer.getSavePath());
-	// docConverter.convert();
-	// docConverter.getSwfFilePath();
-	// System.out.println(docConverter.getSwfFilePath());
-	// }
 
 }

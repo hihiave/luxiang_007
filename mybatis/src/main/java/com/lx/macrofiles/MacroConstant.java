@@ -17,6 +17,6 @@ public interface MacroConstant {
 	public static final String DOCDIR = "datadir\\worddir\\"; // doc目录
 
 	// **********目录常量**********
-	public static final String level0_category = "1482422400";
+	public static final String level0_category = "1482422400"; // 0级类别,用来索引1级类别
 
 }
