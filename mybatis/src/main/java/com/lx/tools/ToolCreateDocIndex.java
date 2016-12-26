@@ -18,8 +18,8 @@ import org.apache.lucene.util.Version;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.lx.macrofiles.MacroConstant;
 import com.lx.macrofiles.MacroEnum;
-import com.lx.macrofiles.SystemConstant;
 import com.lx.service.DocRecordService;
 
 import net.paoding.analysis.analyzer.PaodingAnalyzer;
@@ -58,7 +58,7 @@ public class ToolCreateDocIndex {
 	public static boolean createPDFIndex(HttpServletRequest request) {
 		boolean flag = true;
 		String basePath = request.getSession().getServletContext().getRealPath("");
-		String pdfDir = basePath + SystemConstant.PDFDIR;
+		String pdfDir = basePath + MacroConstant.PDFDIR;
 		System.out.println("================pdfDir=================" + pdfDir);
 		File[] files = new File(pdfDir).listFiles();
 
@@ -102,7 +102,8 @@ public class ToolCreateDocIndex {
 					} else {
 						document = new Document();
 						document.add(new StringField("id", "" + id, Field.Store.YES));
-						document.add(new StringField("type", MacroEnum.KFileFormatType.pdf.toString(), Field.Store.YES));
+						document.add(
+								new StringField("type", MacroEnum.KFileFormatType.pdf.toString(), Field.Store.YES));
 						document.add(new StringField("fileName", filename, Field.Store.YES));
 						document.add(new TextField("contents", contents, Field.Store.YES));
 						writer.addDocument(document);
@@ -133,7 +134,7 @@ public class ToolCreateDocIndex {
 	public static boolean createWordIndex(HttpServletRequest request) {
 		boolean flag = true;
 		String basePath = request.getSession().getServletContext().getRealPath("");
-		String docDir = basePath + SystemConstant.DOCDIR;
+		String docDir = basePath + MacroConstant.DOCDIR;
 		File[] files = new File(docDir).listFiles();
 
 		try {
@@ -191,7 +192,7 @@ public class ToolCreateDocIndex {
 	private static IndexWriter getIndexWriter() {
 		IndexWriter writer = null;
 		try {
-			Directory directory = FSDirectory.open(new File(SystemConstant.INDEXDIR));
+			Directory directory = FSDirectory.open(new File(MacroConstant.INDEXDIR));
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_44, new PaodingAnalyzer());
 			/* 会创建write.lock文件 */
 			writer = new IndexWriter(directory, iwc);

@@ -28,9 +28,9 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
+import com.lx.macrofiles.MacroConstant;
 import com.lx.macrofiles.MacroEnum;
 import com.lx.macrofiles.MacroEnum.KSearchType;
-import com.lx.macrofiles.SystemConstant;
 import com.lx.model.DocumentEntity;
 
 import net.paoding.analysis.analyzer.PaodingAnalyzer;
@@ -98,9 +98,9 @@ public class ToolSearchDocIndex {
 				docEntity.setId(doc.get("id"));
 
 				if (filenameExtension.equalsIgnoreCase("pdf")) {
-					docEntity.setFileUrl(SystemConstant.PDFDIR + filename + "." + filenameExtension);
+					docEntity.setFileUrl(MacroConstant.PDFDIR + filename + "." + filenameExtension);
 				} else if (filenameExtension.equalsIgnoreCase("doc")) {
-					docEntity.setFileUrl(SystemConstant.DOCDIR + filename + "." + filenameExtension);
+					docEntity.setFileUrl(MacroConstant.DOCDIR + filename + "." + filenameExtension);
 				}
 
 				list.add(docEntity);
@@ -151,7 +151,7 @@ public class ToolSearchDocIndex {
 	// 获取索引搜索
 	private static IndexSearcher getIndexSearcher() {
 		try {
-			Directory directory = FSDirectory.open(new File(SystemConstant.INDEXDIR));
+			Directory directory = FSDirectory.open(new File(MacroConstant.INDEXDIR));
 			DirectoryReader directoryReader = DirectoryReader.open(directory);
 			return new IndexSearcher(directoryReader);
 		} catch (IOException e) {

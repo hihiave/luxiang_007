@@ -2,13 +2,21 @@ package com.lx.macrofiles;
 
 public interface MacroConstant {
 
-	// 路径常量
-	String basePath = "";
+	// **********路径常量**********
+	/* 绝对路径 */
+	public static final String TEMP = "C:\\temp\\"; // 存放txt的临时目录
 
-	// 目录常量
+	public static final String INDEXDIR = "C:\\lucene\\luceneindex\\"; // 索引目录
+
+	// pdf-->txt 转换器的路径
+	public static final String ConvertorPATH = "C:\\lucene\\xpdf\\bin32\\pdftotext";
+
+	/* 相对路径 */
+	public static final String PDFDIR = "datadir\\pdfdir\\"; // pdf目录
+
+	public static final String DOCDIR = "datadir\\worddir\\"; // doc目录
+
+	// **********目录常量**********
 	public static final String level0_category = "1482422400";
-
-	// 管理员用户名
-	// public static final String admin = "admin";
 
 }

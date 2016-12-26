@@ -6,8 +6,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import com.lx.macrofiles.MacroConstant;
 import com.lx.macrofiles.MacroEnum;
-import com.lx.macrofiles.SystemConstant;
 
 public class XpdfParser {
 
@@ -39,16 +39,16 @@ public class XpdfParser {
 	 */
 	private static String xpdfParser(String filePath, String filename) {
 		System.out.println("-----------------------------xpdfParser----------------------");
-		File file = new File(SystemConstant.TEMP);
+		File file = new File(MacroConstant.TEMP);
 		if (!file.exists())
 			file.mkdirs();
 
 		XpdfParams xparam = new XpdfParams();
 		// xparam.setLayout("-layout");
-		xparam.setConvertor(SystemConstant.ConvertorPATH);
+		xparam.setConvertor(MacroConstant.ConvertorPATH);
 		xparam.setEncoding("-enc UTF-8");
 		xparam.setSource(filePath);
-		xparam.setTarget(SystemConstant.TEMP + filename + ".txt");
+		xparam.setTarget(MacroConstant.TEMP + filename + ".txt");
 		String command = xparam.getCommand();
 		// String target = xparam.getTarget();
 		try {
