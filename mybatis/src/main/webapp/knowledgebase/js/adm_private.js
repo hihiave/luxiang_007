@@ -7,7 +7,7 @@ $(function(){
 
 
 
-//获取公有文件
+//获取全部文件
 function get_all_private_file(){
     var src = "/mybatis/FileInfoController/myuploadfile.do";
     sendAjaxRequest(src,{"page_Now":1},get_all_private_file_table);
@@ -26,19 +26,103 @@ function get_all_private_file_table(data){
         var td_2 = "<td style='padding-top:15px;width:180px;' id="+all_pri_file[i].fileId+"><a href='##'  onclick='ReadOnLine(this)' path='"+all_pri_file[i].fileUrl+"' >"+all_pri_file[i].fileName+"</a></td>";
         var td_3 = "<td style='padding-top:15px;'>"+all_pri_file[i].fileIsVisible+"</td>";
         var td_4 = "<td style='padding-top:15px;'>"+timeStampFormatDay(all_pri_file[i].fileUploadTime*1000)+"</td>";
-        var td_5 = "<td><button class='btn btn-primary' bid='"+all_pri_file[i].fileId+"'  onclick='download(this)' path='"+all_pri_file[i].fileUrl+"'>下载</button></td>";
+        var td_5 = "<td><button class='button button-primary button-rounded button-small'" +
+        		" bid='"+all_pri_file[i].fileId+"'  onclick='download(this)' path='"+all_pri_file[i].fileUrl+"'>下载</button></td>";
+        if(all_pri_file[i].fileIsVisible=="私有")
+        	var td_6="<td><button class='button button-action button-rounded button-small' " +
+        			"  onclick='download(this)' >分类</button></td>";
+        else
+        	var td_6 = "<td style='padding-top:15px;'></td>"
         //var td_5 = "<td><button class='btn btn-primary' data-toggle='modal' data-target='' onclick='delete_one_pick(this)'>删除</button></td>";
         //var td_6 = "<td ></td>";
         //var td_7 = "<td><button class='btn btn-primary' data-toggle='modal' data-target='' onclick='pre_file(this)'>预览</button></td>";
-        var content = tr_begin  + td_1 + td_2 + td_3 + td_4  + td_5 + tr_end;
+        var content = tr_begin  + td_1 + td_2 + td_3 + td_4  + td_6 + td_5 + tr_end;
         $("#pri_file").append(content);
     }
     createNewPagination(data,"file_private","/mybatis/FileInfoController/myuploadfile.do",get_all_private_file_table,"first_file_click","last_file_click","page-file-one",{})
 }
+/*
+ * 条件查询文件
+ * */
+function fileinfo_search(obj){
+	
+}
+function get_category(obj){
+	var val=$(obj).val();
 
+	var obj1=document.getElementById("filecate");
+	var obj2=document.getElementById("filechildcate");
+	obj1.options.length=0;
+	obj2.options.length=0;
+	var op="<option value=''>请选择</option>";
+	$("#filecate").append(op);
+	$("#filechildcate").append(op);
+	var userid;
+	if(val=="公有"){
+		userid=2;
+	}
+	else if(val=="私有"){
+		userid=document.getElementById("userid").value;
+	}
+	if(val!==""){$.ajax({
+		type : 'post',
+		url : "/mybatis/CategoryController/get_category.do",
+		data:{"userid":userid},
+		dataType : "json",
+		success : function(data) {
+			var _select = $("#filecate>option");
+			_select.remove();
+			$("#filecate").prepend("<option value=''>请选择</option>");
+			var all_select_category = data["category"];
+			// console.log(all_select_category.length);
+			for (var i = 0; i < all_select_category.length; i++) {
+				var op = "<option value='"
+						+ all_select_category[i].categoryName + "'>"
+						+ all_select_category[i].categoryName + "</option>";
+				$("#filecate").append(op);
+				// console.log(all_select_category[i].categoryName);
+			}
+		}
+	})
+	}
+}
 
+function get_child_category_select(obj){
+	var type=$("#filetype").val();
+	var userid;
+	if(type=="公有")
+		userid=2;
+	else if(type=="私有")
+		userid=document.getElementById("userid").value;
+	var obj=document.getElementById("filechildcate");
+	obj.options.length=0;
+	var belongto=$("#filecate").val();
+	
+	//obj.options.length=0;
+	$.ajax({
+		type : 'post',
+		url : "/mybatis/CategoryController/get_child_category.do",
+		data:{"userid":userid,"categoryBelongTo":belongto},
+		dataType : "json",
+		success : function(data){	
+			var category=data["category"];
+			if(category.length==0){
+				var op="<option value=''>请选择</option>";
+				$("#filechildcate").append(op);
+			}else{
+			for(var i=0 ; i < category.length ;i++){
+				 var op = "<option value='"
+					+ category[i].categoryName + "'>"
+					+ category[i].categoryName + "</option>";
+				 $("#filechildcate").append(op);
+			}
+			}
 
-
+			}
+			
+		
+	})
+}
 
 ////下载文件
 //function down_file(obj){

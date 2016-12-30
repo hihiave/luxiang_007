@@ -27,12 +27,20 @@ public class CategoryController {
 	// 添加类别
 	@RequestMapping(value = "/add_cate", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public Map<String, Object> add_cate(String catename, HttpServletRequest request) {
+	public Map<String, Object> add_cate(Integer userid,String catename,String categoryBelongTo,HttpServletRequest request) {
 		System.out.println(catename + "-------___________");
-		boolean check_result = categortservice.checkCategoryIsExist(catename);
+		boolean check_result = categortservice.checkCategoryIsExist(userid,catename);
+		System.out.println("catebelongto==."+categoryBelongTo+".");
+		String value;
+		if(categoryBelongTo==null){
+			value="1482422400";
+		}
+		else{
+			value=categoryBelongTo;
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (!check_result) {
-			if (categortservice.addCategory(catename)) {
+			if (categortservice.addCategory(userid,catename,value)) {
 				map.put("flag", "chenggong");
 				return map;
 			}
@@ -46,48 +54,65 @@ public class CategoryController {
 	// 删除类别
 	@RequestMapping(value = "/del_cate", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public Map<String, Object> del_cate(String cate_name, HttpSession httpSession,
+	public Map<String, Object> del_cate(Integer userid,String cate_name, HttpSession httpSession,
 			HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
-
-		boolean result = categortservice.delCategory(cate_name);
+		System.out.println(userid+"......"+ cate_name);
+		boolean result = categortservice.delCategory(userid,cate_name);
 		map.put("flag", result);
 		return map;
 	}
-
+	//修改类别
+	@RequestMapping(value = "/change_cate", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> alertCategory(Integer userid,String username,String old_catename,
+			
+		String new_catename,HttpSession httpSession,HttpServletRequest httpServletRequest) {
+		boolean check_result = categortservice.checkCategoryIsExist(userid,new_catename);
+		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println(userid+".."+username+".."+old_catename+".."+new_catename+"."+check_result);
+		if (!check_result) {
+			if (categortservice.alterCategory(userid, username, old_catename, new_catename)) {
+				map.put("flag", "chenggong");
+				return map;
+			}else{
+			map.put("flag", "shibai");
+			return map;
+			}
+		}
+		map.put("flag", "cunzai");
+		return map;
+	}
 	// 获取类别
 	@RequestMapping(value = "/get_category", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public Map<String, Object> get_category(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+	public Map<String, Object> get_category(Integer userid,HttpSession httpSession, HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
-
-		List<Category> category = categortservice.getAllCategory();
-
-		map.put("category", category);
+		System.out.println("id=========="+userid);
+		List<Category> category = categortservice.getAllCategory(userid);
+		List<Category> newcate = new ArrayList<Category>();
+		for(Category cate :category){
+			if(cate.getCategoryBelongTo().equals("1482422400"))
+				newcate.add(cate);
+		}
+		map.put("category", newcate);
 		return map;
 	}
 
 
 	@RequestMapping(value = "/get_child_category", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public Map<String, Object> get_child_category(HttpSession httpSession, HttpServletRequest httpServletRequest) {
+	public Map<String, Object> get_child_category(Integer userid,String categoryBelongTo,
+			HttpSession httpSession, HttpServletRequest httpServletRequest) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		List<Category> child1 = new ArrayList<Category>();
-		for(int i=0;i<4;i++){
-			Category cate=new Category();
-			cate.setCategoryName("专利"+i);
-			child1.add(cate);
+		System.out.println(userid+"....."+categoryBelongTo);
+		List<Category> category = categortservice.getAllCategory(userid);
+		List<Category> newcate = new ArrayList<Category>();
+		for(Category cate :category){
+			if(cate.getCategoryBelongTo().equals(categoryBelongTo))
+				newcate.add(cate);
 		}
-		
-		List<Category> child2 = new ArrayList<Category>();
-		for(int i=0;i<4;i++){
-			Category cate=new Category();
-			cate.setCategoryName("论文"+i);
-			child2.add(cate);
-		}
-		map.put("child1", child1);
-		map.put("child2", child2);
+		map.put("category", newcate);
 		return map;
 	}
 	}

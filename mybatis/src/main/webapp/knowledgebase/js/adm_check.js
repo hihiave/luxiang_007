@@ -26,9 +26,9 @@ function get_all_check_user_one(data){
         var td_4 = "<td padding-left:15px;' style='text-align:center;'>"+timeStampFormatDay(all_check_user[i].userRegisterTime*1000)+"</td>";
         var td_5 = "<td padding-left:15px;  style='text-align:center;'>待审核</td>";
         var td_6 = "<td style='padding-bottom:3px;padding-top:3px;'>" +
-        		"<button class='btn btn-success' style='width:64px;' onclick='check_one_pick(this)'>通过</button></td>";
+        		"<button class='button button-action button-rounded button-small' style='width:64px;' onclick='check_one_pick(this)'>通过</button></td>";
         var td_7 = "<td style='padding-bottom:3px;padding-top:3px;'>" +
-        		"<button class='btn btn-info' style='width:64px;' onclick='refuse_one_pick(this)'>拒绝</button></td>";
+        		"<button class='button button-caution button-rounded button-jumbo button-small' style='width:64px;' onclick='refuse_one_pick(this)'>拒绝</button></td>";
         var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + td_6 + td_7 + tr_end;
         $("#check_result").append(content);
 

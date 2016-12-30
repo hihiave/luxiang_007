@@ -48,8 +48,22 @@
 
 
 <style type="text/css">
-	
-
+	td .button-action{
+	padding-left:20px;
+	padding-right:20px;
+	}
+	td .button-caution{
+	padding-left:20px;
+	padding-right:20px;
+	}
+	th .button-action{
+	padding-left:20px;
+	padding-right:20px;
+	}
+	th .button-caution{
+	padding-left:20px;
+	padding-right:20px;
+	}
 </style>
 
 </head>
@@ -57,6 +71,7 @@
 
 
 <jsp:include page="public-part.jsp" flush="true"/>
+
 <div class="container">
 
 		<div class="col-xs-2 left_nav">
@@ -68,6 +83,7 @@
 							<li><a href="/mybatis/knowledgebase/adm-private.jsp">我的文件</a></li>					
 							<li><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
+							<li><a href="/mybatis/knowledgebase/user-category.jsp">我的分类</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>
 							</c:if>
 						</ul>
@@ -130,10 +146,10 @@
                             <th style="text-align:center;padding-bottom:12px;">注册时间</th>
                             <th style="padding-bottom:12px;text-align:center;">审核状态</th>
                             <th style="width:80px;">
-                                <button class="btn btn-success btn-block" onclick="check_all_pick(this)">通过</button>
+                                <button class="button button-action button-rounded button-small" onclick="check_all_pick(this)">通过</button>
                             </th>
                             <th style="width:80px;">
-                                <button class="btn btn-block btn-info" onclick="refuse_all_pick(this)">拒绝</button>
+                                <button class="button button-caution button-rounded button-jumbo button-small" onclick="refuse_all_pick(this)">拒绝</button>
                             </th>
                         </tr>
                         </thead>

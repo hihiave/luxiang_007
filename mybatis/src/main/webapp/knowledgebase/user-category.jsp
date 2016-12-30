@@ -33,7 +33,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
- <link rel="stylesheet" type="text/css" href="/mybatis/knowledgebase/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="/mybatis/knowledgebase/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/mybatis/knowledgebase/css/jquery-ui.min.css">
 <link rel="stylesheet" type="text/css" href="/mybatis/knowledgebase/css/common.css">
 <script src="/mybatis/knowledgebase/js/jquery.min.js"></script>
@@ -42,19 +42,24 @@
 <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
 <script src="/mybatis/knowledgebase/js/common.js"></script>
 <script src="/mybatis/knowledgebase/js/public_search.js"></script>
-<script src="/mybatis/knowledgebase/js/adm_checkfile.js"></script>
+<script src="/mybatis/knowledgebase/js/user_category.js"></script>
 <script src="/mybatis/knowledgebase/js/jquery-ui.min.js"></script>
 
 
 <style type="text/css">
-	td .button-rounded{
+	th .button-action{
 	padding-left:20px;
 	padding-right:20px;
 	}
-	td .button-caution{
+	th .button-caution{
 	padding-left:20px;
 	padding-right:20px;
 	}
+	th .button-royal{
+	padding-left:20px;
+	padding-right:20px;
+	}
+
 </style>
 
 </head>
@@ -62,7 +67,6 @@
 
 
 <jsp:include page="public-part.jsp" flush="true"/>
-
 <div class="container">
 
 		<div class="col-xs-2 left_nav">
@@ -74,7 +78,7 @@
 							<li><a href="/mybatis/knowledgebase/adm-private.jsp">我的文件</a></li>					
 							<li><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
-							<li><a href="/mybatis/knowledgebase/user-category.jsp">我的分类</a></li>
+							<li  class="active"><a href="/mybatis/knowledgebase/user-category.jsp">我的分类</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>
 							</c:if>
 						</ul>
@@ -100,7 +104,7 @@
 						<li><a href="#source-manager" data-toggle="collapse">资源管理<span class="glyphicon glyphicon-menu-down" ></span></a></li>
 						<ul id="source-manager" class="panel-collapse collapse in ">
 							<li><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
-							<li class="active"><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
+							<li><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
 						</ul>
 						</c:if>
 					
@@ -115,103 +119,159 @@
 						</ul>
 					</c:if>
 					</ul>
+				
 		<div style="clear: both;"></div>
 		</div>
-         <div class="col-xs-10 r_body" >	
+        <div class="col-xs-10 r_body" >	
             <div class="panel panel-info"  id="default_panel">
                 <div class="panel-heading">
-                    <h3 class="panel-title">资源审核</h3>
+                    <h3 class="panel-title">我的类别</h3>
                 </div>
-                <c:if test="${is_manager == 1}">
-                <div class="panel-body" style="padding-top:0px;">
-                    <div style="padding-top: 10px;">
-                        <button class="button button-royal button-rounded button-giant button-small" 
-							 style="height:34px;float:left;padding:0 15px; margin-right:10px;
-							 background: #808080;color: #FFF" onclick="check_all_file(this)">通过</button>
-                        <button class="button button-royal button-rounded button-giant button-small" 
-							 style="height:34px;float:left;padding:0 15px; margin-right:10px;
-							 background: #808080;color: #FFF" onclick="notpass_all_selected_file_modal(this)">拒绝</button>
-                    </div>
+                    <div class="panel-body">
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th style="width: 5%;"><input type="checkbox" id="selAll" onclick="selectAll()"></th>
-                            <th style="width: 60%;">资源名</th>
-                            <th style="width: 10%;text-align:center;">文件信息</th>
-                            <th style="width: 15%;text-align:center;">上传者</th>
-
+                            <th style="font-size:16px;width:65%;">已有类别</th>
+                            <th style="width:5%"></th>
+                            <th style="width:8%;"></th>
+                            <th style="width:8%;"></th>
+                            <th style="padding-bottom:5px;padding-top:0px;width:10%;">
+                                <button class="btn btn-info" style="width:87px;"
+                                data-toggle="modal" data-target="#tianjia">添加类别</button>
+                            </th>
                         </tr>
                         </thead>
-                        <tbody id="file_result">
-                        
+                        <tbody id="category_result">
                         </tbody>
                     </table>
-                    <div style="margin-top: -20px;float: right;">
-                        <ul class="pagination" id="page-file-checkfile">
-                            <%--<li><a href="#">&laquo;</a></li>--%>
-                            <%--<li><a href="#">1</a></li>--%>
-                            <%--<li><a href="#">2</a></li>--%>
-                            <%--<li><a href="#">3</a></li>--%>
-                            <%--<li><a href="#">4</a></li>--%>
-                            <%--<li><a href="#">5</a></li>--%>
-                            <%--<li><a href="#">&raquo;</a></li>--%>
-                        </ul>
-                    </div>
                 </div>
-                </c:if>
+<%--                 <c:if test="${is_manager == 1}">
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th style="font-size:16px;">已有类别</th>
+                            <th></th>
+                            <th style="padding-bottom:5px;padding-top:0px;width:116px;">
+                                <button class="btn btn-info" data-toggle="modal" data-target="#tianjia">添加类别</button>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="category_result">
+
+                        </tbody>
+                    </table>
+                </div>
+                </c:if> --%>
             </div>
             <jsp:include page="search-result.jsp" flush="true"/>
-            <div style="clear:both;"></div>
+			<div style="clear:both;"></div>
         </div>
+
     </div>
 
-<div class="modal fade" id="changefileinfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-changefileino">
+
+
+
+<div class="modal fade" id="shanchu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-shanchu">
     <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content" style="width:400px;">
+        <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel-changefileinfo">提示</h4>
+
+                <h4 class="modal-title" id="myModalLabel-shanchu">提示</h4>
             </div>
             <div class="modal-body">
-       		<ul style="padding-left: 0px;">
-       			<li>
-       			<span>用户分类：</span>
-       			<input type="text" value="" style="width:70%;display:inline;"
-							class="form-control" id="usercate"  readonly="true">
-       			</li>
-				<li><span>重新分类：</span>
-				<select class="form-control" onchange="get_child_category_select(this)" id="cate_select"
-					style="width: 34%;padding:6px;display:inline;">
-				<option value='类别'>类别</option>
-				</select>
-				<select class="form-control" onchange="value" id="second_cate"
-				style="width: 35%;padding:6px;display:inline;">
-				<option value=''>请选择</option>
-				</select>	
-				</li>
-				<li>
-				<span style="margin-left:4%;">关键词：</span>
-				<input type="text" value="" style="width:70%;display:inline;"
-							class="form-control" id="fileword" >
-				</li>
-				<li>
-				<span>资料描述：</span>
-				<textarea type="textarea" id="filearea" rows="3" 
-						style="width:70%;vertical-align:top;display:inline;"
-							class="form-control" value=""></textarea>
-				</li>	
-					</ul>
-					</div>
+                <p id="adm_delete"></p>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="change_click"
-                        onclick="updateFile(this)">修改
+                <button type="button" id="queren" class="btn btn-primary" data-dismiss="modal"
+                        onclick="delete_ok(this)">确认
                 </button>
             </div>
         </div>
     </div>
 </div>
 
-	<div class="modal fade" id="result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+
+
+<div class="modal fade" id="add_child_cate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-add_child_cate">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel">类别添加</h4>
+            </div>
+            <div class="modal-body">
+                <ul style="padding-left:0px;">
+                    <li><input type="text" placeholder="请输入子类名称" id="child_cate_name" class="form-control"></li>
+                    
+                </ul>
+            </div>
+            <p type="hidden" id="father_cate"></p>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary " id="btnclick" data-dismiss="modal" onclick="add_childcate()">
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="tianjia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel">类别添加</h4>
+            </div>
+            <div class="modal-body">
+                <ul style="padding-left:0px;">
+                    <li><input type="text" placeholder="请输入类别名称" id="cate_name" class="form-control"></li>
+                    
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary " id="btnclick" data-dismiss="modal" onclick="add_cate()">
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changemsg" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">修改类别信息</h4>
+				</div>
+				<div class="modal-body">
+					<ul style="padding-left: 0px;">
+						<li>原类别名：<input type="text" readonly=true style="width:70%;display:inline;"
+							class="form-control" id="old_catename" ></li>
+						
+						<li>新类别名：<input type="text" id="new_catename" style="width:70%;display:inline;"
+							class="form-control" ></li>
+						<div id="checkmsg"
+							style="margin-left: 6px; margin-bottom: 10px; height: 6px;"></div>
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary " id="btn_changemsg" 
+						>确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<div class="modal fade" id="tianjia_result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-add-result">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -219,7 +279,7 @@
                 <h4 class="modal-title" id="myModalLabel-add-result">提示信息</h4>
             </div>
             <div class="modal-body">
-                <p id="result_msg"></p>
+                <p id="add_cate_result"></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -227,66 +287,7 @@
             </div>
         </div>
     </div>
-	</div>
-
-<div class="modal fade" id="pass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-check-1">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-
-                <h4 class="modal-title" id="myModalLabel-check-1">提示</h4>
-            </div>
-            <div class="modal-body">
-                <p id="file_remind"></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="file_click"
-                        onclick="pass_file_ok()">确认
-                </button>
-            </div>
-        </div>
-    </div>
 </div>
-
-
-<div class="modal fade" id="pass_remind" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-person_remind">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-
-                <h4 class="modal-title" id="myModalLabel-person_remind">提示</h4>
-            </div>
-            <div class="modal-body">
-                <p id="remind_info"></p>
-            </div>
-            <div class="modal-footer">
-
-                <button type="button" class="btn btn-primary " data-dismiss="modal">确认</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade" id="jujue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-not">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-
-                <h4 class="modal-title" id="myModalLabel-not">提示</h4>
-            </div>
-            <div class="modal-body">
-                <p id="jujue_remind_info"></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" id="jujue_ok_btn">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-logout">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">

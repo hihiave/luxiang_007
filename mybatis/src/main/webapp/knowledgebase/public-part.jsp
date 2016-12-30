@@ -50,7 +50,8 @@
     </c:if>
 </c:forEach>
 <div class="pub_top">
-
+<input type="hidden" id="userid" value="<%=session.getAttribute("userid")%>">
+<input type="hidden" id="username" value="<%=session.getAttribute("username")%>">
 	<div class="col-xs-2 top-img">
 		<img src="/mybatis/knowledgebase/img/3.png">
 	</div>
@@ -63,7 +64,7 @@
 		</div>
         <div style="float: left; margin-right: 0px;">
 			<select class="form-control" onchange="value" id="second_category"
-				style="width: 85px;padding:6px;">
+				style="width: 95px;padding:6px;">
 				<option value=''>请选择</option>
 			</select>
 		</div>
@@ -97,6 +98,7 @@
 		<div style="float: right; margin-right: 10px;">
 		<c:if test="${is_worker == 1}">
 			<div class="upload">
+			<input type="hidden" id="userid" value="<%=session.getAttribute("userid")%>">
 				<a href="/mybatis/knowledgebase/adm-upload.jsp"><span
 					class="glyphicon glyphicon-open"></span>上传</a>
 			</div>

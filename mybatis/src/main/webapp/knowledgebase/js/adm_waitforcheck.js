@@ -27,7 +27,7 @@ function cb_get_all(obj){
         
         //var td_5 = "<td><button class='btn btn-primary' bid='"+all_wait_file[each].fileId+"' onclick='download(this)' path='"+all_wait_file[each].fileUrl+"'>下载</button></td>";
         //去掉下载
-        var td_5= "<td style='padding-top:15px;text-align:center;' >"+all_wait_file[each].fileUploadTime+"</td>";
+        var td_5= "<td style='padding-top:15px;text-align:center;' >"+timeStampFormatDay(all_wait_file[each].fileUploadTime*1000)+"</td>";
         //var td_6 = "";
         //if(all_wait_file[each].fileCheck == -1){
         //    td_6 = "<td><button class='btn btn-primary' onclick='' value="+all_wait_file[each].fileId+">提交</button></td>";

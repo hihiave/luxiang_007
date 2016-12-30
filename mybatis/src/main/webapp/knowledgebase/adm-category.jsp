@@ -47,7 +47,18 @@
 
 
 <style type="text/css">
-	
+	th .button-action{
+	padding-left:20px;
+	padding-right:20px;
+	}
+	th .button-caution{
+	padding-left:20px;
+	padding-right:20px;
+	}
+	th .button-royal{
+	padding-left:20px;
+	padding-right:20px;
+	}
 
 </style>
 
@@ -56,6 +67,7 @@
 
 
 <jsp:include page="public-part.jsp" flush="true"/>
+
 <div class="container">
 
 		<div class="col-xs-2 left_nav">
@@ -67,6 +79,7 @@
 							<li><a href="/mybatis/knowledgebase/adm-private.jsp">我的文件</a></li>					
 							<li><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
+							<li><a href="/mybatis/knowledgebase/user-category.jsp">我的分类</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>
 							</c:if>
 						</ul>
@@ -120,15 +133,17 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th style="font-size:16px;">已有类别</th>
-                            <th></th>
-                            <th style="padding-bottom:5px;padding-top:0px;width:116px;">
-                                <button class="btn btn-info" data-toggle="modal" data-target="#tianjia">添加类别</button>
+                            <th style="font-size:16px;width:65%;">已有类别</th>
+                            <th style="width:5%"></th>
+                            <th style="width:8%;"></th>
+                            <th style="width:8%;"></th>
+                            <th style="padding-bottom:5px;padding-top:0px;width:10%;">
+                                <button class="btn btn-info" style="width:87px;"
+                                data-toggle="modal" data-target="#tianjia">添加类别</button>
                             </th>
                         </tr>
                         </thead>
                         <tbody id="category_result">
-
                         </tbody>
                     </table>
                 </div>
@@ -162,8 +177,33 @@
         </div>
     </div>
 </div>
-</div>
 
+
+
+
+<div class="modal fade" id="add_child_cate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-add_child_cate">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel">类别添加</h4>
+            </div>
+            <div class="modal-body">
+                <ul style="padding-left:0px;">
+                    <li><input type="text" placeholder="请输入子类名称" id="child_cate_name" class="form-control"></li>
+                    
+                </ul>
+            </div>
+            <p type="hidden" id="father_cate"></p>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary " id="btnclick" data-dismiss="modal" onclick="add_childcate()">
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="tianjia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-sm" role="document">
@@ -175,6 +215,7 @@
             <div class="modal-body">
                 <ul style="padding-left:0px;">
                     <li><input type="text" placeholder="请输入类别名称" id="cate_name" class="form-control"></li>
+                    
                 </ul>
             </div>
             <div class="modal-footer">
@@ -186,7 +227,34 @@
         </div>
     </div>
 </div>
-</div>
+
+<div class="modal fade" id="changemsg" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">修改类别信息</h4>
+				</div>
+				<div class="modal-body">
+					<ul style="padding-left: 0px;">
+						<li>原类别名：<input type="text" readonly=true style="width:70%;display:inline;"
+							class="form-control" id="old_catename" ></li>
+						
+						<li>新类别名：<input type="text" id="new_catename" style="width:70%;display:inline;"
+							class="form-control" ></li>
+						<div id="checkmsg"
+							style="margin-left: 6px; margin-bottom: 10px; height: 6px;"></div>
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary " id="btn_changemsg" 
+						>确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 <div class="modal fade" id="tianjia_result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-add-result">
     <div class="modal-dialog modal-sm" role="document">

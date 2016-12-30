@@ -319,6 +319,7 @@ public class UserInfoController {
 		ui.setUserRealName(truename);;
 		Boolean result = userInfoService.alterUserInfo(userid,ui);
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		if (result) {
 			map.put("flag", true);
 		} else {

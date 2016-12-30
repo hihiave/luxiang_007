@@ -74,6 +74,7 @@
 <body>
 
 	<jsp:include page="public-part.jsp" flush="true" />
+	<input type="hidden" id="userid" value="<%=session.getAttribute("userid")%>">
 	<div class="container">
 		<div class="col-xs-2 left_nav">
 			<ul class="nav nav-menu">
@@ -86,6 +87,7 @@
 						<li><a href="/mybatis/knowledgebase/adm-private.jsp">我的文件</a></li>
 						<li><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
 						<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
+						<li><a href="/mybatis/knowledgebase/user-category.jsp">我的分类</a></li>
 						<li><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>
 					</c:if>
 				</ul>
@@ -160,7 +162,7 @@
 						<p>
 							注册邮箱：<span id="show_register_email">xxxx</span>
 						</p>
-						<input type="hidden" id="userid" value="${userid}">
+						
 					</div>
 					<div align="center" style="margin-top: 20%">
 						<button class="btn btn-info" data-toggle="modal" 
@@ -235,11 +237,30 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 					<button type="button" class="btn btn-primary " id="btnclick"
-						data-dismiss="modal">确认</button>
+						>确认</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<div class="modal fade" id="result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel-add-result">提示信息</h4>
+            </div>
+            <div class="modal-body">
+                <p id="result_msg"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary " data-dismiss="modal">确认</button>
+            </div>
+        </div>
+    </div>
+	</div>
+	
 	<div class="modal fade" id="logout-modal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel-logout">
 		<div class="modal-dialog modal-sm" role="document">

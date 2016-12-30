@@ -60,7 +60,10 @@ if(session.getAttribute("message")=="noexist"){
 
 <style type="text/css">
 	
-
+	td .button-rounded{
+	padding-left:20px;
+	padding-right:20px;
+	}
 </style>
 
 </head>
@@ -79,6 +82,7 @@ if(session.getAttribute("message")=="noexist"){
 							<li><a href="/mybatis/knowledgebase/adm-private.jsp">我的文件</a></li>					
 							<li><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
+							<li><a href="/mybatis/knowledgebase/user-category.jsp">我的分类</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>
 							</c:if>
 						</ul>
@@ -130,10 +134,10 @@ if(session.getAttribute("message")=="noexist"){
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th style="width: 60%;">文件名</th>
+                            <th style="width: 57%;">文件名</th>
                             <th style="padding-left:0px;width: 10%;">上传者</th>
                             <th style="width: 13%;">上传时间</th>
-                            <th style="padding-left:20px;width: 7%;">下载</th>
+                            <th style="padding-left:20px;width: 10%;">下载</th>
                             <%--<th style="padding-left:20px;">预览</th>--%>
                             <th style="padding-left:0px;width: 10%;">下载量</th>
                         </tr>

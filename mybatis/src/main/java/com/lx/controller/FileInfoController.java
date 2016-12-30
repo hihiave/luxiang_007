@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.lucene.search.FieldCacheDocIdSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +42,40 @@ public class FileInfoController {
 		request.setAttribute("fileInfo", fileInfo);
 		return "showFileInfo";
 		// System.out.println;
+	}
+	/**
+	 * 修改文件描述
+	 */
+	@RequestMapping(value = "/alter_file_msg", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> alter_file_msg(Integer fileid,String keyword,
+			String filedesc,String filecate) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		FileInfo fileInfo=new FileInfo();
+		fileInfo.setFileCategory(filecate);
+		fileInfo.setFileDesc(filedesc);
+		fileInfo.setFileKeywords(keyword);
+		boolean result=fileInfoService.updateFileByFileId(fileid, fileInfo);
+		map.put("flag", result);
+		return map;
+	}
+	
+	
+	/**
+	 * 获取文件描述
+	 */
+	@RequestMapping(value = "/get_file_msg", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> get_file_msg(Integer fileid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		FileInfo fileInfo = fileInfoService.getFileByFileId(fileid);
+		String keyWord=fileInfo.getFileKeywords();
+		String fileDes=fileInfo.getFileDesc();
+		String fileCate=fileInfo.getFileCategory();
+		map.put("keyWord",keyWord);
+		map.put("fileDes", fileDes);
+		map.put("filecate", fileCate);
+		return map;
 	}
 
 	@RequestMapping(value = "/get_file_points", method = RequestMethod.POST)
@@ -224,11 +259,18 @@ public class FileInfoController {
 			String fileauthor1 = request.getParameter("author1");
 			String filekeys1 = request.getParameter("word1");
 			String filecate1 = request.getParameter("cate1");
+			String filedesc1 = request.getParameter("area1");
+			String filechildcate1 =request.getParameter("child_cate1");
 			String filevisible1 = request.getParameter("pro1");
 			FileInfo fileInfo1 = new FileInfo();
 			fileInfo1.setFileName(filename1);
 			fileInfo1.setFileAuthor(fileauthor1);
-			fileInfo1.setFileCategory(filecate1);
+			fileInfo1.setFileDesc(filedesc1);
+			if(filechildcate1!=""){
+			fileInfo1.setFileCategory(filechildcate1);
+			}else{
+				fileInfo1.setFileCategory(filecate1);
+			}
 			if (filevisible1.equals("私有")) {
 				fileInfo1.setFileCheck(1);
 			} else if (filevisible1.equals("公有")) {
@@ -241,7 +283,7 @@ public class FileInfoController {
 			fileInfo1.setFileIsVisible(filevisible1);
 			fileInfo1.setFileUrl(request.getParameter("filepath1"));
 			fileInfo1.setFileStatus(1);
-			fileInfo1.setFileDesc("");
+
 
 			result1 = fileInfoService.addFileInfo(fileInfo1);
 			map.put("message1", "hahaha");
@@ -252,11 +294,18 @@ public class FileInfoController {
 			String fileauthor2 = request.getParameter("author2");
 			String filekeys2 = request.getParameter("word2");
 			String filecate2 = request.getParameter("cate2");
+			String filedesc2 = request.getParameter("area2");
+			String filechildcate2 =request.getParameter("child_cate2");
 			String filevisible2 = request.getParameter("pro2");
 			FileInfo fileInfo2 = new FileInfo();
 			fileInfo2.setFileName(filename2);
 			fileInfo2.setFileAuthor(fileauthor2);
-			fileInfo2.setFileCategory(filecate2);
+			if(filechildcate2!=""){
+			fileInfo2.setFileCategory(filechildcate2);
+			}
+			else{
+				fileInfo2.setFileCategory(filecate2);
+			}
 			if (filevisible2.equals("私有")) {
 				fileInfo2.setFileCheck(1);
 			} else if (filevisible2.equals("公有")) {
@@ -268,7 +317,7 @@ public class FileInfoController {
 			fileInfo2.setFileIsVisible(filevisible2);
 			fileInfo2.setFileUrl(request.getParameter("filepath2"));
 			fileInfo2.setFileStatus(1);
-			fileInfo2.setFileDesc("");
+			fileInfo2.setFileDesc(filedesc2);
 
 			result2 = fileInfoService.addFileInfo(fileInfo2);
 			map.put("message2", "hahaha");
@@ -279,11 +328,18 @@ public class FileInfoController {
 			String fileauthor3 = request.getParameter("author3");
 			String filekeys3 = request.getParameter("word3");
 			String filecate3 = request.getParameter("cate3");
+			String filedesc3 = request.getParameter("area3");
+			String filechildcate3 =request.getParameter("child_cate3");
 			String filevisible3 = request.getParameter("pro3");
 			FileInfo fileInfo3 = new FileInfo();
 			fileInfo3.setFileName(filename3);
 			fileInfo3.setFileAuthor(fileauthor3);
-			fileInfo3.setFileCategory(filecate3);
+			if(filechildcate3!=""){
+			fileInfo3.setFileCategory(filechildcate3);
+			}
+			else{
+				fileInfo3.setFileCategory(filecate3);
+			}
 			if (filevisible3.equals("私有")) {
 				fileInfo3.setFileCheck(1);
 			} else if (filevisible3.equals("公有")) {
@@ -295,7 +351,7 @@ public class FileInfoController {
 			fileInfo3.setFileIsVisible(filevisible3);
 			fileInfo3.setFileUrl(request.getParameter("filepath3"));
 			fileInfo3.setFileStatus(1);
-			fileInfo3.setFileDesc("");
+			fileInfo3.setFileDesc(filedesc3);
 
 			result3 = fileInfoService.addFileInfo(fileInfo3);
 			map.put("message3", "hahaha");

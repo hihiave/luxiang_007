@@ -30,12 +30,14 @@ function changemsg(){
             success:function(data){
                 var result = data["flag"];
                 if(result){
-                    alert("修改信息成功！");
-                    $('#changemsg').modal('toggle');
+                	$('#changemsg').modal('toggle');
+                	$("#result_msg").html("修改信息成功!");
+                    $("#result").modal('show');
                    
                 }else{
-                    alert("修改信息失败！");
                     $('#changemsg').modal('toggle');
+                	$("#result_msg").html("修改信息失败!");
+                    $("#result").modal('show');
                 }
             }
         })
@@ -100,7 +102,7 @@ function change_password(){
     }
     function checkrepsw(){
         if(psw1obj.value!=psw2obj.value ){
-            var msg="<font color='red' size='2px'>两次密码不一致!</font>";
+        	 document.getElementById("spanrepsw").innerHTML = "<font color='red' size='2px'>密码不一致!</font>";
             return;
         }else if(oldpswobj.value == ""){
             document.getElementById("spanusername").innerHTML = "<font color='red' size='2px'>原密码不能为空!</font>";
@@ -119,11 +121,13 @@ function change_password(){
                     success:function(data){
                         var result = data["flag"];
                         if(result){
-                            alert("修改密码成功！");
-                            $('#changepsw').modal('toggle');
+                        	$('#changepsw').modal('toggle');
+                        	$("#result_msg").html("修改信息成功!");
+                            $("#result").modal('show');
                         }else{
-                            alert("修改密码失败");
-                            $('#changepsw').modal('toggle');
+                        	$('#changepsw').modal('toggle');
+                        	$("#result_msg").html("修改信息失败!");
+                            $("#result").modal('show');
                         }
                     }
                 }

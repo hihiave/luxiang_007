@@ -67,6 +67,7 @@
 							<li><a href="/mybatis/knowledgebase/adm-private.jsp">我的文件</a></li>					
 							<li class="active"><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
+							<li><a href="/mybatis/knowledgebase/user-category.jsp">我的分类</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>
 							</c:if>
 						</ul>
@@ -112,11 +113,13 @@
         <div class="col-xs-10 r_body" >	
             <div class="panel panel-info"  id="default_panel">
                 <div class="panel-heading">
-                    <h3 class="panel-title">待审核文件</h3>
+                    <h3 class="panel-title">待审文件</h3>
                 </div>
                 <div class="panel-body" style="padding-top:0px;">
                     <div style="padding-top: 10px;">
-                        <button class="btn btn-primary" onclick="delete_all_file_modal(this)">删除
+                        <button class="button button-royal button-rounded button-giant button-small" 
+						 style="height:34px;float:left;padding:0 15px; margin-right:10px;
+							 background: #808080;color: #FFF" onclick="delete_all_file_modal(this)">删除
                         </button>
                     </div>
                     <table class="table table-striped">

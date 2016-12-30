@@ -72,6 +72,7 @@ text-decoration:none;
 							<li><a href="/mybatis/knowledgebase/adm-private.jsp">我的文件</a></li>					
 							<li><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
+							<li><a href="/mybatis/knowledgebase/user-category.jsp">我的分类</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>
 							</c:if>
 						</ul>
@@ -178,16 +179,23 @@ text-decoration:none;
 
 									<div class="row">
 										<div class="col-xs-6" style="margin-bottom: 25px;">
-											<span>资料属性：</span> <select class="form-control " id="proto1"
-												onchange="value" style="width: 75%; margin-left: -3px;">
-												<option value='私有' selected>私有</option>
-												<option value='公有'>公有</option>
+											<span>资料属性：</span> <select class="form-control " id="proto1"  num="1"
+												onchange="get_category(this)" style="width: 75%; margin-left: -3px;">
+												<option value='' selected>请选择</option>
+												<option value='私有' >私有</option>
+												<option value='公有' >公有</option>
 											</select>
 										</div>
 										<div class="col-xs-6" style="margin-bottom: 25px;">
 											<span>类&nbsp;&nbsp;&nbsp;&nbsp;别：</span><select
-												class="form-control select-class-name" id="cate1"
-												onchange="value" style="width: 75%; margin-left: -2px;"></select>
+												class="form-control select-class-name" id="cate1" count="1"
+												onchange="get_child_category_select(this)" style="width: 25%; margin-left: -2px;">	
+												<option value=''>请选择</option>									
+												</select>
+												<select
+												class="form-control select-name" id="child_cate1"
+												onchange="value" style="width: 25%; margin-left: -2px;">
+												<option value=''>请选择</option></select>
 										</div>
 									</div>
 
@@ -264,16 +272,21 @@ text-decoration:none;
 
 									<div class="row">
 										<div class="col-xs-6" style="margin-bottom: 25px;">
-											<span>资料属性：</span> <select class="form-control " id="proto2"
-												onchange="value" style="width: 75%; margin-left: -3px;">
-												<option value='私有' selected>私有</option>
-												<option value='公有'>公有</option>
+											<span>资料属性：</span> <select class="form-control " id="proto2"  num="2"
+												onchange="get_category(this)" style="width: 75%; margin-left: -3px;">
+												<option value='' selected>请选择</option>
+												<option value='私有' >私有</option>
+												<option value='公有' >公有</option>
 											</select>
 										</div>
 										<div class="col-xs-6" style="margin-bottom: 25px;">
 											<span>类&nbsp;&nbsp;&nbsp;&nbsp;别：</span><select
-												class="form-control select-class-name" id="cate2"
-												onchange="value" style="width: 75%; margin-left: -2px;"></select>
+												class="form-control select-class-name" id="cate2" count="2"
+												onchange="get_child_category_select(this)" style="width: 25%; margin-left: -2px;">										
+												</select>
+												<select
+												class="form-control select-name" id="child_cate2"
+												onchange="value" style="width: 25%; margin-left: -2px;"></select>
 										</div>
 									</div>
 
@@ -347,18 +360,23 @@ text-decoration:none;
 										</div>
 									</div>
 
-									<div class="row">
+																		<div class="row">
 										<div class="col-xs-6" style="margin-bottom: 25px;">
-											<span>资料属性：</span> <select class="form-control " id="proto3"
-												onchange="value" style="width: 75%; margin-left: -3px;">
-												<option value='私有' selected>私有</option>
-												<option value='公有'>公有</option>
+											<span>资料属性：</span> <select class="form-control " id="proto3"  num="3"
+												onchange="get_category(this)" style="width: 75%; margin-left: -3px;">
+												<option value='' selected>请选择</option>
+												<option value='私有' >私有</option>
+												<option value='公有' >公有</option>
 											</select>
 										</div>
 										<div class="col-xs-6" style="margin-bottom: 25px;">
 											<span>类&nbsp;&nbsp;&nbsp;&nbsp;别：</span><select
-												class="form-control select-class-name" id="cate3"
-												onchange="value" style="width: 75%; margin-left: -2px;"></select>
+												class="form-control select-class-name" id="cate3" count="3"
+												onchange="get_child_category_select(this)" style="width: 25%; margin-left: -2px;">										
+												</select>
+												<select
+												class="form-control select-name" id="child_cate3"
+												onchange="value" style="width: 25%; margin-left: -2px;"></select>
 										</div>
 									</div>
 
@@ -377,7 +395,7 @@ text-decoration:none;
 
 						<div align="center">
 							<%--<input type="submit" value="上传文件" id="sub"   class="btn btn-primary">--%>
-							<button class="btn btn-primary" onclick="uploadFile()">上传</button>
+							<button class="button button-primary button-rounded button-small" onclick="uploadFile()">上传</button>
 						</div>
 
 
