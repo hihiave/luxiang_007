@@ -93,11 +93,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 		UserInfo userInfo = selectUserByUserName(userName);
 		if (userInfo != null && userInfo.getUserPassword().equals(ToolEncryption.EncryptMD5(userPassword))) {
 			if (userInfo.getUserCheck() == 1) {
-				return KMessageType.loginSuccess; // 登录成功
+				return KMessageType.success; // 登录成功
 			}
 			return KMessageType.checkNotPass; // 审核未通过
 		}
-		return KMessageType.loginFail;// 登录失败
+		return KMessageType.fail;// 登录失败
 	}
 
 	@Override

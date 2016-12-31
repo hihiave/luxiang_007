@@ -36,7 +36,7 @@ public class UserInfoController {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		switch (result) {
-		case loginSuccess:
+		case success:
 			UserInfo userInfo = userInfoService.selectUserByUserName(username);
 			// httpSession.setAttribute("userinfo",userInfo);
 			httpSession.setAttribute("username", username);
@@ -44,7 +44,7 @@ public class UserInfoController {
 			System.out.println("name=================" + user);
 			httpSession.setAttribute("time", userInfo.getUserRegisterTime());
 			httpSession.setAttribute("userrole", userInfo.getUserRole());
-			httpSession.setAttribute("usertruename",userInfo.getUserRealName());
+			httpSession.setAttribute("usertruename", userInfo.getUserRealName());
 			httpSession.setAttribute("email", userInfo.getUserEmail());
 			httpSession.setAttribute("userid", userInfo.getUserId());
 			// httpSession.setAttribute("password",password);
@@ -54,7 +54,7 @@ public class UserInfoController {
 		case checkNotPass:
 			map.put("data", "CheckNotPass");
 			return map;
-		case loginFail:
+		case fail:
 			map.put("data", "LoginFail");
 			return map;
 		default:
@@ -84,8 +84,8 @@ public class UserInfoController {
 	 */
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> regist(String username, String userpassword,
-			String truename,String email, HttpSession httpSession) {
+	public Map<String, Object> regist(String username, String userpassword, String truename, String email,
+			HttpSession httpSession) {
 		System.out.println("======username=====" + username);
 		System.out.println("======password=====" + userpassword);
 		System.out.println("=====truename=====" + truename);
@@ -96,7 +96,7 @@ public class UserInfoController {
 		System.out.println("检查结果" + check_result);
 		if (!check_result) {
 
-			boolean regist_result = userInfoService.registerUserInfo(username, userpassword,truename,email);
+			boolean regist_result = userInfoService.registerUserInfo(username, userpassword, truename, email);
 
 			map.put("data", regist_result);
 		}
@@ -280,7 +280,7 @@ public class UserInfoController {
 	 */
 	@RequestMapping(value = "/check_refuse_user", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public Map<String, Object> checkrefuseuser(String[] check_user_array, HttpServletRequest httpServletRequest) {
+	public Map<String, Object> checkrefuseuser(String[] check_user_array) {
 		System.out.println("传入数据=========" + check_user_array.toString());
 		boolean result = userInfoService.delUsersByUserName(check_user_array);
 		System.out.println("审核结果========" + result);
@@ -295,37 +295,35 @@ public class UserInfoController {
 	 */
 	@RequestMapping(value = "/get_psw", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public Map<String, Object> get_psw(String username, String oldpassword, HttpServletRequest httpServletRequest) {
+	public Map<String, Object> get_psw(String username, String oldpassword) {
 		System.out.println("++++++++" + username);
 		System.out.println("!!!!!!!!" + oldpassword);
 		MacroEnum.KMessageType result = userInfoService.checkLogin(username, oldpassword);
-		Map<String, Object> map = new HashMap<String, Object>();
-		if (result == MacroEnum.KMessageType.loginSuccess) {
+		Map<String, Object> map = new HashMap<>();
+		if (result == MacroEnum.KMessageType.success) {
 			map.put("flag", true);
 		} else {
 			map.put("flag", false);
 		}
-
 		return map;
 	}
+
 	@RequestMapping(value = "/change_msg", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public Map<String, Object> changeUserMsg(Integer userid,String truename, String email, HttpServletRequest httpServletRequest) {
+	public Map<String, Object> changeUserMsg(Integer userid, String truename, String email) {
 		System.out.println("++++++++" + truename);
 		System.out.println("!!!!!!!!" + email);
 		System.out.println("........" + userid);
-		UserInfo ui=new UserInfo();
-		ui.setUserEmail(email);
-		ui.setUserRealName(truename);;
-		Boolean result = userInfoService.alterUserInfo(userid,ui);
-		Map<String, Object> map = new HashMap<String, Object>();
-		
+		UserInfo userInfo = new UserInfo();
+		userInfo.setUserEmail(email);
+		userInfo.setUserRealName(truename);
+		Boolean result = userInfoService.alterUserInfo(userid, userInfo);
+		Map<String, Object> map = new HashMap<>();
 		if (result) {
 			map.put("flag", true);
 		} else {
 			map.put("flag", false);
 		}
-
 		return map;
 	}
 }
