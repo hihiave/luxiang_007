@@ -50,8 +50,9 @@ public class FileInfoController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		FileInfo fileInfo = new FileInfo();
 		fileInfo.setFileCategory(filecate);
-		fileInfo.setFileDesc(filedesc);
-		fileInfo.setFileKeywords(keyword);
+		if(keyword!=null||filedesc!=null){
+			fileInfo.setFileDesc(filedesc);
+			fileInfo.setFileKeywords(keyword);}
 		boolean result = fileInfoService.updateFileByFileId(fileid, fileInfo);
 		map.put("flag", result);
 		return map;

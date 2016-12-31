@@ -153,7 +153,8 @@ if(session.getAttribute("message")=="noexist"){
                     </div>
                 </div>
             </div>
-            <jsp:include page="search-result.jsp" flush="true"/>
+           <jsp:include page="search-result.jsp" flush="true" />
+			<div style="clear: both;"></div>
         </div>
     </div>
 

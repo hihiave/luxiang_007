@@ -405,7 +405,8 @@ text-decoration:none;
 						<%--</div>--%>
 					</div>
 				</div>
-
+			  <jsp:include page="search-result.jsp" flush="true"/>
+            <div style="clear:both;"></div>
 			</div>
 		</div>
 

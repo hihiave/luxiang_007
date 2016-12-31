@@ -49,7 +49,14 @@
 
 
 <style type="text/css">
-	
+th .button-action{
+height:34px;
+padding:0 17px;
+}
+td .button-rounded{
+height:34px;
+padding:0 17px;
+}
 
 </style>
 
@@ -132,10 +139,10 @@
                             "height:34px;padding-left:5px;width:90%">
                             </th>
                             <th style="padding-bottom:5px;padding-top:0px;width:12%;">
-                                <button class="btn btn-success" id="search-user" onclick="searchuser()">搜索用户</button>
+                                <button class="button button-action button-rounded button-small" id="search-user" onclick="searchuser()">搜索用户</button>
                             </th>
                             <th style="padding-bottom:5px;padding-top:0px;width:12%;">
-                                <button class="btn btn-success" data-toggle="modal" data-target="#tianjia">添加用户</button>
+                                <button class="button button-action button-rounded button-small" data-toggle="modal" data-target="#tianjia">添加用户</button>
                             </th>
                         </tr>
                         </thead>

@@ -71,6 +71,8 @@ if(session.getAttribute("message")=="noexist"){
 
 
 <jsp:include page="public-part.jsp" flush="true"/>
+<input type="hidden" id="type" value="">
+<input type="hidden" id="cate" value="">
 <div class="container">
 
 		<div class="col-xs-2 left_nav">
@@ -184,7 +186,58 @@ if(session.getAttribute("message")=="noexist"){
 				<div style="clear:both;"></div>
 			</div>
 		</div>
+	 
+	 <div class="modal fade" id="changefileinfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-changefileino">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content" style="width:400px;">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel-changefileinfo">提示</h4>
+            </div>
+            <div class="modal-body">
+       		<ul style="padding-left: 0px;">
+       			<li>
+       			<span>用户分类：</span>
+       			<input type="text" value="" style="width:70%;display:inline;"
+							class="form-control" id="usercate"  readonly="true">
+       			</li>
+				<li><span>重新分类：</span>
+				<select class="form-control" onchange="get_my_category_select(this)" id="cate_select"
+					style="width: 34%;padding:6px;display:inline;">
+				<option value='类别'>类别</option>
+				</select>
+				<select class="form-control" onchange="value" id="second_cate"
+				style="width: 35%;padding:6px;display:inline;">
+				<option value=''>请选择</option>
+				</select>	
+				</li>
+					</ul>
+					</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="change_click"
+                        onclick="updateFile(this)">修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+	 	<div class="modal fade" id="result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
 
+                <h4 class="modal-title" id="myModalLabel-add-result">提示信息</h4>
+            </div>
+            <div class="modal-body">
+                <p id="result_msg"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary " data-dismiss="modal">确认</button>
+            </div>
+        </div>
+    </div>
+	</div>
 
 	<div class="modal fade" id="download" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
