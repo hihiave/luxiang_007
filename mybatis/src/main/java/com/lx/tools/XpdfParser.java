@@ -14,14 +14,10 @@ public class XpdfParser {
 	/**
 	 * 获取由pdf-->txt文档后文档内容
 	 */
-	public static String getPDFFileContents(String filePath, String filename) {
-		System.out.println("====================1====================");
-
-		String txtCanonicalPath = xpdfParser(filePath, filename);
+	public static String getPDFFileContents(String filePath) {
+		String txtCanonicalPath = xpdfParser(filePath);
 		if (txtCanonicalPath == null)
 			return null;
-
-		System.out.println("===========txtCanonicalPath======" + txtCanonicalPath);
 
 		// 等待pdf-->txt的进程执行完后,txt路径下的txt文档才存在.
 		// 不然在读取txt内容时会报文件不存在异常.
@@ -37,8 +33,7 @@ public class XpdfParser {
 	/**
 	 * pdf转换txt,获取txt文档全路径
 	 */
-	private static String xpdfParser(String filePath, String filename) {
-		System.out.println("-----------------------------xpdfParser----------------------");
+	private static String xpdfParser(String filePath) {
 		File file = new File(MacroConstant.TEMP);
 		if (!file.exists())
 			file.mkdirs();
@@ -48,16 +43,14 @@ public class XpdfParser {
 		xparam.setConvertor(MacroConstant.ConvertorPATH);
 		xparam.setEncoding("-enc UTF-8");
 		xparam.setSource(filePath);
-		xparam.setTarget(MacroConstant.TEMP + filename + ".txt");
+		xparam.setTarget(MacroConstant.TEMP + "temp.txt");
 		String command = xparam.getCommand();
 		// String target = xparam.getTarget();
 		try {
-			System.out.println("------command------1------------" + command);
 			Runtime.getRuntime().exec(command);
 		} catch (IOException e) {
 			e.printStackTrace();
 			MacroEnum.ErrMessage = "pdf转换txt错误!";
-			System.out.println("------------pdf转换txt错误!------------");
 			return null;
 		}
 		return xparam.getTarget();
@@ -67,7 +60,6 @@ public class XpdfParser {
 	 * 获取txt文档内容
 	 */
 	private static String getTxtContents(String txtCanonicalPath) {
-		System.out.println("=================getTxtContents================" + txtCanonicalPath);
 		StringBuffer stringBuffer = new StringBuffer();
 		try {
 			String line = "";
@@ -85,7 +77,6 @@ public class XpdfParser {
 		} catch (Exception e) {
 			e.printStackTrace();
 			MacroEnum.ErrMessage = "获取txt文档内容错误!";
-			System.out.println("=====================获取txt文档内容错误!====================");
 			return null;
 		}
 		// if(strBuffer.toString().length()<=500)

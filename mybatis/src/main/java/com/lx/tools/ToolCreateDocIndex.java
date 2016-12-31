@@ -59,7 +59,6 @@ public class ToolCreateDocIndex {
 		boolean flag = true;
 		String basePath = request.getSession().getServletContext().getRealPath("");
 		String pdfDir = basePath + MacroConstant.PDFDIR;
-		System.out.println("================pdfDir=================" + pdfDir);
 		File[] files = new File(pdfDir).listFiles();
 
 		String contents = "";
@@ -68,12 +67,6 @@ public class ToolCreateDocIndex {
 		Document document;
 
 		try {
-			System.out.println("*********files.length**********" + files.length);
-			System.out.println("*********long files[i].lastModified()**********" + files[0].lastModified());
-			System.out.println("*********lu********************" + files[0].lastModified() / 1000);
-			System.out.println("*********xiang****getName******" + files[0].getName());
-
-			System.out.println("*********getCanonicalPath******" + files[0].getCanonicalPath());
 			// 返回的是数据库表中最新的文件的修改时间(戳s)
 
 			// int LatestTime =
@@ -82,7 +75,6 @@ public class ToolCreateDocIndex {
 			int LatestTime = 0;
 			IndexWriter writer = getIndexWriter();
 			for (int i = 0; i < files.length; i++) {
-				System.out.println("==============i===============" + i);
 				if (files[i].lastModified() / 1000 > LatestTime) {
 					filenameFull = files[i].getName();
 					// DocRecord docRecord = new DocRecord();
@@ -93,13 +85,11 @@ public class ToolCreateDocIndex {
 					// int id = docRecordService.createDoc(docRecord);
 
 					int id = 1;
-					filename = filenameFull.substring(0, filenameFull.lastIndexOf(".pdf"));
-
-					contents = XpdfParser.getPDFFileContents(files[i].getCanonicalPath(), filename);
-
+					contents = XpdfParser.getPDFFileContents(files[i].getCanonicalPath());
 					if (contents == null) {
-						return false;
+						flag = false;
 					} else {
+						filename = filenameFull.substring(0, filenameFull.lastIndexOf(".pdf"));
 						document = new Document();
 						document.add(new StringField("id", "" + id, Field.Store.YES));
 						document.add(
@@ -110,17 +100,7 @@ public class ToolCreateDocIndex {
 					}
 				}
 			}
-
 			writer.close();
-			// 创建完索引之后，删除txt文档
-			// File file = new File(SystemConstant.PDFTxtdir);
-
-			// if (file.exists()){
-			// System.out.println("------1.1-----");
-			// DelTempDir.delAllFile(file);
-			// }
-			// System.out.println("------end------2-");
-
 		} catch (IOException e) {
 			e.printStackTrace();
 			flag = false;
@@ -137,26 +117,14 @@ public class ToolCreateDocIndex {
 		String docDir = basePath + MacroConstant.DOCDIR;
 		File[] files = new File(docDir).listFiles();
 
+		// int LatestTime = docRecordService.getLatestDocument("doc");
+		int LatestTime = 0;
+
+		String contents = "";
+		String filenameFull = "";
+		Document document; // 文档
+		IndexWriter writer = getIndexWriter();
 		try {
-			System.out.println("*********1**********" + files.length);
-			System.out.println("*********2**********" + files[0].lastModified());
-			System.out.println("*********3**********" + files[0].lastModified() / 1000);
-			System.out.println("*********4**********" + files[0].getName());
-			System.out.println("*********4**********" + files[1].getName());
-			System.out.println("*********4**********" + files[2].getName());
-			System.out.println("*********5**********" + files[0].getCanonicalPath());
-			System.out.println("*********6**********" + files[0].getAbsolutePath());
-
-			System.out.println("*********7**********" + "==================================");
-
-			// int LatestTime = docRecordService.getLatestDocument("doc");
-			int LatestTime = 0;
-			System.out.println("*********LatestTime**********" + LatestTime);
-
-			String contents = "";
-			String filenameFull = "";
-			Document document; // 文档
-			IndexWriter writer = getIndexWriter();
 			for (int i = 0; i < files.length; i++) {
 				if (files[i].lastModified() > LatestTime) {
 					filenameFull = files[i].getName();
@@ -201,4 +169,5 @@ public class ToolCreateDocIndex {
 		}
 		return writer;
 	}
+
 }

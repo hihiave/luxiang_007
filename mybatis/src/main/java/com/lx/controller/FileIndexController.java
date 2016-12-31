@@ -15,13 +15,6 @@ import com.lx.tools.ToolCreateDocIndex;
 @RequestMapping("/FileIndexController")
 public class FileIndexController {
 
-	// @Autowired
-	// private InitIndex initIndex;
-	// @Autowired
-	// private PDFIndex pdfIndex;
-	// @Autowired
-	// private WordIndex wordIndex;
-
 	@RequestMapping("/fileIndex")
 	public String fileIndexCreate(HttpServletRequest request) {
 
