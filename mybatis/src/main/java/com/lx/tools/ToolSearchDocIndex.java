@@ -117,9 +117,7 @@ public class ToolSearchDocIndex {
 
 	// 获取查询
 	private static Query getQuery(String queryStr, String searchType, String filetype) {
-
 		Query query = null;
-
 		switch (KSearchType.valueOf(searchType)) {
 		case accurate:
 			try {
@@ -160,4 +158,5 @@ public class ToolSearchDocIndex {
 		}
 		return null;
 	}
+
 }

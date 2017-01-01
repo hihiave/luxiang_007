@@ -9,7 +9,7 @@
 <link href="css/souba.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 	function check() {
-		var val = document.forms[0].fieldname.value;
+		var val = document.forms[0].queryStr.value.trim();
 		if (val == "") {
 			return false;
 		} else {
@@ -21,7 +21,7 @@
 <body>
 	<br><br><br><br><br><br>
 	<center>
-		<img src="img/3.png" width=180 height=84 usemap="#mp" id=lg>
+		<img src="images/3.png" width=180 height=84 usemap="#mp" id=lg>
 		<br> <br> <br> <br>
 		<form action="searchIndex.do">
 			<table>
@@ -33,7 +33,7 @@
 							<option value="fuzzy">模糊
 							<option value="Prefix">前缀
 					</select>
-					<input type="text" name="fieldname" size="42" maxlength="100" />
+					<input type="text" name="queryStr" size="42" maxlength="100" />
 					<input type="button" value="搜索" onclick="check()" />
 					</td>
 				</tr>
