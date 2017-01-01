@@ -89,10 +89,12 @@
 				style="width: 78px;height:33px; margin-left: 5px; background: #808080;padding:0; color: #FFF"
 				id="file_search_sub" onclick="send_search_info()">搜&nbsp;索
 			</button>
-			<button class="button button-primary button-pill button-small"
+			<!-- <button class="button button-primary button-pill button-small"
 				style="width: 78px;height:33px; margin-left: 5px; padding:0; color: #fff"
 				id="file_search_sub" onclick="send_search_info()">高级搜索
-			</button>
+			</button> -->
+			<input type="button"><a href="/mybatis/search.jsp" target="black">高级搜索</a>
+			
 		</div>
 
 		<div style="float: right; margin-right: 10px;">

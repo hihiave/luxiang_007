@@ -146,7 +146,7 @@ function send_search_info() {
 	var _key = $.trim($("#key_select").val());
 	var _search_input = $.trim($("#file_search_input").val());
 
-	var src = "/mybatis/FileInfoController/publicfile.do"
+	var src = "/FileInfoController/publicfile.do"
 
 	var dataPost = {
 		"fileCategory" : _category,

@@ -21,7 +21,7 @@ public class SearchController {
 
 	// 文档搜索
 	@RequestMapping("/searchIndex")
-	public ModelAndView searchIndex(HttpServletRequest request) throws Exception {
+	public ModelAndView searchIndex(HttpServletRequest request) {
 
 		String queryStr = request.getParameter("queryStr");
 		String searchType = request.getParameter("searchType");

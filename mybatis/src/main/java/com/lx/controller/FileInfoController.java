@@ -50,9 +50,10 @@ public class FileInfoController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		FileInfo fileInfo = new FileInfo();
 		fileInfo.setFileCategory(filecate);
-		if(keyword!=null||filedesc!=null){
+		if (keyword != null || filedesc != null) {
 			fileInfo.setFileDesc(filedesc);
-			fileInfo.setFileKeywords(keyword);}
+			fileInfo.setFileKeywords(keyword);
+		}
 		boolean result = fileInfoService.updateFileByFileId(fileid, fileInfo);
 		map.put("flag", result);
 		return map;
@@ -92,7 +93,7 @@ public class FileInfoController {
 		return map;
 	}
 
-	// ********************普通用户操作权限***************** ***
+	// ********************普通用户操作权限********************
 	/**
 	 * 公有文件,包括查询
 	 */
@@ -108,13 +109,10 @@ public class FileInfoController {
 		}
 		Page page = new Page(pageNow);
 
-		KFilePropertyType filePropertyType = KFilePropertyType.valueOf(fileProperty);
-		List<FileInfo> fileInfos = fileInfoService.getFileByFilePropertyWithPass(fileCategory, filePropertyType, fileIn,
+		List<FileInfo> fileInfos = fileInfoService.getFileByFilePropertyWithPass(fileCategory, KFilePropertyType.valueOf(fileProperty), fileIn,
 				page);
-		System.out.println("文件============" + JSON.toJSONString(fileInfos));
-		System.out.println(fileInfos.size() + "大小");
-
-		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Map<String, Object> map = new HashMap<>();
 		map.put("totalCount", page.getTotalCount());
 		map.put("pageNow", pageNow);
 		map.put("pageCount", page.getTotalPageCount());

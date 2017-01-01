@@ -21,7 +21,7 @@
 <body>
 	<br><br><br><br><br><br>
 	<center>
-		<img src="images/3.png" width=180 height=84 usemap="#mp" id=lg>
+		<img src="img/3.png" width=180 height=84 usemap="#mp" id=lg>
 		<br> <br> <br> <br>
 		<form action="searchIndex.do">
 			<table>
