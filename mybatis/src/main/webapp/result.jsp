@@ -31,7 +31,7 @@
 		<TBODY>
 			<TR vAlign=center>
 				<TD style="PADDING-LEFT: 8px; WIDTH: 137px" vAlign=top noWrap
-					width="100%"><IMG height="46" alt="到搜索首页" src="images/3.png"
+					width="100%"><IMG height="46" alt="到搜索首页" src="img/3.png"
 					width=137 border=0></TD>
 				<TD>&nbsp;&nbsp;&nbsp;</TD>
 				<TD vAlign="top" align="left" width="100%">
