@@ -13,14 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
+import com.lx.macrofiles.MacroConstant;
 import com.lx.macrofiles.MacroEnum;
 import com.lx.macrofiles.MacroEnum.KCheckType;
+import com.lx.macrofiles.MacroEnum.KFileFormatType;
 import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.tools.Page;
 import com.lx.tools.ToolDate;
+import com.lx.tools.ToolFileTransfer;
 import com.lx.tools.ToolString;
 
 @Controller
@@ -244,100 +246,149 @@ public class FileInfoController {
 	@RequestMapping(value = "/add_file_info", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> uploadFile(HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<>();
-		if (request.getParameter("filename1") != null) {
+		String basePath = request.getSession().getServletContext().getRealPath("");
+		String pdfDir = basePath + MacroConstant.PDFDIR;
+		String docDir = basePath + MacroConstant.DOCDIR;
 
+		Map<String, Object> map = new HashMap<>();
+		String filename1 = request.getParameter("filename1");
+		if (filename1 != null) {
 			FileInfo fileInfo1 = new FileInfo();
-			fileInfo1.setFileName(request.getParameter("filename1").trim());
+			fileInfo1.setFileName(filename1.trim());
 			fileInfo1.setFileAuthor(request.getParameter("author1").trim());
 			fileInfo1.setFileKeywords(request.getParameter("word1").trim());
 			fileInfo1.setFileDesc(request.getParameter("area1").trim());
 			fileInfo1.setFileDownloadCount(0);
 
-			String filePath = request.getParameter("filepath1");
-			fileInfo1.setFileUploadTime(Integer.valueOf(ToolString.getFilename(ToolString.getFilenameFull(filePath))));
-
-			String filevisible1 = request.getParameter("pro1");
-			String filecate1 = request.getParameter("cate1");
-			String filechildcate1 = request.getParameter("child_cate1");
-
-			fileInfo1.setFileIsVisible(filevisible1);
-			if (filechildcate1 != "") {
+			// 设置类别
+			fileInfo1.setFileCategory(request.getParameter("cate1").trim());
+			String filechildcate1 = request.getParameter("child_cate1").trim();
+			if (!filechildcate1.equals("")) {
 				fileInfo1.setFileCategory(filechildcate1);
-			} else {
-				fileInfo1.setFileCategory(filecate1);
-			}
-			if (filevisible1.equals("私有")) {
-				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.privateFile.getValue());
-			} else if (filevisible1.equals("公有")) {
-				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.publicFile.getValue());
 			}
 
-			fileInfo1.setFileUrl(filePath);
+			// 设置文件可见类型
+			String filevisible1 = request.getParameter("pro1");
+			fileInfo1.setFileIsVisible(filevisible1);
+			if (filevisible1.equals("私有"))
+				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.privateFile.getValue());
+			if (filevisible1.equals("公有"))
+				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.publicFile.getValue());
+
+			// 设置文件地址
+			String filePath = request.getParameter("filepath1"); // C:\\temp\\1479709800.doc
+			String filenameFull = ToolString.getFilenameFull(filePath);
+			fileInfo1.setFileUploadTime(Integer.valueOf(ToolString.getFilename(filenameFull)));
+
+			switch (KFileFormatType.valueOf(ToolString.getFilenameExtension(filenameFull))) {
+			case doc:
+				if (ToolFileTransfer.transfer(filePath, docDir)) {
+					fileInfo1.setFileUrl(ToolFileTransfer.getToFilePath());
+				}
+				break;
+			case pdf:
+				if (ToolFileTransfer.transfer(filePath, pdfDir)) {
+					fileInfo1.setFileUrl(ToolFileTransfer.getToFilePath());
+				}
+				break;
+			default:
+				break;
+			}
 
 			map.put("message1", "hahaha");
 			map.put("result1", fileInfoService.addFileInfo(fileInfo1));
 		}
-		if (request.getParameter("filename2") != null) {
-			String filename2 = request.getParameter("filename2");
-			String fileauthor2 = request.getParameter("author2");
-			String filekeys2 = request.getParameter("word2");
-			String filecate2 = request.getParameter("cate2");
-			String filedesc2 = request.getParameter("area2");
-			String filechildcate2 = request.getParameter("child_cate2");
-			String filevisible2 = request.getParameter("pro2");
+		String filename2 = request.getParameter("filename2");
+		if (filename2 != null) {
 			FileInfo fileInfo2 = new FileInfo();
-			fileInfo2.setFileName(filename2);
-			fileInfo2.setFileAuthor(fileauthor2);
-			if (filechildcate2 != "") {
-				fileInfo2.setFileCategory(filechildcate2);
-			} else {
-				fileInfo2.setFileCategory(filecate2);
-			}
-			if (filevisible2.equals("私有")) {
-				fileInfo2.setFileCheck(1);
-			} else if (filevisible2.equals("公有")) {
-				fileInfo2.setFileCheck(0);
-			}
+			fileInfo2.setFileName(filename2.trim());
+			fileInfo2.setFileAuthor(request.getParameter("author2").trim());
+			fileInfo2.setFileKeywords(request.getParameter("word2").trim());
+			fileInfo2.setFileDesc(request.getParameter("area2").trim());
 			fileInfo2.setFileDownloadCount(0);
-			fileInfo2.setFileUploadTime(ToolDate.getCurrentTimestamp());
-			fileInfo2.setFileKeywords(filekeys2);
-			fileInfo2.setFileIsVisible(filevisible2);
-			fileInfo2.setFileUrl(request.getParameter("filepath2"));
 
-			fileInfo2.setFileDesc(filedesc2);
+			// 设置类别
+			fileInfo2.setFileCategory(request.getParameter("cate2").trim());
+			String filechildcate2 = request.getParameter("child_cate2").trim();
+			if (!filechildcate2.equals("")) {
+				fileInfo2.setFileCategory(filechildcate2);
+			}
+
+			// 设置文件可见类型
+			String filevisible2 = request.getParameter("pro2");
+			fileInfo2.setFileIsVisible(filevisible2);
+			if (filevisible2.equals("私有"))
+				fileInfo2.setFileCheck(MacroEnum.KFileVisibleType.privateFile.getValue());
+			if (filevisible2.equals("公有"))
+				fileInfo2.setFileCheck(MacroEnum.KFileVisibleType.publicFile.getValue());
+
+			// 设置文件地址
+			String filePath = request.getParameter("filepath2"); // C:\\temp\\1479709800.doc
+			String filenameFull = ToolString.getFilenameFull(filePath);
+			fileInfo2.setFileUploadTime(Integer.valueOf(ToolString.getFilename(filenameFull)));
+
+			switch (KFileFormatType.valueOf(ToolString.getFilenameExtension(filenameFull))) {
+			case doc:
+				if (ToolFileTransfer.transfer(filePath, docDir)) {
+					fileInfo2.setFileUrl(ToolFileTransfer.getToFilePath());
+				}
+				break;
+			case pdf:
+				if (ToolFileTransfer.transfer(filePath, pdfDir)) {
+					fileInfo2.setFileUrl(ToolFileTransfer.getToFilePath());
+				}
+				break;
+			default:
+				break;
+			}
 
 			map.put("message2", "hahaha");
 			map.put("result2", fileInfoService.addFileInfo(fileInfo2));
 		}
-		if (request.getParameter("filename3") != null) {
-			String filename3 = request.getParameter("filename3");
-			String fileauthor3 = request.getParameter("author3");
-			String filekeys3 = request.getParameter("word3");
-			String filecate3 = request.getParameter("cate3");
-			String filedesc3 = request.getParameter("area3");
-			String filechildcate3 = request.getParameter("child_cate3");
-			String filevisible3 = request.getParameter("pro3");
-			FileInfo fileInfo3 = new FileInfo();
-			fileInfo3.setFileName(filename3);
-			fileInfo3.setFileAuthor(fileauthor3);
-			if (filechildcate3 != "") {
-				fileInfo3.setFileCategory(filechildcate3);
-			} else {
-				fileInfo3.setFileCategory(filecate3);
-			}
-			if (filevisible3.equals("私有")) {
-				fileInfo3.setFileCheck(1);
-			} else if (filevisible3.equals("公有")) {
-				fileInfo3.setFileCheck(0);
-			}
-			fileInfo3.setFileDownloadCount(0);
-			fileInfo3.setFileUploadTime(ToolDate.getCurrentTimestamp());
-			fileInfo3.setFileKeywords(filekeys3);
-			fileInfo3.setFileIsVisible(filevisible3);
-			fileInfo3.setFileUrl(request.getParameter("filepath3"));
 
-			fileInfo3.setFileDesc(filedesc3);
+		String filename3 = request.getParameter("filename3");
+		if (filename3 != null) {
+			FileInfo fileInfo3 = new FileInfo();
+			fileInfo3.setFileName(filename3.trim());
+			fileInfo3.setFileAuthor(request.getParameter("author3").trim());
+			fileInfo3.setFileKeywords(request.getParameter("word3").trim());
+			fileInfo3.setFileDesc(request.getParameter("area3").trim());
+			fileInfo3.setFileDownloadCount(0);
+
+			// 设置类别
+			fileInfo3.setFileCategory(request.getParameter("cate3").trim());
+			String filechildcate3 = request.getParameter("child_cate3").trim();
+			if (!filechildcate3.equals("")) {
+				fileInfo3.setFileCategory(filechildcate3);
+			}
+
+			// 设置文件可见类型
+			String filevisible3 = request.getParameter("pro3");
+			fileInfo3.setFileIsVisible(filevisible3);
+			if (filevisible3.equals("私有"))
+				fileInfo3.setFileCheck(MacroEnum.KFileVisibleType.privateFile.getValue());
+			if (filevisible3.equals("公有"))
+				fileInfo3.setFileCheck(MacroEnum.KFileVisibleType.publicFile.getValue());
+
+			// 设置文件地址
+			String filePath = request.getParameter("filepath3"); // C:\\temp\\1479709800.doc
+			String filenameFull = ToolString.getFilenameFull(filePath);
+			fileInfo3.setFileUploadTime(Integer.valueOf(ToolString.getFilename(filenameFull)));
+
+			switch (KFileFormatType.valueOf(ToolString.getFilenameExtension(filenameFull))) {
+			case doc:
+				if (ToolFileTransfer.transfer(filePath, docDir)) {
+					fileInfo3.setFileUrl(ToolFileTransfer.getToFilePath());
+				}
+				break;
+			case pdf:
+				if (ToolFileTransfer.transfer(filePath, pdfDir)) {
+					fileInfo3.setFileUrl(ToolFileTransfer.getToFilePath());
+				}
+				break;
+			default:
+				break;
+			}
 
 			map.put("message3", "hahaha");
 			map.put("result3", fileInfoService.addFileInfo(fileInfo3));

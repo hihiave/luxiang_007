@@ -186,7 +186,6 @@ function uploadFile() {
 		 */
 	else if ((aim2.val() != "") && (proto2.val() != "私有")
 			&& ((area2.val() == "") || (word2.val() == ""))) {
-
 		if (proto2.val() == "") {
 			alert("请完善文件2属性");
 			return false;
@@ -202,7 +201,6 @@ function uploadFile() {
 			alert("请完善文件2信息");
 			return false;
 		}
-
 	} else if ((aim1.val() != "") && (proto1.val() != "私有")
 			&& ((area1.val() == "") || (word1.val() == ""))) {
 		if (proto1.val() == "") {
@@ -220,7 +218,6 @@ function uploadFile() {
 			alert("请完善文件1信息");
 			return false;
 		}
-
 	} else if ((aim3.val() != "") && (proto3.val() != "私有")
 			&& ((area3.val() == "") || (word3.val() == ""))) {
 		if (proto3.val() == "") {
@@ -302,7 +299,7 @@ function upload_success_cb(data) {
 	if (data["message1"] != null) {
 		// console.log(data["result1"]);
 		if (data["result1"] == true) {
-			message1 = "文件1222222上传成功!";
+			message1 = "文件1上传成功!";
 			$("#file-test1").val("");
 			$("#file-result1").val("");
 			$("#aim1").val("");

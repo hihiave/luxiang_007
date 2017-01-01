@@ -62,7 +62,6 @@ text-decoration:none;
 
 <jsp:include page="public-part.jsp" flush="true"/>
 <div class="container">
-
 		<div class="col-xs-2 left_nav">
 		<ul class="nav nav-menu">
 					<li><a href="#user-center" data-toggle="collapse">个人中心<span class="glyphicon glyphicon-menu-down" ></span></a></li>

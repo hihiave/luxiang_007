@@ -30,7 +30,7 @@ public class FileUploadController {
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> fileUpload(HttpServletRequest request, HttpServletResponse response) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
 
@@ -67,7 +67,6 @@ public class FileUploadController {
 				}
 				// 注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的,如：c:\a\b\1.txt;
 				// 而有些只是单纯的文件名，如：1.txt，下面做兼容
-				
 				String filenameFull = ToolString.getFilenameFull(filePath);
 				String filenameExtension = ToolString.getFilenameExtension(filenameFull);
 
@@ -91,7 +90,6 @@ public class FileUploadController {
 				map.put("dirPath", filePath);
 				message = "添加文件成功，请完善信息上传！";
 			}
-
 		} catch (FileUploadBase.FileSizeLimitExceededException e) {
 			e.printStackTrace();
 			message = "单个文件超出最大值";

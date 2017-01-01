@@ -56,7 +56,7 @@ public class ToolFileTransfer {
 	}
 
 	/**
-	 * 返回目的文件路径,例:D:/SWFTools/1479709800.doc
+	 * 返回目的文件路径,例:D:\\temp\\1479709800.doc
 	 */
 	public static String getToFilePath() {
 		return toFilePath;
