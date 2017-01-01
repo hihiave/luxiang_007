@@ -118,11 +118,6 @@ public class FileInfoServiceImpl implements FileInfoService {
 				fileInfo.setFileCategory(fileCategory);
 			}
 			
-			// if (fileCategory != null && !fileCategory.equals("类别")) {
-			// fileInfo.setFileCategory(fileCategory);
-			// }
-
-			System.out.println("=========fileInfo=====" + JSON.toJSONString(fileInfo));
 			int totalCount = fileInfoMapper.getFileInfoCount(KCheckType.pass.getValue(), fileInfo);
 			page.setTotalCount(totalCount);
 			page.init();

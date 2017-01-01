@@ -19,4 +19,7 @@ public interface MacroConstant {
 	// **********目录常量**********
 	public static final String level0_category = "1482422400"; // 0级类别,用来索引1级类别
 
+	// **********ID常量**********
+	public static final int ADMIN = 1;
+	
 }

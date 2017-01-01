@@ -21,7 +21,6 @@ import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.tools.Page;
-import com.lx.tools.ToolDate;
 import com.lx.tools.ToolFileTransfer;
 import com.lx.tools.ToolString;
 
@@ -45,9 +44,7 @@ public class FileInfoController {
 		return "showFileInfo";
 	}
 
-	/**
-	 * 修改文件描述
-	 */
+	// 修改文件描述
 	@RequestMapping(value = "/alter_file_msg", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> alter_file_msg(Integer fileid, String keyword, String filedesc, String filecate) {
@@ -63,9 +60,7 @@ public class FileInfoController {
 		return map;
 	}
 
-	/**
-	 * 获取文件描述
-	 */
+	// 获取文件描述
 	@RequestMapping(value = "/get_file_msg", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> get_file_msg(Integer fileid) {
@@ -80,6 +75,7 @@ public class FileInfoController {
 		return map;
 	}
 
+	// 获取文件提示
 	@RequestMapping(value = "/get_file_points", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> get_file_points(KFilePropertyType filePropertyType, String value) {
@@ -98,9 +94,7 @@ public class FileInfoController {
 	}
 
 	// ********************普通用户操作权限********************
-	/**
-	 * 公有文件,包括查询
-	 */
+	// 公有文件,包括查询
 	@RequestMapping(value = "/publicfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> publicfile(String fileCategory, String fileProperty, String fileIn, Integer page_Now) {
@@ -124,18 +118,14 @@ public class FileInfoController {
 		return map;
 	}
 
-	/**
-	 * 我的上传
-	 */
+	// 我的上传
 	@RequestMapping(value = "/myuploadfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> myuploadfile(Integer page_Now, HttpSession httpSession) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 		String username = (String) httpSession.getAttribute("username");
-		System.out.println(username + "hahahaha");
 
 		Page page = new Page(page_Now);
-
 		List<FileInfo> pri_file = fileInfoService.selectMyFileInfo(username, page, KCheckType.pass);
 		int pageCount = page.getTotalPageCount();
 		int totalCount = page.getTotalCount();
@@ -146,17 +136,13 @@ public class FileInfoController {
 		return map;
 	}
 
-	/**
-	 * 我的下载
-	 */
+	// 我的下载
 	public String myDownloadFile() {
 
 		return null;
 	}
 
-	/**
-	 * 我的待审
-	 */
+	// 我的待审
 	@RequestMapping(value = "/waitforcheckfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> waitforcheckfile(Integer page_Now, HttpSession httpSession,
@@ -178,9 +164,7 @@ public class FileInfoController {
 		return map;
 	}
 
-	/**
-	 * 我的草稿
-	 */
+	// 我的草稿
 	@RequestMapping(value = "/draftfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> draftfile(Integer page_Now, HttpSession httpSession,
@@ -202,9 +186,7 @@ public class FileInfoController {
 		return map;
 	}
 
-	/**
-	 * 用户删除文件,仅仅放入垃圾箱
-	 */
+	// 用户删除文件,仅仅放入垃圾箱
 	@RequestMapping(value = "/delete_file_to_draft", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> pushWithRecycleBin(Integer[] delete_array) {
@@ -214,9 +196,7 @@ public class FileInfoController {
 		return map;
 	}
 
-	/**
-	 * 用户还原垃圾箱的文件
-	 */
+	// 用户还原垃圾箱的文件
 	@RequestMapping(value = "/recovery_file", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> popWithRecycleBin(Integer[] recovery_array) {
@@ -226,9 +206,7 @@ public class FileInfoController {
 		return map;
 	}
 
-	/**
-	 * 用户删除文件,从垃圾箱里再次删除
-	 */
+	// 用户删除文件,从垃圾箱里再次删除
 	@RequestMapping(value = "/delete_file", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> delete_file(Integer[] delete_array) {
@@ -240,9 +218,7 @@ public class FileInfoController {
 		return map;
 	}
 
-	/**
-	 * 上传文件
-	 */
+	// 上传文件
 	@RequestMapping(value = "/add_file_info", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> uploadFile(HttpServletRequest request) {
@@ -397,9 +373,7 @@ public class FileInfoController {
 		return map;
 	}
 
-	/**
-	 * 下载文件
-	 */
+	// 下载文件
 	@RequestMapping(value = "/download_count_add", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> down_check_file(Integer fileid) {
@@ -415,9 +389,7 @@ public class FileInfoController {
 	}
 
 	// ********************管理员操作权限********************
-	/**
-	 * 资源审核
-	 */
+	// 资源审核
 	@RequestMapping(value = "/get_all_checkfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> get_all_checkfile(Integer page_Now) {
@@ -438,9 +410,7 @@ public class FileInfoController {
 		return map;
 	}
 
-	/**
-	 * 审核通过
-	 */
+	// 审核通过
 	@RequestMapping(value = "/pass_file", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> pass_file(Integer[] pass_array) {
@@ -451,9 +421,7 @@ public class FileInfoController {
 		return map;
 	}
 
-	/**
-	 * 审核不通过
-	 */
+	// 审核不通过
 	@RequestMapping(value = "/notpass_file", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> notpass_file(Integer[] notpass_array) {

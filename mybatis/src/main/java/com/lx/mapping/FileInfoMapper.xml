@@ -70,6 +70,7 @@
   		<foreach collection="fileChecks" item="fileCheck" index="fileCheck" open="(" close=")" separator=",">
   			#{fileCheck}
   		</foreach>
+  		ORDER BY file_upload_time DESC
   		limit #{page.startPos}, #{page.pageSize}
   </select>
   <select id="getFileInfoCount" resultType="java.lang.Integer">
