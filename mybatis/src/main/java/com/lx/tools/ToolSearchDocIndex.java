@@ -36,7 +36,6 @@ import com.lx.model.DocumentEntity;
 import net.paoding.analysis.analyzer.PaodingAnalyzer;
 
 public class ToolSearchDocIndex {
-
 	// doc中的属性
 	private static final String type = "type"; // <id:1><type:pdf>
 	private static final String fileName = "fileName";// <fileName:一种N层体系结构下的Web挖掘应用>

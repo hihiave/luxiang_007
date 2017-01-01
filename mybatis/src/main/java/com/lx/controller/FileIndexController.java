@@ -23,7 +23,7 @@ public class FileIndexController {
 		if (StringUtils.isEmpty(flag)) {
 			return "fileindex";
 		}
-		System.out.println("================flag=============" + flag);
+		System.out.println("==========flag========" + flag);
 		if (StringUtils.equals(flag, "init")) {
 
 			ToolCreateDocIndex.init();

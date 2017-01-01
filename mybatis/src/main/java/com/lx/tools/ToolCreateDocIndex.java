@@ -48,7 +48,6 @@ public class ToolCreateDocIndex {
 		// Document document = new Document();
 		// writer.addDocument(document);
 		// writer.close();
-
 		docRecordService.deleteAllDoc();
 	}
 

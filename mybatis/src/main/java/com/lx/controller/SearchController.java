@@ -1,6 +1,5 @@
 package com.lx.controller;
 
-import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;

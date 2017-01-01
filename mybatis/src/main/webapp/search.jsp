@@ -75,7 +75,6 @@
 				</tr>
 			</table>
 		</form>
-
 		<p id="km"></p>
 		<p style="height: 60px">
 		<table cellpadding=0 cellspacing=0 id=lk>

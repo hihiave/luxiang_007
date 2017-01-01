@@ -114,21 +114,7 @@
 
 	<br>
 	<br>
-	<%-- 	<DIV
-		style="CLEAR: both; WIDTH: 100%; HEIGHT: 60px; BACKGROUND-COLOR: #eff2fa">
-		<TABLE style="MARGIN-LEFT: 18px; HEIGHT: 60px" cellSpacing=0
-			cellPadding=0>
-			<form action="searchIndex.do">
-				<TBODY>
-					<TR vAlign=center>
-						<TD noWrap><input type="text" name="fieldname" size="42"
-							value="${queryStr}" maxlength="100" /> <input type="submit" value="搜索haha" />
-						<TD noWrap></TD>
-					</TR>
-				</TBODY>
-			</form>
-		</TABLE>
-	</DIV> --%>
+
 	<DIV id=ft>
 		<span>Copyright © &copy; 1956 - 2016&nbsp; All Rights Reserved
 			电子科技大学</span>

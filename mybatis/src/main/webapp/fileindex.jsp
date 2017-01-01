@@ -21,7 +21,6 @@
 -->
 
 </head>
-
 <body>
 	<a href="FileIndexController/fileIndex.do?flag=init">索引初始化</a>&nbsp;|&nbsp;
 	<a href="FileIndexController/fileIndex.do?flag=pdf">PDF文档索引</a>&nbsp;|&nbsp;
