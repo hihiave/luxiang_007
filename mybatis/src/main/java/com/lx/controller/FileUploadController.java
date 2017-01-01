@@ -2,13 +2,11 @@ package com.lx.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lx.macrofiles.MacroConstant;
 import com.lx.tools.ToolDate;
+import com.lx.tools.ToolString;
 
 @Controller
 @RequestMapping("/FileUploadController")
@@ -35,32 +35,15 @@ public class FileUploadController {
 
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> fileUpload(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public Map<String, Object> fileUpload(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		// System.out.println(request.getParameter("file"));
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
 
-		String dirPath = "C:/Users/qqq"; // 上传的地址
-
-		// String path = request.getContextPath();
-		// String basePath = request.getScheme() + "://" +
-		// request.getServerName() + ":" + request.getServerPort()
-		// + path + "/";
-		String basePath = request.getSession().getServletContext().getRealPath("");
-
-		System.out.println(" ===================1====" + basePath);
-
+		String dirPath = MacroConstant.TEMP; // 上传的地址
 		File file = new File(dirPath);
 		if (!file.exists()) {
 			file.mkdirs();
-		}
-
-		String tempPath = "C:/temp";
-		file = new File(tempPath);
-		if (!file.exists()) {
-			file.mkdirs(); // 创建临时目录
 		}
 
 		String message = ""; // 消息提示
@@ -74,100 +57,59 @@ public class FileUploadController {
 				map.put("message", message);
 				return map;
 			}
-			upload.setFileSizeMax(1024 * 1024 * 10);// 单个文件的最大大小 这里是10M
-			upload.setSizeMax(1024 * 1024 * 30);// 文件总大小 这里设为30M
+			upload.setFileSizeMax(1024 * 1024 * 20);// 单个文件的最大大小 这里是20M
+			upload.setSizeMax(1024 * 1024 * 50);// 文件总大小 这里设为50M
 
 			// 用ServletFileUpload解析上传数据,返回一个List<FileItem>集合
 			// 每一个FileItem对应一个Form表单的输入项
 			List<FileItem> fileItems = upload.parseRequest(request);
-
-			System.out.println("fileItems ==================== " + fileItems.size());
-
+			// 如果fileitem中封装的是普通输入项的数据
+			// if (fileItems.get(0).isFormField()) {}
 			for (FileItem fileItem : fileItems) {
-				// 如果fileitem中封装的是普通输入项的数据
-				if (fileItem.isFormField()) {
-					System.out.println("");
-
-					String name = fileItem.getFieldName();
-					String value = fileItem.getString("UTF-8");
-					System.out.println(name + "=" + value);
+				// fileitem中封装的是上传文件
+				String filePath = fileItem.getName();
+				if (filePath == null || filePath.trim().equals("")) {
+					continue;
 				}
-				// 如果fileitem中封装的是上传文件
-				else {
-					String filePath = fileItem.getName();
+				// 注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的,如：c:\a\b\1.txt;
+				// 而有些只是单纯的文件名，如：1.txt，下面做兼容
+				
+				String filenameFull = ToolString.getFilenameFull(filePath);
+				String filenameExtension = ToolString.getFilenameExtension(filenameFull);
 
-					System.out.println("String filePath =========" + filePath);
-					if (filePath == null || filePath.trim().equals("")) {
-						continue;
-					}
-					// 注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的
-					// 如：
-					// c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt处理获取到的上传文件的文件名的路径部分，只保留文件名部分
+				filePath = dirPath + ToolDate.getCurrentTimestamp() + "." + filenameExtension;
 
-					String fileNameFull = filePath.substring(filePath.lastIndexOf("/") + 1);
-
-					System.out.println("=======fileNameFull=====" + fileNameFull);
-
-					String fileNameExtension = fileNameFull.substring(fileNameFull.lastIndexOf(".") + 1);
-					System.out.println("上传文件的扩展名是====" + fileNameExtension);
-					if (fileNameExtension.equals("docx")) {
-						fileNameExtension = "doc";
-						System.out.println("上传文件的扩展名是" + fileNameExtension);
-					}
-					if (fileNameExtension.equals("xlsx")) {
-						fileNameExtension = "xls";
-						System.out.println("上传文件的扩展名是" + fileNameExtension);
-					}
-					if (fileNameExtension.equals("pptx")) {
-						fileNameExtension = "ppt";
-						System.out.println("上传文件的扩展名是" + fileNameExtension);
-					}
-
-					filePath = dirPath + "/" + ToolDate.getCurrentTimestamp() + "." + fileNameExtension;
-					System.out.println("=======文件存储路径=====" + filePath);
-					// 获取item中上传文件的输入流
-					InputStream in = fileItem.getInputStream();
-					// 创建一个文件输出流
-					FileOutputStream out = new FileOutputStream(filePath);
-					// 创建一个缓存区
-					byte buffer[] = new byte[1024];
-					// 建立一个标志判断输入流中的数据是否已经读完
-					int len = 0;
-					// 循环将输入流读入到缓冲区当中，(len=in.read(buffer))>0就表示in里面还有数据
-					while ((len = in.read(buffer)) > 0) {
-						out.write(buffer, 0, len);
-					}
-					in.close();
-					out.close();
-					fileItem.delete();
-					map.put("dirPath", filePath);
-					message = "添加文件成功，请完善信息上传！";
+				// 获取item中上传文件的输入流
+				InputStream in = fileItem.getInputStream();
+				// 创建一个文件输出流
+				FileOutputStream out = new FileOutputStream(filePath);
+				// 创建一个缓存区
+				byte buffer[] = new byte[1024];
+				// 建立一个标志判断输入流中的数据是否已经读完
+				int len = 0;
+				// 循环将输入流读入到缓冲区当中，(len=in.read(buffer))>0就表示in里面还有数据
+				while ((len = in.read(buffer)) > 0) {
+					out.write(buffer, 0, len);
 				}
+				in.close();
+				out.close();
+				fileItem.delete();
+				map.put("dirPath", filePath);
+				message = "添加文件成功，请完善信息上传！";
 			}
+
 		} catch (FileUploadBase.FileSizeLimitExceededException e) {
 			e.printStackTrace();
-			// request.setAttribute("message", "单个文件超出最大值");
-			// request.getRequestDispatcher("/message.jsp").forward(request,
-			// response);
-			map.put("message", "单个文件超出最大值");
-			return map;
+			message = "单个文件超出最大值";
 		} catch (FileUploadBase.SizeLimitExceededException e) {
 			e.printStackTrace();
-			// request.setAttribute("message", "上传文件的总大小超出最大值");
-			// request.getRequestDispatcher("/message.jsp").forward(request,
-			// response);
-			map.put("message", "上传文件的总大小超出最大值");
-			return map;
+			message = "上传文件的总大小超出最大值";
 		} catch (Exception e) {
-			message = "文件上传失败";
 			e.printStackTrace();
+			message = "文件上传失败";
 		}
-		// request.setAttribute("message", message);
-		// request.getRequestDispatcher("/message.jsp").forward(request,
-		// response);
 		map.put("message", message);
 		return map;
-		// System.out.println;
 	}
 
 }

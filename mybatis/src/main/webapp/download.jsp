@@ -7,7 +7,7 @@
 <body>
 
 	<form name="form2" method="post"
-		action="/mybatis/FileDownloadController/fileDownload.do">
+		action="/FileDownloadController/fileDownload.do">
 		<input type="text" name="filename" id="filename"> <input
-			type="submit" name="submit" value="下载">
+			type="submit" name="submit" value="下载aa">
 	</form>

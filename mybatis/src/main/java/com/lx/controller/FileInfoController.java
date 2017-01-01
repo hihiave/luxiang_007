@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.lx.macrofiles.MacroEnum;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.tools.Page;
 import com.lx.tools.ToolDate;
+import com.lx.tools.ToolString;
 
 @Controller
 @RequestMapping("/FileInfoController")
@@ -109,9 +111,9 @@ public class FileInfoController {
 		}
 		Page page = new Page(pageNow);
 
-		List<FileInfo> fileInfos = fileInfoService.getFileByFilePropertyWithPass(fileCategory, KFilePropertyType.valueOf(fileProperty), fileIn,
-				page);
-		
+		List<FileInfo> fileInfos = fileInfoService.getFileByFilePropertyWithPass(fileCategory,
+				KFilePropertyType.valueOf(fileProperty), fileIn, page);
+
 		Map<String, Object> map = new HashMap<>();
 		map.put("totalCount", page.getTotalCount());
 		map.put("pageNow", pageNow);
@@ -242,46 +244,38 @@ public class FileInfoController {
 	@RequestMapping(value = "/add_file_info", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> uploadFile(HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		// System.out.println(request.getParameter("filename1"));
-		// System.out.println(request.getParameter("filename2"));
-		// System.out.println(request.getParameter("filename3"));
-		boolean result1;
-		boolean result2;
-		boolean result3;
+		Map<String, Object> map = new HashMap<>();
 		if (request.getParameter("filename1") != null) {
-			String filename1 = request.getParameter("filename1");
-			String fileauthor1 = request.getParameter("author1");
-			String filekeys1 = request.getParameter("word1");
-			String filecate1 = request.getParameter("cate1");
-			String filedesc1 = request.getParameter("area1");
-			String filechildcate1 = request.getParameter("child_cate1");
-			String filevisible1 = request.getParameter("pro1");
+
 			FileInfo fileInfo1 = new FileInfo();
-			fileInfo1.setFileName(filename1);
-			fileInfo1.setFileAuthor(fileauthor1);
-			fileInfo1.setFileDesc(filedesc1);
+			fileInfo1.setFileName(request.getParameter("filename1").trim());
+			fileInfo1.setFileAuthor(request.getParameter("author1").trim());
+			fileInfo1.setFileKeywords(request.getParameter("word1").trim());
+			fileInfo1.setFileDesc(request.getParameter("area1").trim());
+			fileInfo1.setFileDownloadCount(0);
+
+			String filePath = request.getParameter("filepath1");
+			fileInfo1.setFileUploadTime(Integer.valueOf(ToolString.getFilename(ToolString.getFilenameFull(filePath))));
+			fileInfo1.setFileUrl(filePath);
+
+			String filevisible1 = request.getParameter("pro1");
+			String filecate1 = request.getParameter("cate1");
+			String filechildcate1 = request.getParameter("child_cate1");
+
+			fileInfo1.setFileIsVisible(filevisible1);
 			if (filechildcate1 != "") {
 				fileInfo1.setFileCategory(filechildcate1);
 			} else {
 				fileInfo1.setFileCategory(filecate1);
 			}
 			if (filevisible1.equals("私有")) {
-				fileInfo1.setFileCheck(1);
+				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.privateFile.getValue());
 			} else if (filevisible1.equals("公有")) {
-				fileInfo1.setFileCheck(0);
+				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.publicFile.getValue());
 			}
 
-			fileInfo1.setFileDownloadCount(0);
-			fileInfo1.setFileUploadTime(ToolDate.getCurrentTimestamp());
-			fileInfo1.setFileKeywords(filekeys1);
-			fileInfo1.setFileIsVisible(filevisible1);
-			fileInfo1.setFileUrl(request.getParameter("filepath1"));
-			fileInfo1.setFileStatus(1);
-
-			result1 = fileInfoService.addFileInfo(fileInfo1);
 			map.put("message1", "hahaha");
-			map.put("result1", result1);
+			map.put("result1", fileInfoService.addFileInfo(fileInfo1));
 		}
 		if (request.getParameter("filename2") != null) {
 			String filename2 = request.getParameter("filename2");
@@ -309,12 +303,11 @@ public class FileInfoController {
 			fileInfo2.setFileKeywords(filekeys2);
 			fileInfo2.setFileIsVisible(filevisible2);
 			fileInfo2.setFileUrl(request.getParameter("filepath2"));
-			fileInfo2.setFileStatus(1);
+
 			fileInfo2.setFileDesc(filedesc2);
 
-			result2 = fileInfoService.addFileInfo(fileInfo2);
 			map.put("message2", "hahaha");
-			map.put("result2", result2);
+			map.put("result2", fileInfoService.addFileInfo(fileInfo2));
 		}
 		if (request.getParameter("filename3") != null) {
 			String filename3 = request.getParameter("filename3");
@@ -342,12 +335,11 @@ public class FileInfoController {
 			fileInfo3.setFileKeywords(filekeys3);
 			fileInfo3.setFileIsVisible(filevisible3);
 			fileInfo3.setFileUrl(request.getParameter("filepath3"));
-			fileInfo3.setFileStatus(1);
+
 			fileInfo3.setFileDesc(filedesc3);
 
-			result3 = fileInfoService.addFileInfo(fileInfo3);
 			map.put("message3", "hahaha");
-			map.put("result3", result3);
+			map.put("result3", fileInfoService.addFileInfo(fileInfo3));
 		}
 
 		return map;

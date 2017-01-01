@@ -46,10 +46,20 @@ public class MacroEnum {
 	/**
 	 * 文件可见类型
 	 */
-	public interface KFileVisibleType {
-		// 文件公有还是私有
-		public static final String PUBLIC_FILE = "公有";
-		// public static final String PRIVATEFILE = "私有";
+	public enum KFileVisibleType {
+
+		publicFile(0), // 公有文件 :0 等待审核
+		privateFile(1); // 私有文件 :1 审核通过
+
+		KFileVisibleType(int value) {
+			this.value = value;
+		}
+
+		private int value;
+
+		public int getValue() {
+			return value;
+		}
 	}
 
 	/**

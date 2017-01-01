@@ -23,20 +23,12 @@ public class SearchController {
 	@RequestMapping("/searchIndex")
 	public ModelAndView searchIndex(HttpServletRequest request) {
 
-		String queryStr = request.getParameter("queryStr").trim();
-		String searchType = request.getParameter("searchType");
-		String filetype = request.getParameter("filetype");
-		int topNum = Integer.parseInt(request.getParameter("topNum"));
-		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
-		String page_Now = request.getParameter("page_Now");
-
-		System.out.println("======queryStr======2=====" + queryStr); // 检索内容
-		System.out.println("======searchType=========" + searchType); // 精确还是模糊
-		System.out.println("======filetype===========" + filetype); // pdf doc
-																	// all
-		System.out.println("======topNum=============" + topNum); // 检索前topNum条
-		System.out.println("======pageSize===========" + pageSize); // 页大小
-		System.out.println("======page_Now===========" + page_Now); // 当前页
+		String queryStr = request.getParameter("queryStr").trim(); // 检索内容
+		String searchType = request.getParameter("searchType"); // 精确还是模糊
+		String filetype = request.getParameter("filetype");// pdf doc all
+		int topNum = Integer.parseInt(request.getParameter("topNum"));// 检索前topNum条
+		int pageSize = Integer.parseInt(request.getParameter("pageSize"));// 页大小
+		String page_Now = request.getParameter("page_Now"); // 当前页
 
 		int pageNow = 1;
 		if (page_Now != null) {

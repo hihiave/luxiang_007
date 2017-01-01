@@ -44,7 +44,7 @@ public class TestFileInfo {
 		fileInfo.setFileKeywords("两学一做");
 		fileInfo.setFileCategory("科技成果");
 		fileInfo.setFileDesc("hahahahaha");
-		fileInfo.setFileIsVisible(KFileVisibleType.PUBLIC_FILE);
+		fileInfo.setFileIsVisible(KFileVisibleType.publicFile.toString());
 		fileInfo.setFileUrl("F/");
 		boolean d = fileInfoService.addFileInfo(fileInfo);
 		logger.info("=========上传======" + d);
