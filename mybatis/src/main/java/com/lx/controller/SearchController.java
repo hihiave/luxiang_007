@@ -23,7 +23,7 @@ public class SearchController {
 	@RequestMapping("/searchIndex")
 	public ModelAndView searchIndex(HttpServletRequest request) {
 
-		String queryStr = request.getParameter("queryStr");
+		String queryStr = request.getParameter("queryStr").trim();
 		String searchType = request.getParameter("searchType");
 		String filetype = request.getParameter("filetype");
 		int topNum = Integer.parseInt(request.getParameter("topNum"));
