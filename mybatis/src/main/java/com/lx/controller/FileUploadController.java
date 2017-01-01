@@ -26,13 +26,7 @@ import com.lx.tools.ToolString;
 @Controller
 @RequestMapping("/FileUploadController")
 public class FileUploadController {
-	// String filename = "西游记"
-	// String filenameExtension = "png"
-	// String filenameFull = filename + "." + filenameExtension;
-
-	// String dirPath = "c:/a/b/";
-	// String filePath = dirPath + filenameFull; filePath = fileUrl
-
+	
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> fileUpload(HttpServletRequest request, HttpServletResponse response) {

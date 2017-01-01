@@ -1,5 +1,6 @@
 package com.lx.tools;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,15 +15,13 @@ public class ToolFileTransfer {
 
 	/** 文件转移
 	 * @author luxiang
-	 * @param fromFilePath 起始文件路径,例:C:/Users/1479709800.doc
-	 * @param toDirPath 目的目录路径,例:D:/SWFTools
+	 * @param fromFilePath 起始文件路径,例:C:\\temp\\1479709800.doc
+	 * @param toDirPath 目的目录路径,例:D:\\temp\\ 注意:末尾一定要加\\
 	 * @return boolean,成功true;失败false
 	 */
 	public static boolean transfer(String fromFilePath, String toDirPath) {
-		boolean flag = true;
-		// new File("fromFilePath").getName();
-		toFilePath = toDirPath + "/" + fromFilePath.substring(fromFilePath.lastIndexOf("/") + 1);
-
+		boolean flag = false;
+		toFilePath = toDirPath + ToolString.getFilenameFull(fromFilePath);
 		InputStream in = null;
 		FileOutputStream out = null;
 		try {
@@ -34,7 +33,6 @@ public class ToolFileTransfer {
 				out.write(buffer, 0, len);
 			}
 		} catch (Exception e) {
-			flag = false;
 			e.printStackTrace();
 		} finally {
 			try {
@@ -45,9 +43,14 @@ public class ToolFileTransfer {
 					out.close();
 				}
 			} catch (IOException e) {
-				flag = false;
 				e.printStackTrace();
 			}
+		}
+
+		File file = new File(toFilePath);
+		if (file.exists()) {
+			file.setLastModified(Integer.valueOf(ToolString.getFilename(file.getName())));
+			flag = true;
 		}
 		return flag;
 	}
@@ -58,5 +61,5 @@ public class ToolFileTransfer {
 	public static String getToFilePath() {
 		return toFilePath;
 	}
-	
+
 }

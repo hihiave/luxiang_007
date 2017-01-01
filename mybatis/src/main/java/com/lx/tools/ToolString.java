@@ -1,7 +1,16 @@
 package com.lx.tools;
 
+/**
+ * 字符串操作
+ */
 public class ToolString {
+	// String filename = "西游记"
+	// String filenameExtension = "pdf"
+	// String filenameFull = filename + "." + filenameExtension;
 
+	// String dirPath = "c:\\a\\b\\";
+	// String filePath = dirPath + filenameFull; filePath = fileUrl
+	
 	/** 获取文件全名
 	 * @author luxiang
 	 * @param filePath 文件路径 例 : C:\haha\呵呵.doc

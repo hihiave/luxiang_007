@@ -256,7 +256,6 @@ public class FileInfoController {
 
 			String filePath = request.getParameter("filepath1");
 			fileInfo1.setFileUploadTime(Integer.valueOf(ToolString.getFilename(ToolString.getFilenameFull(filePath))));
-			fileInfo1.setFileUrl(filePath);
 
 			String filevisible1 = request.getParameter("pro1");
 			String filecate1 = request.getParameter("cate1");
@@ -273,6 +272,8 @@ public class FileInfoController {
 			} else if (filevisible1.equals("公有")) {
 				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.publicFile.getValue());
 			}
+
+			fileInfo1.setFileUrl(filePath);
 
 			map.put("message1", "hahaha");
 			map.put("result1", fileInfoService.addFileInfo(fileInfo1));
