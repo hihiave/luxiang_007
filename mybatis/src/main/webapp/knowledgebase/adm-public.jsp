@@ -131,7 +131,7 @@ if(session.getAttribute("message")=="noexist"){
                     <h3 class="panel-title">公有文件</h3>
                 </div>
                 <div class="panel-body" style="padding-top:0px;">
-                    <table class="table table-striped">
+                    <table class="table table-striped" style="font-size:14px;">
                         <thead>
                         <tr>
                             <th style="width: 57%;">文件名</th>

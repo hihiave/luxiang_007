@@ -24,7 +24,7 @@ function get_all_private_file_table(data){
         var tr_begin = "<tr>";
         var tr_end = "</tr>";
         var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' value="+all_pri_file[i].fileId+"></td>"
-        var td_2 = "<td style='padding-top:15px;width:180px;' id="+all_pri_file[i].fileId+"><a href='##'  onclick='ReadOnLine(this)' path='"+all_pri_file[i].fileUrl+"' >"+all_pri_file[i].fileName+"</a></td>";
+        var td_2 = "<td style='padding-top:15px;width:180px;' id="+all_pri_file[i].fileId+"><a href='../"+all_pri_file[i].fileUrl+"' >"+all_pri_file[i].fileName+"</a></td>";
         var td_3 = "<td style='padding-top:15px;'>"+all_pri_file[i].fileIsVisible+"</td>";
         var td_4 = "<td style='padding-top:15px;'>"+timeStampFormatDay(all_pri_file[i].fileUploadTime*1000)+"</td>";
         var td_5 = "<td><button class='button button-primary button-rounded button-small'" +
@@ -90,7 +90,7 @@ function get_my_file(data){
         var tr_begin = "<tr>";
         var tr_end = "</tr>";
         var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' value="+all_pri_file[i].fileId+"></td>"
-        var td_2 = "<td style='padding-top:15px;width:180px;' id="+all_pri_file[i].fileId+"><a href='##'  onclick='ReadOnLine(this)' path='"+all_pri_file[i].fileUrl+"' >"+all_pri_file[i].fileName+"</a></td>";
+        var td_2 = "<td style='padding-top:15px;width:180px;' id="+all_pri_file[i].fileId+"><a href='../"+all_pri_file[i].fileUrl+"' >"+all_pri_file[i].fileName+"</a></td>";
         var td_3 = "<td style='padding-top:15px;'>"+all_pri_file[i].fileIsVisible+"</td>";
         var td_4 = "<td style='padding-top:15px;'>"+timeStampFormatDay(all_pri_file[i].fileUploadTime*1000)+"</td>";
         var td_5 = "<td><button class='button button-primary button-rounded button-small'" +

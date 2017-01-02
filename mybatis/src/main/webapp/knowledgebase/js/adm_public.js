@@ -1,4 +1,3 @@
-
 //审查页面出来，加载表格
 $(function(){
     get_all_public_file();
