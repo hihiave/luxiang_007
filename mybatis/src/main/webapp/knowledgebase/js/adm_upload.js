@@ -5,6 +5,8 @@ $(function() {
 function get_category(obj) {
 	var val = $(obj).val();
 	var num = $(obj).attr("num");
+	var proto="proto"+num;
+	document.getElementById(proto).value=val;
 	var cate = "cate" + num;
 	var child_cate = "child_cate" + num;
 	var obj1 = document.getElementById(cate);
