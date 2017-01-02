@@ -63,7 +63,6 @@ public class SearchController {
 		request.setAttribute("pageSize", pageSize);
 
 		// request.setAttribute("sk1", URLEncoder.encode(queryStr, "UTF-8"));
-
 		return new ModelAndView("result").addObject("totalCount", totalCount)
 				.addObject("documentEntities", documentEntities).addObject("pageUrl", "searchIndex.do?page_Now=");
 
