@@ -14,10 +14,7 @@ function get_all_private_file(){
 
 }
 
-function get_all_my_file(){
-	 var src = "/mybatis/FileInfoController/myuploadfile.do";
-	    sendAjaxRequest(src,{"page_Now":1},get_my_file);
-}
+
 
 function get_all_private_file_table(data){
     var _table = $("#pri_file>tr");
@@ -53,8 +50,16 @@ function fileinfo_search(obj){
 	var filetype=$("#filetype").val();
 	var filecate=$("#filecate").val();
 	var filechildcate=$("#filechildcate").val();
+	var cate;
+	if((filecate!='')&&(filechildcate!='')){
+		cate=filechildcate;
+	}else{
+		cate=filecate;
+	}
+	  var src = "/mybatis/FileInfoController/selectByCondition.do";
+	    sendAjaxRequest(src,{"page_Now":1,"type":filetype,"cate":cate},get_my_file);
 	//alert("type="+filetype+"..filecate="+filecate+"..filechildcate="+filechildcate)
-	if(filetype==''){
+/*	if(filetype==''){
 		get_all_private_file();
 	}
 	else if((filetype!='')&&(filecate=='')&&(filechildcate=='')){
@@ -71,6 +76,7 @@ function fileinfo_search(obj){
 		$("#cate").val(filechildcate);
 		get_all_my_file();
 	}
+	*/
 }
 /*
  * 通过条件查询
@@ -80,12 +86,7 @@ function get_my_file(data){
     var _table = $("#pri_file>tr");
     _table.remove();
     var all_pri_file = data["pri_file"];
-    var type=$("#type").val();
-    var cate=$("#cate").val();
-	//alert(type+"''"+cate);
     for(var i = 0;i < all_pri_file.length;i++){
-    	if(cate!=""){
-    	if((all_pri_file[i].fileIsVisible==type)&&(all_pri_file[i].fileCategory==cate)){
         var tr_begin = "<tr>";
         var tr_end = "</tr>";
         var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' value="+all_pri_file[i].fileId+"></td>"
@@ -98,31 +99,12 @@ function get_my_file(data){
         	var td_6="<td><button class='button button-action button-rounded button-small changefilemsg' " +
         			"  onclick='file_classify(this)' >分类</button></td>";
         else
-        	var td_6 = "<td style='padding-top:15px;'></td>";
+        	var td_6 = "<td style='padding-top:15px;'></td>"
+      
         var content = tr_begin  + td_1 + td_2 + td_3 + td_4  + td_6 + td_5 + tr_end;
         $("#pri_file").append(content);
-    	}
-    }else if(cate==""){
-    	if(all_pri_file[i].fileIsVisible==type){
-            var tr_begin = "<tr>";
-            var tr_end = "</tr>";
-            var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' value="+all_pri_file[i].fileId+"></td>"
-            var td_2 = "<td style='padding-top:15px;width:180px;' id="+all_pri_file[i].fileId+"><a href='##'  onclick='ReadOnLine(this)' path='"+all_pri_file[i].fileUrl+"' >"+all_pri_file[i].fileName+"</a></td>";
-            var td_3 = "<td style='padding-top:15px;'>"+all_pri_file[i].fileIsVisible+"</td>";
-            var td_4 = "<td style='padding-top:15px;'>"+timeStampFormatDay(all_pri_file[i].fileUploadTime*1000)+"</td>";
-            var td_5 = "<td><button class='button button-primary button-rounded button-small'" +
-            		" bid='"+all_pri_file[i].fileId+"'  onclick='download(this)' path='"+all_pri_file[i].fileUrl+"'>下载</button></td>";
-            if(all_pri_file[i].fileIsVisible=="私有")
-            	var td_6="<td><button class='button button-action button-rounded button-small changefilemsg' " +
-            			"  onclick='file_classify(this)' >分类</button></td>";
-            else
-            	var td_6 = "<td style='padding-top:15px;'></td>";
-            var content = tr_begin  + td_1 + td_2 + td_3 + td_4  + td_6 + td_5 + tr_end;
-            $("#pri_file").append(content);
-        	}
     }
-    }
-    createNewPagination(data,"file_private","/mybatis/FileInfoController/myuploadfile.do",get_my_file,"first_file_click","last_file_click","page-file-one",{})
+    createNewPagination(data,"file_private","/mybatis/FileInfoController/selectByCondition.do",get_my_file,"first_file_click","last_file_click","page-file-one",{})
 }
 
 function file_classify(obj){

@@ -164,20 +164,22 @@ text-decoration:none;
 									</div>
 
 									<div class="row">
-										<div class="col-xs-6" style="margin-bottom: 25px;">
-											<span>上传时间：</span><input class="form-control"
-												style="width: 75%;" type="text" id="time1"
-												placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
-										</div>
+										
 										<div class="col-xs-6" style="margin-bottom: 25px;">
 											<span>关键词：</span><input class="form-control"
-												style="width: 75%;" placeholder="多个关键词以空格分开" type="text"
+												style="width: 75%;margin-left: 15px;" placeholder="多个关键词以空格分开" type="text"
 												id="word1">
 										</div>
 									</div>
 
 									<div class="row">
 										<div class="col-xs-6" style="margin-bottom: 25px;">
+										<span>资料属性：</span>
+										<input type="hidden" id="filetype" value="">
+										<input type="radio" name="typeradio" onclick="get_category(this)" value="" checked style="display:inline;">全部&nbsp;
+										<input type="radio" name="typeradio" onclick="get_category(this)" value="公有" style="display:inline;">公有&nbsp;
+										<input type="radio" name="typeradio" onclick="get_category(this)" value="私有" style="display:inline;">私有&nbsp;
+										
 											<span>资料属性：</span> <select class="form-control " id="proto1"  num="1"
 												onchange="get_category(this)" style="width: 75%; margin-left: -3px;">
 												<option value='' selected>请选择</option>
@@ -257,14 +259,10 @@ text-decoration:none;
 									</div>
 
 									<div class="row">
-										<div class="col-xs-6" style="margin-bottom: 25px;">
-											<span>上传时间：</span><input class="form-control"
-												style="width: 75%;" type="text" id="time2"
-												placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
-										</div>
+										
 										<div class="col-xs-6" style="margin-bottom: 25px;">
 											<span>关键词：</span><input class="form-control"
-												style="width: 75%;" placeholder="多个关键词以空格分开" type="text"
+												style="width: 75%;margin-left: 15px;" placeholder="多个关键词以空格分开" type="text"
 												id="word2">
 										</div>
 									</div>
@@ -347,14 +345,14 @@ text-decoration:none;
 									</div>
 
 									<div class="row">
-										<div class="col-xs-6" style="margin-bottom: 25px;">
+										<%-- <div class="col-xs-6" style="margin-bottom: 25px;">
 											<span>上传时间：</span><input class="form-control"
 												style="width: 75%;" type="text" id="time3"
 												placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
-										</div>
+										</div> --%>
 										<div class="col-xs-6" style="margin-bottom: 25px;">
 											<span>关键词：</span><input class="form-control"
-												style="width: 75%;" placeholder="多个关键词以空格分开" type="text"
+												style="width: 75%;margin-left: 15px;" placeholder="多个关键词以空格分开" type="text"
 												id="word3">
 										</div>
 									</div>

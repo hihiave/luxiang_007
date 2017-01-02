@@ -135,6 +135,23 @@ public class FileInfoController {
 		map.put("pri_file", pri_file);
 		return map;
 	}
+	@RequestMapping(value = "/selectByCondition", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> selectByCondition(Integer page_Now,String cate,
+			String type,HttpSession httpSession) {
+		Map<String, Object> map = new HashMap<>();
+		String username = (String) httpSession.getAttribute("username");
+
+		Page page = new Page(page_Now);
+		List<FileInfo> pri_file = fileInfoService.selectMyFileInfoByCondition(username, type, cate, page);
+		int pageCount = page.getTotalPageCount();
+		int totalCount = page.getTotalCount();
+		map.put("totalCount", totalCount);
+		map.put("pageNow", page_Now);
+		map.put("pageCount", pageCount);
+		map.put("pri_file", pri_file);
+		return map;
+	}
 
 	// 我的下载
 	public String myDownloadFile() {
