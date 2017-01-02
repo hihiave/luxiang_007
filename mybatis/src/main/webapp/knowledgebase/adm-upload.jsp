@@ -173,20 +173,24 @@ text-decoration:none;
 									</div>
 
 									<div class="row">
-										<div class="col-xs-6" style="margin-bottom: 25px;">
+										<div class="col-xs-6" style="margin-top: 5px;">
 										<span>资料属性：</span>
-										<input type="hidden" id="filetype" value="">
-										<input type="radio" name="typeradio" onclick="get_category(this)" value="" checked style="display:inline;">全部&nbsp;
-										<input type="radio" name="typeradio" onclick="get_category(this)" value="公有" style="display:inline;">公有&nbsp;
-										<input type="radio" name="typeradio" onclick="get_category(this)" value="私有" style="display:inline;">私有&nbsp;
+										<input type="hidden" id="proto1"   value="">
+										<input type="radio" name="typeradio1" num="1"
+										onclick="get_category(this)" value="" checked style="display:inline;">全部&nbsp;
+										<input type="radio" name="typeradio1" num="1"
+										onclick="get_category(this)" value="公有" style="display:inline;">公有&nbsp;
+										<input type="radio" name="typeradio1" num="1"
+										 onclick="get_category(this)" value="私有" style="display:inline;">私有&nbsp;
 										
-											<span>资料属性：</span> <select class="form-control " id="proto1"  num="1"
+										</div>
+										
+											<!-- <span>资料属性：</span> <select class="form-control " id="proto1"  num="1"
 												onchange="get_category(this)" style="width: 75%; margin-left: -3px;">
 												<option value='' selected>请选择</option>
 												<option value='私有' >私有</option>
 												<option value='公有' >公有</option>
-											</select>
-										</div>
+											</select> -->
 										<div class="col-xs-6" style="margin-bottom: 25px;">
 											<span>类&nbsp;&nbsp;&nbsp;&nbsp;别：</span><select
 												class="form-control select-class-name" id="cate1" count="1"
@@ -268,13 +272,16 @@ text-decoration:none;
 									</div>
 
 									<div class="row">
-										<div class="col-xs-6" style="margin-bottom: 25px;">
-											<span>资料属性：</span> <select class="form-control " id="proto2"  num="2"
-												onchange="get_category(this)" style="width: 75%; margin-left: -3px;">
-												<option value='' selected>请选择</option>
-												<option value='私有' >私有</option>
-												<option value='公有' >公有</option>
-											</select>
+										<div class="col-xs-6" style="margin-top: 5px;">
+										<span>资料属性：</span>
+										<input type="hidden" id="proto2"   value="">
+										<input type="radio" name="typeradio2" num="2"
+										onclick="get_category(this)" value="" checked style="display:inline;">全部&nbsp;
+										<input type="radio" name="typeradio2" num="2"
+										onclick="get_category(this)" value="公有" style="display:inline;">公有&nbsp;
+										<input type="radio" name="typeradio2" num="2"
+										 onclick="get_category(this)" value="私有" style="display:inline;">私有&nbsp;
+										
 										</div>
 										<div class="col-xs-6" style="margin-bottom: 25px;">
 											<span>类&nbsp;&nbsp;&nbsp;&nbsp;别：</span><select
@@ -358,13 +365,16 @@ text-decoration:none;
 									</div>
 
 																		<div class="row">
-										<div class="col-xs-6" style="margin-bottom: 25px;">
-											<span>资料属性：</span> <select class="form-control " id="proto3"  num="3"
-												onchange="get_category(this)" style="width: 75%; margin-left: -3px;">
-												<option value='' selected>请选择</option>
-												<option value='私有' >私有</option>
-												<option value='公有' >公有</option>
-											</select>
+										<div class="col-xs-6" style="margin-top: 5px;">
+										<span>资料属性：</span>
+										<input type="hidden" id="proto3"   value="">
+										<input type="radio" name="typeradio3" num="3"
+										onclick="get_category(this)" value="" checked style="display:inline;">全部&nbsp;
+										<input type="radio" name="typeradio3" num="3"
+										onclick="get_category(this)" value="公有" style="display:inline;">公有&nbsp;
+										<input type="radio" name="typeradio3" num="3"
+										 onclick="get_category(this)" value="私有" style="display:inline;">私有&nbsp;
+										
 										</div>
 										<div class="col-xs-6" style="margin-bottom: 25px;">
 											<span>类&nbsp;&nbsp;&nbsp;&nbsp;别：</span><select
