@@ -21,7 +21,7 @@ function get_my_download_table(obj){
         //console.log(all_download_file[i].myDownloadTime);
         var tr_begin = "<tr>";
         var tr_end = "</tr>";
-        var td_1 = "<td><a href='##' onclick='ReadOnLine(this)' path='"+all_download_file[i].fileUrl+"'>"+all_download_file[i].fileName+"</a></td>";
+        var td_1 = "<td><a href='../"+all_download_file[i].fileUrl+"' >"+all_download_file[i].fileName+"</a></td>";
         var td_2 = "<td>"+all_download_file[i].fileAuthor+"</td>";
         var td_3 = "<td>"+timeStampFormatDay(all_download_file[i].myDownloadTime*1000)+"</td>";
         var content = tr_begin + td_1 + td_2 + td_3 + tr_end;

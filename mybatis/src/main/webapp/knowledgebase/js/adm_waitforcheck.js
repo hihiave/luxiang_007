@@ -18,6 +18,7 @@ function cb_get_all(obj){
         //console.log(each.fileName);
         //上面这种写法不对
         var tr_begin = "<tr>";
+        
         var tr_end = "</tr>";
         var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' onclick='select_one(this)' value="+all_wait_file[each].fileId+"></td>";
         var td_2 = "<td style='padding-top:15px;' value="+all_wait_file[each].fileId+"><a href='../"+all_wait_file[each].fileUrl+"' >"+all_wait_file[each].fileName+"</a></td>";
