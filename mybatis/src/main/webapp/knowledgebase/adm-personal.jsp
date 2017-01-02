@@ -75,7 +75,7 @@
 
 	<jsp:include page="public-part.jsp" flush="true" />
 	<input type="hidden" id="userid" value="<%=session.getAttribute("userid")%>">
-	<div class="container">
+	<div class="pub_bottom">
 		<div class="col-xs-2 left_nav">
 			<ul class="nav nav-menu">
 				<li><a href="#user-center" data-toggle="collapse">个人中心<span

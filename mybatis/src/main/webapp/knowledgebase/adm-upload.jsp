@@ -42,7 +42,6 @@
 <script src="/mybatis/knowledgebase/js/ajaxfileupload.js"></script>
 <script src="/mybatis/knowledgebase/js/adm_upload.js"></script>
 <script src="/mybatis/knowledgebase/js/jquery-ui.min.js"></script>
-
 <style type="text/css">
 .up_panel{
 min-height:10px !important;
@@ -62,6 +61,7 @@ text-decoration:none;
 
 <jsp:include page="public-part.jsp" flush="true"/>
 <div class="container">
+
 		<div class="col-xs-2 left_nav">
 		<ul class="nav nav-menu">
 					<li><a href="#user-center" data-toggle="collapse">个人中心<span class="glyphicon glyphicon-menu-down" ></span></a></li>
@@ -164,11 +164,11 @@ text-decoration:none;
 									</div>
 
 									<div class="row">
-										<%-- <div class="col-xs-6" style="margin-bottom: 25px;">
+										<div class="col-xs-6" style="margin-bottom: 25px;">
 											<span>上传时间：</span><input class="form-control"
 												style="width: 75%;" type="text" id="time1"
 												placeholder="<%=time%>" readonly="true">&nbsp;&nbsp;
-										</div> --%>
+										</div>
 										<div class="col-xs-6" style="margin-bottom: 25px;">
 											<span>关键词：</span><input class="form-control"
 												style="width: 75%;" placeholder="多个关键词以空格分开" type="text"
@@ -359,7 +359,7 @@ text-decoration:none;
 										</div>
 									</div>
 
-									<div class="row">
+																		<div class="row">
 										<div class="col-xs-6" style="margin-bottom: 25px;">
 											<span>资料属性：</span> <select class="form-control " id="proto3"  num="3"
 												onchange="get_category(this)" style="width: 75%; margin-left: -3px;">

@@ -55,7 +55,7 @@
 	<div class="col-xs-2 top-img">
 		<img src="/mybatis/knowledgebase/img/3.png">
 	</div>
-	<div class="col-xs-10" style="margin-top: 0.74%;padding-left:1.94%;">
+	<div class="col-xs-10" style="margin-top: 0.74%;padding:0 1% 0 1.94%;">
 		<div style="float: left; margin-right: 0px;">
 			<select class="form-control" onchange="get_child_category_select(this)" id="category_select"
 				style="width: 95px;padding:6px;">
@@ -79,7 +79,7 @@
 		</div>
 		<div class="input-group input-group-md" style="float: left;">
 			<input type="text" class="form-control"
-				aria-describedby="sizing-addon1" style="width: 350px;"
+				aria-describedby="sizing-addon1" style="width:350px;"
 				id="file_search_input" onfocus="myfunction()" oninput="myfunction()">
 			<!-- <button class="btn btn-default"
 				style="width: 78px; margin-left: 5px; background: #808080; color: #FFF"
@@ -89,18 +89,18 @@
 				style="width: 78px;height:33px; margin-left: 5px; background: #808080;padding:0; color: #FFF"
 				id="file_search_sub" onclick="send_search_info()">搜&nbsp;索
 			</button>
-			<!-- <button class="button button-primary button-pill button-small"
+			<a href="/mybatis/search.jsp" target="black"><button class="button button-primary button-pill button-small"
 				style="width: 78px;height:33px; margin-left: 5px; padding:0; color: #fff"
 				id="file_search_sub" onclick="send_search_info()">高级搜索
-			</button> -->
-			<input type="button"><a href="/mybatis/search.jsp" target="black">高级搜索</a>
+			</button>
+			</a>
+			<!-- <input type="button"><a href="/mybatis/search.jsp" target="black">高级搜索</a> -->
 			
 		</div>
-
-		<div style="float: right; margin-right: 10px;">
+		
+		<div style="float: right;">
 		<c:if test="${is_worker == 1}">
 			<div class="upload">
-			<input type="hidden" id="userid" value="<%=session.getAttribute("userid")%>">
 				<a href="/mybatis/knowledgebase/adm-upload.jsp"><span
 					class="glyphicon glyphicon-open"></span>上传</a>
 			</div>
