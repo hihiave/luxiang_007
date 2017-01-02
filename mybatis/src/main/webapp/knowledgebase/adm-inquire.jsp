@@ -63,10 +63,10 @@ padding:0 17px;
 </head>
 <body>
 
-<div class="container">
+
 <jsp:include page="public-part.jsp" flush="true"/>
-</div>
-<div class="container">
+
+<div class="pub_bottom">
 
 		<div class="col-xs-2 left_nav">
 		<ul class="nav nav-menu">

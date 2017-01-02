@@ -71,7 +71,7 @@ if(session.getAttribute("message")=="noexist"){
 
 
 <jsp:include page="public-part.jsp" flush="true"/>
-<div class="container">
+<div class="pub_bottom">
 
 		<div class="col-xs-2 left_nav">
 		<ul class="nav nav-menu">
