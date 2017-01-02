@@ -325,7 +325,7 @@ public class UserInfoController {
 			httpSession.setAttribute("usertruename", truename);
 			httpSession.setAttribute("email", email);
 			map.put("flag", true);
-		    
+
 		} else {
 			map.put("flag", false);
 		}
