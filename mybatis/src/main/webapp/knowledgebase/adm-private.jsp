@@ -138,13 +138,17 @@ if(session.getAttribute("message")=="noexist"){
 							 style="height:34px;float:left;padding:0 15px; margin-right:10px;
 							 background: #808080;color: #FFF"
 								onclick="delete_all_pick(this)">删除</button>
-							<select class="form-control" onchange="get_category(this)" id="filetype"
+							<!-- <select class="form-control" onchange="get_category(this)" id="filetype"
 								style="width: 10%;padding:6px;display:inline;">
 							<option value='' selected>全部</option>
 							<option value='私有'>私有</option>
 							<option value='公有'>公有</option>
-							</select>
-								<select class="form-control" onchange="get_child_category_select(this)" id="filecate"
+							</select> -->
+							<input type="hidden" id="filetype" value="">
+							<input type="radio" name="typeradio" onclick="get_category(this)" value="" checked style="display:inline;">全部&nbsp;
+							<input type="radio" name="typeradio" onclick="get_category(this)" value="公有" style="display:inline;">公有&nbsp;
+							<input type="radio" name="typeradio" onclick="get_category(this)" value="私有" style="display:inline;">私有&nbsp;
+							<select class="form-control" onchange="get_child_category_select(this)" id="filecate"
 								style="width: 10%;padding:6px;display:inline;">
 							<option value=''>请选择</option>
 							

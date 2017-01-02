@@ -39,6 +39,8 @@ function changemsg(){
                 	$("#result_msg").html("修改信息失败!");
                     $("#result").modal('show');
                 }
+                $("#show_user_truename").html(usertruename.value);
+        		$("#show_register_email").html(useremail.value);
             }
         })
 	}

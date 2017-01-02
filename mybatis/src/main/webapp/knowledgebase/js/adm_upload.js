@@ -16,7 +16,7 @@ function get_category(obj) {
 	$("#" + cate + "").append(op);
 	var userid;
 	if (val == "公有") {
-		userid = 2;
+		userid = 1;
 	} else if (val == "私有") {
 		userid = document.getElementById("userid").value;
 	}
@@ -55,7 +55,7 @@ function get_child_category_select(obj) {
 	var type = $("#proto" + num).val();
 	var userid;
 	if (type == "公有")
-		userid = 2;
+		userid = 1;
 	else if (type == "私有")
 		userid = document.getElementById("userid").value;
 	var child_cate = "child_cate" + num;

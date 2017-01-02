@@ -57,11 +57,11 @@ function myfunction() {
  * 
  * ("#file_search_input").autocomplete() }
  */
-function get_child_category_select(){
+function get_child_category_selected(){
 	var category=document.getElementById("category_select");
 	var obj=document.getElementById('second_category');
 	obj.options.length=0;
-	var userid=2;
+	var userid=1;
 	$.ajax({
 		type : 'post',
 		url : "/mybatis/CategoryController/get_child_category.do",
@@ -119,7 +119,7 @@ function get_child_category_select(){
 
 function get_category_select() {
 	//var userid=document.getElementById("userid");
-	var userid=2;
+	var userid=1;
 	$.ajax({
 		type : 'post',
 		url : "/mybatis/CategoryController/get_category.do",

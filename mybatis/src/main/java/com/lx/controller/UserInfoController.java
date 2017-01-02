@@ -48,6 +48,7 @@ public class UserInfoController {
 			httpSession.setAttribute("usertruename", userInfo.getUserRealName());
 			httpSession.setAttribute("email", userInfo.getUserEmail());
 			httpSession.setAttribute("userid", userInfo.getUserId());
+			httpSession.setAttribute("adminid", MacroConstant.ADMIN);
 			// httpSession.setAttribute("password",password);
 			// httpSession.setAttribute("flag", true);
 			map.put("data", "LoginSuccess");
@@ -311,7 +312,7 @@ public class UserInfoController {
 
 	@RequestMapping(value = "/change_msg", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public Map<String, Object> changeUserMsg(Integer userid, String truename, String email) {
+	public Map<String, Object> changeUserMsg(Integer userid, String truename, String email, HttpSession httpSession) {
 		System.out.println("++++++++" + truename);
 		System.out.println("!!!!!!!!" + email);
 		System.out.println("........" + userid);
@@ -321,7 +322,10 @@ public class UserInfoController {
 		Boolean result = userInfoService.alterUserInfo(userid, userInfo);
 		Map<String, Object> map = new HashMap<>();
 		if (result) {
+			httpSession.setAttribute("usertruename", truename);
+			httpSession.setAttribute("email", email);
 			map.put("flag", true);
+		    
 		} else {
 			map.put("flag", false);
 		}

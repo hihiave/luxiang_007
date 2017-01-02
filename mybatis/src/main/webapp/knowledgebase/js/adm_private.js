@@ -174,6 +174,7 @@ function file_classify(obj){
 
 function get_category(obj){
 	var val=$(obj).val();
+	document.getElementById("filetype").value=val;
 	var obj1=document.getElementById("filecate");
 	var obj2=document.getElementById("filechildcate");
 	obj1.options.length=0;
@@ -183,7 +184,7 @@ function get_category(obj){
 	$("#filechildcate").append(op);
 	var userid;
 	if(val=="公有"){
-		userid=2;
+		userid=1;
 	}
 	else if(val=="私有"){
 		userid=document.getElementById("userid").value;
@@ -215,7 +216,7 @@ function get_child_category_select(obj){
 	var type=$("#filetype").val();
 	var userid;
 	if(type=="公有")
-		userid=2;
+		userid=1;
 	else if(type=="私有")
 		userid=document.getElementById("userid").value;
 	var obj=document.getElementById("filechildcate");

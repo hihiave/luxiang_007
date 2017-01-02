@@ -52,12 +52,13 @@
 <div class="pub_top">
 <input type="hidden" id="userid" value="<%=session.getAttribute("userid")%>">
 <input type="hidden" id="username" value="<%=session.getAttribute("username")%>">
+<input type="hidden" id="admin" value="<%=session.getAttribute("adminid")%>">
 	<div class="col-xs-2 top-img">
 		<img src="/mybatis/knowledgebase/img/3.png">
 	</div>
 	<div class="col-xs-10" style="margin-top: 0.74%;padding:0 1% 0 1.94%;">
 		<div style="float: left; margin-right: 0px;">
-			<select class="form-control" onchange="get_child_category_select(this)" id="category_select"
+			<select class="form-control" onchange="get_child_category_selected(this)" id="category_select"
 				style="width: 95px;padding:6px;">
 				<option value='类别'>类别</option>
 			</select>
