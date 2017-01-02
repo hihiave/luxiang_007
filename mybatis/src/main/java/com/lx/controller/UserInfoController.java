@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lx.macrofiles.MacroConstant;
 import com.lx.macrofiles.MacroEnum;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.model.UserInfo;

@@ -1,5 +1,6 @@
 package com.lx.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.tools.Page;
+import com.lx.tools.ToolDate;
 import com.lx.tools.ToolFileTransfer;
 import com.lx.tools.ToolString;
 
@@ -225,7 +227,7 @@ public class FileInfoController {
 		String basePath = request.getSession().getServletContext().getRealPath("");
 		String pdfDir = basePath + MacroConstant.PDFDIR;
 		String docDir = basePath + MacroConstant.DOCDIR;
-
+		boolean flag = false;
 		Map<String, Object> map = new HashMap<>();
 		String filename1 = request.getParameter("filename1");
 		if (filename1 != null) {
@@ -260,19 +262,23 @@ public class FileInfoController {
 			case doc:
 				if (ToolFileTransfer.transfer(filePath, docDir)) {
 					fileInfo1.setFileUrl(ToolFileTransfer.getToFilePath());
+					flag = true;
 				}
 				break;
 			case pdf:
 				if (ToolFileTransfer.transfer(filePath, pdfDir)) {
 					fileInfo1.setFileUrl(ToolFileTransfer.getToFilePath());
+					flag = true;
 				}
 				break;
 			default:
 				break;
 			}
 
+			flag = flag && fileInfoService.addFileInfo(fileInfo1);
+
 			map.put("message1", "hahaha");
-			map.put("result1", fileInfoService.addFileInfo(fileInfo1));
+			map.put("result1", flag);
 		}
 		String filename2 = request.getParameter("filename2");
 		if (filename2 != null) {
@@ -307,19 +313,22 @@ public class FileInfoController {
 			case doc:
 				if (ToolFileTransfer.transfer(filePath, docDir)) {
 					fileInfo2.setFileUrl(ToolFileTransfer.getToFilePath());
+					flag = true;
 				}
 				break;
 			case pdf:
 				if (ToolFileTransfer.transfer(filePath, pdfDir)) {
 					fileInfo2.setFileUrl(ToolFileTransfer.getToFilePath());
+					flag = true;
 				}
 				break;
 			default:
 				break;
 			}
 
+			flag = flag && fileInfoService.addFileInfo(fileInfo2);
 			map.put("message2", "hahaha");
-			map.put("result2", fileInfoService.addFileInfo(fileInfo2));
+			map.put("result2", flag);
 		}
 
 		String filename3 = request.getParameter("filename3");
@@ -355,19 +364,22 @@ public class FileInfoController {
 			case doc:
 				if (ToolFileTransfer.transfer(filePath, docDir)) {
 					fileInfo3.setFileUrl(ToolFileTransfer.getToFilePath());
+					flag = true;
 				}
 				break;
 			case pdf:
 				if (ToolFileTransfer.transfer(filePath, pdfDir)) {
 					fileInfo3.setFileUrl(ToolFileTransfer.getToFilePath());
+					flag = true;
 				}
 				break;
 			default:
 				break;
 			}
 
+			flag = flag && fileInfoService.addFileInfo(fileInfo3);
 			map.put("message3", "hahaha");
-			map.put("result3", fileInfoService.addFileInfo(fileInfo3));
+			map.put("result3", flag);
 		}
 
 		return map;
