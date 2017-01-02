@@ -69,6 +69,7 @@ public class FileDownloadController {
 			e.printStackTrace();
 		}
 		// fileUrl = new String(fileUrl.getBytes("ISO8859_1"), "UTF-8");
+		
 	}
 
 }
