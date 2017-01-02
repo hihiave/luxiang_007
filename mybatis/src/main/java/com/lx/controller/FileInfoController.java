@@ -98,9 +98,18 @@ public class FileInfoController {
 	// 公有文件,包括查询
 	@RequestMapping(value = "/publicfile", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> publicfile(String fileCategory, String fileProperty, String fileIn, Integer page_Now) {
+	public Map<String, Object> publicfile(HttpServletRequest request, Integer page_Now) {
 		System.out.println("=================publicfile=============");
-		System.out.println("==q===" + "类别" + fileCategory + "属性" + fileProperty + "搜索值" + fileIn);
+
+		String fileCategory = request.getParameter("fileCategory");
+		String subFileCategory = request.getParameter("subFileCategory");
+		String fileProperty = request.getParameter("fileProperty");
+		String fileIn = request.getParameter("fileIn");
+
+		System.out.println("============类别============" + fileCategory);
+		System.out.println("===========子类别=============" + subFileCategory);
+		System.out.println("============属性=============" + fileProperty);
+		System.out.println("===========搜索值=============" + fileIn);
 
 		int pageNow = 1;
 		if (page_Now != null) {
@@ -108,6 +117,9 @@ public class FileInfoController {
 		}
 		Page page = new Page(pageNow);
 
+		if (!subFileCategory.equals("")) {
+			fileCategory = subFileCategory;
+		}
 		List<FileInfo> fileInfos = fileInfoService.getFileByFilePropertyWithPass(fileCategory,
 				KFilePropertyType.valueOf(fileProperty), fileIn, page);
 

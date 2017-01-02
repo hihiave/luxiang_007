@@ -143,6 +143,7 @@ function get_category_select() {
 
 function send_search_info() {
 	var _category = $.trim($("#category_select").val());
+	var _subcategory = $.trim($("#second_category").val());
 	var _key = $.trim($("#key_select").val());
 	var _search_input = $.trim($("#file_search_input").val());
 
@@ -150,6 +151,7 @@ function send_search_info() {
 
 	var dataPost = {
 		"fileCategory" : _category,
+		"subFileCategory" : _subcategory,
 		"fileProperty" : _key,
 		"fileIn" : _search_input
 	};
