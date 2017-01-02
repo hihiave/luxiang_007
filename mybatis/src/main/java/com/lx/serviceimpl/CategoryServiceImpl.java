@@ -46,36 +46,6 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 		return null;
 
-		//
-		// HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
-		// ArrayList<String> strings = new ArrayList<>();
-		// Category category;
-		// for (int i = 0; i < categories.size(); i++) {
-		// category = categories.get(i);
-		// if
-		// (category.getCategoryBelongTo().equals(MacroConstant.level0_category))
-		// {
-		// strings.add(category.getCategoryName());
-		// }
-		// }
-		// // 1482422400 ----> A B C
-		// hashMap.put(MacroConstant.level0_category, strings);
-		//
-		// ArrayList<String> list;
-		// for (int i = 0; i < strings.size(); i++) {
-		// list = new ArrayList<>();
-		// for (int j = 0; j < categories.size(); j++) {
-		// category = categories.get(j);
-		// if (category.getCategoryBelongTo().equals(strings.get(i))) {
-		// list.add(category.getCategoryName());
-		// }
-		// }
-		// // A ----> A1 A2
-		// // B ----> B1
-		// // C ----> []
-		// hashMap.put(strings.get(i), list);
-		// }
-
 	}
 
 	@Override

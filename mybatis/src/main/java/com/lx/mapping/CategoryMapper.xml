@@ -27,8 +27,8 @@
 	category_user_id = #{categoryUserId}
   </update>
   <update id="updateCategoryBelongTo">
-  	update Category set category_name = #{newCategoryName}
-	where category_name = #{oldCategoryName} and 
+  	update Category set category_belong_to = #{newCategoryName}
+	where category_belong_to = #{oldCategoryName} and 
 	category_user_id = #{categoryUserId}
   </update>  
   <select id="selectByUserIdAndCategoryName" resultMap="BaseResultMap">

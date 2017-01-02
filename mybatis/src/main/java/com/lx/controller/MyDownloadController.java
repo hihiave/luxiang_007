@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,46 +23,35 @@ public class MyDownloadController {
 	@Autowired
 	MyDownloadService myDownloadService;
 
-	/**
-	 * 删除我的下载记录
-	 */
-	@RequestMapping(value = "/del_my_download", method = RequestMethod.POST)
-
-	@ResponseBody
-	public Map<String, Object> delMyDownload(Integer[] myDownloadIds, HttpSession httpSession) {
-
-		// myDownloadIds 我的下载记录的id号, 批量的
-		myDownloadService.delMyDownload(myDownloadIds);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		return map;
-	}
-
-	/**
-	 * 添加我的下载记录
-	 */
+	// 添加我的下载记录
 	@RequestMapping(value = "/add_my_download", method = RequestMethod.POST)
-
 	@ResponseBody
 	public Map<String, Object> addMydownload(HttpSession httpSession, Integer fileid) {
-		String username = (String) httpSession.getAttribute("username");
-		myDownloadService.addMyDownload(username, fileid);
+		String userName = (String) httpSession.getAttribute("username");
+		if (myDownloadService.checkDownloadIsExist(userName, fileid)) {
+			return null;
+		}
+		
+		myDownloadService.addMyDownload(userName, fileid);
 		return null;
 	}
 
-	/**
-	 * 获取我的下载记录
-	 */
-	@RequestMapping(value = "/get_my_download", method = RequestMethod.POST)
-
+	// 删除我的下载记录
+	@RequestMapping(value = "/del_my_download", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getMyDownload(Integer page_Now, HttpSession httpSession,
-			HttpServletRequest httpServletRequest) {
+	public Map<String, Object> delMyDownload(Integer[] myDownloadIds) {
+		// myDownloadIds 我的下载记录的id号, 批量的
+		myDownloadService.delMyDownload(myDownloadIds);
+		Map<String, Object> map = new HashMap<>();
+		return map;
+	}
 
-		// userName 用户名
-		// page 分页
-		Map<String, Object> map = new HashMap<String, Object>();
+	// 获取我的下载记录
+	@RequestMapping(value = "/get_my_download", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getMyDownload(Integer page_Now, HttpSession httpSession) {
+
+		Map<String, Object> map = new HashMap<>();
 		String userName = (String) httpSession.getAttribute("username");
 		int pageNow = 1;
 		if (page_Now != null) {

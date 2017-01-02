@@ -90,13 +90,12 @@
 				style="width: 78px;height:33px; margin-left: 5px; background: #808080;padding:0; color: #FFF"
 				id="file_search_sub" onclick="send_search_info()">搜&nbsp;索
 			</button>
-			<a href="/mybatis/search.jsp" target="black"><button class="button button-primary button-pill button-small"
-				style="width: 78px;height:33px; margin-left: 5px; padding:0; color: #fff"
-				id="file_search_sub" onclick="send_search_info()">高级搜索
-			</button>
+			<a href="/mybatis/search.jsp" target="black">
+			<button class="button button-primary button-pill button-small"
+				style="width: 78px;height:33px; margin-left: 5px; padding:0; color: #fff">高级搜索</button>
 			</a>
 			<!-- <input type="button"><a href="/mybatis/search.jsp" target="black">高级搜索</a> -->
-			
+			<!-- id="file_search_sub" onclick="send_search_info()" -->
 		</div>
 		
 		<div style="float: right;">

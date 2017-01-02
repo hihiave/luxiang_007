@@ -52,7 +52,13 @@
   	ORDER BY my_download_time DESC
   	limit #{page.startPos}, #{page.pageSize}
   </select>
-
+  <select id="selectByUserNameAndFildId" resultMap="BaseResultMap">
+  	select * from MyDownload 
+  	where 
+  	my_download_user_name = #{userName} and 
+  	my_download_file_id = #{myDownloadFileId} 
+  	limit 1
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

@@ -20,7 +20,6 @@ public class MyDownloadServiceImpl implements MyDownloadService {
 
 	@Override
 	public boolean addMyDownload(String myDownloadUserName, int myDownloadFileId) {
-
 		MyDownload myDownload = new MyDownload();
 		myDownload.setMyDownloadUserName(myDownloadUserName);
 		myDownload.setMyDownloadFileId(myDownloadFileId);
@@ -48,6 +47,14 @@ public class MyDownloadServiceImpl implements MyDownloadService {
 			return myDownloadMapper.selectMyDownloadByMyDownloadUserName(userName.trim(), page);
 		}
 		return null;
+	}
+
+	@Override
+	public boolean checkDownloadIsExist(String userName, int myDownloadFileId) {
+		if (myDownloadMapper.selectByUserNameAndFildId(userName, myDownloadFileId) != null) {
+			return true;
+		}
+		return false;
 	}
 
 }

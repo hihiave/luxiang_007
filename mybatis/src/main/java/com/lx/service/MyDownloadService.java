@@ -2,7 +2,6 @@ package com.lx.service;
 
 import java.util.List;
 
-import com.lx.model.FileInfo;
 import com.lx.model.FileInfoVo;
 import com.lx.tools.Page;
 
@@ -31,4 +30,9 @@ public interface MyDownloadService {
 	 */
 	public List<FileInfoVo> getMyDownload(String userName, Page page);
 	
+	/** 检查是否已经有此记录
+	 * @author luxiang
+	 * @return boolean,true表示有,false表示无
+	 */
+	public boolean checkDownloadIsExist(String userName, int myDownloadFileId);
 }

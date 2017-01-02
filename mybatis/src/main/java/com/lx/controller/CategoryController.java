@@ -60,7 +60,7 @@ public class CategoryController {
 	@ResponseBody
 	public Map<String, Object> alertCategory(Integer userid, String username, String old_catename,
 			String new_catename) {
-		System.out.println(userid + ".." + username + ".." + old_catename + ".." + new_catename + ".");
+		System.out.println(userid + "========" + username + "========" + old_catename + "======" + new_catename);
 		Map<String, Object> map = new HashMap<>();
 		if (categortservice.checkCategoryIsExist(userid, new_catename)) {
 			map.put("flag", "cunzai");
@@ -98,7 +98,7 @@ public class CategoryController {
 	public Map<String, Object> get_child_category(Integer userid, String categoryBelongTo) {
 		System.out.println("===========get_child_category==============");
 		Map<String, Object> map = new HashMap<>();
-		System.out.println(userid + "....." + categoryBelongTo);
+		System.out.println(userid + "===========" + categoryBelongTo);
 		List<Category> category = categortservice.getAllCategory(userid);
 		List<Category> newcate = new ArrayList<Category>();
 		for (Category cate : category) {
