@@ -73,6 +73,34 @@
   		ORDER BY file_upload_time DESC
   		limit #{page.startPos}, #{page.pageSize}
   </select>
+  
+  <select id="selectFileByConditionCount" resultType="java.lang.Integer">
+  	select count(*) from File 
+  	<where>
+  		file_check = '1' and file_author = #{userName} 
+  		<if test="fileCategory!=null and fileCategory!=''">
+  			and file_category = #{fileCategory}
+  		</if>
+  		<if test="fileIsVisible!=null and fileIsVisible!=''">
+  			and file_is_visible = #{fileIsVisible}
+  		</if>	
+  	</where>	
+  </select>
+  <select id="selectFileByCondition" resultMap="BaseResultMap">
+  	select * from File 
+  	<where>
+  		file_check = '1' and file_author = #{userName} 
+  		<if test="fileCategory!=null and fileCategory!=''">
+  			and file_category = #{fileCategory}
+  		</if>
+  		<if test="fileIsVisible!=null and fileIsVisible!=''">
+  			and file_is_visible = #{fileIsVisible}
+  		</if>
+  		ORDER BY file_upload_time DESC
+  		limit #{page.startPos}, #{page.pageSize}	
+  	</where>
+  </select>
+  
   <select id="getFileInfoCount" resultType="java.lang.Integer">
   	select count(*) from File
   	<where>

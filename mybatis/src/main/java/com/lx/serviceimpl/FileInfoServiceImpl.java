@@ -96,6 +96,18 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	@Override
+	public List<FileInfo> selectMyFileInfoByCondition(String userName, String fileIsVisible, String fileCategory,
+			Page page) {
+		if (page != null && userName != null) {
+			int totalCount = fileInfoMapper.selectFileByConditionCount(userName.trim(), fileIsVisible, fileCategory);
+			page.setTotalCount(totalCount);
+			page.init();
+			return fileInfoMapper.selectFileByCondition(userName.trim(), fileIsVisible, fileCategory, page);
+		}
+		return null;
+	}
+
+	@Override
 	public List<FileInfo> getFileByFilePropertyWithPass(String fileCategory, KFilePropertyType filePropertyType,
 			String value, Page page) {
 		if (value == null) {
@@ -117,7 +129,7 @@ public class FileInfoServiceImpl implements FileInfoService {
 			if (!"类别".equals(fileCategory)) {
 				fileInfo.setFileCategory(fileCategory);
 			}
-			
+
 			int totalCount = fileInfoMapper.getFileInfoCount(KCheckType.pass.getValue(), fileInfo);
 			page.setTotalCount(totalCount);
 			page.init();
@@ -152,4 +164,5 @@ public class FileInfoServiceImpl implements FileInfoService {
 			return fileInfoMapper.getFileNames(value.trim());
 		}
 	}
+
 }

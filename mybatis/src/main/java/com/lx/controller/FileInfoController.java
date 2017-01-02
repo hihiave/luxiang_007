@@ -120,7 +120,7 @@ public class FileInfoController {
 		return map;
 	}
 
-	// 我的上传
+	// 我的文件
 	@RequestMapping(value = "/myuploadfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> myuploadfile(Integer page_Now, HttpSession httpSession) {

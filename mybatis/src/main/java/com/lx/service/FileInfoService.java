@@ -79,6 +79,18 @@ public interface FileInfoService {
 	 */
 	public List<FileInfo> selectMyFileInfo(String userName, Page page, KCheckType... checkTypes);
 	
+	/** 通过条件查询我的文件信息
+	 * @author luxiang
+	 * @param userName 用户名
+	 * @param fileIsVisible 文件可见性
+	 * @param fileCategory 文件类别
+	 * @param page 分页
+	 * @return
+	 */
+	public List<FileInfo> selectMyFileInfoByCondition(String userName, String fileIsVisible, String fileCategory, Page page);
+	
+	
+	
 	/** 通过文件属性(标题,作者等等)模糊查询文件(公有,通过审核)
 	 * @author luxiang
 	 * @param page 分页
