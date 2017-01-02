@@ -32,7 +32,6 @@ public class FileDownloadController {
 
 		// datadir\pdfdir\1483366139.pdf or datadir\temp\1483364067.pdf
 		String fileUrl = request.getParameter("filename");
-
 		// 获取下载文件的地址
 		String filePath = basePath + fileUrl;
 
