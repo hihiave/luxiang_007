@@ -70,6 +70,7 @@ public class FileUploadController {
 				String filenameFull = ToolString.getFilenameFull(filePath);
 				String filenameExtension = ToolString.getFilenameExtension(filenameFull);
 
+				// "C:\\temp\\1483337258.doc"
 				filePath = dirPath + ToolDate.getCurrentTimestamp() + "." + filenameExtension;
 
 				// 获取item中上传文件的输入流

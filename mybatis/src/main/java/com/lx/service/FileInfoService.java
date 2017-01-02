@@ -89,8 +89,6 @@ public interface FileInfoService {
 	 */
 	public List<FileInfo> selectMyFileInfoByCondition(String userName, String fileIsVisible, String fileCategory, Page page);
 	
-	
-	
 	/** 通过文件属性(标题,作者等等)模糊查询文件(公有,通过审核)
 	 * @author luxiang
 	 * @param page 分页

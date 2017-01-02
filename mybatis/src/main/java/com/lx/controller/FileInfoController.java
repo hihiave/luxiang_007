@@ -1,6 +1,5 @@
 package com.lx.controller;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +21,6 @@ import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.tools.Page;
-import com.lx.tools.ToolDate;
 import com.lx.tools.ToolFileTransfer;
 import com.lx.tools.ToolString;
 
@@ -258,16 +256,17 @@ public class FileInfoController {
 			String filenameFull = ToolString.getFilenameFull(filePath);
 			fileInfo1.setFileUploadTime(Integer.valueOf(ToolString.getFilename(filenameFull)));
 
+			// ToolFileTransfer.getToFilePath()
 			switch (KFileFormatType.valueOf(ToolString.getFilenameExtension(filenameFull))) {
 			case doc:
 				if (ToolFileTransfer.transfer(filePath, docDir)) {
-					fileInfo1.setFileUrl(ToolFileTransfer.getToFilePath());
+					fileInfo1.setFileUrl(MacroConstant.DOCDIR + filenameFull);
 					flag = true;
 				}
 				break;
 			case pdf:
 				if (ToolFileTransfer.transfer(filePath, pdfDir)) {
-					fileInfo1.setFileUrl(ToolFileTransfer.getToFilePath());
+					fileInfo1.setFileUrl(MacroConstant.PDFDIR + filenameFull);
 					flag = true;
 				}
 				break;
