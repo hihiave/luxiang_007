@@ -21,6 +21,7 @@ import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.tools.Page;
+import com.lx.tools.ToolDocConverter;
 import com.lx.tools.ToolFileTransfer;
 import com.lx.tools.ToolString;
 
@@ -135,10 +136,10 @@ public class FileInfoController {
 		map.put("pri_file", pri_file);
 		return map;
 	}
+
 	@RequestMapping(value = "/selectByCondition", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> selectByCondition(Integer page_Now,String cate,
-			String type,HttpSession httpSession) {
+	public Map<String, Object> selectByCondition(Integer page_Now, String cate, String type, HttpSession httpSession) {
 		Map<String, Object> map = new HashMap<>();
 		String username = (String) httpSession.getAttribute("username");
 
@@ -270,15 +271,19 @@ public class FileInfoController {
 
 			// 设置文件地址
 			String filePath = request.getParameter("filepath1"); // C:\\temp\\1479709800.doc
-			String filenameFull = ToolString.getFilenameFull(filePath);
-			fileInfo1.setFileUploadTime(Integer.valueOf(ToolString.getFilename(filenameFull)));
+			String filenameFull = ToolString.getFilenameFull(filePath); // 1479709800.doc
+			String Filename = ToolString.getFilename(filenameFull);
+			fileInfo1.setFileUploadTime(Integer.valueOf(Filename));
 
 			// ToolFileTransfer.getToFilePath()
 			switch (KFileFormatType.valueOf(ToolString.getFilenameExtension(filenameFull))) {
 			case doc:
 				if (ToolFileTransfer.transfer(filePath, docDir)) {
-					fileInfo1.setFileUrl(MacroConstant.DOCDIR + filenameFull);
-					flag = true;
+					if (ToolDocConverter.docToPdf(filePath, basePath + MacroConstant.DOC_TEMP)) {
+						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo1.setFileStatus(MacroEnum.DOC);
+						flag = true;
+					}
 				}
 				break;
 			case pdf:

@@ -31,11 +31,11 @@ public class ToolString {
 
 	/** 获取文件扩展名
 	 * @author luxiang
-	 * @param filenameFull 文件全名  例 : 呵呵.doc
+	 * @param filePath 文件全名  例 : *****.doc
 	 * @return doc
 	 */
-	public static String getFilenameExtension(String filenameFull) {
-		return filenameFull.substring(filenameFull.lastIndexOf(".") + 1);
+	public static String getFilenameExtension(String filePath) {
+		return filePath.substring(filePath.lastIndexOf(".") + 1);
 	}
 
 }

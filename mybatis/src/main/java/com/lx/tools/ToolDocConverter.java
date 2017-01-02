@@ -4,9 +4,11 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.ConnectException;
 
 import com.artofsolving.jodconverter.DocumentConverter;
 import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
+import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeException;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 import com.lx.macrofiles.MacroConstant;
@@ -53,11 +55,36 @@ public class ToolDocConverter {
 		return false;
 	}
 
+	// docPath : "C:\\temp\\1483359477.doc"
+	// pdfDir : "D:\\temp\\"
+	public static boolean docToPdf(String docPath, String pdfDir) {
+		boolean flag = false;
+		File docFile = new File(docPath);
+		File pdfFile = new File(pdfDir + ToolString.getFilename(ToolString.getFilenameFull(docPath)) + ".pdf");
+		if (docFile.exists()) {
+			String command = MacroConstant.openOfficeHome + MacroConstant.openOfficeHomeCmd;
+			try {
+				Process process = Runtime.getRuntime().exec(command);
+				OpenOfficeConnection connection = new SocketOpenOfficeConnection(8100);// 创建一个连接对象
+				connection.connect();// 建立连接
+				DocumentConverter converter = new OpenOfficeDocumentConverter(connection);// 创建一个文件转换器
+				converter.convert(docFile, pdfFile);
+				connection.disconnect();// 关闭连接
+				process.destroy();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+			if (pdfFile.exists()) {
+				flag = true;
+			}
+		}
+		return flag;
+	}
+
 	private static boolean doc2pdf() {
 		boolean flag = true;
-		String openOfficeHome = "C:/Program Files (x86)/OpenOffice 4/program/";
-		String command = openOfficeHome
-				+ "soffice.exe -headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\" -nofirststartwizard";
+		String command = MacroConstant.openOfficeHome + MacroConstant.openOfficeHomeCmd;
 		try {
 			Process process = Runtime.getRuntime().exec(command);
 			OpenOfficeConnection connection = new SocketOpenOfficeConnection(8100);// 创建一个连接对象
@@ -66,11 +93,11 @@ public class ToolDocConverter {
 			converter.convert(docFile, pdfFile);
 			connection.disconnect();// 关闭连接
 			process.destroy();
-		} catch (java.net.ConnectException e) {
+		} catch (ConnectException e) {
 			flag = false;
 			MacroEnum.ErrMessage = "openoffice服务未启动,连接错误!";
 			e.printStackTrace();
-		} catch (com.artofsolving.jodconverter.openoffice.connection.OpenOfficeException e) {
+		} catch (OpenOfficeException e) {
 			flag = false;
 			MacroEnum.ErrMessage = "openoffice服务器异常,读取文件错误!";
 			e.printStackTrace();

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.lx.macrofiles.MacroConstant;
+import com.lx.macrofiles.MacroEnum;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.tools.ToolString;
@@ -27,13 +29,25 @@ public class FileDownloadController {
 	protected void fileDownload(HttpServletRequest request, HttpServletResponse response) {
 		response.setCharacterEncoding("UTF-8");
 		String basePath = request.getSession().getServletContext().getRealPath("");
+
+		// datadir\pdfdir\1483366139.pdf or datadir\temp\1483364067.pdf
+		String fileUrl = request.getParameter("filename");
+
+		// 获取下载文件的地址
+		String filePath = basePath + fileUrl;
+
 		FileInfo fileInfo = fileInfoService.getFileByFileId(Integer.parseInt(request.getParameter("fileid")));
-		// 获取下载文件的url
-		String fileUrl = basePath + request.getParameter("filename");
-		String downloadName = fileInfo.getFileName() + "." + ToolString.getFilenameExtension(fileUrl);
+
+		if (fileInfo.getFileStatus() == MacroEnum.DOC) {
+			filePath = basePath + MacroConstant.DOCDIR + ToolString.getFilename(ToolString.getFilenameFull(fileUrl))
+					+ ".doc";
+		}
+
+		String downloadName = fileInfo.getFileName() + "." + ToolString.getFilenameExtension(filePath);
+
 		try {
 			// 判定资源是否存在
-			if (!new File(fileUrl).exists()) {
+			if (!new File(filePath).exists()) {
 				request.getSession().setAttribute("message", "noexist");
 				response.sendRedirect(request.getHeader("Referer"));
 				return;
@@ -42,7 +56,7 @@ public class FileDownloadController {
 			response.setHeader("content-disposition",
 					"attachment;filename=" + URLEncoder.encode(downloadName, "UTF-8"));
 			// 读取要下载的文件 保存到文件输入流
-			FileInputStream in = new FileInputStream(fileUrl);
+			FileInputStream in = new FileInputStream(filePath);
 			// 创建输出流
 			OutputStream out = response.getOutputStream();
 			byte buffer[] = new byte[1024];
