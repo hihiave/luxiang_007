@@ -36,9 +36,6 @@ public class ReadOnlineController {
 				System.out.println("==============转换成功===========");
 				fileUrl = ToolDocConverter.getSwfFilePath();
 
-				// String errorMessage = ToolDocConverter.getErrorMessage();
-				// System.err.println("===============错误==============" +
-				// errorMessage);
 				System.out.println("========swf文件目的地址=====Q======" + fileUrl);
 
 				// "E:/lu/swf文件/1479781384.swf" fileUrl
@@ -49,7 +46,6 @@ public class ReadOnlineController {
 				// TODO Auto-generated method stub
 			}
 		} else {
-
 		}
 	}
 }
