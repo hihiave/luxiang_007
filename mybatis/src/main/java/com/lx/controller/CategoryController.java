@@ -80,14 +80,18 @@ public class CategoryController {
 	@RequestMapping(value = "/get_category", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> get_category(Integer userid) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println("id==========" + userid);
+		System.out.println("=======get_category======" + userid);
 		List<Category> category = categortservice.getAllCategory(userid);
-		List<Category> newcate = new ArrayList<Category>();
-		for (Category cate : category) {
-			if (cate.getCategoryBelongTo().equals(MacroConstant.level0_category))
-				newcate.add(cate);
+
+		List<Category> newcate = new ArrayList<>();
+		if (category != null) {
+			for (Category cate : category) {
+				if (cate.getCategoryBelongTo().equals(MacroConstant.level0_category))
+					newcate.add(cate);
+			}
 		}
+
+		Map<String, Object> map = new HashMap<>();
 		map.put("category", newcate);
 		return map;
 	}
