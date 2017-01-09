@@ -100,7 +100,6 @@ public class FileInfoController {
 	@ResponseBody
 	public Map<String, Object> publicfile(HttpServletRequest request, Integer page_Now) {
 		System.out.println("=================publicfile=============");
-
 		String fileCategory = request.getParameter("fileCategory");
 		String subFileCategory = request.getParameter("subFileCategory");
 		String fileProperty = request.getParameter("fileProperty");
@@ -117,9 +116,16 @@ public class FileInfoController {
 		}
 		Page page = new Page(pageNow);
 
+		if (fileCategory == null) {
+			fileCategory = "";
+		}
+		if (subFileCategory == null) {
+			subFileCategory = "";
+		}
 		if (!subFileCategory.equals("")) {
 			fileCategory = subFileCategory;
 		}
+
 		List<FileInfo> fileInfos = fileInfoService.getFileByFilePropertyWithPass(fileCategory,
 				KFilePropertyType.valueOf(fileProperty), fileIn, page);
 
