@@ -3,12 +3,14 @@
 	pageEncoding="UTF-8"%>
 <%
 	if (session.getAttribute("username") != null) {
+		System.out.println("==============登录==");
 %>
 
 <%
 	} else {
 %>
 <script language="javascript">
+	System.out.println("==============未登录==");
 	alert("请先登录!");
 
 	top.location = 'Login.jsp';
@@ -20,8 +22,8 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ "/";
-	System.out.println("路径" + path);
-	System.out.println("路径" + basePath);
+	System.out.println("ContextPath = " + path);
+	System.out.println("basePath    = " + basePath);
 %>
 <c:set value="0" var="is_manager" />
 <c:set value="0" var="is_worker" />
