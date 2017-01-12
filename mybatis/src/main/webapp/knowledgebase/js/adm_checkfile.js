@@ -40,7 +40,7 @@ function changeFileInfo(obj){
 	cate_select.options.length=0;
 	var op="<option value=''>请选择</option>";
 	$("#cate_select").append(op);
-	var userid=2;
+	var userid=1;
 	$.ajax({
 		type : 'post',
 		url : "/mybatis/CategoryController/get_category.do",
@@ -116,7 +116,7 @@ function get_child_category_select(obj){
 	var child_cate=document.getElementById("second_cate");
 
 	child_cate.options.length=0;
-	var userid=2;
+	var userid=1;
 	var belongto=$(obj).val();
 	$.ajax({
 		type : 'post',
