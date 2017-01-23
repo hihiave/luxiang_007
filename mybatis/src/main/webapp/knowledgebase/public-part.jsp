@@ -115,6 +115,7 @@
 		</div>
 		<div class="clear"></div>
 	</div>
+	
 	<div style="float:right;padding:0.4% 1.1% 0 0;
 	font-size:13px;font-weight:bold;">
 		<span id="welcomeword">欢迎你，<%=session.getAttribute("username")%>！</span>
