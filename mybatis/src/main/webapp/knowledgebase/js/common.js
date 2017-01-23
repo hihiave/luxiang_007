@@ -13,7 +13,6 @@
 //时间戳转换
 // 格式化时间对象
 $(function() {
-	//$("#welcomeword").html("${username}");
 	get_user_check_num();
 	get_file_check_num();
 })
