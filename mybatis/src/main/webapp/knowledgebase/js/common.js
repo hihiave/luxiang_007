@@ -17,6 +17,7 @@ $(function() {
 	get_file_check_num();
 })
 
+
 function get_user_check_num(){
 	$.ajax(
             {
