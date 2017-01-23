@@ -44,7 +44,7 @@
 		var id = "${userid}";
 		var time = timeStampFormatDay(register_time * 1000);
 		console.log(time);
-		$("#show_user_name").html("${username}");
+		//$("#welcomeword").html("${username}");
 		$("#show_user_name").html("${username}");
 		$("#show_user_role").html("${userrole}");
 		$("#show_user_truename").html("${usertruename}");
@@ -98,7 +98,7 @@
 							class="glyphicon glyphicon-menu-down"></span></a></li>
 					<ul id="user-manage" class="panel-collapse collapse in">
 						<li><a href="/mybatis/knowledgebase/adm-inquire.jsp">用户查询</a></li>
-						<li><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核</a></li>
+						<li><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核<span id="badge1" class="badge"></span></a></li>
 					</ul>
 				</c:if>
 				<c:if test="${is_worker == 1}">
@@ -115,7 +115,7 @@
 							class="glyphicon glyphicon-menu-down"></span></a></li>
 					<ul id="source-manager" class="panel-collapse collapse in ">
 						<li><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
-						<li><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
+						<li><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核<span id="badge2" class="badge"></span></a></li>
 					</ul>
 				</c:if>
 
@@ -149,20 +149,20 @@
 						style="font-size: 17px;padding:6% 25% 0 0;
 						 font-weight: 600;display: inline-block;float:right;">
 						<p>
-							用户名：<span id="show_user_name">xxxx</span>
+							用户名：<span id="show_user_name"></span>
 						</p>
 						<p>
-							真实姓名：<span id="show_user_truename">xxxx</span>
+							真实姓名：<span id="show_user_truename"></span>
 						</p>
 						<p>
-							用户角色：<span id="show_user_role">xxxx</span>
+							用户角色：<span id="show_user_role"></span>
 						</p>
 
 						<p>
-							注册时间：<span id="show_register_time">xxxx</span>
+							注册时间：<span id="show_register_time"></span>
 						</p>
 						<p>
-							注册邮箱：<span id="show_register_email">xxxx</span>
+							注册邮箱：<span id="show_register_email"></span>
 						</p>
 						
 					</div>

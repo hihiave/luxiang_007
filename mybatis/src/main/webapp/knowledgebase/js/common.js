@@ -12,7 +12,40 @@
 
 //时间戳转换
 // 格式化时间对象
+$(function() {
+	//$("#welcomeword").html("${username}");
+	get_user_check_num();
+	get_file_check_num();
+})
 
+function get_user_check_num(){
+	$.ajax(
+            {
+                type:'post',
+                url:"/mybatis/UserInfoController/get_unchecked_num.do",
+                dataType:'json',
+                success:function(data){
+                	var num=data["num"];
+                    $("#badge1").html(num);
+                }
+            }
+        )
+
+}
+function get_file_check_num(){
+	$.ajax(
+            {
+                type:'post',
+                url:"/mybatis/FileInfoController/get_unchecked_num.do",
+                dataType:'json',
+                success:function(data){
+                	var num=data["num"];
+                    $("#badge2").html(num);
+                }
+            }
+        )
+
+}
 Date.prototype.Format = function (fmt) {
     var o = {
         "M+": this.getMonth() + 1, //月份

@@ -122,9 +122,15 @@
 
         <%--}--%>
     <%--</script>--%>
-
+   <script type="text/javascript">
+   function keylogin(){
+	   if(event.keyCode==13){
+		   document.getElementById("denglu").click();
+	   }
+   }
+   </script>
 </head>
-<body>
+<body onkeydown="keylogin();">
 <div class="login">
     <div class="login-top">
         <img src="img/zhishiku_2.png">

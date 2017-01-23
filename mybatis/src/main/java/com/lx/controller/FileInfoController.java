@@ -60,7 +60,15 @@ public class FileInfoController {
 		map.put("flag", result);
 		return map;
 	}
-
+	//获取待审文件数量
+	@RequestMapping(value = "/get_unchecked_num", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> get_unchecked_num(HttpSession httpSession) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		int num=fileInfoService.getCountWithWaitForCheck();
+		map.put("num", num);
+		return map;
+	}
 	// 获取文件描述
 	@RequestMapping(value = "/get_file_msg", method = RequestMethod.POST)
 	@ResponseBody
