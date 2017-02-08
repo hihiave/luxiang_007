@@ -6,6 +6,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set value="0" var="is_manager"/>
+<c:set value="0" var="is_worker"/>
+<c:forEach items="${userrole}" var="role">
+    <c:if test="${role == '管理员'}">
+        <c:set value="1" var="is_manager"/>
+    </c:if>
+    <c:if test="${role == '普通用户'}">
+        <c:set value="1" var="is_worker"/>
+    </c:if>
+</c:forEach>
 <div class="panel panel-info" style="display: none;" id="search_panel" >
     <div class="panel-heading">
         <h3 class="panel-title">搜索结果</h3>

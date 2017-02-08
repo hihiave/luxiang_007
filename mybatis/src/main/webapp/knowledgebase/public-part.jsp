@@ -49,6 +49,7 @@
         <c:set value="1" var="is_worker"/>
     </c:if>
 </c:forEach>
+
 <div class="pub_top">
 <input type="hidden" id="userid" value="<%=session.getAttribute("userid")%>">
 <input type="hidden" id="username" value="<%=session.getAttribute("username")%>">
@@ -81,14 +82,14 @@
 		<div class="input-group input-group-md" style="float: left;">
 			<input type="text" class="form-control"
 				aria-describedby="sizing-addon1" style="width:350px;"
-				id="file_search_input" onfocus="myfunction()" oninput="myfunction()">
+				id="file_search_input" onfocus="myfunction()" oninput="myfunction()" onkeydown="keysearch();">
 			<!-- <button class="btn btn-default"
 				style="width: 78px; margin-left: 5px; background: #808080; color: #FFF"
 				id="file_search_sub" onclick="send_search_info()">搜&nbsp;索
 			</button> -->
 			<button class="button button-action button-pill button-small"
 				style="width: 78px;height:33px; margin-left: 5px; background: #808080;padding:0; color: #FFF"
-				id="file_search_sub" onclick="send_search_info()">搜&nbsp;索
+				id="file_search_sub" onclick="send_search_info()" >搜&nbsp;索
 			</button>
 			<a href="/mybatis/search.jsp" target="black">
 			<button class="button button-primary button-pill button-small"
@@ -114,6 +115,9 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-
+	<div style="float:right;padding:0.4% 1.1% 0 0;
+	font-size:13px;font-weight:bold;">
+		<span id="welcomeword">欢迎你，<%=session.getAttribute("username")%>！</span>
+	</div>
 	<div style="clear: both;"></div>
 </div>

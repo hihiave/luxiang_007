@@ -80,7 +80,17 @@ public class UserInfoController {
 		map.put("result", "success");
 		return map;
 	}
-
+	/**
+	 * 提示待审数量
+	 */
+	@RequestMapping(value = "/get_unchecked_num", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> get_unchecked_num(HttpSession httpSession) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		int num=userInfoService.getCountWithWaitForCheck();
+		map.put("num", num);
+		return map;
+	}
 	/**
 	 * 注册
 	 */

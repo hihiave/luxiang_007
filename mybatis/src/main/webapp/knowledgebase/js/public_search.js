@@ -20,6 +20,10 @@ $(function() {
 	 *  }) $("#file_search-input").autocomplete({ source:filepoints }); })
 	 */
 })
+function keysearch(){
+	if (event.keyCode==13)
+		document.getElementById("file_search_sub").click();
+}
 function myfunction() {
 	var filepoints = new Array();
 	var fileinput = $("#file_search_input").val();
@@ -168,9 +172,7 @@ function get_all_search_file_table(data) {
 	for (var i = 0; i < all_pub_file.length; i++) {
 		var tr_begin = "<tr>";
 		var tr_end = "</tr>";
-		var td_1 = "<td style='padding-top:15px;'><a href='##' onclick='ReadOnLine(this)' path='"
-				+ all_pub_file[i].fileUrl
-				+ "'>"
+		var td_1 = "<td style='padding-top:15px;'><a href='../"+all_pub_file[i].fileUrl+"' >"
 				+ all_pub_file[i].fileName
 				+ "</a></td>";
 		var td_2 = "<td style='padding-top:15px;text-align:center;'>"

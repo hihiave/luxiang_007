@@ -20,7 +20,7 @@ function get_all_checkfile_table(data){
         var tr_begin = "<tr>";
         var tr_end = "</tr>";
         var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' value="+checkfile[i].fileId+"></td>";
-        var td_2 = "<td style='padding-top:15px;' id="+checkfile[i].fileId+"><a href='##' onclick='ReadOnLine(this)' path='"+checkfile[i].fileUrl+"'>"+checkfile[i].fileName+"</a></td>";
+        var td_2 = "<td style='padding-top:15px;' id="+checkfile[i].fileId+"><a href='../"+checkfile[i].fileUrl+"' >"+checkfile[i].fileName+"</a></td>";
         var td_3 = "<td style='padding-top:15px;text-align:center;'>"+checkfile[i].fileAuthor+"</td>";
         var td_5 = "<td style='padding-top:15px;'>"+timeStampFormatDay(checkfile[i].fileUploadTime*1000)+"</td>";
         var td_4 = "<td style='text-align:center;'><button class='button button-action" +
@@ -40,7 +40,7 @@ function changeFileInfo(obj){
 	cate_select.options.length=0;
 	var op="<option value=''>请选择</option>";
 	$("#cate_select").append(op);
-	var userid=2;
+	var userid=1;
 	$.ajax({
 		type : 'post',
 		url : "/mybatis/CategoryController/get_category.do",
@@ -116,7 +116,7 @@ function get_child_category_select(obj){
 	var child_cate=document.getElementById("second_cate");
 
 	child_cate.options.length=0;
-	var userid=2;
+	var userid=1;
 	var belongto=$(obj).val();
 	$.ajax({
 		type : 'post',

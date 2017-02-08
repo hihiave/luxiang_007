@@ -11,6 +11,7 @@
 	}
 	else
 	{
+		
 %>
 	<script language="javascript">
 
@@ -86,7 +87,7 @@ padding:0 17px;
 					<li><a href="#user-manage" data-toggle="collapse">用户管理<span class="glyphicon glyphicon-menu-down" ></span></a></li>
 						<ul id="user-manage" class="panel-collapse collapse in">
 							<li class="active"><a href="/mybatis/knowledgebase/adm-inquire.jsp">用户查询</a></li>
-							<li><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核</a></li>
+							<li><a href="/mybatis/knowledgebase/adm-check.jsp">用户审核<span id="badge1" class="badge"></span></a></li>
 						</ul>
 						</c:if>
 						<c:if test="${is_worker == 1}">
@@ -104,7 +105,7 @@ padding:0 17px;
 						<li><a href="#source-manager" data-toggle="collapse">资源管理<span class="glyphicon glyphicon-menu-down" ></span></a></li>
 						<ul id="source-manager" class="panel-collapse collapse in ">
 							<li><a href="/mybatis/knowledgebase/adm-category.jsp">类别管理</a></li>
-							<li><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核</a></li>
+							<li><a href="/mybatis/knowledgebase/adm-checkfile.jsp">资源审核<span id="badge2" class="badge"></span></a></li>
 						</ul>
 						</c:if>
 					
@@ -133,7 +134,7 @@ padding:0 17px;
                         <thead>
                         <tr>
                             <th style="font-size:16px;width:5%;"></th>
-                            <th style="font-size:16px;width:35%">用户名</th>
+                            <th style="font-size:16px;width:30%">用户名</th>
                             <th style="padding-bottom:5px;padding-top:0px;width:36%;">
                             <input type="text" id="search-in" name="" style=
                             "height:34px;padding-left:5px;width:90%">
