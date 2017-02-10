@@ -30,6 +30,7 @@ public class FileDownloadController {
 		response.setCharacterEncoding("UTF-8");
 		String basePath = request.getSession().getServletContext().getRealPath("");
 
+		System.out.println("============fileDownload====== eeee==");
 		// datadir\pdfdir\1483366139.pdf or datadir\temp\1483364067.pdf
 		String fileUrl = request.getParameter("filename");
 		// 获取下载文件的地址

@@ -60,27 +60,26 @@ public class FileInfoController {
 		map.put("flag", result);
 		return map;
 	}
-	//获取待审文件数量
+
+	// 获取待审文件数量
 	@RequestMapping(value = "/get_unchecked_num", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> get_unchecked_num(HttpSession httpSession) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		int num=fileInfoService.getCountWithWaitForCheck();
+		int num = fileInfoService.getCountWithWaitForCheck();
 		map.put("num", num);
 		return map;
 	}
+
 	// 获取文件描述
 	@RequestMapping(value = "/get_file_msg", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> get_file_msg(Integer fileid) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		FileInfo fileInfo = fileInfoService.getFileByFileId(fileid);
-		String keyWord = fileInfo.getFileKeywords();
-		String fileDes = fileInfo.getFileDesc();
-		String fileCate = fileInfo.getFileCategory();
-		map.put("keyWord", keyWord);
-		map.put("fileDes", fileDes);
-		map.put("filecate", fileCate);
+		map.put("keyWord", fileInfo.getFileKeywords());
+		map.put("fileDes", fileInfo.getFileDesc());
+		map.put("filecate", fileInfo.getFileCategory());
 		return map;
 	}
 
