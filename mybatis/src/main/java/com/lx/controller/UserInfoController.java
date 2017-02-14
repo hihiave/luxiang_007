@@ -39,8 +39,6 @@ public class UserInfoController {
 			UserInfo userInfo = userInfoService.selectUserByUserName(username);
 			// httpSession.setAttribute("userinfo",userInfo);
 			httpSession.setAttribute("username", username);
-			String user = userInfo.getUserRole();
-			System.out.println("name=========11========" + user);
 			httpSession.setAttribute("time", userInfo.getUserRegisterTime());
 			httpSession.setAttribute("userrole", userInfo.getUserRole());
 			httpSession.setAttribute("usertruename", userInfo.getUserRealName());

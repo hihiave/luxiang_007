@@ -62,21 +62,13 @@ Date.prototype.Format = function (fmt) {
     return fmt;
 };
 
-
-
-
 /*
  * 将时间戳转成日期格式 比如2016-04-26 08:00:00
  */
-
-
 function timeStampFormat(time_stamp) {
-
     var add0 = function(m){
         return m<10?'0'+m:m
     };
-
-
     var time = new Date(time_stamp);
     var y = time.getFullYear();
     var m = time.getMonth()+1;
@@ -91,8 +83,6 @@ function timeStampFormatMinute(time_stamp) {
 
     var time = new Date(time_stamp);
     return getFormatTime(time, "yyyy-MM-dd hh:mm");
-
-
 }
 
 /**
@@ -101,7 +91,6 @@ function timeStampFormatMinute(time_stamp) {
  * @returns {String}
  */
 function timeStampFormatDay(time_stamp) {
-
     var add0 = function(m){
         return m<10?'0'+m:m
     };
@@ -122,7 +111,6 @@ function timeStampFormatDay(time_stamp) {
  *
  */
 function getFormatTime (date, format) {
-
     var time = date.Format(format);
     return time;
 }
@@ -130,6 +118,7 @@ function getBasePath() {
     var base = $("#base").val();
     return base;
 }
+
 //退出登录
 function logout(){
     var logout_src = getBasePath()+"/UserInfoController/logout.do";
@@ -265,7 +254,6 @@ function createNewPagination(data, class_name,src,deal_cb,left_arrow_id, right_a
 
 }
 
-
 //在线阅读
 function ReadOnLine(obj){
     //var filename = $(obj).attr("path");
@@ -291,9 +279,7 @@ function ReadOnLine(obj){
     $("#form-readonline").remove();
 }
 
-
 function download(obj){
-
         var form = $("<form>");   //定义一个form表单
         form.attr('style', 'display:none');   //在form表单中添加查询参数
 
