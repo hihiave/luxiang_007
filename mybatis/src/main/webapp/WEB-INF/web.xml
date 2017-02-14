@@ -50,16 +50,13 @@
 		<servlet-name>springMvc</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
-	<welcome-file-list>
-		<welcome-file>/index.jsp</welcome-file>
-	</welcome-file-list>
+	
+	<!-- <welcome-file-list>
+		<welcome-file>/knowledgebase/Login.jsp</welcome-file>
+	</welcome-file-list> -->
+	
 	<!-- 配置session超时时间，单位分钟 -->
 	<session-config>
 		<session-timeout>60</session-timeout>
 	</session-config>
-
-	<welcome-file-list>
-		<welcome-file>/knowledgebase/Login.jsp</welcome-file>
-	</welcome-file-list>
-
 </web-app>
