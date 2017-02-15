@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,8 @@ import com.lx.tools.ToolString;
 @RequestMapping("/FileInfoController")
 public class FileInfoController {
 
+	private static Logger logger = Logger.getLogger(FileInfoController.class);
+
 	@Autowired
 	FileInfoService fileInfoService;
 
@@ -45,10 +48,16 @@ public class FileInfoController {
 		return "showFileInfo";
 	}
 
-	// 修改文件描述
+	// 修改文件信息
 	@RequestMapping(value = "/alter_file_msg", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> alter_file_msg(Integer fileid, String keyword, String filedesc, String filecate) {
+		logger.info("=================alter_file_msg==================");
+		logger.info("=================fileid==================" + fileid);
+		logger.info("=================keyword==================" + keyword);
+		logger.info("=================filedesc==================" + filedesc);
+		logger.info("=================filecate==================" + filecate);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		FileInfo fileInfo = new FileInfo();
 		fileInfo.setFileCategory(filecate);
@@ -64,7 +73,8 @@ public class FileInfoController {
 	// 获取待审文件数量
 	@RequestMapping(value = "/get_unchecked_num", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> get_unchecked_num(HttpSession httpSession) {
+	public Map<String, Object> get_unchecked_num() {
+		logger.info("=================get_unchecked_num==================");
 		Map<String, Object> map = new HashMap<String, Object>();
 		int num = fileInfoService.getCountWithWaitForCheck();
 		map.put("num", num);
@@ -87,9 +97,8 @@ public class FileInfoController {
 	@RequestMapping(value = "/get_file_points", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> get_file_points(KFilePropertyType filePropertyType, String value) {
-		System.out.println("=================get_file_points=============");
-		System.out.println("++++++++" + filePropertyType);
-		System.out.println("1" + value);
+		logger.info("=================get_file_points==================");
+
 		List<String> fileInfos = fileInfoService.getIntelligentPrompt(filePropertyType, value);
 		Map<String, Object> map = new HashMap<String, Object>();
 		/*
@@ -106,7 +115,7 @@ public class FileInfoController {
 	@RequestMapping(value = "/publicfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> publicfile(HttpServletRequest request, Integer page_Now) {
-		System.out.println("=================publicfile=============");
+		logger.info("=================publicfile==================");
 		String fileCategory = request.getParameter("fileCategory");
 		String subFileCategory = request.getParameter("subFileCategory");
 		String fileProperty = request.getParameter("fileProperty");
@@ -148,6 +157,7 @@ public class FileInfoController {
 	@RequestMapping(value = "/myuploadfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> myuploadfile(Integer page_Now, HttpSession httpSession) {
+		logger.info("=================myuploadfile==================");
 		Map<String, Object> map = new HashMap<>();
 		String username = (String) httpSession.getAttribute("username");
 
@@ -165,6 +175,7 @@ public class FileInfoController {
 	@RequestMapping(value = "/selectByCondition", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> selectByCondition(Integer page_Now, String cate, String type, HttpSession httpSession) {
+		logger.info("=================selectByCondition==================");
 		Map<String, Object> map = new HashMap<>();
 		String username = (String) httpSession.getAttribute("username");
 
@@ -179,20 +190,14 @@ public class FileInfoController {
 		return map;
 	}
 
-	// 我的下载
-	public String myDownloadFile() {
-
-		return null;
-	}
-
 	// 我的待审
 	@RequestMapping(value = "/waitforcheckfile", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> waitforcheckfile(Integer page_Now, HttpSession httpSession,
-			HttpServletRequest httpServletRequest) {
+	public Map<String, Object> waitforcheckfile(Integer page_Now, HttpSession httpSession) {
+		logger.info("=================waitforcheckfile==================");
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		String username = (String) httpSession.getAttribute("username");
-		System.out.println(username + "hahahaha");
 
 		Page page = new Page(page_Now);
 
@@ -210,8 +215,8 @@ public class FileInfoController {
 	// 我的草稿
 	@RequestMapping(value = "/draftfile", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> draftfile(Integer page_Now, HttpSession httpSession,
-			HttpServletRequest httpServletRequest) {
+	public Map<String, Object> draftfile(Integer page_Now, HttpSession httpSession) {
+		logger.info("=================draftfile==================");
 		Map<String, Object> map = new HashMap<String, Object>();
 		String username = (String) httpSession.getAttribute("username");
 
@@ -233,6 +238,7 @@ public class FileInfoController {
 	@RequestMapping(value = "/delete_file_to_draft", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> pushWithRecycleBin(Integer[] delete_array) {
+		logger.info("=================delete_file_to_draft==================");
 		Map<String, Object> map = new HashMap<String, Object>();
 		boolean flag = fileInfoService.batchFilesIsPass(KCheckType.invalid, delete_array);
 		map.put("flag", flag);
@@ -243,19 +249,19 @@ public class FileInfoController {
 	@RequestMapping(value = "/recovery_file", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> popWithRecycleBin(Integer[] recovery_array) {
+		logger.info("=================recovery_file==================");
 		Map<String, Object> map = new HashMap<String, Object>();
 		boolean d = fileInfoService.batchFilesIsPass(KCheckType.pass, recovery_array);
 		map.put("flag", d);
 		return map;
 	}
 
-	// 用户删除文件,从垃圾箱里再次删除
+	// 用户删除文件
 	@RequestMapping(value = "/delete_file", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> delete_file(Integer[] delete_array) {
+		logger.info("=================delete_file==================");
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println("传入数据=========");
-
 		boolean result = fileInfoService.delFilesById(delete_array);
 		map.put("flag", result);
 		return map;
@@ -265,6 +271,7 @@ public class FileInfoController {
 	@RequestMapping(value = "/add_file_info", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> uploadFile(HttpServletRequest request) {
+		logger.info("=================uploadFile==================");
 		String basePath = request.getSession().getServletContext().getRealPath("");
 		String pdfDir = basePath + MacroConstant.PDFDIR;
 		String docDir = basePath + MacroConstant.DOCDIR;
@@ -435,6 +442,7 @@ public class FileInfoController {
 	@RequestMapping(value = "/download_count_add", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> down_check_file(Integer fileid) {
+		logger.info("=================down_check_file==================");
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		FileInfo fileInfo = fileInfoService.getFileByFileId(fileid);
@@ -451,7 +459,8 @@ public class FileInfoController {
 	@RequestMapping(value = "/get_all_checkfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> get_all_checkfile(Integer page_Now) {
-		// 你看一下，完善这个方法
+		logger.info("=================get_all_checkfile==================");
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		int pageNow = 1;
 		if (page_Now != null) {
@@ -472,6 +481,7 @@ public class FileInfoController {
 	@RequestMapping(value = "/pass_file", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> pass_file(Integer[] pass_array) {
+		logger.info("=================pass_file==================");
 		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println("传入数据=========");
 		boolean result = fileInfoService.batchFilesIsPass(KCheckType.pass, pass_array);
@@ -483,6 +493,7 @@ public class FileInfoController {
 	@RequestMapping(value = "/notpass_file", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> notpass_file(Integer[] notpass_array) {
+		logger.info("=================notpass_file==================");
 		Map<String, Object> map = new HashMap<String, Object>();
 		boolean flag = fileInfoService.batchFilesIsPass(KCheckType.notPass, notpass_array);
 		map.put("flag", flag);
