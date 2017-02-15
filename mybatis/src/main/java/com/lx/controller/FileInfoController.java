@@ -58,6 +58,7 @@ public class FileInfoController {
 		logger.info("=================filedesc==================" + filedesc);
 		logger.info("=================filecate==================" + filecate);
 		
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		FileInfo fileInfo = new FileInfo();
 		fileInfo.setFileCategory(filecate);
