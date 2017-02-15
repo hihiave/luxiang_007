@@ -40,7 +40,7 @@ public class ToolSearchDocIndex {
 	private static final String type = "type"; // <id:1><type:pdf>
 	private static final String fileName = "fileName";// <fileName:一种N层体系结构下的Web挖掘应用>
 	private static final String contents = "contents"; // <contents:~>
-	private static final int keyContextNum = 300; // 关键词文本的数量
+	private static final int keyContextNum = 2500; // 关键词文本的数量
 
 	// 获得索引结果
 	public static List<DocumentEntity> getSearchResult(String queryStr, String searchType, String filetype, int topNum,
