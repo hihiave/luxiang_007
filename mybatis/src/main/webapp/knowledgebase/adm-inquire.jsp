@@ -10,8 +10,7 @@
 <%
 	}
 	else
-	{
-		
+	{		
 %>
 	<script language="javascript">
 
@@ -52,11 +51,11 @@
 <style type="text/css">
 th .button-action{
 height:34px;
-padding:0 17px;
+padding:0 20px;
 }
 td .button-rounded{
 height:34px;
-padding:0 17px;
+padding:0 20px;
 }
 
 </style>

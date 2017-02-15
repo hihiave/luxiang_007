@@ -122,7 +122,7 @@
 							 background: #808080;color: #FFF" onclick="delete_all_file_modal(this)">删除
                         </button>
                     </div>
-                    <table class="table table-striped">
+                    <table class="table table-striped" style="font-size:14px;">
                         <thead>
                         <tr>
                             <th style="width: 5%"><input type="checkbox" id="selAll" onclick="selectAll()"></th>

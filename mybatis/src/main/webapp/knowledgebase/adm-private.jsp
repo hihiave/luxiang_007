@@ -161,7 +161,7 @@ if(session.getAttribute("message")=="noexist"){
 							 onclick="fileinfo_search(this)" 
 							 style="float:right;height:33px; margin-right:2.5%; background: #808080;color: #FFF">查询</button>
 						</div>
-						<table class="table table-striped">
+						<table class="table table-striped" style="font-size:14px;">
 							<thead>
 								<tr>
 									<th style="width: 5%"><input type="checkbox" id="selAll"

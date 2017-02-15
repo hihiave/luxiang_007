@@ -192,13 +192,14 @@
 				<li>
 				<span style="margin-left:4%;">关键词：</span>
 				<input type="text" value="" style="width:70%;display:inline;"
-							class="form-control" id="fileword" >
+					placeholder="多个关键词以空格分开"		class="form-control" id="fileword" >
 				</li>
 				<li>
+				<p type="hidden" id="fileid"></p>
 				<span>资料描述：</span>
 				<textarea type="textarea" id="filearea" rows="3" 
 						style="width:70%;vertical-align:top;display:inline;"
-							class="form-control" value=""></textarea>
+						placeholder="请对文件进行描述"	class="form-control" value=""></textarea>
 				</li>	
 					</ul>
 					</div>
