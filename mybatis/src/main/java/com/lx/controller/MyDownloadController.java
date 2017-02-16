@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,8 @@ import com.lx.tools.Page;
 @RequestMapping("/MyDownloadController")
 public class MyDownloadController {
 
+	private static Logger logger = Logger.getLogger(MyDownloadController.class);
+
 	@Autowired
 	MyDownloadService myDownloadService;
 
@@ -27,12 +30,11 @@ public class MyDownloadController {
 	@RequestMapping(value = "/add_my_download", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> addMydownload(HttpSession httpSession, Integer fileid) {
+		logger.info("=================add_my_download==================");
 		String userName = (String) httpSession.getAttribute("username");
-		if (myDownloadService.checkDownloadIsExist(userName, fileid)) {
-			return null;
+		if (!myDownloadService.checkDownloadIsExist(userName, fileid)) {
+			myDownloadService.addMyDownload(userName, fileid);
 		}
-		
-		myDownloadService.addMyDownload(userName, fileid);
 		return null;
 	}
 
@@ -40,6 +42,7 @@ public class MyDownloadController {
 	@RequestMapping(value = "/del_my_download", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> delMyDownload(Integer[] myDownloadIds) {
+		logger.info("=================del_my_download==================");
 		// myDownloadIds 我的下载记录的id号, 批量的
 		myDownloadService.delMyDownload(myDownloadIds);
 		Map<String, Object> map = new HashMap<>();

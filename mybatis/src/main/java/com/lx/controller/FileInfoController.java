@@ -53,19 +53,11 @@ public class FileInfoController {
 	@ResponseBody
 	public Map<String, Object> alter_file_msg(Integer fileid, String keyword, String filedesc, String filecate) {
 		logger.info("=================alter_file_msg==================");
-		logger.info("=================fileid==================" + fileid);
-		logger.info("=================keyword==================" + keyword);
-		logger.info("=================filedesc==================" + filedesc);
-		logger.info("=================filecate==================" + filecate);
-		
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		FileInfo fileInfo = new FileInfo();
+		fileInfo.setFileKeywords(keyword);
+		fileInfo.setFileDesc(filedesc);
 		fileInfo.setFileCategory(filecate);
-		if (keyword != null || filedesc != null) {
-			fileInfo.setFileDesc(filedesc);
-			fileInfo.setFileKeywords(keyword);
-		}
 		boolean result = fileInfoService.updateFileByFileId(fileid, fileInfo);
 		map.put("flag", result);
 		return map;
@@ -99,15 +91,10 @@ public class FileInfoController {
 	@ResponseBody
 	public Map<String, Object> get_file_points(KFilePropertyType filePropertyType, String value) {
 		logger.info("=================get_file_points==================");
-
 		List<String> fileInfos = fileInfoService.getIntelligentPrompt(filePropertyType, value);
 		Map<String, Object> map = new HashMap<String, Object>();
-		/*
-		 * Iterator<String> x=fileInfos.iterator(); while(x.hasNext()) {
-		 * System.out.println(x.next()); }
-		 */
+
 		map.put("FileInfo_check", fileInfos);
-		// System.out.println("check+++++++++"+userInfos.size());
 		return map;
 	}
 
@@ -173,20 +160,19 @@ public class FileInfoController {
 		return map;
 	}
 
+	// 我的文件，条件查询
 	@RequestMapping(value = "/selectByCondition", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> selectByCondition(Integer page_Now, String cate, String type, HttpSession httpSession) {
 		logger.info("=================selectByCondition==================");
-		Map<String, Object> map = new HashMap<>();
 		String username = (String) httpSession.getAttribute("username");
-
 		Page page = new Page(page_Now);
 		List<FileInfo> pri_file = fileInfoService.selectMyFileInfoByCondition(username, type, cate, page);
-		int pageCount = page.getTotalPageCount();
-		int totalCount = page.getTotalCount();
-		map.put("totalCount", totalCount);
+
+		Map<String, Object> map = new HashMap<>();
 		map.put("pageNow", page_Now);
-		map.put("pageCount", pageCount);
+		map.put("totalCount", page.getTotalCount());
+		map.put("pageCount", page.getTotalPageCount());
 		map.put("pri_file", pri_file);
 		return map;
 	}
@@ -484,7 +470,7 @@ public class FileInfoController {
 	public Map<String, Object> pass_file(Integer[] pass_array) {
 		logger.info("=================pass_file==================");
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println("传入数据=========");
+
 		boolean result = fileInfoService.batchFilesIsPass(KCheckType.pass, pass_array);
 		map.put("flag", result);
 		return map;
