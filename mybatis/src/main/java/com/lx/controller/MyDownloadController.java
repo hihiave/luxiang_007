@@ -44,8 +44,9 @@ public class MyDownloadController {
 	public Map<String, Object> delMyDownload(Integer[] myDownloadIds) {
 		logger.info("=================del_my_download==================");
 		// myDownloadIds 我的下载记录的id号, 批量的
-		myDownloadService.delMyDownload(myDownloadIds);
+		boolean result=myDownloadService.delMyDownload(myDownloadIds);
 		Map<String, Object> map = new HashMap<>();
+		map.put("flag", result);
 		return map;
 	}
 

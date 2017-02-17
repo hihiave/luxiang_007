@@ -377,12 +377,12 @@ function download_search(obj){
     sendAjaxRequest("/mybatis/MyDownloadController/add_my_download.do",{"fileid":fileid},function(){console.log("下载成功")});
     sendAjaxRequest("/mybatis/FileInfoController/download_count_add.do",{"fileid":fileid},function(data){
         console.log("下载次数"+data["count"]);
-        if($(obj).attr("did") == "public"){
-            var src = "/mybatis/FileInfoController/publicfile.do";
-            var page = $("ul.pagination li.active>a").text();
-            console.log(page);
-//            sendAjaxRequest(src,{"page_Now":page,"fileProperty":"fullText"},get_all_search_file_table);
-            sendAjaxRequest(src,get_all_search_file_table);
-        }
+//        if($(obj).attr("did") == "public"){
+//            var src = "/mybatis/FileInfoController/publicfile.do";
+//            //var page = $("ul.pagination li.active>a").text();
+//            //console.log(page);
+////            sendAjaxRequest(src,{"page_Now":page,"fileProperty":"fullText"},get_all_search_file_table);
+        send_search_info();
+//        }
     });
 }

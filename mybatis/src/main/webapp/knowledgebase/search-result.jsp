@@ -44,21 +44,21 @@
             		<c:choose>
             			<c:when test="${is_worker == 1}">
                             <th style="width: 37%;">文件名</th>
-                            <th style="width: 20%;">关键词</th>
-                            <th style="padding-left:0px;width: 10%;">上传者</th>
-                            <th style="width: 13%;">上传时间</th>
-                            <th style="padding-left:20px;width: 10%;">下载</th>
-                            <th style="padding-left:0px;width: 10%;">下载量</th>
+                            <th style="width: 20%;text-align:center;">关键词</th>
+                            <th style="width: 10%;text-align:center">上传者</th>
+                            <th style="width: 13%;text-align:center">上传时间</th>
+                            <th style="width: 10%;text-align:center">下载</th>
+                            <th style="width: 10%;text-align:center">下载量</th>
                         </c:when>
                         <c:otherwise>
                         	<th style="width: 5%">
                         	<input type="checkbox" id="selAllfile" onclick="selectAllfile()"></th>
                         	<th style="width: 32%;">文件名</th>
-                        	<th style="width: 20%;">关键词</th>
-                            <th style="padding-left:0px;width: 10%;">上传者</th>
-                            <th style="width: 13%;">上传时间</th>
-                            <th style="padding-left:20px;width: 10%;">下载</th>
-                            <th style="padding-left:0px;width: 10%;">下载量</th>
+                        	<th style="width: 20%;text-align:center;">关键词</th>
+                            <th style="width: 10%;text-align:center">上传者</th>
+                            <th style="width: 13%;text-align:center">上传时间</th>
+                            <th style="width: 10%;text-align:center">下载</th>
+                            <th style="width: 10%;text-align:center">下载量</th>
                         </c:otherwise>
                     </c:choose>
             </tr>

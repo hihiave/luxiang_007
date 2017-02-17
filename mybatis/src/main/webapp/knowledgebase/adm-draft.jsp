@@ -141,10 +141,12 @@ if(session.getAttribute("message")=="noexist"){
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th style="width: 5%;"><input type="checkbox" id="selAll" onclick="selectAll()"></th>
-                            <th style="width: 80%;">文件名</th>
-
-                            <th style="width: 15%;">&nbsp;&nbsp;&nbsp;下载</th>
+                            <th style="width: 5%;padding-bottom:10px;"><input type="checkbox" id="selAll" onclick="selectAll()"></th>
+                            <th style="width: 50%;">文件名</th>
+							<th style="width: 13%;text-align:center">属性</th>
+							<th style="width: 14%;text-align:center">上传时间</th>
+							<th style="width: 12%;text-align:center">分类</th>
+                           
 
 
                         </tr>

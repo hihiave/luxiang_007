@@ -128,8 +128,6 @@
                             <th style="width: 5%"><input type="checkbox" id="selAll" onclick="selectAll()"></th>
                             <th style="width: 55%;">文件名</th>
                             <th style="width: 20%;text-align:center;">审核状态</th>
-                            <%--<th style="padding-bottom:15px;">上传时间</th>--%>
-
                             <th style="width:20%;text-align:center;">
                               		上传时间
                             </th>

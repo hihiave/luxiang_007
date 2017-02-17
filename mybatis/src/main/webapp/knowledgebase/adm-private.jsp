@@ -166,11 +166,11 @@ if(session.getAttribute("message")=="noexist"){
 								<tr>
 									<th style="width: 5%"><input type="checkbox" id="selAll"
 										onclick="selectAll()"></th>
-									<th style="width: 50%;">文件名</th>
-									<th style="width: 10%">属性</th>
-									<th style="width: 15%">上传时间</th>
-									<th style="width: 10%;">&nbsp;&nbsp;分类</th>
-									<th style="width: 10%;">&nbsp;&nbsp;下载</th>
+									<th style="width: 44%;">文件名</th>
+									<th style="width: 13%;text-align:center">属性</th>
+									<th style="width: 14%;text-align:center">上传时间</th>
+									<th style="width: 12%;text-align:center">分类</th>
+									<th style="width: 12%;text-align:center">下载</th>
 
 									<%--<th style="padding-bottom:15px;">&nbsp;&nbsp;预览</th>--%>
 								</tr>
