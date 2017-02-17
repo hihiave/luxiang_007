@@ -127,21 +127,23 @@ padding:0 20px;
                     <h3 class="panel-title">用户查询</h3>
                 </div>
                 <c:if test="${is_manager == 1}">
-                <div class="panel-body">
+                <div class="panel-body" style='padding-top:0px;'>
                 	
-                    <table class="table table-striped">
+                    <table class="table table-striped" style="font-size:14px;">
                         <thead>
                         <tr>
-                            <th style="font-size:16px;width:5%;"></th>
-                            <th style="font-size:16px;width:30%">用户名</th>
-                            <th style="padding-bottom:5px;padding-top:0px;width:36%;">
+                            <th style="width:1%;"></th>
+                            <th style="font-size:16px;width:10%">用户名</th>
+                            <th style="font-size:16px;width:10%;text-align:center;">真实姓名</th>
+                            <th style="font-size:16px;width:19%;text-align:center;">邮箱</th>
+                            <th style="padding-bottom:5px;width:36%;">
                             <input type="text" id="search-in" name="" style=
                             "height:34px;padding-left:5px;width:90%">
                             </th>
-                            <th style="padding-bottom:5px;padding-top:0px;width:12%;">
+                            <th style="padding-bottom:5px;padding-top:0px;width:12%;text-align:center;">
                                 <button class="button button-action button-rounded button-small" id="search-user" onclick="searchuser()">搜索用户</button>
                             </th>
-                            <th style="padding-bottom:5px;padding-top:0px;width:12%;">
+                            <th style="padding-bottom:5px;padding-top:0px;width:12%;text-align:center;">
                                 <button class="button button-action button-rounded button-small" data-toggle="modal" data-target="#tianjia">添加用户</button>
                             </th>
                         </tr>
