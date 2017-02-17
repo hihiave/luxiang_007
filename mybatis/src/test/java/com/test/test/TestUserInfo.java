@@ -39,13 +39,4 @@ public class TestUserInfo {
 		}
 	}
 
-	// 方法不严谨，插入的时候应判断，用户id是否已经存在了，因为id号是 主键
-	// @Test
-	// public void TestAddUserInfo() {
-	// UserInfo userInfo = new UserInfo();
-	// userInfo.setUserId(200);
-	// userInfoServiceImpl.addUserInfo(userInfo);
-	//
-	// }
-
 }
