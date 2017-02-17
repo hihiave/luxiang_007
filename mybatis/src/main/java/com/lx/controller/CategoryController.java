@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,8 @@ import com.lx.service.CategoryService;
 @RequestMapping("/CategoryController")
 public class CategoryController {
 
+	private static Logger logger = Logger.getLogger(CategoryController.class);
+
 	@Autowired
 	CategoryService categortservice;
 
@@ -26,6 +29,7 @@ public class CategoryController {
 	@RequestMapping(value = "/add_cate", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> add_cate(Integer userid, String catename, String categoryBelongTo) {
+		logger.info("=================add_cate==================");
 		System.out.println("====add_cate====" + catename + "===catebelongto===" + categoryBelongTo);
 		Map<String, Object> map = new HashMap<>();
 		if (categortservice.checkCategoryIsExist(userid, catename)) {
@@ -48,6 +52,7 @@ public class CategoryController {
 	@RequestMapping(value = "/del_cate", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> del_cate(Integer userid, String cate_name) {
+		logger.info("=================del_cate==================");
 		Map<String, Object> map = new HashMap<>();
 		System.out.println("==userid==" + userid + "===cate_name====" + cate_name);
 		boolean result = categortservice.delCategory(userid, cate_name);
@@ -60,6 +65,7 @@ public class CategoryController {
 	@ResponseBody
 	public Map<String, Object> alertCategory(Integer userid, String username, String old_catename,
 			String new_catename) {
+		logger.info("=================change_cate==================");
 		System.out.println(userid + "========" + username + "========" + old_catename + "======" + new_catename);
 		Map<String, Object> map = new HashMap<>();
 		if (categortservice.checkCategoryIsExist(userid, new_catename)) {
@@ -73,14 +79,13 @@ public class CategoryController {
 			map.put("flag", "shibai");
 			return map;
 		}
-
 	}
 
 	// 获取(公有)类别
 	@RequestMapping(value = "/get_category", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> get_category(Integer userid) {
-		System.out.println("=======get_category======" + userid);
+		logger.info("=================get_category==================" + userid);
 		List<Category> category = categortservice.getAllCategory(userid);
 
 		List<Category> newcate = new ArrayList<>();
@@ -100,9 +105,9 @@ public class CategoryController {
 	@RequestMapping(value = "/get_child_category", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> get_child_category(Integer userid, String categoryBelongTo) {
-		System.out.println("===========get_child_category==============");
+		logger.info("=================get_child_category==================");
+		logger.info("========" + userid + "==================" + categoryBelongTo + "=========");
 		Map<String, Object> map = new HashMap<>();
-		System.out.println(userid + "===========" + categoryBelongTo);
 		List<Category> category = categortservice.getAllCategory(userid);
 		List<Category> newcate = new ArrayList<Category>();
 		for (Category cate : category) {

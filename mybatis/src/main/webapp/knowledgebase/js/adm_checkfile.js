@@ -36,6 +36,9 @@ function changeFileInfo(obj){
 	//var filename = $(obj).parent().siblings()[1].innerHTML;
 	$(obj).attr({"data-toggle":"modal","data-target":"#changefileinfo"});
 	var filename = $($(obj).parent().siblings()[1]).attr("id");
+	 $("#fileid").removeClass();
+	 $("#fileid").addClass(filename);
+	//alert(filename);
 	var cate_select=document.getElementById("cate_select");
 	cate_select.options.length=0;
 	var op="<option value=''>请选择</option>";
@@ -82,7 +85,9 @@ function changeFileInfo(obj){
 }
 function updateFile(obj){
 	var filecate;
-	var fileid = $($(".changefilemsg").parent().siblings()[1]).attr("id");
+	//var fileid = $($(".changefilemsg").parent().siblings()[1]).attr("id");
+	var fileid = $("#fileid").attr("class");
+	//alert(fileid);
 	var cate=$("#cate_select").val();
 	var second_cate=$("#second_cate").val();
 	var usercate=$("#usercate").val();

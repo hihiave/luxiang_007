@@ -161,16 +161,16 @@ if(session.getAttribute("message")=="noexist"){
 							 onclick="fileinfo_search(this)" 
 							 style="float:right;height:33px; margin-right:2.5%; background: #808080;color: #FFF">查询</button>
 						</div>
-						<table class="table table-striped">
+						<table class="table table-striped" style="font-size:14px;">
 							<thead>
 								<tr>
 									<th style="width: 5%"><input type="checkbox" id="selAll"
 										onclick="selectAll()"></th>
-									<th style="width: 50%;">文件名</th>
-									<th style="width: 10%">属性</th>
-									<th style="width: 15%">上传时间</th>
-									<th style="width: 10%;">&nbsp;&nbsp;分类</th>
-									<th style="width: 10%;">&nbsp;&nbsp;下载</th>
+									<th style="width: 44%;">文件名</th>
+									<th style="width: 13%;text-align:center">属性</th>
+									<th style="width: 14%;text-align:center">上传时间</th>
+									<th style="width: 12%;text-align:center">分类</th>
+									<th style="width: 12%;text-align:center">下载</th>
 
 									<%--<th style="padding-bottom:15px;">&nbsp;&nbsp;预览</th>--%>
 								</tr>

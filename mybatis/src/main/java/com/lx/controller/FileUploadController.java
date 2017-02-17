@@ -26,7 +26,7 @@ import com.lx.tools.ToolString;
 @Controller
 @RequestMapping("/FileUploadController")
 public class FileUploadController {
-	
+
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> fileUpload(HttpServletRequest request, HttpServletResponse response) {
@@ -67,20 +67,15 @@ public class FileUploadController {
 				}
 				// 注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的,如：c:\a\b\1.txt;
 				// 而有些只是单纯的文件名，如：1.txt，下面做兼容
-				String filenameFull = ToolString.getFilenameFull(filePath);
-				String filenameExtension = ToolString.getFilenameExtension(filenameFull);
+				String filenameExtension = ToolString.getFilenameExtension(filePath);
 
 				// "C:\\temp\\1483337258.doc"
 				filePath = dirPath + ToolDate.getCurrentTimestamp() + "." + filenameExtension;
-
-				// 获取item中上传文件的输入流
-				InputStream in = fileItem.getInputStream();
-				// 创建一个文件输出流
-				FileOutputStream out = new FileOutputStream(filePath);
-				// 创建一个缓存区
-				byte buffer[] = new byte[1024];
-				// 建立一个标志判断输入流中的数据是否已经读完
-				int len = 0;
+				InputStream in = fileItem.getInputStream(); // 获取item中上传文件的输入流
+				FileOutputStream out = new FileOutputStream(filePath); // 创建一个文件输出流
+				byte buffer[] = new byte[1024]; // 创建一个缓存区
+				int len = 0; // 建立一个标志判断输入流中的数据是否已经读完
+				
 				// 循环将输入流读入到缓冲区当中，(len=in.read(buffer))>0就表示in里面还有数据
 				while ((len = in.read(buffer)) > 0) {
 					out.write(buffer, 0, len);

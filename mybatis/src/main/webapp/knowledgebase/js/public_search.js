@@ -24,6 +24,11 @@ function keysearch(){
 	if (event.keyCode==13)
 		document.getElementById("file_search_sub").click();
 }
+
+//全选
+
+
+
 function myfunction() {
 	var filepoints = new Array();
 	var fileinput = $("#file_search_input").val();
@@ -172,31 +177,37 @@ function get_all_search_file_table(data) {
 	for (var i = 0; i < all_pub_file.length; i++) {
 		var tr_begin = "<tr>";
 		var tr_end = "</tr>";
+		var td_0 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAllfile' " +
+				" value="+all_pub_file[i].fileId+"></td>";
 		var td_1 = "<td style='padding-top:15px;'><a href='../"+all_pub_file[i].fileUrl+"' >"
 				+ all_pub_file[i].fileName
 				+ "</a></td>";
-		var td_2 = "<td style='padding-top:15px;text-align:center;'>"
-				+ all_pub_file[i].fileAuthor + "</td>";
-		var td_3 = "<td style='padding-top:15px;text-align:center;'>"
+		var td_2 = "<td style='padding-top:15px;text-align:center'>"+ all_pub_file[i].fileAuthor + "</td>";
+		var td_3 = "<td style='padding-top:15px;text-align:center'>"
 				+ timeStampFormatDay(all_pub_file[i].fileUploadTime * 1000)
 				+ "</td>";
-		var td_4 = "<td style='text-align:center;'><button class='btn btn-primary'  did='public' bid='"
-				+ all_pub_file[i].fileId + "'  onclick='download(this)' path='"
+		var td_4 = "<td style='text-align:center'><button class='button button-primary button-rounded button-small'  did='public' bid='"
+				+ all_pub_file[i].fileId + "'  onclick='download_search(this)' path='"
 				+ all_pub_file[i].fileUrl + "'>下载</button></td>";
-		// var td_5 = "<td><button class='btn btn-primary' data-toggle='modal'
-		// data-target='#preview' onclick='pre_file(this)'>预览</button></td>";
-		var td_6 = "<td style='padding-top:15px;text-align:center;'>"
+		var td_5="<td style='padding-top:15px;text-align:center'>"+ all_pub_file[i].fileKeywords + "</td>";
+		var td_6 = "<td style='padding-top:15px;text-align:center'>"
 				+ all_pub_file[i].fileDownloadCount + "</td>"
-
-		var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_6 + tr_end;
+		var userid = document.getElementById("userid").value;
+		if (userid==1){
+			var content = tr_begin + td_0 + td_1 + td_5 + td_2 + td_3 + td_4 + td_6 + tr_end;
+		}else{
+			var content = tr_begin + td_1 + td_5 + td_2 + td_3 + td_4 + td_6 + tr_end;
+		}
+		
 		$("#search_file").append(content);
 	}
 	// createNewPagination(data,"file_public","/mybatis/FileInfoController/publicfile.do",get_all_public_file_table,"first_file_click","last_file_click","page-file-three",{"fileProperty":"fullText"});
 }
 
-function selectAll() {
-	var ckbs = document.getElementsByName("checkAll");
-	var cka = document.getElementById("selAll");
+//全选
+function selectAllfile() {
+	var ckbs = document.getElementsByName("checkAllfile");
+	var cka = document.getElementById("selAllfile");
 	if (cka.checked == true) {
 		for (var i = 0; i < ckbs.length; i++) {
 			ckbs[i].checked = true;
@@ -208,11 +219,57 @@ function selectAll() {
 	}
 };
 
-function select_one(obj) {
-	var s = $(this).checked;
-	if (s) {
-		$(this).attr("checked", false);
-	} else {
-		$(this).attr("checked", true);
-	}
+function deleteFile(delete_array){
+    $.ajax({
+        type:'post',
+        url:"/mybatis/FileInfoController/delete_file.do",
+        dataType:"json",
+        traditional:true,
+        data:{"delete_array":delete_array},
+        success:function(data)
+        {
+            if(data["flag"]){
+
+            	send_search_info();
+            }else{
+                alert("网络故障,稍后重试");
+            }
+
+        }
+    })
 }
+
+
+
+function delete_pub_file_modal(obj){
+    var delete_count = 0;
+    $("input[name=checkAllfile]").each(function(){
+        if($(this).is(':checked')){
+            delete_count += 1;
+        }
+    });
+    console.log("选中的文件个数："+delete_count);
+    if(delete_count == 0){
+        $(obj).attr({"data-toggle":"modal","data-target":"#deletepubfile-modal"});
+        $("#myModalLabel-delete_pub_title").html("删除文件提示");
+        $("#delete_pub_info").html("请选择需要删除的文件");
+    }else{
+        $(obj).attr({"data-toggle":"modal","data-target":"#deletepubfile-modal"});
+        $("#myModalLabel-delete_pub_title").html("删除文件提示");
+
+        $("#delete_pub_info").html("确定删除选中文件？此次删除后不可恢复");
+        $("#adm_ok_btn").attr("onclick","delete_selected_pubfile()");
+    }
+}
+
+function delete_selected_pubfile(){
+    var delete_array = [];
+    $("input[name=checkAllfile]").each(function(){
+        if($(this).is(':checked')){
+            var arr = $(this).attr("value");
+            delete_array.push(arr);
+        }
+    });
+    deleteFile(delete_array);
+}
+

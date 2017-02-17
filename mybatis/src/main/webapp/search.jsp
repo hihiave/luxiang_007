@@ -43,8 +43,8 @@
 					<td><font><b>选择每页显示的文档数</b></font></td>
 					<td>
 					<select name="pageSize">
-							<option value="5" selected="selected">每页显示5条
-							<option value="3">每页显示3条
+							<option value="3" selected="selected">每页显示3条
+							<option value="5">每页显示5条
 							<option value="10">每页显示10条
 					</select>
 					</td>

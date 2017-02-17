@@ -130,16 +130,16 @@ if(session.getAttribute("message")=="noexist"){
                 <div class="panel-heading">
                     <h3 class="panel-title">公有文件</h3>
                 </div>
-                <div class="panel-body" style="padding-top:0px;">
+                <div class="panel-body" style="padding-top:0px;height: 560px; overflow-y: auto;">
                     <table class="table table-striped" style="font-size:14px;">
                         <thead>
                         <tr>
-                            <th style="width: 57%;">文件名</th>
-                            <th style="padding-left:0px;width: 10%;">上传者</th>
-                            <th style="width: 13%;">上传时间</th>
-                            <th style="padding-left:20px;width: 10%;">下载</th>
-                            <%--<th style="padding-left:20px;">预览</th>--%>
-                            <th style="padding-left:0px;width: 10%;">下载量</th>
+                            <th style="width: 37%;">文件名</th>
+                            <th style="width: 20%;text-align:center;">关键词</th>
+                            <th style="width: 10%;text-align:center">上传者</th>
+                            <th style="width: 13%;text-align:center">上传时间</th>
+                            <th style="width: 10%;text-align:center">下载</th>
+                            <th style="width: 10%;text-align:center">下载量</th>
                         </tr>
                         </thead>
                         <tbody id="pub_file">

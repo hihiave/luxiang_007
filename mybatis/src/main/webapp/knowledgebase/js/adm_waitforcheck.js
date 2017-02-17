@@ -20,8 +20,8 @@ function cb_get_all(obj){
         var tr_begin = "<tr>";
         
         var tr_end = "</tr>";
-        var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' onclick='select_one(this)' value="+all_wait_file[each].fileId+"></td>";
-        var td_2 = "<td style='padding-top:15px;' value="+all_wait_file[each].fileId+"><a href='../"+all_wait_file[each].fileUrl+"' >"+all_wait_file[each].fileName+"</a></td>";
+        var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' value="+all_wait_file[each].fileId+"></td>";
+        var td_2 = "<td style='padding-top:15px;' value="+all_wait_file[each].fileId+">"+all_wait_file[each].fileName+"</td>";
         var td_3 = "<td style='padding-top:15px;text-align:center;' >"+get_file_check(all_wait_file[each].fileCheck)+"</td>";
         //var td_4 = "<td><button class='btn btn-primary' onclick='delete_one_file(this)' value="+all_wait_file[each].fileId+">删除</button></td>";
         
@@ -68,12 +68,12 @@ function deleteFile(delete_array){
     })
 }
 
-function delete_one_file(obj){
-    var file_id = $(obj).attr("value");
-    var delete_array = [];
-    delete_array.push(file_id);
-    deleteFile(delete_array);
-}
+//function delete_one_file(obj){
+//    var file_id = $(obj).attr("value");
+//    var delete_array = [];
+//    delete_array.push(file_id);
+//    deleteFile(delete_array);
+//}
 
 
 

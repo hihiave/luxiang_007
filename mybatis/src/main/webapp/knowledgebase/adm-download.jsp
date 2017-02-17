@@ -114,13 +114,19 @@
                     <h3 class="panel-title">我的下载</h3>
                 </div>
                 <div class="panel-body" style="padding-top:0px;">
-                   
+                    <div style="padding-top: 10px;">
+                        <button class="button button-royal button-rounded button-giant button-small" 
+						 style="height:34px;float:left;padding:0 15px; margin-right:10px;
+							 background: #808080;color: #FFF" onclick="delete_mydownload(this)">删除
+                        </button>
+                    </div>
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th style="width: 70%;">文件名</th>
-                            <th style="width: 15%;">上传者</th>
-                            <th style="width: 15%;">下载时间</th>
+                        	<th style="width: 5%;padding-bottom: 10px;"><input type="checkbox" id="selAll" onclick="selectAll()"></th>
+                            <th style="width: 65%;">文件名</th>
+                            <th style="width: 15%;text-align:center;">上传者</th>
+                            <th style="width: 15%;text-align:center;">下载时间</th>
                             
                         </tr>
                         </thead>
@@ -140,6 +146,25 @@
         </div>
     </div>
 
+
+<div class="modal fade" id="delete_download" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-logout">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel-delete_title"></h4>
+            </div>
+            <div class="modal-body">
+                <p id="delete_download_info"></p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="delete_btn" >确认</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="download" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-sm" role="document">

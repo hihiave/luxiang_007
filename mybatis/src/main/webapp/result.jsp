@@ -11,7 +11,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML>
 <HEAD>
-<TITLE>文档搜索系统result</TITLE>
+<TITLE>文档搜索结果</TITLE>
 <!--STATUS OK-->
 <META http-equiv=content-type content=text/html;charset=UTF-8">
 <link href="css/result.css" rel="stylesheet" type="text/css">
@@ -70,15 +70,15 @@
 	<!--开始填充检索到的文档documentEntities -->
 	<BR>
 	<c:forEach items="${documentEntities}" var="DocumentEntity">
-		<TABLE cellSpacing=5 cellPadding=0 border=0>
-			<TBODY>
-				<TR>
-					<TD class="f EC_PP"><A href="${DocumentEntity.fileUrl}"
-						target=_blank>${DocumentEntity.filename} </A> <BR>${DocumentEntity.contents}<BR>
-					</TD>
-				</TR>
-			</TBODY>
-		</TABLE>
+		<table cellspacing="10" cellpadding="0" border="0" width="100%">
+		<tr>
+			<td class="f EC_PP">
+			<a href="${DocumentEntity.fileUrl}" target=_blank>${DocumentEntity.filename} </a>
+			<BR>${DocumentEntity.contents}<BR>
+			</td>
+		</tr>
+			<!-- <TBODY></TBODY> -->
+		</table>
 	</c:forEach>
 	<BR>
 	<c:choose>

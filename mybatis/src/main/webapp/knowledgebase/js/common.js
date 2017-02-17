@@ -64,12 +64,34 @@ Date.prototype.Format = function (fmt) {
 
 
 
+/*
+ * 全选
+ * */
+function selectAll() {
+	var ckbs = document.getElementsByName("checkAll");
+	var cka = document.getElementById("selAll");
+	if (cka.checked == true) {
+		for (var i = 0; i < ckbs.length; i++) {
+			ckbs[i].checked = true;
+		}
+	} else {
+		for (var i = 0; i < ckbs.length; i++) {
+			ckbs[i].checked = false;
+		}
+	}
+};
 
+function select_one(obj) {
+	var s = $(this).checked;
+	if (s) {
+		$(this).attr("checked", false);
+	} else {
+		$(this).attr("checked", true);
+	}
+}
 /*
  * 将时间戳转成日期格式 比如2016-04-26 08:00:00
  */
-
-
 function timeStampFormat(time_stamp) {
 
     var add0 = function(m){
@@ -326,4 +348,41 @@ function download(obj){
                 sendAjaxRequest(src,{"page_Now":page,"fileProperty":"fullText"},get_all_public_file_table);
             }
         });
+}
+
+function download_search(obj){
+
+    var form = $("<form>");   //定义一个form表单
+    form.attr('style', 'display:none');   //在form表单中添加查询参数
+
+    form.attr('method', 'post');
+    form.attr('id', 'form-add');
+    form.attr('action', "/mybatis/FileDownloadController/fileDownload.do");
+
+    var input1 = $('<input>');
+    input1.attr('type', 'hidden');
+    input1.attr('name', 'filename');
+    input1.attr('value', $(obj).attr("path"));
+    var input2 = $('<input>');
+    input2.attr('type', 'hidden');
+    input2.attr('name', 'fileid');
+    input2.attr('value', $(obj).attr("bid"));
+    $('.container').append(form);  //将表单放置在web中
+    form.append(input1);   //将查询参数控件提交到表单上
+    form.append(input2);   //将查询参数控件提交到表单上
+    form.submit();
+    $("#form-add").remove();
+
+    var fileid = $(obj).attr("bid");
+    sendAjaxRequest("/mybatis/MyDownloadController/add_my_download.do",{"fileid":fileid},function(){console.log("下载成功")});
+    sendAjaxRequest("/mybatis/FileInfoController/download_count_add.do",{"fileid":fileid},function(data){
+        console.log("下载次数"+data["count"]);
+//        if($(obj).attr("did") == "public"){
+//            var src = "/mybatis/FileInfoController/publicfile.do";
+//            //var page = $("ul.pagination li.active>a").text();
+//            //console.log(page);
+////            sendAjaxRequest(src,{"page_Now":page,"fileProperty":"fullText"},get_all_search_file_table);
+        send_search_info();
+//        }
+    });
 }

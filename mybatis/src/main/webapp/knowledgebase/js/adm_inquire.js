@@ -47,14 +47,16 @@ function get_all_check_user(obj){
 
         var tr_begin = "<tr>";
         var tr_end = "</tr>";
+        var td_0 = "<td></td>"
         var td_1 = "<td>"+(i+1)+"</td>";
         var td_2 = "<td class='Name'>"+all_pass_user[i].userName+"</td>"
-        var td_3 = "<td></td>";
-        var td_4 = "<td style='padding-bottom:3px;padding-top:3px;'>"+"<button class='button button-primary button-rounded button-small'' " +
+        var td_3 = "<td style='text-align:center;'>"+all_pass_user[i].userRealName+"</td>";
+        var td_4 = "<td style='text-align:center;'>"+all_pass_user[i].userEmail+"</td>";
+        var td_5 = "<td style='padding-bottom:3px;padding-top:3px;text-align:center;'>"+"<button class='button button-primary button-rounded button-small'' " +
         		"data-toggle='modal' data-target='' onclick='deleteUser(this)'>删除用户</button>"+"</td>";
-        var td_5 = "<td style='padding-bottom:3px;padding-top:3px;'>"+"<button class='button button-primary button-rounded button-small'' " +
+        var td_6 = "<td style='padding-bottom:3px;padding-top:3px;text-align:center;'>"+"<button class='button button-primary button-rounded button-small'' " +
         		"data-toggle='modal' data-target='' onclick='user_selected(this)' >重置密码</button>"+"</td>";
-        var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_5 + tr_end;
+        var content = tr_begin + td_1 + td_2 + td_3 + td_4 + td_0 + td_5 + td_6 + tr_end;
         $("#search_result").append(content);
 
     }
