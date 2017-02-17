@@ -90,16 +90,16 @@ function get_my_file(data){
         var tr_begin = "<tr>";
         var tr_end = "</tr>";
         var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' value="+all_pri_file[i].fileId+"></td>"
-        var td_2 = "<td style='padding-top:15px;width:180px;' id="+all_pri_file[i].fileId+"><a href='../"+all_pri_file[i].fileUrl+"' >"+all_pri_file[i].fileName+"</a></td>";
-        var td_3 = "<td style='padding-top:15px;'>"+all_pri_file[i].fileIsVisible+"</td>";
-        var td_4 = "<td style='padding-top:15px;'>"+timeStampFormatDay(all_pri_file[i].fileUploadTime*1000)+"</td>";
-        var td_5 = "<td><button class='button button-primary button-rounded button-small'" +
+        var td_2 = "<td style='padding-top:15px;' id="+all_pri_file[i].fileId+"><a href='../"+all_pri_file[i].fileUrl+"' >"+all_pri_file[i].fileName+"</a></td>";
+        var td_3 = "<td style='padding-top:15px;text-align:center;'>"+all_pri_file[i].fileIsVisible+"</td>";
+        var td_4 = "<td style='padding-top:15px;text-align:center;'>"+timeStampFormatDay(all_pri_file[i].fileUploadTime*1000)+"</td>";
+        var td_5 = "<td style='text-align:center;'><button class='button button-primary button-rounded button-small'" +
         		" bid='"+all_pri_file[i].fileId+"'  onclick='download(this)' path='"+all_pri_file[i].fileUrl+"'>下载</button></td>";
         if(all_pri_file[i].fileIsVisible=="私有")
-        	var td_6="<td><button class='button button-action button-rounded button-small changefilemsg' " +
+        	var td_6="<td style='text-align:center;'><button class='button button-action button-rounded button-small changefilemsg' " +
         			"  onclick='file_classify(this)' >分类</button></td>";
         else
-        	var td_6 = "<td style='padding-top:15px;'></td>"
+        	var td_6 =  "<td style='padding-top:15px;text-align:center'>"+all_pri_file[i].fileCategory+"</td>"
       
         var content = tr_begin  + td_1 + td_2 + td_3 + td_4  + td_6 + td_5 + tr_end;
         $("#pri_file").append(content);
