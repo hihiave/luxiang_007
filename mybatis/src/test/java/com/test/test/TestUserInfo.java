@@ -18,7 +18,6 @@ public class TestUserInfo {
 
 	@Before
 	public void init() {
-
 		app = new ClassPathXmlApplicationContext("test/applicationContext.xml");
 		userInfoServiceImpl = app.getBean(UserInfoServiceImpl.class);
 	}
