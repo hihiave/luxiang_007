@@ -30,8 +30,8 @@ function get_user_check_num(){
                 }
             }
         )
-
 }
+
 function get_file_check_num(){
 	$.ajax(
             {
@@ -44,8 +44,8 @@ function get_file_check_num(){
                 }
             }
         )
-
 }
+
 Date.prototype.Format = function (fmt) {
     var o = {
         "M+": this.getMonth() + 1, //月份
@@ -62,11 +62,7 @@ Date.prototype.Format = function (fmt) {
     return fmt;
 };
 
-
-
-/*
- * 全选
- * */
+// 全选
 function selectAll() {
 	var ckbs = document.getElementsByName("checkAll");
 	var cka = document.getElementById("selAll");
@@ -93,12 +89,9 @@ function select_one(obj) {
  * 将时间戳转成日期格式 比如2016-04-26 08:00:00
  */
 function timeStampFormat(time_stamp) {
-
     var add0 = function(m){
         return m<10?'0'+m:m
     };
-
-
     var time = new Date(time_stamp);
     var y = time.getFullYear();
     var m = time.getMonth()+1;
@@ -242,7 +235,6 @@ function createPaginationHtml(page_begin, page_end, page_now, page_total_num, cl
  * right_arrow_id:  是给最右键头取的新id
  */
 function createNewPagination(data, class_name,src,deal_cb,left_arrow_id, right_arrow_id, ul_id,addition_data) {
-
     var page_now = data["pageNow"];
     var page_total_num = data["pageCount"];
     console.log(page_now);
@@ -287,7 +279,6 @@ function createNewPagination(data, class_name,src,deal_cb,left_arrow_id, right_a
 
 }
 
-
 //在线阅读
 function ReadOnLine(obj){
     //var filename = $(obj).attr("path");
@@ -313,11 +304,10 @@ function ReadOnLine(obj){
     $("#form-readonline").remove();
 }
 
-
 function download(obj){
 
         var form = $("<form>");   //定义一个form表单
-        form.attr('style', 'display:none');   //在form表单中添加查询参数
+        form.attr('style', 'display:block');   //在form表单中添加查询参数
 
         form.attr('method', 'post');
         form.attr('id', 'form-add');
@@ -331,7 +321,8 @@ function download(obj){
         input2.attr('type', 'hidden');
         input2.attr('name', 'fileid');
         input2.attr('value', $(obj).attr("bid"));
-        $('.container').append(form);  //将表单放置在web中
+        $("#pri_file").append(form);
+//        $('.container').append(form);  //将表单放置在web中
         form.append(input1);   //将查询参数控件提交到表单上
         form.append(input2);   //将查询参数控件提交到表单上
         form.submit();
@@ -351,7 +342,6 @@ function download(obj){
 }
 
 function download_search(obj){
-
     var form = $("<form>");   //定义一个form表单
     form.attr('style', 'display:none');   //在form表单中添加查询参数
 
