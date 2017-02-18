@@ -5,8 +5,8 @@ $(function() {
 function get_category(obj) {
 	var val = $(obj).val();
 	var num = $(obj).attr("num");
-	var proto="proto"+num;
-	document.getElementById(proto).value=val;
+	var proto = "proto" + num;
+	document.getElementById(proto).value = val;
 	var cate = "cate" + num;
 	var child_cate = "child_cate" + num;
 	var obj1 = document.getElementById(cate);
@@ -168,10 +168,12 @@ function changeFile_test(obj) {
 // 上传文件信息
 function uploadFile() {
 	// var src = "/mybatis/FileUploadController/fileUpload.do";
-	var aim1 = $("#aim1"), aim2 = $("#aim2"), aim3 = $("#aim3");
-	var word1 = $("#word1"), word2 = $("#word2"), word3 = $("#word3");
-	var area1 = $("#area1"), area2 = $("#area2"), area3 = $("#area3");
-	var proto1 = $("#proto1"), proto2 = $("#proto2"), proto3 = $("#proto3");
+	var aim1 = $("#aim1"), aim2 = $("#aim2"), aim3 = $("#aim3"); // 文件名
+	var word1 = $("#word1"), word2 = $("#word2"), word3 = $("#word3"); // 关键词
+	var area1 = $("#area1"), area2 = $("#area2"), area3 = $("#area3"); // 描述
+	var cate1 = $("#cate1"), cate2 = $("#cate2"), cate3 = $("#cate3"); // 类别
+	var child_cate1 = $("#child_cate1"), child_cate2 = $("#child_cate2"), child_cate3 = $("#child_cate3"); // 子类别
+	var proto1 = $("#proto1"), proto2 = $("#proto2"), proto3 = $("#proto3"); // 属性
 	var file1 = $("#file-test1").val();
 	var file2 = $("#file-test2").val();
 	var file3 = $("#file-test3").val();
@@ -181,114 +183,112 @@ function uploadFile() {
 	if (aim1.val() == "" && aim2.val() == "" && aim3.val() == "") {
 		alert("请选择上传的文件");
 		return false;
-	}/*
-		 * else if(((aim1.val() != "")&&(proto1.val()=="私有" )) || ((aim2.val() !=
-		 * "")&&(proto2.val()=="私有" )) || ((aim3.val() !=
-		 * "")&&(proto3.val()=="私有" ))){ return true; }
-		 */
-	else if ((aim2.val() != "") && (proto2.val() != "私有")
-			&& ((area2.val() == "") || (word2.val() == ""))) {
-		if (proto2.val() == "") {
-			alert("请完善文件2属性");
-			return false;
-		}
-		if (word2.val() == "") {
-			alert("请完善文件2关键词");
-			return false;
-		}
-		if ((area2.val() == "")) {
-			alert("请完善文件2描述");
-			return false;
-		} else {
-			alert("请完善文件2信息");
-			return false;
-		}
-	} else if ((aim1.val() != "") && (proto1.val() != "私有")
-			&& ((area1.val() == "") || (word1.val() == ""))) {
-		if (proto1.val() == "") {
-			alert("请完善文件1属性");
-			return false;
-		}
+	}
+	if (aim1.val() != "") {
 		if (word1.val() == "") {
 			alert("请完善文件1关键词");
+			return false;
+		}
+		if (proto1.val() == "") {
+			alert("请完善文件1资料属性");
+			return false;
+		}
+		if (cate1.val() == "" && child_cate1.val() == "") {
+			alert("请选择文件1类别");
 			return false;
 		}
 		if ((area1.val() == "")) {
 			alert("请完善文件1描述");
 			return false;
-		} else {
-			alert("请完善文件1信息");
+		}
+	}
+
+	if (aim2.val() != "") {
+		if (word2.val() == "") {
+			alert("请完善文件2关键词");
 			return false;
 		}
-	} else if ((aim3.val() != "") && (proto3.val() != "私有")
-			&& ((area3.val() == "") || (word3.val() == ""))) {
-		if (proto3.val() == "") {
-			alert("请完善文件3属性");
+		if (proto2.val() == "") {
+			alert("请完善文件2资料属性");
 			return false;
 		}
+		if (cate2.val() == "" && child_cate2.val() == "") {
+			alert("请选择文件2类别");
+			return false;
+		}
+		if ((area2.val() == "")) {
+			alert("请完善文件2描述");
+			return false;
+		}
+
+	}
+
+	if (aim3.val() != "") {
 		if (word3.val() == "") {
 			alert("请完善文件3关键词");
+			return false;
+		}
+		if (proto3.val() == "") {
+			alert("请完善文件3资料属性");
+			return false;
+		}
+		if (cate3.val() == "" && child_cate3.val() == "") {
+			alert("请选择文件3类别");
 			return false;
 		}
 		if ((area3.val() == "")) {
 			alert("请完善文件3描述");
 			return false;
-		} else {
-			alert("请完善文件3信息");
-			return false;
 		}
-	} else {
-		var data = {};
-		if (((proto1.val() == "私有") && (aim1.val() != ""))
-				|| (aim1.val() != "" && area1.val() != "" && word1.val() != "")) {
-
-			data.filepath1 = path1;
-			var name1 = aim1.val().split(".");
-			// console.log(name1[0]);
-			data.filename1 = name1[0];
-			data.author1 = $("#author1").attr("placeholder");
-			// console.log($("#author1").val()+"!!!!!!!");
-			// data.time1 = $("#time1").attr("placeholder");
-			data.word1 = word1.val();
-			data.pro1 = $("#proto1").val();
-			data.cate1 = $("#cate1").val();
-			data.child_cate1 = $("#child_cate1").val();
-			data.area1 = area1.val();
-		}
-		if (((proto2.val() == "私有") && (aim2.val() != ""))
-				|| (aim2.val() != "" && area2.val() != "" && word2.val() != "")) {
-			data.filepath2 = path2;
-			var name2 = aim2.val().split(".");
-			// console.log(name1[0]);
-			data.filename2 = name2[0];
-			data.author2 = $("#author2").attr("placeholder");
-			// data.time2 = $("#time2").attr("placeholder");
-			data.word2 = word2.val();
-			data.pro2 = $("#proto2").val();
-			data.cate2 = $("#cate2").val();
-			data.child_cate2 = $("#child_cate2").val();
-			data.area2 = area2.val();
-		}
-		if (((proto3.val() == "私有") && (aim3.val() != ""))
-				|| (aim3.val() != "" && area3.val() != "" && word3.val() != "")) {
-			data.filepath3 = path3;
-			var name3 = aim3.val().split(".");
-			// console.log(name1[0]);
-			data.filename3 = name3[0];
-			data.author3 = $("#author3").attr("placeholder");
-			// data.time3 = $("#time3").attr("placeholder");
-			data.word3 = word3.val();
-			data.pro3 = $("#proto3").val();
-			data.cate3 = $("#cate3").val();
-			data.child_cate3 = $("#child_cate3").val();
-			data.area3 = area3.val();
-		}
-		console.log(data);
-		sendAjaxRequest("/mybatis/FileInfoController/add_file_info.do", data,
-				upload_success_cb, function() {
-					alert("网络故障，请稍后重试！！！")
-				});
 	}
+
+	var data = {};
+	if (aim1.val() != "") {
+		data.filepath1 = path1;
+		var name1 = aim1.val().split(".");
+		// console.log(name1[0]);
+		data.filename1 = name1[0];
+		data.author1 = $("#author1").attr("placeholder");
+		// console.log($("#author1").val()+"!!!!!!!");
+		// data.time1 = $("#time1").attr("placeholder");
+		data.word1 = word1.val();
+		data.pro1 = proto1.val();
+		data.cate1 = cate1.val();
+		data.child_cate1 = child_cate1.val();
+		data.area1 = area1.val();
+	}
+	if (aim2.val() != "") {
+		data.filepath2 = path2;
+		var name2 = aim2.val().split(".");
+		// console.log(name1[0]);
+		data.filename2 = name2[0];
+		data.author2 = $("#author2").attr("placeholder");
+		// data.time2 = $("#time2").attr("placeholder");
+		data.word2 = word2.val();
+		data.pro2 = proto2.val();
+		data.cate2 = cate2.val();
+		data.child_cate2 = child_cate2.val();
+		data.area2 = area2.val();
+	}
+	if (aim3.val() != "") {
+		data.filepath3 = path3;
+		var name3 = aim3.val().split(".");
+		// console.log(name1[0]);
+		data.filename3 = name3[0];
+		data.author3 = $("#author3").attr("placeholder");
+		// data.time3 = $("#time3").attr("placeholder");
+		data.word3 = word3.val();
+		data.pro3 = proto3.val();
+		data.cate3 = cate3.val();
+		data.child_cate3 = child_cate3.val();
+		data.area3 = area3.val();
+	}
+	console.log(data);
+	sendAjaxRequest("/mybatis/FileInfoController/add_file_info.do", data,
+			upload_success_cb, function() {
+				alert("网络故障，请稍后重试！！！")
+			});
+
 }
 
 // 文件上传成功，清空页面内容

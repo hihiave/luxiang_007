@@ -265,6 +265,7 @@ public class FileInfoController {
 		boolean flag = false;
 		Map<String, Object> map = new HashMap<>();
 		String filename1 = request.getParameter("filename1");
+		logger.info("=================filename1==================" + filename1);
 		if (filename1 != null) {
 			FileInfo fileInfo1 = new FileInfo();
 			fileInfo1.setFileName(filename1.trim());
@@ -283,15 +284,22 @@ public class FileInfoController {
 			// 设置文件可见类型
 			String filevisible1 = request.getParameter("pro1");
 			fileInfo1.setFileIsVisible(filevisible1);
-			if (filevisible1.equals("私有"))
+			if (filevisible1.equals("私有")) {
 				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.privateFile.getValue());
+
+				/*
+				 * 私有的，通过审核 为1 ， 直接转移 转移
+				 * 
+				 */
+			}
+
 			if (filevisible1.equals("公有"))
 				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.publicFile.getValue());
 
-			// 设置文件地址
+			// 设置文件url
 			String filePath = request.getParameter("filepath1"); // C:\\temp\\1479709800.doc
 			String filenameFull = ToolString.getFilenameFull(filePath); // 1479709800.doc
-			String Filename = ToolString.getFilename(filenameFull);
+			String Filename = ToolString.getFilename(filenameFull); // 1479709800
 			fileInfo1.setFileUploadTime(Integer.valueOf(Filename));
 
 			// ToolFileTransfer.getToFilePath()
@@ -300,7 +308,7 @@ public class FileInfoController {
 				if (ToolFileTransfer.transfer(filePath, docDir)) {
 					if (ToolDocConverter.docToPdf(filePath, basePath + MacroConstant.DOC_TEMP)) {
 						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo1.setFileStatus(MacroEnum.DOC);
+						fileInfo1.setFileStatus(MacroConstant.DOC);
 						flag = true;
 					}
 				}
@@ -321,6 +329,7 @@ public class FileInfoController {
 			map.put("result1", flag);
 		}
 		String filename2 = request.getParameter("filename2");
+		logger.info("=================filename2==================" + filename2);
 		if (filename2 != null) {
 			FileInfo fileInfo2 = new FileInfo();
 			fileInfo2.setFileName(filename2.trim());
@@ -372,7 +381,9 @@ public class FileInfoController {
 		}
 
 		String filename3 = request.getParameter("filename3");
+		logger.info("=================filename3==================" + filename3);
 		if (filename3 != null) {
+			logger.info("=================3333333333==================");
 			FileInfo fileInfo3 = new FileInfo();
 			fileInfo3.setFileName(filename3.trim());
 			fileInfo3.setFileAuthor(request.getParameter("author3").trim());

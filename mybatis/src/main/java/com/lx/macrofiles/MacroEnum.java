@@ -85,7 +85,5 @@ public class MacroEnum {
 		year, month, week, day, hour, minute, second
 	}
 
-	public static final int DOC = 2;
-	
 	public static String ErrMessage;
 }

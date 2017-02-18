@@ -8,12 +8,12 @@ import java.net.URLEncoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lx.macrofiles.MacroConstant;
-import com.lx.macrofiles.MacroEnum;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.tools.ToolString;
@@ -22,25 +22,25 @@ import com.lx.tools.ToolString;
 @RequestMapping("/FileDownloadController")
 public class FileDownloadController {
 
+	private static Logger logger = Logger.getLogger(FileDownloadController.class);
+
 	@Autowired
 	FileInfoService fileInfoService;
 
 	@RequestMapping("/fileDownload")
 	protected void fileDownload(HttpServletRequest request, HttpServletResponse response) {
+		logger.info("=================fileDownload==================");
 		response.setCharacterEncoding("UTF-8");
 		String basePath = request.getSession().getServletContext().getRealPath("");
 
-		System.out.println("============fileDownload====== eeee==");
 		// datadir\pdfdir\1483366139.pdf or datadir\temp\1483364067.pdf
 		String fileUrl = request.getParameter("filename");
 		// 获取下载文件的地址
 		String filePath = basePath + fileUrl;
-
 		FileInfo fileInfo = fileInfoService.getFileByFileId(Integer.parseInt(request.getParameter("fileid")));
 
-		if (fileInfo.getFileStatus() == MacroEnum.DOC) {
-			filePath = basePath + MacroConstant.DOCDIR + ToolString.getFilename(ToolString.getFilenameFull(fileUrl))
-					+ ".doc";
+		if (fileInfo.getFileStatus() == MacroConstant.DOC) {
+			filePath = basePath + MacroConstant.DOCDIR + fileInfo.getFileUploadTime() + ".doc";
 		}
 
 		String downloadName = fileInfo.getFileName() + "." + ToolString.getFilenameExtension(filePath);
@@ -70,7 +70,7 @@ public class FileDownloadController {
 			e.printStackTrace();
 		}
 		// fileUrl = new String(fileUrl.getBytes("ISO8859_1"), "UTF-8");
-		
+
 	}
 
 }

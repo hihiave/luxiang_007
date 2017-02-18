@@ -87,8 +87,8 @@ public class CategoryController {
 	public Map<String, Object> get_category(Integer userid) {
 		logger.info("=================get_category==================" + userid);
 		List<Category> category = categortservice.getAllCategory(userid);
-
 		List<Category> newcate = new ArrayList<>();
+
 		if (category != null) {
 			for (Category cate : category) {
 				if (cate.getCategoryBelongTo().equals(MacroConstant.level0_category))
@@ -110,10 +110,14 @@ public class CategoryController {
 		Map<String, Object> map = new HashMap<>();
 		List<Category> category = categortservice.getAllCategory(userid);
 		List<Category> newcate = new ArrayList<Category>();
-		for (Category cate : category) {
-			if (cate.getCategoryBelongTo().equals(categoryBelongTo))
-				newcate.add(cate);
+
+		if (category != null) {
+			for (Category cate : category) {
+				if (cate.getCategoryBelongTo().equals(categoryBelongTo))
+					newcate.add(cate);
+			}
 		}
+
 		map.put("category", newcate);
 		return map;
 	}
