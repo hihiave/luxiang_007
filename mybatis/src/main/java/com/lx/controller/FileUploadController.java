@@ -14,6 +14,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,10 +27,13 @@ import com.lx.tools.ToolString;
 @Controller
 @RequestMapping("/FileUploadController")
 public class FileUploadController {
+	
+	private static Logger logger = Logger.getLogger(FileUploadController.class);
 
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> fileUpload(HttpServletRequest request, HttpServletResponse response) {
+		logger.info("=================fileUpload==================");
 		Map<String, Object> map = new HashMap<>();
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
