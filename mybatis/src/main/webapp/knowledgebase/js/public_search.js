@@ -186,8 +186,8 @@ function get_all_search_file_table(data) {
 		var td_3 = "<td style='padding-top:15px;text-align:center'>"
 				+ timeStampFormatDay(all_pub_file[i].fileUploadTime * 1000)
 				+ "</td>";
-		var td_4 = "<td style='text-align:center'><button class='button button-primary button-rounded button-small'  did='public' bid='"
-				+ all_pub_file[i].fileId + "'  onclick='download_search(this)' path='"
+		var td_4 = "<td style='text-align:center'><button class='button button-primary button-rounded button-small'   bid='"
+				+ all_pub_file[i].fileId + "'  onclick='download(this)' path='"
 				+ all_pub_file[i].fileUrl + "'>下载</button></td>";
 		var td_5="<td style='padding-top:15px;text-align:center'>"+ all_pub_file[i].fileKeywords + "</td>";
 		var td_6 = "<td style='padding-top:15px;text-align:center'>"

@@ -138,10 +138,7 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">个人信息</h3>
 				</div>
-				<div class="panel-body">
-
-					
-					
+				<div class="panel-body">	
 					<div align="center" style="margin-top: 20%">
 						<button class="btn btn-info" data-toggle="modal" 
 						style="float:left;margin-left:35%;"
