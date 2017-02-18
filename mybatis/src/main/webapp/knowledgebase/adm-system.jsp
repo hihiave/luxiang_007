@@ -65,7 +65,7 @@
 <script src="/mybatis/knowledgebase/js/respond.min.js"></script>
 <script src="/mybatis/knowledgebase/js/common.js"></script>
 <script src="/mybatis/knowledgebase/js/public_search.js"></script>
-<script src="/mybatis/knowledgebase/js/adm_personal.js"></script>
+<script src="/mybatis/knowledgebase/js/adm_system.js"></script>
 <script src="/mybatis/knowledgebase/js/jquery-ui.min.js"></script>
 
 
@@ -83,7 +83,7 @@
 				<li><a href="#user-center" data-toggle="collapse">个人中心<span
 						class="glyphicon glyphicon-menu-down"></span></a></li>
 				<ul id="user-center" class="panel-collapse collapse in">
-					<li class="active"><a
+					<li><a
 						href="/mybatis/knowledgebase/adm-personal.jsp">个人信息</a></li>
 					<c:if test="${is_worker == 1}">
 						<li><a href="/mybatis/knowledgebase/adm-private.jsp">我的文件</a></li>
@@ -127,7 +127,7 @@
 
 						<!-- <li><a href="#">数据还原</a></li>
 						<li><a href="#">数据备份</a></li> -->
-						<li><a href="/mybatis/knowledgebase/adm-system.jsp">系统配置</a></li>
+						<li  class="active"><a href="/mybatis/knowledgebase/adm-system.jsp">系统配置</a></li>
 					</ul>
 				</c:if>
 			</ul>
@@ -140,40 +140,16 @@
 				</div>
 				<div class="panel-body">
 
-
-					<div style="display: inline-block; padding:5% 0 0 5%">
-						<img src="/mybatis/knowledgebase/img/defaultUser.jpg">
-					</div>
 					
-					<div
-						style="font-size: 17px;padding:6% 25% 0 0;
-						 font-weight: 600;display: inline-block;float:right;">
-						<p>
-							用户名：<span id="show_user_name"></span>
-						</p>
-						<p>
-							真实姓名：<span id="show_user_truename"></span>
-						</p>
-						<p>
-							用户角色：<span id="show_user_role"></span>
-						</p>
-
-						<p>
-							注册时间：<span id="show_register_time"></span>
-						</p>
-						<p>
-							注册邮箱：<span id="show_register_email"></span>
-						</p>
-						
-					</div>
+					
 					<div align="center" style="margin-top: 20%">
 						<button class="btn btn-info" data-toggle="modal" 
 						style="float:left;margin-left:35%;"
-							data-target="#changemsg"  >修改信息
+							data-target="#backup" >系统备份
 						</button>
 						<button class="btn btn-info" data-toggle="modal" 
 						style="float:right;margin-right:35%;"
-							data-target="#changepsw" onclick="change_password()">修改密码
+							data-target="#restore"">系统还原
 						</button>
 						<div style="clear: both;"></div>
 					</div>
@@ -185,75 +161,58 @@
 	</div>
 
 	
-	<div class="modal fade" id="changemsg" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog modal-sm" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">修改个人信息</h4>
-				</div>
-				<div class="modal-body">
-					<ul style="padding-left: 0px;">
-						<li>真实姓名：<input type="text" value="${usertruename}" style="width:70%;display:inline;"
-							class="form-control" id="usertruename" ></li>
-						
-						<li>用户邮箱：<input type="text" id="useremail" style="width:70%;display:inline;"
-							class="form-control" value="${email}"></li>
-						<div id="checkmsg"
-							style="margin-left: 6px; margin-bottom: 10px; height: 6px;"></div>
-					</ul>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary " id="btn_changemsg" onclick="changemsg()"
-						>确认</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	
 
-	<div class="modal fade" id="changepsw" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog modal-sm" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">修改密码</h4>
-				</div>
-				<div class="modal-body">
-					<ul style="padding-left: 0px;">
-						<li><input type="password" placeholder="请输入原密码"
-							class="form-control" id="oldpsw"></li>
-						<div id="spanusername"
-							style="margin-left: 6px; margin-bottom: 10px; height: 6px;"></div>
-						<li><input type="password" id="password1"
-							class="form-control" placeholder="请输入新密码"></li>
-						<div id="spanpsw"
-							style="margin-left: 6px; margin-bottom: 10px; height: 6px;"></div>
-						<li><input type="password" id="password2"
-							class="form-control" placeholder="请再次输入新密码"></li>
-						<div id="spanrepsw"
-							style="margin-left: 6px; margin-bottom: 10px; height: 6px;"></div>
-					</ul>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary " id="btnclick"
-						>确认</button>
-				</div>
-			</div>
-		</div>
-	</div>
 	
-	<div class="modal fade" id="result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="restore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-restore">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
 
-                <h4 class="modal-title" id="myModalLabel-add-result">提示信息</h4>
+                <h4 class="modal-title" id="myModalLabel-restore">提示</h4>
             </div>
             <div class="modal-body">
-                <p id="result_msg"></p>
+                <p>确定要对系统进行还原吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" id="queren" class="btn btn-primary" data-dismiss="modal"
+                        onclick="restore_ok(this)">确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+	
+	
+<div class="modal fade" id="backup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-backup">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel-backup">提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>确定要对系统进行备份吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" id="queren" class="btn btn-primary" data-dismiss="modal"
+                        onclick="backup_ok(this)">确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+	
+<div class="modal fade" id="result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-result">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel-result">提示信息</h4>
+            </div>
+            <div class="modal-body">
+                <p id="add_result"></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -261,7 +220,8 @@
             </div>
         </div>
     </div>
-	</div>
+</div>	
+	
 	
 	<div class="modal fade" id="logout-modal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel-logout">
