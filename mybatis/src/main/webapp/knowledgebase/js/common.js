@@ -358,7 +358,6 @@ function download_search(obj){
     form.attr('method', 'post');
     form.attr('id', 'form-add');
     form.attr('action', "/mybatis/FileDownloadController/fileDownload.do");
-
     var input1 = $('<input>');
     input1.attr('type', 'hidden');
     input1.attr('name', 'filename');

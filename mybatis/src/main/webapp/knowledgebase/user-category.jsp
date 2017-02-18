@@ -113,9 +113,9 @@
 					<li><a href="#system-manage" data-toggle="collapse">系统管理<span class="glyphicon glyphicon-menu-down" ></span></a></li>
 						<ul id="system-manage" class="panel-collapse collapse in">
 						
-							<li><a href="#">数据还原</a></li>
-							<li><a href="#">数据备份</a></li>
-							<li><a href="#">系统配置</a></li>
+							<!-- <li><a href="#">数据还原</a></li>
+							<li><a href="#">数据备份</a></li> -->
+							<li><a href="/mybatis/knowledgebase/adm-system.jsp">系统配置</a></li>
 						</ul>
 					</c:if>
 					</ul>

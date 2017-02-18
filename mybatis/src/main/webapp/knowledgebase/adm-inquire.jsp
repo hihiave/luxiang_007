@@ -113,9 +113,9 @@ padding:0 20px;
 					<li><a href="#system-manage" data-toggle="collapse">系统管理<span class="glyphicon glyphicon-menu-down" ></span></a></li>
 						<ul id="system-manage" class="panel-collapse collapse in">
 						
-							<li><a href="#">数据还原</a></li>
-							<li><a href="#">数据备份</a></li>
-							<li><a href="#">系统配置</a></li>
+							<!-- <li><a href="#">数据还原</a></li>
+							<li><a href="#">数据备份</a></li> -->
+							<li><a href="/mybatis/knowledgebase/adm-system.jsp">系统配置</a></li>
 						</ul>
 					</c:if>
 					</ul>
@@ -137,7 +137,7 @@ padding:0 20px;
                             <th style="font-size:16px;width:10%;text-align:center;">真实姓名</th>
                             <th style="font-size:16px;width:19%;text-align:center;">邮箱</th>
                             <th style="padding-bottom:5px;width:36%;">
-                            <input type="text" id="search-in" name="" style=
+                            <input type="text" id="search-in" name="" placeholder="请输入要查询的用户名" style=
                             "height:34px;padding-left:5px;width:90%">
                             </th>
                             <th style="padding-bottom:5px;padding-top:0px;width:12%;text-align:center;">
