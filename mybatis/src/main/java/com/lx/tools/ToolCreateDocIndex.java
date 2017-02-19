@@ -49,8 +49,7 @@ public class ToolCreateDocIndex {
 	public static boolean createPDFIndex(HttpServletRequest request) {
 		boolean flag = true;
 		String basePath = request.getSession().getServletContext().getRealPath("");
-		String pdfDir = basePath + MacroConstant.PDFDIR;
-		File[] files = new File(pdfDir).listFiles();
+		File[] files = new File(basePath + MacroConstant.PDFDIR).listFiles();
 
 		String contents = "";
 		String filename = "";

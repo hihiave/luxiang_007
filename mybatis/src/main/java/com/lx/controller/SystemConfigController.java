@@ -74,7 +74,7 @@ public class SystemConfigController {
 
 	}
 
-	// 建立pdf
+	// 创建PDF索引
 	@RequestMapping("/build_pdf")
 	@ResponseBody
 	public Map<String, Object> build_pdf(HttpServletRequest request, HttpSession httpSession) {
@@ -93,7 +93,7 @@ public class SystemConfigController {
 		return map;
 	}
 
-	// 建立word
+	// 创建Word索引
 	@RequestMapping("/build_word")
 	@ResponseBody
 	public Map<String, Object> build_word(HttpServletRequest request, HttpSession httpSession) {

@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSON;
+import com.lx.macrofiles.MacroConstant;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.macrofiles.MacroEnum.KFileVisibleType;
@@ -18,6 +19,7 @@ import com.lx.service.FileInfoService;
 import com.lx.serviceimpl.FileInfoServiceImpl;
 import com.lx.tools.Page;
 import com.lx.tools.ToolDate;
+import com.lx.tools.ToolIndexTime;
 
 public class TestFileInfo {
 
@@ -59,7 +61,7 @@ public class TestFileInfo {
 
 	@Test
 	public void getFileByFileIdTest() {
-		logger.info("===============getFileByFileNameTest=============");
+		logger.info("===============getFileByFileIdTest=============");
 		FileInfo fileInfo = fileInfoService.getFileByFileId(1);
 		logger.info("=========通过文件id查询文件======" + JSON.toJSONString(fileInfo));
 	}
@@ -81,12 +83,12 @@ public class TestFileInfo {
 		logger.info("=========更新文件所属类别======" + d);
 	}
 
-	@Test
-	public void checkFileIsExistTest() {
-		logger.info("===============TestCheckFileIsExist=============");
-		boolean d = fileInfoService.checkFileIsExist("西游记1");
-		logger.info("=========检查======" + d);
-	}
+//	@Test
+//	public void checkFileIsExistTest() {
+//		logger.info("===============TestCheckFileIsExist=============");
+//		boolean d = fileInfoService.checkFileIsExist("西游记1");
+//		logger.info("=========检查======" + d);
+//	}
 
 	@Test
 	public void batchFilesIsPassTest() {
@@ -131,6 +133,16 @@ public class TestFileInfo {
 		Page page = new Page(1);
 		List<FileInfo> fileInfos = fileInfoService.getFileWithWaitForCheck(page);
 		logger.info("=========待审核文件======" + JSON.toJSONString(fileInfos));
+	}
+	
+	@Test
+	public void ToolIndexTimeTest() {
+		logger.info("===============ToolIndexTimeTest=============");
+		boolean d = ToolIndexTime.setLatestIndexTime(35435+"", MacroConstant.DOC_TIME);
+		logger.info("===============d=============" + d);
+		
+		int q = ToolIndexTime.getLatestIndexTime(MacroConstant.DOC_TIME);
+		logger.info("===============q=============" + q);
 	}
 
 }

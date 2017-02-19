@@ -48,9 +48,9 @@
 	where file_category = #{oldFileCategory}
 	and file_author = #{fileAuthor}
   </update>
-  <select id="selectFileByFileName" resultMap="BaseResultMap" parameterType="java.lang.String">
+<!--   <select id="selectFileByFileName" resultMap="BaseResultMap" parameterType="java.lang.String">
   	select * from File where file_name = #{fileName,jdbcType=VARCHAR} limit 1
-  </select>
+  </select> -->
   <update id="updateFilesCheck">
   	UPDATE File set file_check = #{fileCheck} where file_id in
   		<foreach collection="fileIds" item="fileId" index="index" open="(" close=")" separator=",">

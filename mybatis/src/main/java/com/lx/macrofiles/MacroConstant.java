@@ -28,6 +28,12 @@ public interface MacroConstant {
 
 	// **********ID常量**********
 	public static final int ADMIN = 1;
-	public static final int DOC = 2;
-
+	public static final int DOC = 2; // DOC file_status = 2
+	public static final int PDF = 1; // PDF file_status = 1
+	
+	// **********最新一次创建索引地址常量**********
+	public static final String DOC_TIME = "C:\\lucene\\indextime\\doctime.txt";
+	public static final String PDF_TIME = "C:\\lucene\\indextime\\pdftime.txt";
+	
+	
 }

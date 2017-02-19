@@ -17,6 +17,7 @@ public class FileIndexController {
 
 	@RequestMapping("/fileIndex")
 	public String fileIndexCreate(HttpServletRequest request) {
+		
 
 		// 获得初始化文档类型
 		String flag = request.getParameter("flag");

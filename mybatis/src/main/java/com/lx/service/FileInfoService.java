@@ -53,7 +53,7 @@ public interface FileInfoService {
 	 * @param fileName 文件名
 	 * @return boolean,true表示存在,false表示不存在
 	 */
-	public boolean checkFileIsExist(String fileName);
+	//public boolean checkFileIsExist(String fileName);
 	
 	/** 通过文件id批量修改审核类型(审核通过pass,文件失效invalid等等)
 	 * @author luxiang
