@@ -21,15 +21,11 @@
 <%
 if(session.getAttribute("message")=="noexist"){
 	%>
-	<%
-	request.getSession().removeAttribute("message");
-	%>
 	<script language="javascript">
 	alert("资源不存在！");
-	</script>
-	
-	
+	</script>	
 <%
+request.getSession().removeAttribute("message");
 }
 %>
 <c:set value="0" var="is_manager"/>
@@ -83,7 +79,7 @@ if(session.getAttribute("message")=="noexist"){
 							<li><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
 							<li><a href="/mybatis/knowledgebase/user-category.jsp">我的分类</a></li>
-							<li><a href="/mybatis/knowledgebase/adm-draft.jsp">垃圾箱</a></li>
+							<li><a href="/mybatis/knowledgebase/adm-draft.jsp">垃圾箱<span id="badge3" class="badge"></span></a></li>
 							</c:if>
 						</ul>
 					<c:if test="${is_manager == 1}">

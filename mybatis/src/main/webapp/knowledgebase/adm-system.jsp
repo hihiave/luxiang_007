@@ -90,7 +90,7 @@
 						<li><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
 						<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
 						<li><a href="/mybatis/knowledgebase/user-category.jsp">我的分类</a></li>
-						<li><a href="/mybatis/knowledgebase/adm-draft.jsp">垃圾箱</a></li>
+						<li><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱<span id="badge3" class="badge"></span></a></li>
 					</c:if>
 				</ul>
 				<c:if test="${is_manager == 1}">
@@ -136,10 +136,10 @@
 		<div class="col-xs-10 r_body">
 			<div class="panel panel-info" id="default_panel">
 				<div class="panel-heading">
-					<h3 class="panel-title">个人信息</h3>
+					<h3 class="panel-title">系统配置</h3>
 				</div>
 				<div class="panel-body">	
-					<div align="center" style="margin-top: 20%">
+					<!-- <div align="center" style="margin-top: 20%">
 						<button class="btn btn-info" data-toggle="modal" 
 						style="float:left;margin-left:35%;"
 							data-target="#backup" >系统备份
@@ -149,7 +149,29 @@
 							data-target="#restore"">系统还原
 						</button>
 						<div style="clear: both;"></div>
-					</div>
+					</div> -->
+					<div >
+						<button class="btn btn-info" data-toggle="modal" 					
+							data-target="#backup" >系统备份
+						</button>
+						<button class="btn btn-info" data-toggle="modal" 
+							data-target="#restore">系统还原
+						</button>
+						
+						<div style="clear: both;"></div>
+					</div>   
+					<div style="margin-top:20px;">
+					<button class="btn btn-info" data-toggle="modal" 
+							data-target="#build">初始化索引
+						</button>
+						<button class="btn btn-info" data-toggle="modal" 
+							data-target="#build_pdf">建立PDF索引
+						</button>
+						<button class="btn btn-info" data-toggle="modal" 
+							data-target="#build_word">建立WORD索引
+						</button>
+						<div style="clear: both;"></div>
+					</div>                                     
 				</div>
 			</div>
 			<jsp:include page="search-result.jsp" flush="true" />
@@ -157,7 +179,61 @@
 		</div>
 	</div>
 
-	
+<div class="modal fade" id="build" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-build">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel-build">提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>是否初始化索引？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" id="queren" class="btn btn-primary" data-dismiss="modal"
+                        onclick="build_ok(this)">确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div><div class="modal fade" id="build_pdf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-build_pdf">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel-build_pdf">提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>是否建立PDF索引？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" id="queren" class="btn btn-primary" data-dismiss="modal"
+                        onclick="build_pdf_ok(this)">确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div><div class="modal fade" id="build_word" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-build_word">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel-build_word">提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>是否建立WORD索引？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" id="queren" class="btn btn-primary" data-dismiss="modal"
+                        onclick="build_word_ok(this)">确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>	
 
 	
 <div class="modal fade" id="restore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-restore">
@@ -168,7 +244,7 @@
                 <h4 class="modal-title" id="myModalLabel-restore">提示</h4>
             </div>
             <div class="modal-body">
-                <p>确定要对系统进行还原吗？</p>
+                <p>是否还原到上一次的备份记录？</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>

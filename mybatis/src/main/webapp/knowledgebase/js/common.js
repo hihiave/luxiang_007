@@ -15,8 +15,23 @@
 $(function() {
 	get_user_check_num();
 	get_file_check_num();
+	get_draft_num();
 })
-
+function get_draft_num(){
+	var username=document.getElementById("username");
+	$.ajax(
+            {
+                type:'post',
+                url:"/mybatis/FileInfoController/get_draft_num.do",
+                data:{"username":username.value},
+                dataType:'json',
+                success:function(data){
+                	var num=data["num"];
+                    $("#badge3").html(num);
+                }
+            }
+        )
+}
 
 function get_user_check_num(){
 	$.ajax(

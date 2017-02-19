@@ -5,6 +5,16 @@
   Time: 10:06
   To change this template use File | Settings | File Templates.
 --%>
+<%
+if(session.getAttribute("message")=="noexist"){
+	%>
+	<script language="javascript">
+	alert("资源不存在！");
+	</script>
+<%
+request.getSession().removeAttribute("message");
+}
+%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set value="0" var="is_manager"/>

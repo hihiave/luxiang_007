@@ -73,6 +73,17 @@ public class FileInfoController {
 		map.put("num", num);
 		return map;
 	}
+	
+	// 获取垃圾文件数量
+		@RequestMapping(value = "/get_draft_num", method = RequestMethod.POST)
+		@ResponseBody
+		public Map<String, Object> get_draft_num(String username) {
+			logger.info("=================get_draft_num==================");
+			Map<String, Object> map = new HashMap<String, Object>();
+			int num = fileInfoService.getCountWithInvalid(username);
+			map.put("num", num);
+			return map;
+		}
 
 	// 获取文件描述
 	@RequestMapping(value = "/get_file_msg", method = RequestMethod.POST)
