@@ -68,6 +68,13 @@ public interface FileInfoService {
 	 * @return int 待审核文件数量
 	 */
 	public int getCountWithWaitForCheck();
+
+	/** 获取我的垃圾箱的文件的数量
+	 * @author luxiang
+	 * @param userName 用户名
+	 * @return int 我的垃圾箱的文件的数量
+	 */
+	public int getCountWithInvalid(String userName);
 	
 	//**********用于一些查询的方法**********
 	/** 通过用户名查询我的文件信息(我的上传pass,我的待审核waitforcheck,我的未通过notpass,已删除文件Invalid)

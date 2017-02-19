@@ -193,7 +193,8 @@ function uploadFile() {
 			alert("请完善文件1资料属性");
 			return false;
 		}
-		if (cate1.val() == "" && child_cate1.val() == "") {
+		if (proto1.val() == "公有" && cate1.val() == ""
+				&& child_cate1.val() == "") {
 			alert("请选择文件1类别");
 			return false;
 		}
@@ -212,7 +213,8 @@ function uploadFile() {
 			alert("请完善文件2资料属性");
 			return false;
 		}
-		if (cate2.val() == "" && child_cate2.val() == "") {
+		if (proto2.val() == "公有" && cate2.val() == ""
+				&& child_cate2.val() == "") {
 			alert("请选择文件2类别");
 			return false;
 		}
@@ -232,7 +234,8 @@ function uploadFile() {
 			alert("请完善文件3资料属性");
 			return false;
 		}
-		if (cate3.val() == "" && child_cate3.val() == "") {
+		if (proto3.val() == "公有" && cate3.val() == ""
+				&& child_cate3.val() == "") {
 			alert("请选择文件3类别");
 			return false;
 		}

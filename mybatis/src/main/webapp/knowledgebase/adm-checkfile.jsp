@@ -75,7 +75,7 @@
 							<li><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
 							<li><a href="/mybatis/knowledgebase/user-category.jsp">我的分类</a></li>
-							<li><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>
+							<li><a href="/mybatis/knowledgebase/adm-draft.jsp">垃圾箱</a></li>
 							</c:if>
 						</ul>
 					<c:if test="${is_manager == 1}">

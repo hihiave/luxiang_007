@@ -199,7 +199,7 @@ public class FileInfoController {
 		return map;
 	}
 
-	// 我的草稿
+	// 我的垃圾箱
 	@RequestMapping(value = "/draftfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> draftfile(Integer page_Now, HttpSession httpSession) {
@@ -262,10 +262,8 @@ public class FileInfoController {
 		String basePath = request.getSession().getServletContext().getRealPath("");
 		String pdfDir = basePath + MacroConstant.PDFDIR;
 		String docDir = basePath + MacroConstant.DOCDIR;
-		boolean flag = false;
 		Map<String, Object> map = new HashMap<>();
 		String filename1 = request.getParameter("filename1");
-		logger.info("=================filename1==================" + filename1);
 		if (filename1 != null) {
 			FileInfo fileInfo1 = new FileInfo();
 			fileInfo1.setFileName(filename1.trim());
@@ -284,15 +282,8 @@ public class FileInfoController {
 			// 设置文件可见类型
 			String filevisible1 = request.getParameter("pro1");
 			fileInfo1.setFileIsVisible(filevisible1);
-			if (filevisible1.equals("私有")) {
+			if (filevisible1.equals("私有"))
 				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.privateFile.getValue());
-
-				/*
-				 * 私有的，通过审核 为1 ， 直接转移 转移
-				 * 
-				 */
-			}
-
 			if (filevisible1.equals("公有"))
 				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.publicFile.getValue());
 
@@ -303,10 +294,11 @@ public class FileInfoController {
 			fileInfo1.setFileUploadTime(Integer.valueOf(Filename));
 
 			// ToolFileTransfer.getToFilePath()
+			boolean flag = false;
 			switch (KFileFormatType.valueOf(ToolString.getFilenameExtension(filenameFull))) {
 			case doc:
-				if (ToolFileTransfer.transfer(filePath, docDir)) {
-					if (ToolDocConverter.docToPdf(filePath, basePath + MacroConstant.DOC_TEMP)) {
+				if (ToolDocConverter.docToPdf(filePath, basePath + MacroConstant.DOC_TEMP)) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
 						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
 						fileInfo1.setFileStatus(MacroConstant.DOC);
 						flag = true;
@@ -323,13 +315,14 @@ public class FileInfoController {
 				break;
 			}
 
-			flag = flag && fileInfoService.addFileInfo(fileInfo1);
+			if (flag) {
+				flag = fileInfoService.addFileInfo(fileInfo1);
+			}
 
 			map.put("message1", "hahaha");
 			map.put("result1", flag);
 		}
 		String filename2 = request.getParameter("filename2");
-		logger.info("=================filename2==================" + filename2);
 		if (filename2 != null) {
 			FileInfo fileInfo2 = new FileInfo();
 			fileInfo2.setFileName(filename2.trim());
@@ -353,21 +346,26 @@ public class FileInfoController {
 			if (filevisible2.equals("公有"))
 				fileInfo2.setFileCheck(MacroEnum.KFileVisibleType.publicFile.getValue());
 
-			// 设置文件地址
+			// 设置文件url
 			String filePath = request.getParameter("filepath2"); // C:\\temp\\1479709800.doc
 			String filenameFull = ToolString.getFilenameFull(filePath);
-			fileInfo2.setFileUploadTime(Integer.valueOf(ToolString.getFilename(filenameFull)));
+			String Filename = ToolString.getFilename(filenameFull); // 1479709800
+			fileInfo2.setFileUploadTime(Integer.valueOf(Filename));
 
+			boolean flag = false;
 			switch (KFileFormatType.valueOf(ToolString.getFilenameExtension(filenameFull))) {
 			case doc:
-				if (ToolFileTransfer.transfer(filePath, docDir)) {
-					fileInfo2.setFileUrl(ToolFileTransfer.getToFilePath());
-					flag = true;
+				if (ToolDocConverter.docToPdf(filePath, basePath + MacroConstant.DOC_TEMP)) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo2.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo2.setFileStatus(MacroConstant.DOC);
+						flag = true;
+					}
 				}
 				break;
 			case pdf:
 				if (ToolFileTransfer.transfer(filePath, pdfDir)) {
-					fileInfo2.setFileUrl(ToolFileTransfer.getToFilePath());
+					fileInfo2.setFileUrl(MacroConstant.PDFDIR + filenameFull);
 					flag = true;
 				}
 				break;
@@ -375,15 +373,15 @@ public class FileInfoController {
 				break;
 			}
 
-			flag = flag && fileInfoService.addFileInfo(fileInfo2);
+			if (flag) {
+				flag = fileInfoService.addFileInfo(fileInfo2);
+			}
 			map.put("message2", "hahaha");
 			map.put("result2", flag);
 		}
 
 		String filename3 = request.getParameter("filename3");
-		logger.info("=================filename3==================" + filename3);
 		if (filename3 != null) {
-			logger.info("=================3333333333==================");
 			FileInfo fileInfo3 = new FileInfo();
 			fileInfo3.setFileName(filename3.trim());
 			fileInfo3.setFileAuthor(request.getParameter("author3").trim());
@@ -409,18 +407,23 @@ public class FileInfoController {
 			// 设置文件地址
 			String filePath = request.getParameter("filepath3"); // C:\\temp\\1479709800.doc
 			String filenameFull = ToolString.getFilenameFull(filePath);
-			fileInfo3.setFileUploadTime(Integer.valueOf(ToolString.getFilename(filenameFull)));
+			String Filename = ToolString.getFilename(filenameFull); // 1479709800
+			fileInfo3.setFileUploadTime(Integer.valueOf(Filename));
 
+			boolean flag = false;
 			switch (KFileFormatType.valueOf(ToolString.getFilenameExtension(filenameFull))) {
 			case doc:
-				if (ToolFileTransfer.transfer(filePath, docDir)) {
-					fileInfo3.setFileUrl(ToolFileTransfer.getToFilePath());
-					flag = true;
+				if (ToolDocConverter.docToPdf(filePath, basePath + MacroConstant.DOC_TEMP)) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo3.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo3.setFileStatus(MacroConstant.DOC);
+						flag = true;
+					}
 				}
 				break;
 			case pdf:
 				if (ToolFileTransfer.transfer(filePath, pdfDir)) {
-					fileInfo3.setFileUrl(ToolFileTransfer.getToFilePath());
+					fileInfo3.setFileUrl(MacroConstant.PDFDIR + filenameFull);
 					flag = true;
 				}
 				break;
@@ -428,11 +431,13 @@ public class FileInfoController {
 				break;
 			}
 
-			flag = flag && fileInfoService.addFileInfo(fileInfo3);
+			if (flag) {
+				flag = fileInfoService.addFileInfo(fileInfo3);
+			}
+
 			map.put("message3", "hahaha");
 			map.put("result3", flag);
 		}
-
 		return map;
 	}
 

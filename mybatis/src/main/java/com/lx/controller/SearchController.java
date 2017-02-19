@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,10 +20,12 @@ import com.lx.tools.ToolSearchDocIndex;
 @Controller
 public class SearchController {
 
+	private static Logger logger = Logger.getLogger(SearchController.class);
+
 	// 文档搜索
 	@RequestMapping("/searchIndex")
 	public ModelAndView searchIndex(HttpServletRequest request) {
-
+		logger.info("=================searchIndex==================");
 		String queryStr = request.getParameter("queryStr").trim(); // 检索内容
 		String searchType = request.getParameter("searchType"); // 精确还是模糊
 		String filetype = request.getParameter("filetype");// pdf doc all

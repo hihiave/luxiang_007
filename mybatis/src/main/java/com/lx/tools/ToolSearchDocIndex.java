@@ -54,59 +54,63 @@ public class ToolSearchDocIndex {
 		// 高亮显示设置
 		Highlighter highlighter = new Highlighter(simpleHTMLFormatter, new QueryScorer(query));
 		Highlighter highlighterTitle = new Highlighter(formatTitle, new QueryScorer(query));
-		/* 这个200是指定关键字字符串的context的长度，你可以自己设定，因为不可能返回整篇正文内容 */
+		/* 这个keyContextNum是指定关键字字符串的context的长度，你可以自己设定，因为不可能返回整篇正文内容 */
 		highlighter.setTextFragmenter(new SimpleFragmenter(keyContextNum));
 
 		IndexSearcher searcher = getIndexSearcher();
 
 		try {
-			ScoreDoc[] scoreDocs = searcher.search(query, topNum).scoreDocs;
+			if (searcher != null) {
+				ScoreDoc[] scoreDocs = searcher.search(query, topNum).scoreDocs;
 
-			page.setTotalCount(scoreDocs.length);
-			page.init();
+				page.setTotalCount(scoreDocs.length);
+				page.init();
 
-			Document doc;
-			DocumentEntity docEntity;
-			String filename = ""; // 文件名
-			String formatT = null; // 高亮标题
+				Document doc;
+				DocumentEntity docEntity;
+				String filename = ""; // 文件名
+				String formatT = null; // 高亮标题
 
-			for (int i = page.getStartPos(); i < page.getEndPos(); i++) {
-				docEntity = new DocumentEntity();
+				for (int i = page.getStartPos(); i < page.getEndPos(); i++) {
+					docEntity = new DocumentEntity();
 
-				// 根据doc获取文档
-				doc = searcher.doc(scoreDocs[i].doc);
+					// 根据doc获取文档
+					doc = searcher.doc(scoreDocs[i].doc);
 
-				// 高亮出显示文本
-				PaodingAnalyzer analyzer1 = new PaodingAnalyzer();
-				TokenStream tokenStream = analyzer1.tokenStream("contents", new StringReader(doc.get(contents)));
-				docEntity.setContents(highlighter.getBestFragment(tokenStream, doc.get(contents)));
+					// 高亮出显示文本
+					PaodingAnalyzer analyzer1 = new PaodingAnalyzer();
+					TokenStream tokenStream = analyzer1.tokenStream("contents", new StringReader(doc.get(contents)));
+					docEntity.setContents(highlighter.getBestFragment(tokenStream, doc.get(contents)));
 
-				// 高亮出显示标题
-				PaodingAnalyzer analyzer2 = new PaodingAnalyzer();
-				filename = doc.get(fileName);
-				tokenStream = analyzer2.tokenStream("fileName", new StringReader(filename));
-				// 需要注意：在处理时如果文本检索结果中不包含对应的关键字返回一个null
-				formatT = highlighterTitle.getBestFragment(tokenStream, filename);
-				if (formatT == null)
-					formatT = filename;
+					// 高亮出显示标题
+					PaodingAnalyzer analyzer2 = new PaodingAnalyzer();
+					filename = doc.get(fileName);
+					tokenStream = analyzer2.tokenStream("fileName", new StringReader(filename));
+					// 需要注意：在处理时如果文本检索结果中不包含对应的关键字返回一个null
+					formatT = highlighterTitle.getBestFragment(tokenStream, filename);
+					if (formatT == null)
+						formatT = filename;
 
-				docEntity.setFilename(formatT);
+					docEntity.setFilename(formatT);
 
-				String filenameExtension = doc.get(type);
-				docEntity.setType(filenameExtension);
-				docEntity.setId(doc.get("id"));
+					String filenameExtension = doc.get(type);
+					docEntity.setType(filenameExtension);
+					docEntity.setId(doc.get("id"));
 
-				if (filenameExtension.equalsIgnoreCase("pdf")) {
-					docEntity.setFileUrl(MacroConstant.PDFDIR + filename + "." + filenameExtension);
-				} else if (filenameExtension.equalsIgnoreCase("doc")) {
-					docEntity.setFileUrl(MacroConstant.DOCDIR + filename + "." + filenameExtension);
+					if (filenameExtension.equalsIgnoreCase("pdf")) {
+						docEntity.setFileUrl(MacroConstant.PDFDIR + filename + "." + filenameExtension);
+					} else if (filenameExtension.equalsIgnoreCase("doc")) {
+						docEntity.setFileUrl(MacroConstant.DOCDIR + filename + "." + filenameExtension);
+					}
+
+					list.add(docEntity);
+					analyzer1.close();
+					analyzer2.close();
 				}
+				return list;
 
-				list.add(docEntity);
-				analyzer1.close();
-				analyzer2.close();
 			}
-			return list;
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			MacroEnum.ErrMessage = "获得索引结果错误!";

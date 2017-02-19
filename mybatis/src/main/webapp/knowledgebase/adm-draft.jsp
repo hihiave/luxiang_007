@@ -82,7 +82,7 @@ if(session.getAttribute("message")=="noexist"){
 							<li><a href="/mybatis/knowledgebase/adm-waitforcheck.jsp">待审文件</a></li>
 							<li><a href="/mybatis/knowledgebase/adm-download.jsp">我的下载</a></li>
 							<li><a href="/mybatis/knowledgebase/user-category.jsp">我的分类</a></li>
-							<li class="active"><a href="/mybatis/knowledgebase/adm-draft.jsp">草稿箱</a></li>
+							<li class="active"><a href="/mybatis/knowledgebase/adm-draft.jsp">垃圾箱</a></li>
 							</c:if>
 						</ul>
 					<c:if test="${is_manager == 1}">
@@ -127,7 +127,7 @@ if(session.getAttribute("message")=="noexist"){
        <div class="col-xs-10 r_body" >	
             <div class="panel panel-info"  id="default_panel">
                 <div class="panel-heading">
-                    <h3 class="panel-title">草稿箱</h3>
+                    <h3 class="panel-title">垃圾箱</h3>
                 </div>
                 <div class="panel-body" style="padding-top:0px;">
                     <div style="padding-top: 10px;">

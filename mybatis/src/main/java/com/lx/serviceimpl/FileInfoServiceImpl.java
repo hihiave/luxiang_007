@@ -79,6 +79,11 @@ public class FileInfoServiceImpl implements FileInfoService {
 		return fileInfoMapper.getFileInfoCount(KCheckType.waitForCheck.getValue(), null);
 	}
 
+	@Override
+	public int getCountWithInvalid(String userName) {
+		return fileInfoMapper.selectFileByfileAuthorWithFileCheckCount(userName, KCheckType.invalid.getValue());
+	}
+
 	// **********用于一些查询的方法**********
 	@Override
 	public List<FileInfo> selectMyFileInfo(String userName, Page page, KCheckType... checkTypes) {
