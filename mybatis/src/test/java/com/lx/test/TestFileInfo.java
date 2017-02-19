@@ -96,6 +96,15 @@ public class TestFileInfo {
 		logger.info("=========检查======" + d);
 	}
 
+	@Test
+	public void getCountWithInvalidTest() {
+		logger.info("===============getCountWithInvalidTest=============");
+		int d = fileInfoService.getCountWithInvalid("qqqq");
+		// .batchFilesIsPass(1, 1);
+		logger.info("=========垃圾箱数量======" + d);
+	}
+	
+	
 	// **********用于一些查询的方法**********
 	@Test
 	public void selectMyFileInfoTest() {
