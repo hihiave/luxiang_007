@@ -58,13 +58,10 @@ public class FileInfoServiceImpl implements FileInfoService {
 		return true;
 	}
 
-//	@Override
-//	public boolean checkFileIsExist(String fileName) {
-//		if (fileInfoMapper.selectFileByFileName(fileName) != null) {
-//			return true;
-//		}
-//		return false;
-//	}
+	@Override
+	public FileInfo getFileByUploadTime(int fileUploadTime) {
+		return fileInfoMapper.selectFileByFileUploadTime(fileUploadTime);
+	}
 
 	@Override
 	public boolean batchFilesIsPass(KCheckType checkType, Integer... fileIds) {

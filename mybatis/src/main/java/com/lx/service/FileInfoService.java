@@ -48,12 +48,12 @@ public interface FileInfoService {
 	 */
 	public boolean alterFileCategroy(String fileAuthor, String oldFileCategory, String newFileCategory);
 
-	/** 通过文件名检查文件是否存在
+	/** 通过上传时间获得文件信息
 	 * @author luxiang
-	 * @param fileName 文件名
-	 * @return boolean,true表示存在,false表示不存在
+	 * @param fileUploadTime
+	 * @return
 	 */
-	//public boolean checkFileIsExist(String fileName);
+	public FileInfo getFileByUploadTime(int fileUploadTime);
 	
 	/** 通过文件id批量修改审核类型(审核通过pass,文件失效invalid等等)
 	 * @author luxiang

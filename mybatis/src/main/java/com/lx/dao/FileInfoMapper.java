@@ -27,7 +27,7 @@ public interface FileInfoMapper {
 	int updateFileCategory(@Param("fileAuthor") String fileAuthor, @Param("oldFileCategory") String oldFileCategory,
 			@Param("newFileCategory") String newFileCategory);
 
-	//FileInfo selectFileByFileName(String fileName);
+	FileInfo selectFileByFileUploadTime(int fileUploadTime);
 
 	int updateFilesCheck(@Param("fileCheck") int fileCheck, @Param("fileIds") Integer... fileIds);
 
