@@ -66,11 +66,12 @@ public class FileInfoController {
 	// 获取待审文件数量
 	@RequestMapping(value = "/get_unchecked_num", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> get_unchecked_num() {
+	public Map<String, Object> get_unchecked_num(HttpSession httpSession) {
 		logger.info("=================get_unchecked_num==================");
 		Map<String, Object> map = new HashMap<String, Object>();
-		int num = fileInfoService.getCountWithWaitForCheck();
-		map.put("num", num);
+		int countWithWaitForCheck = fileInfoService.getCountWithWaitForCheck();
+		httpSession.setAttribute("countWithWaitForCheck", countWithWaitForCheck);
+		map.put("num", countWithWaitForCheck);
 		return map;
 	}
 

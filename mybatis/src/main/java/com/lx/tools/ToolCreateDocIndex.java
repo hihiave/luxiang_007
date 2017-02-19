@@ -16,22 +16,16 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 import org.apache.poi.hwpf.extractor.WordExtractor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lx.macrofiles.MacroConstant;
 import com.lx.macrofiles.MacroEnum;
-import com.lx.service.DocRecordService;
 
 import net.paoding.analysis.analyzer.PaodingAnalyzer;
 
 public class ToolCreateDocIndex {
 
-	@Autowired
-	private static DocRecordService docRecordService;
 
-	/**
-	 * 初始化索引
-	 */
+	// 初始化索引
 	public static void init() {
 		// Constant.getRootRealPath("pdf");
 		// Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_44);
@@ -48,12 +42,10 @@ public class ToolCreateDocIndex {
 		// Document document = new Document();
 		// writer.addDocument(document);
 		// writer.close();
-		docRecordService.deleteAllDoc();
+		//docRecordService.deleteAllDoc();
 	}
 
-	/**
-	 * 创建pdf索引
-	 */
+	// 创建PDF索引
 	public static boolean createPDFIndex(HttpServletRequest request) {
 		boolean flag = true;
 		String basePath = request.getSession().getServletContext().getRealPath("");
@@ -107,9 +99,7 @@ public class ToolCreateDocIndex {
 		return flag;
 	}
 
-	/**
-	 * 创建word索引
-	 */
+	// 创建Word索引
 	public static boolean createWordIndex(HttpServletRequest request) {
 		boolean flag = true;
 		String basePath = request.getSession().getServletContext().getRealPath("");

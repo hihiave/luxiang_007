@@ -119,7 +119,6 @@
 					</ul>
 				</c:if>
 
-
 				<c:if test="${is_manager == 1}">
 					<li><a href="#system-manage" data-toggle="collapse">系统管理<span
 							class="glyphicon glyphicon-menu-down"></span></a></li>
@@ -138,55 +137,43 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">系统配置</h3>
 				</div>
-				<div class="panel-body">	
-					<!-- <div align="center" style="margin-top: 20%">
-						<button class="btn btn-info" data-toggle="modal" 
-						style="float:left;margin-left:35%;"
-							data-target="#backup" >系统备份
-						</button>
-						<button class="btn btn-info" data-toggle="modal" 
-						style="float:right;margin-right:35%;"
-							data-target="#restore"">系统还原
-						</button>
-						<div style="clear: both;"></div>
-					</div> -->
+				<div class="panel-body">
 					<div >
 						<button class="btn btn-info" data-toggle="modal" 					
-							data-target="#backup" >系统备份
+							data-target="#backup" >数据备份
 						</button>
-						<span style="display:inline;font-size:16px">&nbsp;备份当前时刻的数据，在数据丢失和损坏时，可以及时恢复。</span>
+						<span style="display:inline;font-size:16px">&nbsp;注：备份当前时刻的数据，在数据丢失或损坏时，可以及时恢复。</span>
 					</div>
 					
 					<div style="margin-top:10px;">
 						<button class="btn btn-info" data-toggle="modal" 
-							data-target="#restore">系统还原
+							data-target="#restore">数据还原
 						</button>
-						<span style="display:inline;font-size:16px">&nbsp;在数据丢失和损坏时，将数据还原到上一备份时刻，保证数据安全。</span>
+						<span style="display:inline;font-size:16px">&nbsp;注：在数据丢失或损坏时，将数据还原到上一备份的时刻，保证数据的安全性。</span>
 					</div>
 					
 					<div style="margin-top:10px;">
 						<button class="btn btn-info" data-toggle="modal" 
-								data-target="#build">初始化索引
+								data-target="#build">初始化文档索引
 						</button>
-						<span style="display:inline;font-size:16px">&nbsp;该按钮会删除之前创建的所有索引并重新创建所有文档索引。
-						&nbsp;&nbsp;创建时请确保"资源审核"中的文件数量为0</span>
+						<span style="display:inline;font-size:16px">&nbsp;注：创建时，请确保“资源审核”中的文件数量为0。&nbsp;
+						删除之前创建的所有索引并重新创建所有文档索引。</span>
 					</div>
 					
 					<div style="margin-top:10px;">
 						<button class="btn btn-info" data-toggle="modal" 
-							data-target="#build_pdf">建立PDF索引
+							data-target="#build_pdf">创建PDF索引
 						</button>
-						<span style="display:inline;font-size:16px">&nbsp;创建新上传的pdf文档索引，以方便在"高级检索"中
-						做全文检索，此按钮为增量创建pdf索引，上一时刻被创建过的索引不会被重复创建。创建时请确保"资源审核"中的文件数量为0。</span>
+						<span style="display:inline;font-size:16px">&nbsp;注：创建时，请确保“资源审核”中的文件数量为0。&nbsp;
+						创建新上传的PDF文档索引，以方便在“高级搜索”中做全文检索。此按钮为增量创建PDF索引，上一时刻被创建过的索引不会被重复创建。</span>
 					</div>
 					   
 					<div style="margin-top:10px;">
 						<button class="btn btn-info" data-toggle="modal" 
-							data-target="#build_word">建立WORD索引
+							data-target="#build_word">创建Word索引
 						</button>
-						<span style="display:inline;font-size:16px">&nbsp;创建新上传的word文档索引，以方便在"高级检索"中
-						做全文检索，此按钮为增量创建word索引，上一时刻被创建过的索引不会被重复创建。创建时请确保"资源审核"中的文件数量为0</span>
-						
+						<span style="display:inline;font-size:16px">&nbsp;注：创建时，请确保“资源审核”中的文件数量为0。&nbsp;
+						创建新上传的Word文档索引，以方便在"高级检索"中做全文检索。此按钮为增量创建Word索引，上一时刻被创建过的索引不会被重复创建。</span>
 					</div>                                     
 				</div>
 			</div>

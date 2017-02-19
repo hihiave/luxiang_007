@@ -36,7 +36,7 @@ function restore_ok() {
 	})
 }
 
-// 初始化索引
+// 初始化文档索引
 function build_ok() {
 	$.ajax({
 		type : 'post',
@@ -44,14 +44,14 @@ function build_ok() {
 		dataType : "json",
 		success : function(data) {
 			if (data["flag"] == "chenggong") {
-				$("#add_result").html("初始化索引成功");
+				$("#add_result").html("初始化文档索引成功！");
 				$("#result").modal('show');
 				get_category();
 			} else if (data["flag"] == "shibai") {
-				$("#add_result").html("初始化索引失败");
+				$("#add_result").html("初始化文档索引失败，请重新初始化！");
 				$("#result").modal('show');
 			} else if (data["flag"] == "waitforcheck") {
-				$("#add_result").html("初始化失败，存在待审核文件");
+				$("#add_result").html("建立索引失败，请先对“资源审核”中的文件进行审核！");
 				$("#result").modal('show');
 			}
 		}
@@ -66,14 +66,14 @@ function build_word_ok() {
 		dataType : "json",
 		success : function(data) {
 			if (data["flag"] == "chenggong") {
-				$("#add_result").html("建立Word索引成功");
+				$("#add_result").html("建立Word索引成功！");
 				$("#result").modal('show');
 				get_category();
 			} else if (data["flag"] == "shibai") {
-				$("#add_result").html("建立Word索引失败");
+				$("#add_result").html("创建Word索引失败，请重新创建！");
 				$("#result").modal('show');
 			} else if (data["flag"] == "waitforcheck") {
-				$("#add_result").html("建立索引失败，存在待审核文件");
+				$("#add_result").html("建立索引失败，请先对“资源审核”中的文件进行审核！");
 				$("#result").modal('show');
 			}
 		}
@@ -88,14 +88,14 @@ function build_pdf_ok() {
 		dataType : "json",
 		success : function(data) {
 			if (data["flag"] == "chenggong") {
-				$("#add_result").html("建立PDF索引成功");
+				$("#add_result").html("创建PDF索引成功！");
 				$("#result").modal('show');
 				get_category();
 			} else if (data["flag"] == "shibai") {
-				$("#add_result").html("建立PDF索引失败");
+				$("#add_result").html("创建PDF索引失败，请重新创建！");
 				$("#result").modal('show');
 			} else if (data["flag"] == "waitforcheck") {
-				$("#add_result").html("建立索引失败，存在待审核文件");
+				$("#add_result").html("建立索引失败，请先对“资源审核”中的文件进行审核！");
 				$("#result").modal('show');
 			}
 		}
