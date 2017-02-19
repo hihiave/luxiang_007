@@ -11,9 +11,7 @@ import com.lx.macrofiles.MacroEnum;
 
 public class XpdfParser {
 
-	/**
-	 * 获取由pdf-->txt文档后文档内容
-	 */
+	// 获取由pdf-->txt文档后文档内容
 	public static String getPDFFileContents(String filePath) {
 		String txtCanonicalPath = xpdfParser(filePath);
 		if (txtCanonicalPath == null)
@@ -30,9 +28,7 @@ public class XpdfParser {
 		return getTxtContents(txtCanonicalPath);
 	}
 
-	/**
-	 * pdf转换txt,获取txt文档全路径
-	 */
+	// pdf转换txt,获取txt文档全路径
 	private static String xpdfParser(String filePath) {
 		File file = new File(MacroConstant.TEMP);
 		if (!file.exists())
@@ -56,9 +52,7 @@ public class XpdfParser {
 		return xparam.getTarget();
 	}
 
-	/**
-	 * 获取txt文档内容
-	 */
+	// 获取txt文档内容
 	private static String getTxtContents(String txtCanonicalPath) {
 		StringBuffer stringBuffer = new StringBuffer();
 		try {

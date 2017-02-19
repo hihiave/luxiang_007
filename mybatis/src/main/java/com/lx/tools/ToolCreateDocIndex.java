@@ -24,30 +24,26 @@ import net.paoding.analysis.analyzer.PaodingAnalyzer;
 
 public class ToolCreateDocIndex {
 
-
 	// 初始化索引
-	public static void init() {
-		// Constant.getRootRealPath("pdf");
-		// Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_44);
-		// String indexDir = SystemConstant.indexDir;
-		// File file = new File(indexDir);
-		// // 创建目录
-		// Directory directory = FSDirectory.open(file);
-		//
-		// // 表示创建或覆盖当前索引；false表示对当前索引进行追加
-		// // Default value is 128
-		// IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_44,
-		// analyzer);
-		// IndexWriter writer = new IndexWriter(directory, iwc);
-		// Document document = new Document();
-		// writer.addDocument(document);
-		// writer.close();
-		//docRecordService.deleteAllDoc();
+	public static boolean init(HttpServletRequest request) {
+		boolean flag = ToolIndexTime.setLatestIndexTime(0 + "", MacroConstant.PDF_TIME)
+				&& ToolIndexTime.setLatestIndexTime(0 + "", MacroConstant.DOC_TIME);
+
+		if (flag) {
+			// 删除所有索引
+			File[] files = new File(MacroConstant.INDEXDIR).listFiles();
+			for (File file : files) {
+				file.delete();
+			}
+			flag = flag && createPDFIndex(request);
+			flag = flag && createWordIndex(request);
+		}
+		return flag;
 	}
 
 	// 创建PDF索引
 	public static boolean createPDFIndex(HttpServletRequest request) {
-		boolean flag = true;
+		boolean flag = false;
 		String basePath = request.getSession().getServletContext().getRealPath("");
 		File[] files = new File(basePath + MacroConstant.PDFDIR).listFiles();
 
@@ -55,92 +51,65 @@ public class ToolCreateDocIndex {
 		String filename = "";
 		String filenameFull = "";
 		Document document;
-
+		IndexWriter writer = getIndexWriter();
 		try {
-			// 返回的是数据库表中最新的文件的修改时间(戳s)
-
-			// int LatestTime =
-			// docRecordService.getLatestDocument(MacroEnum.KFileExtension.pdf.toString());
-
-			int LatestTime = 0;
-			IndexWriter writer = getIndexWriter();
 			for (int i = 0; i < files.length; i++) {
-				if (files[i].lastModified() / 1000 > LatestTime) {
+				if (files[i].lastModified() / 1000 > ToolIndexTime.getLatestIndexTime(MacroConstant.PDF_TIME)) {
 					filenameFull = files[i].getName();
-					// DocRecord docRecord = new DocRecord();
-					// docRecord.setFileName(filenameFull);
-					// docRecord.setDocType(MacroEnum.KFileExtension.pdf.toString());
-					// docRecord.setLastModify((int) (files[i].lastModified() /
-					// 1000));
-					// int id = docRecordService.createDoc(docRecord);
 
-					int id = 1;
 					contents = XpdfParser.getPDFFileContents(files[i].getCanonicalPath());
-					if (contents == null) {
-						flag = false;
-					} else {
+					if (contents != null) {
 						filename = filenameFull.substring(0, filenameFull.lastIndexOf(".pdf"));
 						document = new Document();
-						document.add(new StringField("id", "" + id, Field.Store.YES));
+						document.add(new StringField("id", filename, Field.Store.YES));
 						document.add(
 								new StringField("type", MacroEnum.KFileFormatType.pdf.toString(), Field.Store.YES));
 						document.add(new StringField("fileName", filename, Field.Store.YES));
 						document.add(new TextField("contents", contents, Field.Store.YES));
 						writer.addDocument(document);
+					} else {
+						return false;
 					}
 				}
 			}
+			flag = true;
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-			flag = false;
 		}
 		return flag;
 	}
 
 	// 创建Word索引
 	public static boolean createWordIndex(HttpServletRequest request) {
-		boolean flag = true;
+		boolean flag = false;
 		String basePath = request.getSession().getServletContext().getRealPath("");
-		String docDir = basePath + MacroConstant.DOCDIR;
-		File[] files = new File(docDir).listFiles();
-
-		// int LatestTime = docRecordService.getLatestDocument("doc");
-		int LatestTime = 0;
+		File[] files = new File(basePath + MacroConstant.DOCDIR).listFiles();
 
 		String contents = "";
-		String filenameFull = "";
+		String filename = "";
 		Document document; // 文档
 		IndexWriter writer = getIndexWriter();
 		try {
 			for (int i = 0; i < files.length; i++) {
-				if (files[i].lastModified() > LatestTime) {
-					filenameFull = files[i].getName();
+				if (files[i].lastModified() / 1000 > ToolIndexTime.getLatestIndexTime(MacroConstant.DOC_TIME)) {
+					filename = ToolString.getFilename(files[i].getName());
 
-					// DocRecord docRecord = new DocRecord();
-					// docRecord.setFileName(filenameFull);
-					// docRecord.setDocType(MacroEnum.KFileExtension.doc.toString());
-					// docRecord.setLastModify((int) (files[i].lastModified() /
-					// 1000));
-					// int id = docRecordService.createDoc(docRecord);
-
-					int id = 1;
 					contents = new WordExtractor(new FileInputStream(files[i].getCanonicalPath())).getText();
 
 					// 创建文档
 					document = new Document();
-					document.add(new StringField("id", "" + id, Field.Store.YES));
+					document.add(new StringField("id", filename, Field.Store.YES));
 					document.add(new StringField("type", MacroEnum.KFileFormatType.doc.toString(), Field.Store.YES));
-					document.add(new StringField("fileName",
-							filenameFull.substring(0, filenameFull.lastIndexOf(".doc")), Field.Store.YES));
+					document.add(new StringField("fileName", filename, Field.Store.YES));
 					document.add(new TextField("contents", contents, Field.Store.YES));
 					writer.addDocument(document);
 				}
 			}
+			flag = true;
 			writer.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			flag = false;
 		}
 		return flag;
 	}

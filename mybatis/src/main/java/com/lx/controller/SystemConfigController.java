@@ -3,17 +3,18 @@ package com.lx.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lx.service.FileInfoService;
+import com.lx.macrofiles.MacroConstant;
 import com.lx.tools.ToolCreateDocIndex;
+import com.lx.tools.ToolDate;
+import com.lx.tools.ToolIndexTime;
 
 @Controller
 @RequestMapping("/SystemConfigController")
@@ -29,7 +30,7 @@ public class SystemConfigController {
 		Map<String, Object> map = new HashMap<>();
 
 		if (true) {
-			map.put("flag", "chenggong");
+			map.put("flag", "chenggong1");
 			return map;
 		}
 
@@ -44,7 +45,7 @@ public class SystemConfigController {
 		logger.info("=================restore==================");
 		Map<String, Object> map = new HashMap<>();
 		if (true) {
-			map.put("flag", "chenggong");
+			map.put("flag", "chenggong1");
 			return map;
 		}
 
@@ -63,12 +64,10 @@ public class SystemConfigController {
 			map.put("flag", "waitforcheck");
 			return map;
 		}
-
-		if (true) {
+		if (ToolCreateDocIndex.init(request)) {
 			map.put("flag", "chenggong");
 			return map;
 		}
-
 		map.put("flag", "shibai");
 		return map;
 
@@ -86,8 +85,10 @@ public class SystemConfigController {
 			return map;
 		}
 		if (ToolCreateDocIndex.createPDFIndex(request)) {
-			map.put("flag", "chenggong");
-			return map;
+			if (ToolIndexTime.setLatestIndexTime(ToolDate.getCurrentTimestamp() + "", MacroConstant.PDF_TIME)) {
+				map.put("flag", "chenggong");
+				return map;
+			}
 		}
 		map.put("flag", "shibai");
 		return map;
@@ -105,8 +106,10 @@ public class SystemConfigController {
 			return map;
 		}
 		if (ToolCreateDocIndex.createWordIndex(request)) {
-			map.put("flag", "chenggong");
-			return map;
+			if (ToolIndexTime.setLatestIndexTime(ToolDate.getCurrentTimestamp() + "", MacroConstant.DOC_TIME)) {
+				map.put("flag", "chenggong");
+				return map;
+			}
 		}
 		map.put("flag", "shibai");
 		return map;

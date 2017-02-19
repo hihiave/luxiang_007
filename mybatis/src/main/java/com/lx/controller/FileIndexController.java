@@ -17,7 +17,6 @@ public class FileIndexController {
 
 	@RequestMapping("/fileIndex")
 	public String fileIndexCreate(HttpServletRequest request) {
-		
 
 		// 获得初始化文档类型
 		String flag = request.getParameter("flag");
@@ -27,7 +26,7 @@ public class FileIndexController {
 		System.out.println("==========flag========" + flag);
 		if (StringUtils.equals(flag, "init")) {
 
-			ToolCreateDocIndex.init();
+			ToolCreateDocIndex.init(request);
 			System.out.println("索引初始化成功！");
 		} else if ("pdf".equals(flag)) {
 
@@ -41,7 +40,7 @@ public class FileIndexController {
 		} else if ("doc".equals(flag)) {
 
 			boolean isSucceeded = ToolCreateDocIndex.createWordIndex(request);
-		
+
 			if (isSucceeded) {
 				System.out.println("==2===WORD索引创建成功！");
 			}
@@ -50,15 +49,15 @@ public class FileIndexController {
 		System.out.println("=======fileIndexCreate=========结束==========");
 		return "fileindex";
 	}
-//
-//	@RequestMapping("initIndex")
-//	public String initIndex(HttpServletRequest request) {
-//		// 获得初始化文档类型
-//		String flag = request.getParameter("flag");
-//		if (StringUtils.isEmpty(flag)) {
-//			return "fileindex";
-//		}
-//		return null;
-//	}
+	//
+	// @RequestMapping("initIndex")
+	// public String initIndex(HttpServletRequest request) {
+	// // 获得初始化文档类型
+	// String flag = request.getParameter("flag");
+	// if (StringUtils.isEmpty(flag)) {
+	// return "fileindex";
+	// }
+	// return null;
+	// }
 
 }
