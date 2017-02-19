@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lx.service.FileInfoService;
+
 
 
 @Controller
@@ -19,12 +21,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SystemConfigController {
 
 	private static Logger logger = Logger.getLogger(SystemConfigController.class);
+	@Autowired
+	FileInfoService fileInfoService;
 	// 备份
 	@RequestMapping("/backup")
 	@ResponseBody
 	public Map<String, Object> backup(HttpServletRequest request) {
 		logger.info("=================backup==================");
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		if(true){
 			map.put("flag", "chenggong");
 			return map;
@@ -54,38 +59,59 @@ public class SystemConfigController {
 	public Map<String, Object> build(HttpServletRequest request) {
 		logger.info("=================restore==================");
 		Map<String, Object> map = new HashMap<String, Object>();
+		int num = fileInfoService.getCountWithWaitForCheck();
+		if(num==0){
+			map.put("flag", "waitforcheck");
+			return map;
+		}else{
 		if(true){
 			map.put("flag", "chenggong");
 			return map;
-		}
+		}else{
 		
 		map.put("flag", "shibai");
 		return map;
+		}
+		}
 	}
 	//建立pdf
 	@RequestMapping("/build_pdf")
 	public Map<String, Object> build_pdf(HttpServletRequest request) {
 		logger.info("=================restore==================");
 		Map<String, Object> map = new HashMap<String, Object>();
+		int num = fileInfoService.getCountWithWaitForCheck();
+		if(num==0){
+			map.put("flag", "waitforcheck");
+			return map;
+		}else{
 		if(true){
 			map.put("flag", "chenggong");
 			return map;
-		}
+		}else{
 		
 		map.put("flag", "shibai");
 		return map;
+		}
+		}
 	}
 	//建立word
 	@RequestMapping("/build_word")
 	public Map<String, Object> build_word(HttpServletRequest request) {
 		logger.info("=================restore==================");
 		Map<String, Object> map = new HashMap<String, Object>();
+		int num = fileInfoService.getCountWithWaitForCheck();
+		if(num==0){
+			map.put("flag", "waitforcheck");
+			return map;
+		}else{
 		if(true){
 			map.put("flag", "chenggong");
 			return map;
-		}
+		}else{
 		
 		map.put("flag", "shibai");
 		return map;
+		}
+		}
 	}
 }

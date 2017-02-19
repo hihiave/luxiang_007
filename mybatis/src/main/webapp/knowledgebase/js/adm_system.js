@@ -30,6 +30,9 @@ function build_ok(){
                }else if(data["flag"] == "shibai"){
                    $("#add_result").html("初始化索引失败");
                    $("#result").modal('show');
+               }else if(data["flag"] == "waitforcheck"){
+            	   $("#add_result").html("初始化失败，存在待审核文件");
+                   $("#result").modal('show');
                }
           }
 	})
@@ -48,6 +51,9 @@ function build_word_ok(){
                }else if(data["flag"] == "shibai"){
                    $("#add_result").html("建立Word索引失败");
                    $("#result").modal('show');
+               }else if(data["flag"] == "waitforcheck"){
+            	   $("#add_result").html("建立索引失败，存在待审核文件");
+                   $("#result").modal('show');
                }
           }
 	})
@@ -65,6 +71,9 @@ function build_pdf_ok(){
                    get_category();
                }else if(data["flag"] == "shibai"){
                    $("#add_result").html("建立PDF索引失败");
+                   $("#result").modal('show');
+               }else if(data["flag"] == "waitforcheck"){
+            	   $("#add_result").html("建立索引失败，存在待审核文件");
                    $("#result").modal('show');
                }
           }
