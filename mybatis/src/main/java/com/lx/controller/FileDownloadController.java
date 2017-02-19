@@ -52,6 +52,7 @@ public class FileDownloadController {
 				response.sendRedirect(request.getHeader("Referer"));
 				return;
 			}
+			
 			// 设置响应头
 			response.setHeader("content-disposition",
 					"attachment;filename=" + URLEncoder.encode(downloadName, "UTF-8"));
