@@ -177,7 +177,7 @@
 							data-target="#build_pdf">建立PDF索引
 						</button>
 						<span style="display:inline;font-size:16px">&nbsp;创建新上传的pdf文档索引，以方便在"高级检索"中
-						做全文检索，此按钮为增量创建pdf索引，上一时刻被创建过的索引不会被重复创建。创建时请确保"资源审核"中的文件数量为0</span>
+						做全文检索，此按钮为增量创建pdf索引，上一时刻被创建过的索引不会被重复创建。创建时请确保"资源审核"中的文件数量为0。</span>
 					</div>
 					   
 					<div style="margin-top:10px;">

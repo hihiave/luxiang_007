@@ -57,9 +57,11 @@ public class SystemConfigController {
 	@RequestMapping("/build")
 	@ResponseBody
 	public Map<String, Object> build(HttpServletRequest request) {
-		logger.info("=================restore==================");
+		logger.info("=================build==================");
 		Map<String, Object> map = new HashMap<String, Object>();
 		int num = fileInfoService.getCountWithWaitForCheck();
+		logger.info("=================num==================" + num);
+
 		if(num==0){
 			map.put("flag", "waitforcheck");
 			return map;
@@ -76,10 +78,12 @@ public class SystemConfigController {
 	}
 	//建立pdf
 	@RequestMapping("/build_pdf")
+	@ResponseBody
 	public Map<String, Object> build_pdf(HttpServletRequest request) {
-		logger.info("=================restore==================");
+		logger.info("=================build_pdf==================");
 		Map<String, Object> map = new HashMap<String, Object>();
 		int num = fileInfoService.getCountWithWaitForCheck();
+		logger.info("=================num==================" + num);
 		if(num==0){
 			map.put("flag", "waitforcheck");
 			return map;
@@ -96,10 +100,12 @@ public class SystemConfigController {
 	}
 	//建立word
 	@RequestMapping("/build_word")
+	@ResponseBody
 	public Map<String, Object> build_word(HttpServletRequest request) {
-		logger.info("=================restore==================");
+		logger.info("=================build_word==================");
 		Map<String, Object> map = new HashMap<String, Object>();
 		int num = fileInfoService.getCountWithWaitForCheck();
+		logger.info("=================num==================" + num);
 		if(num==0){
 			map.put("flag", "waitforcheck");
 			return map;
