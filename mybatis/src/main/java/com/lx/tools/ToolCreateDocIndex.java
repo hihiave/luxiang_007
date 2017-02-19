@@ -16,19 +16,15 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 import org.apache.poi.hwpf.extractor.WordExtractor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lx.macrofiles.MacroConstant;
 import com.lx.macrofiles.MacroEnum;
-import com.lx.model.FileInfo;
-import com.lx.service.FileInfoService;
 
 import net.paoding.analysis.analyzer.PaodingAnalyzer;
 
 public class ToolCreateDocIndex {
 
-	@Autowired
-	public static FileInfoService fileInfoService;
+	//private static IndexWriter writer = null;
 
 	// 初始化索引
 	public static boolean init(HttpServletRequest request) {
@@ -55,24 +51,27 @@ public class ToolCreateDocIndex {
 
 		if (files.length != 0) {
 			String contents = "";
+			String filename = "";
 			Document document;
+
 			IndexWriter writer = getIndexWriter();
 			try {
 				for (int i = 0; i < files.length; i++) {
+					System.out.println("===ToolIndexTime.getLatestIndexTime(MacroConstant.PDF_TIME==========="
+							+ ToolIndexTime.getLatestIndexTime(MacroConstant.PDF_TIME));
+
 					if (files[i].lastModified() / 1000 > ToolIndexTime.getLatestIndexTime(MacroConstant.PDF_TIME)) {
-
-						FileInfo fileInfo = fileInfoService
-								.getFileByUploadTime(Integer.valueOf(ToolString.getFilename(files[i].getName())));
-
+						System.out.println("==========jiu========================");
 						contents = XpdfParser.getPDFFileContents(files[i].getCanonicalPath());
 						if (contents != null) {
-
+							filename = ToolString.getFilename(files[i].getName());
 							document = new Document();
-							document.add(new StringField("id", fileInfo.getFileId() + "", Field.Store.YES));
+							document.add(new StringField("id", filename, Field.Store.YES));
 							document.add(
 									new StringField("type", MacroEnum.KFileFormatType.pdf.toString(), Field.Store.YES));
-							document.add(new StringField("fileName", fileInfo.getFileName(), Field.Store.YES));
+							document.add(new StringField("fileName", filename, Field.Store.YES));
 							document.add(new TextField("contents", contents, Field.Store.YES));
+							System.out.println("=========writer===========" + writer);
 							writer.addDocument(document);
 						} else {
 							return false;
@@ -80,7 +79,6 @@ public class ToolCreateDocIndex {
 					}
 				}
 				flag = true;
-				writer.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -97,27 +95,26 @@ public class ToolCreateDocIndex {
 		if (files.length != 0) {
 			String contents = "";
 			Document document; // 文档
+			String filename = "";
 			IndexWriter writer = getIndexWriter();
 			try {
 				for (int i = 0; i < files.length; i++) {
 					if (files[i].lastModified() / 1000 > ToolIndexTime.getLatestIndexTime(MacroConstant.DOC_TIME)) {
-						FileInfo fileInfo = fileInfoService
-								.getFileByUploadTime(Integer.valueOf(ToolString.getFilename(files[i].getName())));
+						filename = ToolString.getFilename(files[i].getName());
 
 						contents = new WordExtractor(new FileInputStream(files[i].getCanonicalPath())).getText();
 
 						// 创建文档
 						document = new Document();
-						document.add(new StringField("id", fileInfo.getFileId() + "", Field.Store.YES));
+						document.add(new StringField("id", filename, Field.Store.YES));
 						document.add(
 								new StringField("type", MacroEnum.KFileFormatType.doc.toString(), Field.Store.YES));
-						document.add(new StringField("fileName", fileInfo.getFileName(), Field.Store.YES));
+						document.add(new StringField("fileName", filename, Field.Store.YES));
 						document.add(new TextField("contents", contents, Field.Store.YES));
 						writer.addDocument(document);
 					}
 				}
 				flag = true;
-				writer.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
