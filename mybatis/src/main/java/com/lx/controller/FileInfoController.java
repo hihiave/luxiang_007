@@ -248,6 +248,13 @@ public class FileInfoController {
 	@ResponseBody
 	public Map<String, Object> delete_file(Integer[] delete_array) {
 		logger.info("=================delete_file==================");
+		
+		for (Integer integer : delete_array) {
+			logger.info("=================integer==================" + integer);
+		}
+		
+		
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		boolean result = fileInfoService.delFilesById(delete_array);
 		map.put("flag", result);
