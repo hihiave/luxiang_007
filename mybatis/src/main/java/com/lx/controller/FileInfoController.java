@@ -336,6 +336,7 @@ public class FileInfoController {
 				flag = fileInfoService.addFileInfo(fileInfo1);
 			}
 
+			System.out.println("===========flag===========" + flag);
 			map.put("message1", "hahaha");
 			map.put("result1", flag);
 		}
