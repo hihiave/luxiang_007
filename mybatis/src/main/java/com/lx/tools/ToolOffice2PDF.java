@@ -17,10 +17,10 @@ import org.artofsolving.jodconverter.office.OfficeManager;
  * @author xhw
  * 
  */
-public class Office2PDF {
+public class ToolOffice2PDF {
 
 	public static void main(String[] args) {
-		Office2PDF office2pdf = new Office2PDF();
+		ToolOffice2PDF office2pdf = new ToolOffice2PDF();
 		office2pdf.openOfficeToPDF("C:\\temp\\1487552314.docx", "D:\\temp\\1487552314.pdf");
 		//office2pdf.openOfficeToPDF("e:/test." + OFFICE_PPTX, null);
 	}
