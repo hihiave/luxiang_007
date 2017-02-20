@@ -18,11 +18,11 @@ import org.artofsolving.jodconverter.office.OfficeManager;
  */
 public class ToolOffice2PDF {
 
-//	public static void main(String[] args) {
-//		ToolOffice2PDF office2pdf = new ToolOffice2PDF();
-//		office2pdf.openOfficeToPDF("C:\\temp\\哈哈啊.docx", "D:\\temp\\ddd.pdf");
-//		//office2pdf.openOfficeToPDF("e:/test." + OFFICE_PPTX, null);
-//	}
+	public static void main(String[] args) {
+		ToolOffice2PDF office2pdf = new ToolOffice2PDF();
+		office2pdf.openOfficeToPDF("C:\\temp\\1487577137.doc", "D:\\temp\\fefefe.pdf");
+		//office2pdf.openOfficeToPDF("e:/test." + OFFICE_PPTX, null);
+	}
 
 	// 使Office2003-2007全部格式的文档(.doc|.docx|.xls|.xlsx|.ppt|.pptx) 转化为pdf文件<br>
 	// 源文件路径，如："e:/test.docx" ----> 目标文件路径，如："e:/test_docx.pdf"
@@ -48,7 +48,7 @@ public class ToolOffice2PDF {
 	public OfficeManager getOfficeManager() {
 		DefaultOfficeManagerConfiguration config = new DefaultOfficeManagerConfiguration();
 		// 获取OpenOffice.org 3的安装目录
-		String officeHome = "C:/Program Files (x86)/OpenOffice 4";
+		String officeHome = "C:/Program Files/OpenOffice 4";
 		
 		config.setOfficeHome(officeHome);
 		// 启动OpenOffice的服务

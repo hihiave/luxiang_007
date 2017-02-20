@@ -315,7 +315,8 @@ public class FileInfoController {
 			boolean flag = false;
 			switch (KFileFormatType.valueOf(ToolString.getFilenameExtension(filenameFull))) {
 			case doc:
-				if (ToolDocConverter.docToPdf(filePath, basePath + MacroConstant.DOC_TEMP)) {
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
 					if (ToolFileTransfer.transfer(filePath, docDir)) {
 						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
 						fileInfo1.setFileStatus(MacroConstant.DOC);
@@ -324,7 +325,8 @@ public class FileInfoController {
 				}
 				break;
 			case docx:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath, basePath + MacroConstant.DOC_TEMP)) {
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
 					if (ToolFileTransfer.transfer(filePath, docDir)) {
 						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
 						fileInfo1.setFileStatus(MacroConstant.DOCX);
@@ -338,10 +340,50 @@ public class FileInfoController {
 					flag = true;
 				}
 				break;
+			case ppt:
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo1.setFileStatus(MacroConstant.PPT);
+						flag = true;
+					}
+				}
+				break;
+			case pptx:
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo1.setFileStatus(MacroConstant.PPTX);
+						flag = true;
+					}
+				}
+				break;
+			case xls:
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo1.setFileStatus(MacroConstant.XLS);
+						flag = true;
+					}
+				}
+				break;
+			case xlsx:
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo1.setFileStatus(MacroConstant.XLSX);
+						flag = true;
+					}
+				}
+				break;
 			default:
 				break;
 			}
-			
+
 			if (flag) {
 				flag = fileInfoService.addFileInfo(fileInfo1);
 			}
@@ -383,10 +425,21 @@ public class FileInfoController {
 			boolean flag = false;
 			switch (KFileFormatType.valueOf(ToolString.getFilenameExtension(filenameFull))) {
 			case doc:
-				if (ToolDocConverter.docToPdf(filePath, basePath + MacroConstant.DOC_TEMP)) {
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
 					if (ToolFileTransfer.transfer(filePath, docDir)) {
 						fileInfo2.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
 						fileInfo2.setFileStatus(MacroConstant.DOC);
+						flag = true;
+					}
+				}
+				break;
+			case docx:
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo2.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo2.setFileStatus(MacroConstant.DOCX);
 						flag = true;
 					}
 				}
@@ -397,6 +450,47 @@ public class FileInfoController {
 					flag = true;
 				}
 				break;
+			case ppt:
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo2.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo2.setFileStatus(MacroConstant.PPT);
+						flag = true;
+					}
+				}
+				break;
+			case pptx:
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo2.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo2.setFileStatus(MacroConstant.PPTX);
+						flag = true;
+					}
+				}
+				break;
+			case xls:
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo2.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo2.setFileStatus(MacroConstant.XLS);
+						flag = true;
+					}
+				}
+				break;
+			case xlsx:
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo2.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo2.setFileStatus(MacroConstant.XLSX);
+						flag = true;
+					}
+				}
+				break;
+
 			default:
 				break;
 			}
@@ -441,10 +535,21 @@ public class FileInfoController {
 			boolean flag = false;
 			switch (KFileFormatType.valueOf(ToolString.getFilenameExtension(filenameFull))) {
 			case doc:
-				if (ToolDocConverter.docToPdf(filePath, basePath + MacroConstant.DOC_TEMP)) {
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
 					if (ToolFileTransfer.transfer(filePath, docDir)) {
 						fileInfo3.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
 						fileInfo3.setFileStatus(MacroConstant.DOC);
+						flag = true;
+					}
+				}
+				break;
+			case docx:
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo3.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo3.setFileStatus(MacroConstant.DOCX);
 						flag = true;
 					}
 				}
@@ -455,6 +560,47 @@ public class FileInfoController {
 					flag = true;
 				}
 				break;
+			case ppt:
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo3.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo3.setFileStatus(MacroConstant.PPT);
+						flag = true;
+					}
+				}
+				break;
+			case pptx:
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo3.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo3.setFileStatus(MacroConstant.PPTX);
+						flag = true;
+					}
+				}
+				break;
+			case xls:
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo3.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo3.setFileStatus(MacroConstant.XLS);
+						flag = true;
+					}
+				}
+				break;
+			case xlsx:
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
+						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo3.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo3.setFileStatus(MacroConstant.XLSX);
+						flag = true;
+					}
+				}
+				break;
+
 			default:
 				break;
 			}

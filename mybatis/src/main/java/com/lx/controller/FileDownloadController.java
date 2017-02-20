@@ -39,10 +39,22 @@ public class FileDownloadController {
 		String filePath = basePath + fileUrl;
 		FileInfo fileInfo = fileInfoService.getFileByFileId(Integer.parseInt(request.getParameter("fileid")));
 
-		if (fileInfo.getFileStatus() == MacroConstant.DOC) {
+		if (fileInfo.getFileStatus() == MacroConstant.DOC)
 			filePath = basePath + MacroConstant.DOCDIR + fileInfo.getFileUploadTime() + ".doc";
-		}
+		if (fileInfo.getFileStatus() == MacroConstant.DOCX)
+			filePath = basePath + MacroConstant.DOCDIR + fileInfo.getFileUploadTime() + ".docx";
 
+		if (fileInfo.getFileStatus() == MacroConstant.PPT)
+			filePath = basePath + MacroConstant.DOCDIR + fileInfo.getFileUploadTime() + ".ppt";
+		if (fileInfo.getFileStatus() == MacroConstant.PPTX)
+			filePath = basePath + MacroConstant.DOCDIR + fileInfo.getFileUploadTime() + ".pptx";
+
+		if (fileInfo.getFileStatus() == MacroConstant.XLS)
+			filePath = basePath + MacroConstant.DOCDIR + fileInfo.getFileUploadTime() + "xls";
+		if (fileInfo.getFileStatus() == MacroConstant.XLSX)
+			filePath = basePath + MacroConstant.DOCDIR + fileInfo.getFileUploadTime() + ".xlsx";
+
+		
 		String downloadName = fileInfo.getFileName() + "." + ToolString.getFilenameExtension(filePath);
 
 		try {
@@ -52,7 +64,7 @@ public class FileDownloadController {
 				response.sendRedirect(request.getHeader("Referer"));
 				return;
 			}
-			
+
 			// 设置响应头
 			response.setHeader("content-disposition",
 					"attachment;filename=" + URLEncoder.encode(downloadName, "UTF-8"));
