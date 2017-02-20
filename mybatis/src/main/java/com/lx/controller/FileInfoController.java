@@ -24,6 +24,7 @@ import com.lx.service.FileInfoService;
 import com.lx.tools.Page;
 import com.lx.tools.ToolDocConverter;
 import com.lx.tools.ToolFileTransfer;
+import com.lx.tools.ToolOffice2PDF;
 import com.lx.tools.ToolString;
 
 @Controller
@@ -318,6 +319,15 @@ public class FileInfoController {
 					if (ToolFileTransfer.transfer(filePath, docDir)) {
 						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
 						fileInfo1.setFileStatus(MacroConstant.DOC);
+						flag = true;
+					}
+				}
+				break;
+			case docx:
+				if (new ToolOffice2PDF().openOfficeToPDF(filePath, basePath + MacroConstant.DOC_TEMP)) {
+					if (ToolFileTransfer.transfer(filePath, docDir)) {
+						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
+						fileInfo1.setFileStatus(MacroConstant.DOCX);
 						flag = true;
 					}
 				}

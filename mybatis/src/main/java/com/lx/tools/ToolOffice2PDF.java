@@ -2,7 +2,6 @@ package com.lx.tools;
 
 import java.io.File;
 import java.util.Date;
-import java.util.regex.Pattern;
 
 import org.artofsolving.jodconverter.OfficeDocumentConverter;
 import org.artofsolving.jodconverter.office.DefaultOfficeManagerConfiguration;
@@ -19,11 +18,11 @@ import org.artofsolving.jodconverter.office.OfficeManager;
  */
 public class ToolOffice2PDF {
 
-	public static void main(String[] args) {
-		ToolOffice2PDF office2pdf = new ToolOffice2PDF();
-		office2pdf.openOfficeToPDF("C:\\temp\\1487552314.docx", "D:\\temp\\1487552314.pdf");
-		//office2pdf.openOfficeToPDF("e:/test." + OFFICE_PPTX, null);
-	}
+//	public static void main(String[] args) {
+//		ToolOffice2PDF office2pdf = new ToolOffice2PDF();
+//		office2pdf.openOfficeToPDF("C:\\temp\\哈哈啊.docx", "D:\\temp\\ddd.pdf");
+//		//office2pdf.openOfficeToPDF("e:/test." + OFFICE_PPTX, null);
+//	}
 
 	// 使Office2003-2007全部格式的文档(.doc|.docx|.xls|.xlsx|.ppt|.pptx) 转化为pdf文件<br>
 	// 源文件路径，如："e:/test.docx" ----> 目标文件路径，如："e:/test_docx.pdf"
@@ -32,24 +31,25 @@ public class ToolOffice2PDF {
 	}
 
 	// @return OpenOffice.org 3的安装目录
-	public String getOfficeHome() {
-		String osName = System.getProperty("os.name");
-		if (Pattern.matches("Linux.*", osName)) {
-			return "/opt/openoffice.org3";
-		} else if (Pattern.matches("Windows.*", osName)) {
-//			return "C:/Program Files (x86)/OpenOffice.org 3";
-			return "C:/Program Files (x86)/OpenOffice 4";
-		} else if (Pattern.matches("Mac.*", osName)) {
-			return "/Application/OpenOffice.org.app/Contents";
-		}
-		return null;
-	}
+//	public String getOfficeHome() {
+//		String osName = System.getProperty("os.name");
+//		if (Pattern.matches("Linux.*", osName)) {
+//			return "/opt/openoffice.org3";
+//		} else if (Pattern.matches("Windows.*", osName)) {
+////			return "C:/Program Files (x86)/OpenOffice.org 3";
+//			return "C:/Program Files (x86)/OpenOffice 4";
+//		} else if (Pattern.matches("Mac.*", osName)) {
+//			return "/Application/OpenOffice.org.app/Contents";
+//		}
+//		return null;
+//	}
 
 	// 连接OpenOffice.org 并且启动OpenOffice.org
 	public OfficeManager getOfficeManager() {
 		DefaultOfficeManagerConfiguration config = new DefaultOfficeManagerConfiguration();
 		// 获取OpenOffice.org 3的安装目录
-		String officeHome = getOfficeHome(); // "C:/Program Files (x86)/OpenOffice.org 3";
+		String officeHome = "C:/Program Files (x86)/OpenOffice 4";
+		
 		config.setOfficeHome(officeHome);
 		// 启动OpenOffice的服务
 		OfficeManager officeManager = config.buildOfficeManager();
