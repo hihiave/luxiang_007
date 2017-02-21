@@ -7,14 +7,11 @@ import org.artofsolving.jodconverter.OfficeDocumentConverter;
 import org.artofsolving.jodconverter.office.DefaultOfficeManagerConfiguration;
 import org.artofsolving.jodconverter.office.OfficeManager;
 
+import com.lx.macrofiles.MacroConstant;
+
 /**
  * 这是一个工具类，主要是为了使Office2003-2007全部格式的文档(.doc|.docx|.xls|.xlsx|.ppt|.pptx)
  * 转化为pdf文件<br>
- * Office2010的没测试<br>
- * 
- * @date 2012-11-5
- * @author xhw
- * 
  */
 public class ToolOffice2PDF {
 
@@ -30,7 +27,6 @@ public class ToolOffice2PDF {
 		return office2pdf(inputFilePath, outputFilePath);
 	}
 
-	// @return OpenOffice.org 3的安装目录
 //	public String getOfficeHome() {
 //		String osName = System.getProperty("os.name");
 //		if (Pattern.matches("Linux.*", osName)) {
@@ -47,10 +43,7 @@ public class ToolOffice2PDF {
 	// 连接OpenOffice.org 并且启动OpenOffice.org
 	public OfficeManager getOfficeManager() {
 		DefaultOfficeManagerConfiguration config = new DefaultOfficeManagerConfiguration();
-		// 获取OpenOffice.org 3的安装目录
-		String officeHome = "C:/Program Files/OpenOffice 4";
-		
-		config.setOfficeHome(officeHome);
+		config.setOfficeHome(MacroConstant.officeHome);
 		// 启动OpenOffice的服务
 		OfficeManager officeManager = config.buildOfficeManager();
 		officeManager.start();

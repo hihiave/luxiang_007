@@ -57,12 +57,13 @@ public class ToolDocConverter {
 
 	// docPath : "C:\\temp\\1483359477.doc"
 	// pdfDir : "D:\\temp\\"
-	public static boolean docToPdf(String docPath, String pdfDir) {
+	public static boolean docToPdfQQQ(String docPath, String pdfDir) {
 		boolean flag = false;
 		File docFile = new File(docPath);
 		File pdfFile = new File(pdfDir + ToolString.getFilename(ToolString.getFilenameFull(docPath)) + ".pdf");
 		if (docFile.exists()) {
-			String command = MacroConstant.openOfficeHome + MacroConstant.openOfficeHomeCmd;
+			//String command = MacroConstant.openOfficeHome + MacroConstant.openOfficeHomeCmd;
+			String command = "";
 			try {
 				Process process = Runtime.getRuntime().exec(command);
 				OpenOfficeConnection connection = new SocketOpenOfficeConnection(8100);// 创建一个连接对象
@@ -84,7 +85,8 @@ public class ToolDocConverter {
 
 	private static boolean doc2pdf() {
 		boolean flag = true;
-		String command = MacroConstant.openOfficeHome + MacroConstant.openOfficeHomeCmd;
+		// String command = MacroConstant.openOfficeHome + MacroConstant.openOfficeHomeCmd;
+		String command = "";
 		try {
 			Process process = Runtime.getRuntime().exec(command);
 			OpenOfficeConnection connection = new SocketOpenOfficeConnection(8100);// 创建一个连接对象

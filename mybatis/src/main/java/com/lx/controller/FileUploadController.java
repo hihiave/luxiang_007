@@ -27,7 +27,7 @@ import com.lx.tools.ToolString;
 @Controller
 @RequestMapping("/FileUploadController")
 public class FileUploadController {
-	
+
 	private static Logger logger = Logger.getLogger(FileUploadController.class);
 
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
@@ -71,15 +71,13 @@ public class FileUploadController {
 				}
 				// 注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的,如：c:\a\b\1.txt;
 				// 而有些只是单纯的文件名，如：1.txt，下面做兼容
-				String filenameExtension = ToolString.getFilenameExtension(filePath);
-
 				// "C:\\temp\\1483337258.doc"
-				filePath = dirPath + ToolDate.getCurrentTimestamp() + "." + filenameExtension;
+				filePath = dirPath + ToolDate.getCurrentTimestamp() + "." + ToolString.getFilenameExtension(filePath);
 				InputStream in = fileItem.getInputStream(); // 获取item中上传文件的输入流
 				FileOutputStream out = new FileOutputStream(filePath); // 创建一个文件输出流
 				byte buffer[] = new byte[1024]; // 创建一个缓存区
 				int len = 0; // 建立一个标志判断输入流中的数据是否已经读完
-				
+
 				// 循环将输入流读入到缓冲区当中，(len=in.read(buffer))>0就表示in里面还有数据
 				while ((len = in.read(buffer)) > 0) {
 					out.write(buffer, 0, len);
@@ -92,13 +90,13 @@ public class FileUploadController {
 			}
 		} catch (FileUploadBase.FileSizeLimitExceededException e) {
 			e.printStackTrace();
-			message = "单个文件超出最大值";
+			message = "单个文件超出最大值！请重新上传";
 		} catch (FileUploadBase.SizeLimitExceededException e) {
 			e.printStackTrace();
-			message = "上传文件的总大小超出最大值";
+			message = "上传文件的总大小超出最大值！请重新上传";
 		} catch (Exception e) {
 			e.printStackTrace();
-			message = "文件上传失败";
+			message = "文件上传失败！请重新上传";
 		}
 		map.put("message", message);
 		return map;

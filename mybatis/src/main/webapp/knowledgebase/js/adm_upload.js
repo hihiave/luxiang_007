@@ -118,9 +118,10 @@ function changeFile(obj) {
 	var filename = arr[arr.length - 1];
 	var realname_arr = filename.split('.');
 	var file_last = realname_arr[realname_arr.length - 1];
-	if (file_last != "pdf" && file_last != "doc" && file_last != "xls"
-			&& file_last != "ppt" && file_last != "txt" && file_last != "docx") {
-		alert("不支持选中的文件格式！！");
+	if (file_last != "pdf" && file_last != "doc" && file_last != "docx"
+			&& file_last != "txt" && file_last != "xls" && file_last != "xlsx"
+			&& file_last != "ppt" && file_last != "pptx") {
+		alert("不支持选中的文件格式！");
 		$(obj).val("");
 		return;
 	}
@@ -181,45 +182,45 @@ function uploadFile() {
 	var path2 = $("#file_result2").val();
 	var path3 = $("#file_result3").val();
 	if (aim1.val() == "" && aim2.val() == "" && aim3.val() == "") {
-		alert("请选择上传的文件");
+		alert("请选择上传的文件！");
 		return false;
 	}
 	if (aim1.val() != "") {
 		if (word1.val() == "") {
-			alert("请完善文件1关键词");
+			alert("请完善文件1关键词！");
 			return false;
 		}
 		if (proto1.val() == "") {
-			alert("请完善文件1资料属性");
+			alert("请完善文件1资料属性！");
 			return false;
 		}
 		if (proto1.val() == "公有" && cate1.val() == ""
 				&& child_cate1.val() == "") {
-			alert("请选择文件1类别");
+			alert("请选择文件1类别！");
 			return false;
 		}
 		if ((area1.val() == "")) {
-			alert("请完善文件1描述");
+			alert("请完善文件1描述！");
 			return false;
 		}
 	}
 
 	if (aim2.val() != "") {
 		if (word2.val() == "") {
-			alert("请完善文件2关键词");
+			alert("请完善文件2关键词！");
 			return false;
 		}
 		if (proto2.val() == "") {
-			alert("请完善文件2资料属性");
+			alert("请完善文件2资料属性！");
 			return false;
 		}
 		if (proto2.val() == "公有" && cate2.val() == ""
 				&& child_cate2.val() == "") {
-			alert("请选择文件2类别");
+			alert("请选择文件2类别！");
 			return false;
 		}
 		if ((area2.val() == "")) {
-			alert("请完善文件2描述");
+			alert("请完善文件2描述！");
 			return false;
 		}
 
@@ -227,20 +228,20 @@ function uploadFile() {
 
 	if (aim3.val() != "") {
 		if (word3.val() == "") {
-			alert("请完善文件3关键词");
+			alert("请完善文件3关键词！");
 			return false;
 		}
 		if (proto3.val() == "") {
-			alert("请完善文件3资料属性");
+			alert("请完善文件3资料属性！");
 			return false;
 		}
 		if (proto3.val() == "公有" && cate3.val() == ""
 				&& child_cate3.val() == "") {
-			alert("请选择文件3类别");
+			alert("请选择文件3类别！");
 			return false;
 		}
 		if ((area3.val() == "")) {
-			alert("请完善文件3描述");
+			alert("请完善文件3描述！");
 			return false;
 		}
 	}
@@ -304,46 +305,46 @@ function upload_success_cb(data) {
 	if (data["message1"] != null) {
 		// console.log(data["result1"]);
 		if (data["result1"] == true) {
-			message1 = "文件1上传成功!";
+			message1 = "文件1上传成功，请等待管理员审核通过！";
 			$("#file-test1").val("");
 			$("#file-result1").val("");
 			$("#aim1").val("");
-			$("#proto1").val("私有");
+			$("#proto1").val("");
 			$("#word1").val("");
 			$("#area1").val("");
 			$("#cate1").val(cate);
 		} else {
-			message1 = "文件1上传失败!";
+			message1 = "文件1上传失败，请重新上传！";
 		}
 	}
 	if (data["message2"] != null) {
 		// console.log(data["result2"]);
 		if (data["result2"] == true) {
-			message2 = "文件2上传成功!";
+			message2 = "文件2上传成功，请等待管理员审核通过！";
 			$("#file-test2").val("");
 			$("#file-result2").val("");
 			$("#aim2").val("");
-			$("#proto2").val("私有");
+			$("#proto2").val("");
 			$("#word2").val("");
 			$("#area2").val("");
 			$("#cate2").val(cate);
 		} else {
-			message2 = "文件2上传失败!";
+			message2 = "文件2上传失败，请重新上传！";
 		}
 	}
 	if (data["message3"] != null) {
 		// console.log(data["result3"]);
 		if (data["result3"] == true) {
-			message3 = "文件3上传成功!";
+			message3 = "文件3上传成功，请等待管理员审核通过！";
 			$("#file-test3").val("");
 			$("#file-result3").val("");
 			$("#aim3").val("");
-			$("#proto3").val("私有");
+			$("#proto3").val("");
 			$("#word3").val("");
 			$("#area3").val("");
 			$("#cate3").val(cate);
 		} else {
-			message3 = "文件3上传失败!";
+			message3 = "文件3上传失败，请重新上传！";
 		}
 	}
 	info = message1 + message2 + message3;

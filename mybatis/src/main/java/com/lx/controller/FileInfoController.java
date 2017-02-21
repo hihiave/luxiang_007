@@ -300,6 +300,7 @@ public class FileInfoController {
 			// 设置文件可见类型
 			String filevisible1 = request.getParameter("pro1");
 			fileInfo1.setFileIsVisible(filevisible1);
+			logger.info("==========filevisible1==========" + filevisible1);
 			if (filevisible1.equals("私有"))
 				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.privateFile.getValue());
 			if (filevisible1.equals("公有"))
