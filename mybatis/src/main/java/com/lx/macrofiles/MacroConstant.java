@@ -36,8 +36,7 @@ public interface MacroConstant {
 	public static final int DOCX = 3; // DOC file_status = 3
 	public static final int PPT = 4; // DOC file_status = 4
 	public static final int PPTX = 5; // DOC file_status = 5
-	public static final int XLS = 6; // DOC file_status = 6
-	public static final int XLSX = 7; // DOC file_status = 7
+	public static final int XLSX = 6; // DOC file_status = 6
 	
 	// **********最新一次创建索引地址常量**********
 	public static final String DOC_TIME = "C:\\lucene\\indextime\\doctime.txt";

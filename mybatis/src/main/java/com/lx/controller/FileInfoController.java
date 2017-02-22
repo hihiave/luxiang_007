@@ -361,16 +361,7 @@ public class FileInfoController {
 					}
 				}
 				break;
-			case xls:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo1.setFileStatus(MacroConstant.XLS);
-						flag = true;
-					}
-				}
-				break;
+
 			case xlsx:
 				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
 						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
@@ -381,6 +372,7 @@ public class FileInfoController {
 					}
 				}
 				break;
+
 			default:
 				break;
 			}
@@ -471,16 +463,7 @@ public class FileInfoController {
 					}
 				}
 				break;
-			case xls:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo2.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo2.setFileStatus(MacroConstant.XLS);
-						flag = true;
-					}
-				}
-				break;
+
 			case xlsx:
 				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
 						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
@@ -581,16 +564,7 @@ public class FileInfoController {
 					}
 				}
 				break;
-			case xls:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo3.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo3.setFileStatus(MacroConstant.XLS);
-						flag = true;
-					}
-				}
-				break;
+
 			case xlsx:
 				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
 						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
@@ -621,7 +595,7 @@ public class FileInfoController {
 	@ResponseBody
 	public Map<String, Object> down_check_file(Integer fileid) {
 		logger.info("=================down_check_file==================");
-
+		fff();
 		Map<String, Object> map = new HashMap<String, Object>();
 		FileInfo fileInfo = fileInfoService.getFileByFileId(fileid);
 
@@ -630,6 +604,14 @@ public class FileInfoController {
 		fileInfoService.updateFileByFileId(fileInfo.getFileId(), fileInfo);
 		map.put("count", downloadCount);
 		return map;
+	}
+
+	private void fff() {
+
+		for (int i = 0; i < 10; i++) {
+			System.out.println("=====================" + i);
+		}
+
 	}
 
 	// ********************管理员操作权限********************

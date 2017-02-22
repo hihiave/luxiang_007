@@ -49,8 +49,6 @@ public class FileDownloadController {
 		if (fileInfo.getFileStatus() == MacroConstant.PPTX)
 			filePath = basePath + MacroConstant.DOCDIR + fileInfo.getFileUploadTime() + ".pptx";
 
-		if (fileInfo.getFileStatus() == MacroConstant.XLS)
-			filePath = basePath + MacroConstant.DOCDIR + fileInfo.getFileUploadTime() + "xls";
 		if (fileInfo.getFileStatus() == MacroConstant.XLSX)
 			filePath = basePath + MacroConstant.DOCDIR + fileInfo.getFileUploadTime() + ".xlsx";
 
