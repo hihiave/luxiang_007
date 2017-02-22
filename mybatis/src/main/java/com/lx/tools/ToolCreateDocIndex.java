@@ -47,7 +47,11 @@ public class ToolCreateDocIndex {
 	public static boolean createPDFIndex(HttpServletRequest request) {
 		boolean flag = false;
 		String basePath = request.getSession().getServletContext().getRealPath("");
-		File[] files = new File(basePath + MacroConstant.PDFDIR).listFiles();
+		//File[] files = new File(basePath + MacroConstant.PDFDIR).listFiles();
+		
+		// TODO 
+		
+		File[] files = new File("").listFiles();
 
 		if (files.length != 0) {
 			String contents = "";
@@ -91,7 +95,12 @@ public class ToolCreateDocIndex {
 	public static boolean createWordIndex(HttpServletRequest request) {
 		boolean flag = false;
 		String basePath = request.getSession().getServletContext().getRealPath("");
-		File[] files = new File(basePath + MacroConstant.DOCDIR).listFiles();
+		//File[] files = new File(basePath + MacroConstant.DOCDIR).listFiles();
+		
+		// TODO 
+		File[] files = new File("").listFiles();
+		
+		
 		if (files.length != 0) {
 			String contents = "";
 			Document document; // 文档

@@ -22,7 +22,6 @@ import com.lx.macrofiles.MacroEnum.KFilePropertyType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.tools.Page;
-import com.lx.tools.ToolDocConverter;
 import com.lx.tools.ToolFileTransfer;
 import com.lx.tools.ToolOffice2PDF;
 import com.lx.tools.ToolString;
@@ -49,21 +48,7 @@ public class FileInfoController {
 		return "showFileInfo";
 	}
 
-	// 修改文件信息
-	@RequestMapping(value = "/alter_file_msg", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> alter_file_msg(Integer fileid, String keyword, String filedesc, String filecate) {
-		logger.info("=================alter_file_msg==================");
-		Map<String, Object> map = new HashMap<String, Object>();
-		FileInfo fileInfo = new FileInfo();
-		fileInfo.setFileKeywords(keyword);
-		fileInfo.setFileDesc(filedesc);
-		fileInfo.setFileCategory(filecate);
-		boolean result = fileInfoService.updateFileByFileId(fileid, fileInfo);
-		map.put("flag", result);
-		return map;
-	}
-
+	// ********************公用方法********************
 	// 获取待审文件数量
 	@RequestMapping(value = "/get_unchecked_num", method = RequestMethod.POST)
 	@ResponseBody
@@ -81,21 +66,9 @@ public class FileInfoController {
 	@ResponseBody
 	public Map<String, Object> get_draft_num(String username) {
 		logger.info("=================get_draft_num==================");
-		Map<String, Object> map = new HashMap<String, Object>();
-		int num = fileInfoService.getCountWithInvalid(username);
+		Map<String, Object> map = new HashMap<>();
+		int num = fileInfoService.getCountWithInvalid(username.trim());
 		map.put("num", num);
-		return map;
-	}
-
-	// 获取文件描述
-	@RequestMapping(value = "/get_file_msg", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> get_file_msg(Integer fileid) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		FileInfo fileInfo = fileInfoService.getFileByFileId(fileid);
-		map.put("keyWord", fileInfo.getFileKeywords());
-		map.put("fileDes", fileInfo.getFileDesc());
-		map.put("filecate", fileInfo.getFileCategory());
 		return map;
 	}
 
@@ -272,14 +245,65 @@ public class FileInfoController {
 		return map;
 	}
 
+	// 对上传文件信息进行封装
+	private boolean encapsulationUploadFile(String filenameFull, FileInfo fileInfo, String filePath, String tempPath) {
+		boolean flag = false;
+		switch (KFileFormatType.valueOf(ToolString.getFilenameExtension(filenameFull))) {
+		case pdf:
+			fileInfo.setFileStatus(MacroConstant.PDF);
+			if (ToolFileTransfer.transfer(filePath, tempPath)) {
+				if (ToolFileTransfer.transfer(filePath, MacroConstant.PDF_DIR)) {
+					flag = true;
+				}
+			}
+			break;
+		case doc:
+			fileInfo.setFileStatus(MacroConstant.DOC);
+			flag = copyFile(filePath, tempPath, MacroConstant.WORD_DIR);
+			break;
+		case docx:
+			fileInfo.setFileStatus(MacroConstant.DOCX);
+			flag = copyFile(filePath, tempPath, MacroConstant.WORD_DIR);
+			break;
+		case ppt:
+			fileInfo.setFileStatus(MacroConstant.PPT);
+			flag = copyFile(filePath, tempPath, MacroConstant.PDF_DIR);
+			break;
+		case pptx:
+			fileInfo.setFileStatus(MacroConstant.PPTX);
+			flag = copyFile(filePath, tempPath, MacroConstant.PDF_DIR);
+			break;
+		case xlsx:
+			fileInfo.setFileStatus(MacroConstant.XLSX);
+			flag = copyFile(filePath, tempPath, MacroConstant.EXCEL_DIR);
+			break;
+		default:
+			break;
+		}
+
+		if (flag) {
+			flag = fileInfoService.addFileInfo(fileInfo);
+		}
+		return flag;
+	}
+
+	// C:\\temp\\1479709800.doc --> "D:\\temp\\fefefe.pdf" --> C:\\temp\\
+	private boolean copyFile(String filePath, String tempPath, String dirPath) {
+		if (new ToolOffice2PDF().openOfficeToPDF(filePath, tempPath)) {
+			if (ToolFileTransfer.transfer(filePath, dirPath)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	// 上传文件
 	@RequestMapping(value = "/add_file_info", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> uploadFile(HttpServletRequest request) {
 		logger.info("=================uploadFile==================");
 		String basePath = request.getSession().getServletContext().getRealPath("");
-		String pdfDir = basePath + MacroConstant.PDFDIR;
-		String docDir = basePath + MacroConstant.DOCDIR;
+
 		Map<String, Object> map = new HashMap<>();
 		String filename1 = request.getParameter("filename1");
 		if (filename1 != null) {
@@ -297,91 +321,32 @@ public class FileInfoController {
 				fileInfo1.setFileCategory(filechildcate1);
 			}
 
-			// 设置文件可见类型
-			String filevisible1 = request.getParameter("pro1");
-			fileInfo1.setFileIsVisible(filevisible1);
-			logger.info("==========filevisible1==========" + filevisible1);
-			if (filevisible1.equals("私有"))
-				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.privateFile.getValue());
-			if (filevisible1.equals("公有"))
-				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.publicFile.getValue());
-
-			// 设置文件url
+			// 设置文件上传时间
 			String filePath = request.getParameter("filepath1"); // C:\\temp\\1479709800.doc
 			String filenameFull = ToolString.getFilenameFull(filePath); // 1479709800.doc
 			String Filename = ToolString.getFilename(filenameFull); // 1479709800
 			fileInfo1.setFileUploadTime(Integer.valueOf(Filename));
 
-			// ToolFileTransfer.getToFilePath()
+			// 设置文件url
+			String temp = MacroConstant.PUBLIC_DIR + Filename + "." + KFileFormatType.pdf; // 预览的相对路径
+			String tempPath = basePath + temp; // 预览的绝对路径
+			fileInfo1.setFileUrl(temp);
+
 			boolean flag = false;
-			switch (KFileFormatType.valueOf(ToolString.getFilenameExtension(filenameFull))) {
-			case doc:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo1.setFileStatus(MacroConstant.DOC);
-						flag = true;
-					}
-				}
-				break;
-			case docx:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo1.setFileStatus(MacroConstant.DOCX);
-						flag = true;
-					}
-				}
-				break;
-			case pdf:
-				if (ToolFileTransfer.transfer(filePath, pdfDir)) {
-					fileInfo1.setFileUrl(MacroConstant.PDFDIR + filenameFull);
-					flag = true;
-				}
-				break;
-			case ppt:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo1.setFileStatus(MacroConstant.PPT);
-						flag = true;
-					}
-				}
-				break;
-			case pptx:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo1.setFileStatus(MacroConstant.PPTX);
-						flag = true;
-					}
-				}
-				break;
-
-			case xlsx:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo1.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo1.setFileStatus(MacroConstant.XLSX);
-						flag = true;
-					}
-				}
-				break;
-
-			default:
-				break;
+			// 设置文件可见类型
+			String filevisible1 = request.getParameter("pro1");
+			fileInfo1.setFileIsVisible(filevisible1);
+			if (filevisible1.equals("私有")) {
+				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.privateFile.getValue());
+				flag = encapsulationUploadFile(filenameFull, fileInfo1, filePath, tempPath);
+			}
+			if (filevisible1.equals("公有")) {
+				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.publicFile.getValue());
+				flag = encapsulationUploadFile(filenameFull, fileInfo1, filePath, tempPath);
 			}
 
-			if (flag) {
-				flag = fileInfoService.addFileInfo(fileInfo1);
-			}
+			
 
-			System.out.println("===========flag===========" + flag);
 			map.put("message1", "hahaha");
 			map.put("result1", flag);
 		}
@@ -416,68 +381,12 @@ public class FileInfoController {
 			fileInfo2.setFileUploadTime(Integer.valueOf(Filename));
 
 			boolean flag = false;
-			switch (KFileFormatType.valueOf(ToolString.getFilenameExtension(filenameFull))) {
-			case doc:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo2.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo2.setFileStatus(MacroConstant.DOC);
-						flag = true;
-					}
-				}
-				break;
-			case docx:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo2.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo2.setFileStatus(MacroConstant.DOCX);
-						flag = true;
-					}
-				}
-				break;
-			case pdf:
-				if (ToolFileTransfer.transfer(filePath, pdfDir)) {
-					fileInfo2.setFileUrl(MacroConstant.PDFDIR + filenameFull);
-					flag = true;
-				}
-				break;
-			case ppt:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo2.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo2.setFileStatus(MacroConstant.PPT);
-						flag = true;
-					}
-				}
-				break;
-			case pptx:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo2.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo2.setFileStatus(MacroConstant.PPTX);
-						flag = true;
-					}
-				}
-				break;
 
-			case xlsx:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo2.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo2.setFileStatus(MacroConstant.XLSX);
-						flag = true;
-					}
-				}
-				break;
-
-			default:
-				break;
-			}
+			// TODO Auto-generated method stub
+			/*
+			 * 
+			 * 
+			 * */
 
 			if (flag) {
 				flag = fileInfoService.addFileInfo(fileInfo2);
@@ -517,68 +426,12 @@ public class FileInfoController {
 			fileInfo3.setFileUploadTime(Integer.valueOf(Filename));
 
 			boolean flag = false;
-			switch (KFileFormatType.valueOf(ToolString.getFilenameExtension(filenameFull))) {
-			case doc:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo3.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo3.setFileStatus(MacroConstant.DOC);
-						flag = true;
-					}
-				}
-				break;
-			case docx:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo3.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo3.setFileStatus(MacroConstant.DOCX);
-						flag = true;
-					}
-				}
-				break;
-			case pdf:
-				if (ToolFileTransfer.transfer(filePath, pdfDir)) {
-					fileInfo3.setFileUrl(MacroConstant.PDFDIR + filenameFull);
-					flag = true;
-				}
-				break;
-			case ppt:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo3.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo3.setFileStatus(MacroConstant.PPT);
-						flag = true;
-					}
-				}
-				break;
-			case pptx:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo3.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo3.setFileStatus(MacroConstant.PPTX);
-						flag = true;
-					}
-				}
-				break;
 
-			case xlsx:
-				if (new ToolOffice2PDF().openOfficeToPDF(filePath,
-						basePath + MacroConstant.DOC_TEMP + Filename + ".pdf")) {
-					if (ToolFileTransfer.transfer(filePath, docDir)) {
-						fileInfo3.setFileUrl(MacroConstant.DOC_TEMP + Filename + ".pdf");
-						fileInfo3.setFileStatus(MacroConstant.XLSX);
-						flag = true;
-					}
-				}
-				break;
-
-			default:
-				break;
-			}
+			// TODO Auto-generated method stub
+			/*
+			 * 
+			 * 
+			 * */
 
 			if (flag) {
 				flag = fileInfoService.addFileInfo(fileInfo3);
@@ -595,7 +448,6 @@ public class FileInfoController {
 	@ResponseBody
 	public Map<String, Object> down_check_file(Integer fileid) {
 		logger.info("=================down_check_file==================");
-		fff();
 		Map<String, Object> map = new HashMap<String, Object>();
 		FileInfo fileInfo = fileInfoService.getFileByFileId(fileid);
 
@@ -606,16 +458,8 @@ public class FileInfoController {
 		return map;
 	}
 
-	private void fff() {
-
-		for (int i = 0; i < 10; i++) {
-			System.out.println("=====================" + i);
-		}
-
-	}
-
 	// ********************管理员操作权限********************
-	// 资源审核
+	// 获取资源审核
 	@RequestMapping(value = "/get_all_checkfile", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> get_all_checkfile(Integer page_Now) {
@@ -628,11 +472,10 @@ public class FileInfoController {
 		}
 		Page page = new Page(pageNow);
 		List<FileInfo> all_checkfile = fileInfoService.getFileWithWaitForCheck(page);
-		int pageCount = page.getTotalPageCount();
-		int totalCount = page.getTotalCount();
-		map.put("totalCount", totalCount);
+
 		map.put("pageNow", page_Now);
-		map.put("pageCount", pageCount);
+		map.put("totalCount", page.getTotalCount());
+		map.put("pageCount", page.getTotalPageCount());
 		map.put("checkfile", all_checkfile);
 		return map;
 	}
@@ -654,9 +497,38 @@ public class FileInfoController {
 	@ResponseBody
 	public Map<String, Object> notpass_file(Integer[] notpass_array) {
 		logger.info("=================notpass_file==================");
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 		boolean flag = fileInfoService.batchFilesIsPass(KCheckType.notPass, notpass_array);
 		map.put("flag", flag);
 		return map;
 	}
+
+	// 获取文件描述
+	@RequestMapping(value = "/get_file_msg", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> get_file_msg(Integer fileid) {
+		logger.info("=================get_file_msg==================");
+		Map<String, Object> map = new HashMap<String, Object>();
+		FileInfo fileInfo = fileInfoService.getFileByFileId(fileid);
+		map.put("keyWord", fileInfo.getFileKeywords());
+		map.put("fileDes", fileInfo.getFileDesc());
+		map.put("filecate", fileInfo.getFileCategory());
+		return map;
+	}
+
+	// 修改文件信息
+	@RequestMapping(value = "/alter_file_msg", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> alter_file_msg(Integer fileid, String keyword, String filedesc, String filecate) {
+		logger.info("=================alter_file_msg==================");
+		Map<String, Object> map = new HashMap<>();
+		FileInfo fileInfo = new FileInfo();
+		fileInfo.setFileKeywords(keyword);
+		fileInfo.setFileDesc(filedesc);
+		fileInfo.setFileCategory(filecate);
+		boolean result = fileInfoService.updateFileByFileId(fileid, fileInfo);
+		map.put("flag", result);
+		return map;
+	}
+
 }

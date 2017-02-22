@@ -27,6 +27,7 @@ public class ToolOffice2PDF {
 		return office2pdf(inputFilePath, outputFilePath);
 	}
 
+	// 跨平台性
 //	public String getOfficeHome() {
 //		String osName = System.getProperty("os.name");
 //		if (Pattern.matches("Linux.*", osName)) {
