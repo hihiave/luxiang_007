@@ -104,6 +104,7 @@ public class ToolCreateDocIndex {
 					}
 				}
 				flag = true;
+				writer.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

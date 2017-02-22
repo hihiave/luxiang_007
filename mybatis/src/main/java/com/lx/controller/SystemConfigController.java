@@ -89,7 +89,9 @@ public class SystemConfigController {
 			return map;
 		}
 		if (createDocIndex.createPDFIndex(request)) {
+			logger.info("===============createPDFIndex================");
 			if (ToolIndexTime.setLatestIndexTime(ToolDate.getCurrentTimestamp() + "", MacroConstant.TIME)) {
+				logger.info("===============setLatestIndexTime================");
 				map.put("flag", "chenggong");
 				return map;
 			}
