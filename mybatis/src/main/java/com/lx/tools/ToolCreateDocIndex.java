@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lx.macrofiles.MacroConstant;
-import com.lx.macrofiles.MacroEnum;
+import com.lx.macrofiles.MacroEnum.KFileFormatType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 
@@ -70,9 +70,31 @@ public class ToolCreateDocIndex {
 
 							document = new Document();
 							document.add(new StringField("id", fileInfo.getFileId() + "", Field.Store.YES));
-							document.add(
-									new StringField("type", MacroEnum.KFileFormatType.pdf.toString(), Field.Store.YES));
 							document.add(new StringField("fileName", fileInfo.getFileName(), Field.Store.YES));
+
+							switch (fileInfo.getFileStatus()) {
+							case MacroConstant.PDF:
+								document.add(new StringField("type", KFileFormatType.pdf.toString(), Field.Store.YES));
+								break;
+							case MacroConstant.DOC:
+								document.add(new StringField("type", KFileFormatType.doc.toString(), Field.Store.YES));
+								break;
+							case MacroConstant.DOCX:
+								document.add(new StringField("type", KFileFormatType.docx.toString(), Field.Store.YES));
+								break;
+							case MacroConstant.PPT:
+								document.add(new StringField("type", KFileFormatType.ppt.toString(), Field.Store.YES));
+								break;
+							case MacroConstant.PPTX:
+								document.add(new StringField("type", KFileFormatType.pptx.toString(), Field.Store.YES));
+								break;
+							case MacroConstant.XLSX:
+								document.add(new StringField("type", KFileFormatType.xlsx.toString(), Field.Store.YES));
+								break;
+							default:
+								break;
+							}
+
 							document.add(new TextField("contents", contents, Field.Store.YES));
 							System.out.println("=========writer===========" + writer);
 							writer.addDocument(document);
@@ -86,7 +108,6 @@ public class ToolCreateDocIndex {
 				e.printStackTrace();
 			}
 		}
-
 		return flag;
 	}
 

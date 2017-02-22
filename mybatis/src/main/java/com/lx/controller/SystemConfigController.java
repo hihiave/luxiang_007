@@ -34,7 +34,7 @@ public class SystemConfigController {
 		Map<String, Object> map = new HashMap<>();
 
 		if (true) {
-			map.put("flag", "chenggong1");
+			map.put("flag", "chenggong");
 			return map;
 		}
 
@@ -49,7 +49,7 @@ public class SystemConfigController {
 		logger.info("=================restore==================");
 		Map<String, Object> map = new HashMap<>();
 		if (true) {
-			map.put("flag", "chenggong1");
+			map.put("flag", "chenggong");
 			return map;
 		}
 

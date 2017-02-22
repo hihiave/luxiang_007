@@ -49,7 +49,6 @@ public class FileDownloadController {
 		case MacroConstant.PPT:
 			filePath = MacroConstant.PPT_DIR + fileUploadTime + "." + KFileFormatType.ppt;
 			break;
-
 		case MacroConstant.PPTX:
 			filePath = MacroConstant.PPT_DIR + fileUploadTime + "." + KFileFormatType.pptx;
 			break;
