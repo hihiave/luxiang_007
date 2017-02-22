@@ -10,7 +10,16 @@ public class ToolString {
 
 	// String dirPath = "c:\\a\\b\\";
 	// String filePath = dirPath + filenameFull; filePath = fileUrl
-	
+
+	/** 获取文件所在目录路径
+	 * @author luxiang
+	 * @param filePath 文件路径 例 : C:\haha\呵呵.doc
+	 * @return C:\haha\
+	 */
+	public static String getDirPath(String filePath) {
+		return filePath.substring(0, filePath.lastIndexOf("\\") + 1);
+	}
+
 	/** 获取文件全名
 	 * @author luxiang
 	 * @param filePath 文件路径 例 : C:\haha\呵呵.doc
@@ -22,7 +31,7 @@ public class ToolString {
 
 	/** 获取文件名
 	 * @author luxiang
-	 * @param filenameFull 文件全名  例 : 呵呵.doc
+	 * @param filenameFull 文件全名 例 : 呵呵.doc
 	 * @return 呵呵
 	 */
 	public static String getFilename(String filenameFull) {
@@ -31,7 +40,7 @@ public class ToolString {
 
 	/** 获取文件扩展名
 	 * @author luxiang
-	 * @param filePath 文件全名  例 : *****.doc
+	 * @param filePath 文件全名 例 : *****.doc
 	 * @return doc
 	 */
 	public static String getFilenameExtension(String filePath) {

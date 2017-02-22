@@ -68,8 +68,10 @@
 					<td>
 					<select name="filetype">
 							<option value="all" selected="selected">全部文档
-							<option value="doc">Word文档
 							<option value="pdf">PDF文档
+							<option value="doc">Word文档
+							<option value="xls">Excel文档
+							<option value="ppt">PPT文档
 					</select>
 					</td>
 				</tr>

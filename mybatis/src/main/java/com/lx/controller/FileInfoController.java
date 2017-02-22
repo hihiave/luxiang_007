@@ -19,6 +19,7 @@ import com.lx.macrofiles.MacroEnum;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KFileFormatType;
 import com.lx.macrofiles.MacroEnum.KFilePropertyType;
+import com.lx.macrofiles.MacroEnum.KFileVisibleType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.tools.Page;
@@ -246,12 +247,13 @@ public class FileInfoController {
 	}
 
 	// 对上传文件信息进行封装
-	private boolean encapsulationUploadFile(String filenameFull, FileInfo fileInfo, String filePath, String tempPath) {
+	private boolean encapsulationUploadFile(String filenameFull, FileInfo fileInfo, String filePath,
+			String desFilePath) {
 		boolean flag = false;
 		switch (KFileFormatType.valueOf(ToolString.getFilenameExtension(filenameFull))) {
 		case pdf:
 			fileInfo.setFileStatus(MacroConstant.PDF);
-			if (ToolFileTransfer.transfer(filePath, tempPath)) {
+			if (ToolFileTransfer.transfer(filePath, ToolString.getDirPath(desFilePath))) {
 				if (ToolFileTransfer.transfer(filePath, MacroConstant.PDF_DIR)) {
 					flag = true;
 				}
@@ -259,23 +261,23 @@ public class FileInfoController {
 			break;
 		case doc:
 			fileInfo.setFileStatus(MacroConstant.DOC);
-			flag = copyFile(filePath, tempPath, MacroConstant.WORD_DIR);
+			flag = copyFile(filePath, desFilePath, MacroConstant.WORD_DIR);
 			break;
 		case docx:
 			fileInfo.setFileStatus(MacroConstant.DOCX);
-			flag = copyFile(filePath, tempPath, MacroConstant.WORD_DIR);
+			flag = copyFile(filePath, desFilePath, MacroConstant.WORD_DIR);
 			break;
 		case ppt:
 			fileInfo.setFileStatus(MacroConstant.PPT);
-			flag = copyFile(filePath, tempPath, MacroConstant.PDF_DIR);
+			flag = copyFile(filePath, desFilePath, MacroConstant.PDF_DIR);
 			break;
 		case pptx:
 			fileInfo.setFileStatus(MacroConstant.PPTX);
-			flag = copyFile(filePath, tempPath, MacroConstant.PDF_DIR);
+			flag = copyFile(filePath, desFilePath, MacroConstant.PDF_DIR);
 			break;
 		case xlsx:
 			fileInfo.setFileStatus(MacroConstant.XLSX);
-			flag = copyFile(filePath, tempPath, MacroConstant.EXCEL_DIR);
+			flag = copyFile(filePath, desFilePath, MacroConstant.EXCEL_DIR);
 			break;
 		default:
 			break;
@@ -288,8 +290,8 @@ public class FileInfoController {
 	}
 
 	// C:\\temp\\1479709800.doc --> "D:\\temp\\fefefe.pdf" --> C:\\temp\\
-	private boolean copyFile(String filePath, String tempPath, String dirPath) {
-		if (new ToolOffice2PDF().openOfficeToPDF(filePath, tempPath)) {
+	private boolean copyFile(String filePath, String desFilePath, String dirPath) {
+		if (new ToolOffice2PDF().openOfficeToPDF(filePath, desFilePath)) {
 			if (ToolFileTransfer.transfer(filePath, dirPath)) {
 				return true;
 			}
@@ -328,24 +330,26 @@ public class FileInfoController {
 			fileInfo1.setFileUploadTime(Integer.valueOf(Filename));
 
 			// 设置文件url
-			String temp = MacroConstant.PUBLIC_DIR + Filename + "." + KFileFormatType.pdf; // 预览的相对路径
-			String tempPath = basePath + temp; // 预览的绝对路径
-			fileInfo1.setFileUrl(temp);
+			String temp = ""; // 预览的相对路径
 
 			boolean flag = false;
 			// 设置文件可见类型
 			String filevisible1 = request.getParameter("pro1");
 			fileInfo1.setFileIsVisible(filevisible1);
 			if (filevisible1.equals("私有")) {
-				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.privateFile.getValue());
-				flag = encapsulationUploadFile(filenameFull, fileInfo1, filePath, tempPath);
+				temp = MacroConstant.PRIVATE_DIR + Filename + "." + KFileFormatType.pdf;
+				fileInfo1.setFileUrl(temp);
+				fileInfo1.setFileCheck(KFileVisibleType.privateFile.getValue());
+
+				flag = encapsulationUploadFile(filenameFull, fileInfo1, filePath, basePath + temp);
 			}
 			if (filevisible1.equals("公有")) {
-				fileInfo1.setFileCheck(MacroEnum.KFileVisibleType.publicFile.getValue());
-				flag = encapsulationUploadFile(filenameFull, fileInfo1, filePath, tempPath);
-			}
+				temp = MacroConstant.PUBLIC_DIR + Filename + "." + KFileFormatType.pdf;
+				fileInfo1.setFileUrl(temp);
+				fileInfo1.setFileCheck(KFileVisibleType.publicFile.getValue());
 
-			
+				flag = encapsulationUploadFile(filenameFull, fileInfo1, filePath, basePath + temp);
+			}
 
 			map.put("message1", "hahaha");
 			map.put("result1", flag);
@@ -366,31 +370,34 @@ public class FileInfoController {
 				fileInfo2.setFileCategory(filechildcate2);
 			}
 
-			// 设置文件可见类型
-			String filevisible2 = request.getParameter("pro2");
-			fileInfo2.setFileIsVisible(filevisible2);
-			if (filevisible2.equals("私有"))
-				fileInfo2.setFileCheck(MacroEnum.KFileVisibleType.privateFile.getValue());
-			if (filevisible2.equals("公有"))
-				fileInfo2.setFileCheck(MacroEnum.KFileVisibleType.publicFile.getValue());
-
-			// 设置文件url
-			String filePath = request.getParameter("filepath2"); // C:\\temp\\1479709800.doc
-			String filenameFull = ToolString.getFilenameFull(filePath);
+			// 设置文件上传时间
+			String filePath = request.getParameter("filepath1"); // C:\\temp\\1479709800.doc
+			String filenameFull = ToolString.getFilenameFull(filePath); // 1479709800.doc
 			String Filename = ToolString.getFilename(filenameFull); // 1479709800
 			fileInfo2.setFileUploadTime(Integer.valueOf(Filename));
 
+			// 设置文件url
+			String temp = ""; // 预览的相对路径
+
 			boolean flag = false;
+			// 设置文件可见类型
+			String filevisible1 = request.getParameter("pro1");
+			fileInfo2.setFileIsVisible(filevisible1);
+			if (filevisible1.equals("私有")) {
+				temp = MacroConstant.PRIVATE_DIR + Filename + "." + KFileFormatType.pdf;
+				fileInfo2.setFileUrl(temp);
+				fileInfo2.setFileCheck(KFileVisibleType.privateFile.getValue());
 
-			// TODO Auto-generated method stub
-			/*
-			 * 
-			 * 
-			 * */
-
-			if (flag) {
-				flag = fileInfoService.addFileInfo(fileInfo2);
+				flag = encapsulationUploadFile(filenameFull, fileInfo2, filePath, basePath + temp);
 			}
+			if (filevisible1.equals("公有")) {
+				temp = MacroConstant.PUBLIC_DIR + Filename + "." + KFileFormatType.pdf;
+				fileInfo2.setFileUrl(temp);
+				fileInfo2.setFileCheck(KFileVisibleType.publicFile.getValue());
+
+				flag = encapsulationUploadFile(filenameFull, fileInfo2, filePath, basePath + temp);
+			}
+
 			map.put("message2", "hahaha");
 			map.put("result2", flag);
 		}
@@ -411,30 +418,32 @@ public class FileInfoController {
 				fileInfo3.setFileCategory(filechildcate3);
 			}
 
-			// 设置文件可见类型
-			String filevisible3 = request.getParameter("pro3");
-			fileInfo3.setFileIsVisible(filevisible3);
-			if (filevisible3.equals("私有"))
-				fileInfo3.setFileCheck(MacroEnum.KFileVisibleType.privateFile.getValue());
-			if (filevisible3.equals("公有"))
-				fileInfo3.setFileCheck(MacroEnum.KFileVisibleType.publicFile.getValue());
-
-			// 设置文件地址
-			String filePath = request.getParameter("filepath3"); // C:\\temp\\1479709800.doc
-			String filenameFull = ToolString.getFilenameFull(filePath);
+			// 设置文件上传时间
+			String filePath = request.getParameter("filepath1"); // C:\\temp\\1479709800.doc
+			String filenameFull = ToolString.getFilenameFull(filePath); // 1479709800.doc
 			String Filename = ToolString.getFilename(filenameFull); // 1479709800
 			fileInfo3.setFileUploadTime(Integer.valueOf(Filename));
 
+			// 设置文件url
+			String temp = ""; // 预览的相对路径
+
 			boolean flag = false;
+			// 设置文件可见类型
+			String filevisible1 = request.getParameter("pro1");
+			fileInfo3.setFileIsVisible(filevisible1);
+			if (filevisible1.equals("私有")) {
+				temp = MacroConstant.PRIVATE_DIR + Filename + "." + KFileFormatType.pdf;
+				fileInfo3.setFileUrl(temp);
+				fileInfo3.setFileCheck(KFileVisibleType.privateFile.getValue());
 
-			// TODO Auto-generated method stub
-			/*
-			 * 
-			 * 
-			 * */
+				flag = encapsulationUploadFile(filenameFull, fileInfo3, filePath, basePath + temp);
+			}
+			if (filevisible1.equals("公有")) {
+				temp = MacroConstant.PUBLIC_DIR + Filename + "." + KFileFormatType.pdf;
+				fileInfo3.setFileUrl(temp);
+				fileInfo3.setFileCheck(KFileVisibleType.publicFile.getValue());
 
-			if (flag) {
-				flag = fileInfoService.addFileInfo(fileInfo3);
+				flag = encapsulationUploadFile(filenameFull, fileInfo3, filePath, basePath + temp);
 			}
 
 			map.put("message3", "hahaha");

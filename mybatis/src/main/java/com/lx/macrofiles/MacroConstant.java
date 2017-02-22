@@ -17,7 +17,7 @@ public interface MacroConstant {
 	public static final String ConvertorPATH = "C:\\lucene\\xpdf\\bin32\\pdftotext";
 
 	/* 相对路径 */
-	public static final String PUBLIC_DIR = "datadir\\temp\\"; // 公有预览目录，全是PDF，用于建立索引
+	public static final String PUBLIC_DIR = "datadir\\publicdir\\"; // 公有预览目录，全是PDF，用于建立索引
 	public static final String PRIVATE_DIR = "datadir\\privatedir\\"; // 私有预览目录，全是PDF，不用于建立索引
 
 	// **********工具目录常量**********
