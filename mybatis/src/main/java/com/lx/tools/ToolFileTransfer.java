@@ -13,14 +13,10 @@ public class ToolFileTransfer {
 
 	private static String toFilePath;
 
-	/**
-	 * 文件转移
-	 * 
+	/** 文件转移
 	 * @author luxiang
-	 * @param fromFilePath
-	 *            起始文件路径,例:C:\\temp\\1479709800.doc
-	 * @param toDirPath
-	 *            目的目录路径,例:D:\\temp\\ 注意:末尾一定要加\\
+	 * @param fromFilePath 起始文件路径,例:C:\\temp\\1479709800.doc
+	 * @param toDirPath 目的目录路径,例:D:\\temp\\ 注意:末尾一定要加\\
 	 * @return boolean,成功true;失败false
 	 */
 	public static boolean transfer(String fromFilePath, String toDirPath) {

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +22,9 @@ import com.lx.tools.ToolIndexTime;
 public class SystemConfigController {
 
 	private static Logger logger = Logger.getLogger(SystemConfigController.class);
+	
+	@Autowired
+	private ToolCreateDocIndex createDocIndex;
 
 	// 备份
 	@RequestMapping("/backup")
@@ -64,7 +68,7 @@ public class SystemConfigController {
 			map.put("flag", "waitforcheck");
 			return map;
 		}
-		if (ToolCreateDocIndex.init(request)) {
+		if (createDocIndex.init(request)) {
 			map.put("flag", "chenggong");
 			return map;
 		}
@@ -84,8 +88,8 @@ public class SystemConfigController {
 			map.put("flag", "waitforcheck");
 			return map;
 		}
-		if (ToolCreateDocIndex.createPDFIndex(request)) {
-			if (ToolIndexTime.setLatestIndexTime(ToolDate.getCurrentTimestamp() + "", MacroConstant.PDF_TIME)) {
+		if (createDocIndex.createPDFIndex(request)) {
+			if (ToolIndexTime.setLatestIndexTime(ToolDate.getCurrentTimestamp() + "", MacroConstant.TIME)) {
 				map.put("flag", "chenggong");
 				return map;
 			}
@@ -95,24 +99,24 @@ public class SystemConfigController {
 	}
 
 	// 创建Word索引
-	@RequestMapping("/build_word")
-	@ResponseBody
-	public Map<String, Object> build_word(HttpServletRequest request, HttpSession httpSession) {
-		logger.info("=================build_word==================");
-		Map<String, Object> map = new HashMap<>();
-
-		if ((int) httpSession.getAttribute("countWithWaitForCheck") != 0) {
-			map.put("flag", "waitforcheck");
-			return map;
-		}
-		if (ToolCreateDocIndex.createWordIndex(request)) {
-			if (ToolIndexTime.setLatestIndexTime(ToolDate.getCurrentTimestamp() + "", MacroConstant.DOC_TIME)) {
-				map.put("flag", "chenggong");
-				return map;
-			}
-		}
-		map.put("flag", "shibai");
-		return map;
-
-	}
+//	@RequestMapping("/build_word")
+//	@ResponseBody
+//	public Map<String, Object> build_word(HttpServletRequest request, HttpSession httpSession) {
+//		logger.info("=================build_word==================");
+//		Map<String, Object> map = new HashMap<>();
+//
+//		if ((int) httpSession.getAttribute("countWithWaitForCheck") != 0) {
+//			map.put("flag", "waitforcheck");
+//			return map;
+//		}
+//		if (ToolCreateDocIndex.createWordIndex(request)) {
+//			if (ToolIndexTime.setLatestIndexTime(ToolDate.getCurrentTimestamp() + "", MacroConstant.DOC_TIME)) {
+//				map.put("flag", "chenggong");
+//				return map;
+//			}
+//		}
+//		map.put("flag", "shibai");
+//		return map;
+//
+//	}
 }

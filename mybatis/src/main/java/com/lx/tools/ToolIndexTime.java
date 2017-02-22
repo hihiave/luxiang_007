@@ -16,7 +16,7 @@ public class ToolIndexTime {
 	/** 设置最新一次创建索引的时间
 	 * @author luxiang
 	 * @param latestIndexTime 最新一次创建索引的时间
-	 * @param indexTimeDir 记录时间的文件地址
+	 * @param indexTimeDir 记录时间的文件地址 "C:\\lucene\\indextime\\time.txt"
 	 * @return boolean,true表示记录成功,false表示记录失败
 	 */
 	public static boolean setLatestIndexTime(String latestIndexTime, String indexTimeDir) {

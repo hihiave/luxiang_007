@@ -1,5 +1,6 @@
 package com.lx.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lx.macrofiles.MacroConstant;
-import com.lx.macrofiles.MacroEnum;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KFileFormatType;
 import com.lx.macrofiles.MacroEnum.KFilePropertyType;
@@ -269,11 +269,11 @@ public class FileInfoController {
 			break;
 		case ppt:
 			fileInfo.setFileStatus(MacroConstant.PPT);
-			flag = copyFile(filePath, desFilePath, MacroConstant.PDF_DIR);
+			flag = copyFile(filePath, desFilePath, MacroConstant.PPT_DIR);
 			break;
 		case pptx:
 			fileInfo.setFileStatus(MacroConstant.PPTX);
-			flag = copyFile(filePath, desFilePath, MacroConstant.PDF_DIR);
+			flag = copyFile(filePath, desFilePath, MacroConstant.PPT_DIR);
 			break;
 		case xlsx:
 			fileInfo.setFileStatus(MacroConstant.XLSX);
@@ -289,9 +289,11 @@ public class FileInfoController {
 		return flag;
 	}
 
-	// C:\\temp\\1479709800.doc --> "D:\\temp\\fefefe.pdf" --> C:\\temp\\
+	// C:\\temp\\1479709800.doc --> "D:\\temp\\1479709800.pdf" --> C:\\temp\\
 	private boolean copyFile(String filePath, String desFilePath, String dirPath) {
 		if (new ToolOffice2PDF().openOfficeToPDF(filePath, desFilePath)) {
+			File file = new File(desFilePath);
+			file.setLastModified(Long.valueOf(ToolString.getFilename(file.getName())) * (long) 1000);
 			if (ToolFileTransfer.transfer(filePath, dirPath)) {
 				return true;
 			}

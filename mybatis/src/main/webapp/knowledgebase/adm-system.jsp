@@ -142,14 +142,14 @@
 						<button class="btn btn-info" data-toggle="modal" 					
 							data-target="#backup" >数据备份
 						</button>
-						<span style="display:inline;font-size:16px">&nbsp;注：备份当前时刻的数据，在数据丢失或损坏时，可以及时恢复。</span>
+						<span style="display:inline;font-size:16px">&nbsp;按钮功能：备份当前时刻的数据，在数据丢失或损坏时，可以及时恢复。</span>
 					</div>
 					
 					<div style="margin-top:10px;">
 						<button class="btn btn-info" data-toggle="modal" 
 							data-target="#restore">数据还原
 						</button>
-						<span style="display:inline;font-size:16px">&nbsp;注：在数据丢失或损坏时，将数据还原到上一备份的时刻，保证数据的安全性。</span>
+						<span style="display:inline;font-size:16px">&nbsp;按钮功能：在数据丢失或损坏时，将数据还原到上一备份的时刻，保证数据的安全性。</span>
 					</div>
 					
 					<div style="margin-top:10px;">
@@ -157,36 +157,37 @@
 								data-target="#build">初始化文档索引
 						</button>
 						<span style="display:inline;font-size:16px">&nbsp;注：创建时，请确保“资源审核”中的文件数量为0。&nbsp;
-						删除之前创建的所有索引并重新创建所有文档索引。</span>
+						按钮功能：删除之前创建的所有索引，并会重新创建当前所有文档索引。此过程较为缓慢，请耐心等待！</span>
 					</div>
 					
 					<div style="margin-top:10px;">
 						<button class="btn btn-info" data-toggle="modal" 
-							data-target="#build_pdf">创建PDF索引
+							data-target="#build_pdf">创建新文档索引
 						</button>
 						<span style="display:inline;font-size:16px">&nbsp;注：创建时，请确保“资源审核”中的文件数量为0。&nbsp;
-						创建新上传的PDF文档索引，以方便在“高级搜索”中做全文检索。此按钮为增量创建PDF索引，上一时刻被创建过的索引不会被重复创建。</span>
+						按钮功能：创建新上传的文档索引，以方便在“高级搜索”中做全文检索。
+						此按钮为增量创建文档索引，上一时刻被创建过的索引不会被重复创建。此过程较为缓慢，请耐心等待！</span>
 					</div>
 					   
-					<div style="margin-top:10px;">
+					<!-- <div style="margin-top:10px;">
 						<button class="btn btn-info" data-toggle="modal" 
 							data-target="#build_word">创建Word索引
 						</button>
 						<span style="display:inline;font-size:16px">&nbsp;注：创建时，请确保“资源审核”中的文件数量为0。&nbsp;
 						创建新上传的Word文档索引，以方便在"高级检索"中做全文检索。此按钮为增量创建Word索引，上一时刻被创建过的索引不会被重复创建。</span>
-					</div>                                     
+					</div>  -->
 				</div>
 			</div>
 			<jsp:include page="search-result.jsp" flush="true" />
 			<div style="clear: both;"></div>
 		</div>
 	</div>
-
+	
+<!-- 创建新文档索引？的提示信息 -->
 <div class="modal fade" id="build" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-build">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-
                 <h4 class="modal-title" id="myModalLabel-build">提示</h4>
             </div>
             <div class="modal-body">
@@ -200,15 +201,17 @@
             </div>
         </div>
     </div>
-</div><div class="modal fade" id="build_pdf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-build_pdf">
+</div>
+
+<!-- 是否初始化索引？的提示信息 -->
+<div class="modal fade" id="build_pdf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-build_pdf">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-
                 <h4 class="modal-title" id="myModalLabel-build_pdf">提示</h4>
             </div>
             <div class="modal-body">
-                <p>是否建立PDF索引？</p>
+                <p>是否创建新文档索引？</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -218,11 +221,13 @@
             </div>
         </div>
     </div>
-</div><div class="modal fade" id="build_word" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-build_word">
+</div>
+
+<!-- 是否建立WORD索引？的提示信息 -->
+<!-- <div class="modal fade" id="build_word" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-build_word">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-
                 <h4 class="modal-title" id="myModalLabel-build_word">提示</h4>
             </div>
             <div class="modal-body">
@@ -236,35 +241,13 @@
             </div>
         </div>
     </div>
-</div>	
+</div>	 -->
 
-	
-<div class="modal fade" id="restore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-restore">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-
-                <h4 class="modal-title" id="myModalLabel-restore">提示</h4>
-            </div>
-            <div class="modal-body">
-                <p>是否还原到上一次的备份记录？</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" id="queren" class="btn btn-primary" data-dismiss="modal"
-                        onclick="restore_ok(this)">确认
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-	
-	
+<!-- 备份的提示信息 -->
 <div class="modal fade" id="backup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-backup">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-
                 <h4 class="modal-title" id="myModalLabel-backup">提示</h4>
             </div>
             <div class="modal-body">
@@ -279,12 +262,31 @@
         </div>
     </div>
 </div>
-	
+
+<!-- 还原的提示信息 -->
+<div class="modal fade" id="restore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-restore">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel-restore">提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>是否还原到上一次的备份记录？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" id="queren" class="btn btn-primary" data-dismiss="modal"
+                        onclick="restore_ok(this)">确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-result">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-
                 <h4 class="modal-title" id="myModalLabel-result">提示信息</h4>
             </div>
             <div class="modal-body">
@@ -298,27 +300,25 @@
     </div>
 </div>	
 	
-	
-	<div class="modal fade" id="logout-modal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel-logout">
-		<div class="modal-dialog modal-sm" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-
-					<h4 class="modal-title" id="myModalLabel-logout">退出提示</h4>
-				</div>
-				<div class="modal-body">
-					<p id="logout-username"></p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary " data-dismiss="modal"
-						id="logout-dismiss">确认</button>
-				</div>
+<div class="modal fade" id="logout-modal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel-logout">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel-logout">退出提示</h4>
+			</div>
+			<div class="modal-body">
+				<p id="logout-username"></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary " data-dismiss="modal"
+					id="logout-dismiss">确认</button>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<style type="text/css">
+<style type="text/css">
 .modal {
 	margin-top: 20%;
 }

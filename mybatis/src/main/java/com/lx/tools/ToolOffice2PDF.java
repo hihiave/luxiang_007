@@ -18,7 +18,7 @@ public class ToolOffice2PDF {
 	public static void main(String[] args) {
 		ToolOffice2PDF office2pdf = new ToolOffice2PDF();
 		office2pdf.openOfficeToPDF("C:\\temp\\1487577137.doc", "D:\\temp\\fefefe.pdf");
-		//office2pdf.openOfficeToPDF("e:/test." + OFFICE_PPTX, null);
+		// office2pdf.openOfficeToPDF("e:/test." + OFFICE_PPTX, null);
 	}
 
 	// 使Office2003-2007全部格式的文档(.doc|.docx|.xls|.xlsx|.ppt|.pptx) 转化为pdf文件<br>
@@ -28,18 +28,18 @@ public class ToolOffice2PDF {
 	}
 
 	// 跨平台性
-//	public String getOfficeHome() {
-//		String osName = System.getProperty("os.name");
-//		if (Pattern.matches("Linux.*", osName)) {
-//			return "/opt/openoffice.org3";
-//		} else if (Pattern.matches("Windows.*", osName)) {
-////			return "C:/Program Files (x86)/OpenOffice.org 3";
-//			return "C:/Program Files (x86)/OpenOffice 4";
-//		} else if (Pattern.matches("Mac.*", osName)) {
-//			return "/Application/OpenOffice.org.app/Contents";
-//		}
-//		return null;
-//	}
+	// public String getOfficeHome() {
+	// String osName = System.getProperty("os.name");
+	// if (Pattern.matches("Linux.*", osName)) {
+	// return "/opt/openoffice.org3";
+	// } else if (Pattern.matches("Windows.*", osName)) {
+	//// return "C:/Program Files (x86)/OpenOffice.org 3";
+	// return "C:/Program Files (x86)/OpenOffice 4";
+	// } else if (Pattern.matches("Mac.*", osName)) {
+	// return "/Application/OpenOffice.org.app/Contents";
+	// }
+	// return null;
+	// }
 
 	// 连接OpenOffice.org 并且启动OpenOffice.org
 	public OfficeManager getOfficeManager() {
@@ -49,18 +49,6 @@ public class ToolOffice2PDF {
 		OfficeManager officeManager = config.buildOfficeManager();
 		officeManager.start();
 		return officeManager;
-	}
-
-	// 2
-	public void converterFile(File inputFile, String outputFilePath_end, String inputFilePath, String outputFilePath,
-			OfficeDocumentConverter converter) {
-		File outputFile = new File(outputFilePath_end);
-		// 假如目标路径不存在,则新建该路径
-		if (!outputFile.getParentFile().exists()) {
-			outputFile.getParentFile().mkdirs();
-		}
-		converter.convert(inputFile, outputFile);
-		System.out.println("文件：" + inputFilePath + "\n转换为\n目标文件：" + outputFile + "\n成功！");
 	}
 
 	// 1
@@ -93,6 +81,18 @@ public class ToolOffice2PDF {
 		long end_time = new Date().getTime();
 		System.out.println("文件转换耗时：[" + (end_time - begin_time) + "]ms");
 		return flag;
+	}
+
+	// 2
+	public void converterFile(File inputFile, String outputFilePath_end, String inputFilePath, String outputFilePath,
+			OfficeDocumentConverter converter) {
+		File outputFile = new File(outputFilePath_end);
+		// 假如目标路径不存在,则新建该路径
+		if (!outputFile.getParentFile().exists()) {
+			outputFile.getParentFile().mkdirs();
+		}
+		converter.convert(inputFile, outputFile);
+		System.out.println("文件：" + inputFilePath + "\n转换为\n目标文件：" + outputFile + "\n成功！");
 	}
 
 	// 获取输出文件

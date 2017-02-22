@@ -27,7 +27,7 @@ public interface FileInfoService {
 	/** 通过文件id获取文件信息
 	 * @author luxiang
 	 * @param fileId 文件id
-	 * @return FileInfo该文件的信息
+	 * @return FileInfo
 	 */
 	public FileInfo getFileByFileId(Integer fileId);
 

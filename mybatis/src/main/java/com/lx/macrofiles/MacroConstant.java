@@ -8,7 +8,7 @@ public interface MacroConstant {
 
 	public static final String PDF_DIR = "C:\\lucene\\datadir\\pdfdir\\"; // pdf目录
 	public static final String WORD_DIR = "C:\\lucene\\datadir\\worddir\\"; // word目录
-	public static final String PPT_DIR = "C:\\lucene\\datadir\\pdfdir\\"; // ppt目录
+	public static final String PPT_DIR = "C:\\lucene\\datadir\\pptdir\\"; // ppt目录
 	public static final String EXCEL_DIR = "C:\\lucene\\datadir\\exceldir\\"; // excel目录
 
 	public static final String INDEXDIR = "C:\\lucene\\luceneindex\\"; // 索引目录
@@ -44,7 +44,6 @@ public interface MacroConstant {
 	public static final int XLSX = 6; // DOC file_status = 6
 
 	// **********最新一次创建索引地址常量**********
-	public static final String DOC_TIME = "C:\\lucene\\indextime\\doctime.txt";
-	public static final String PDF_TIME = "C:\\lucene\\indextime\\pdftime.txt";
+	public static final String TIME = "C:\\lucene\\indextime\\time.txt";
 
 }

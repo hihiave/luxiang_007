@@ -138,11 +138,20 @@ public class TestFileInfo {
 	@Test
 	public void ToolIndexTimeTest() {
 		logger.info("===============ToolIndexTimeTest=============");
-		boolean d = ToolIndexTime.setLatestIndexTime(35435+"", MacroConstant.DOC_TIME);
+		boolean d = ToolIndexTime.setLatestIndexTime(35435+"", MacroConstant.TIME);
 		logger.info("===============d=============" + d);
-		
-		int q = ToolIndexTime.getLatestIndexTime(MacroConstant.DOC_TIME);
+		int q = ToolIndexTime.getLatestIndexTime(MacroConstant.TIME);
 		logger.info("===============q=============" + q);
+	}
+	
+	@Test
+	public void getFileByUploadTimeTest(){
+		logger.info("===============getFileByUploadTimeTest=============");
+		FileInfo fileInfo = fileInfoService.getFileByUploadTime(4561234);
+		
+		logger.info("====" + JSON.toJSONString(fileInfo));
+		
+		
 	}
 
 }
