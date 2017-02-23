@@ -252,7 +252,7 @@ public class FileInfoController {
 				}
 			}
 		}
-
+		
 		map.put("flag", result);
 		return map;
 	}
