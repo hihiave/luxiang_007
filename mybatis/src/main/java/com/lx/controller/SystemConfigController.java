@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lx.macrofiles.MacroConstant;
-import com.lx.tools.ToolCreateDocIndex;
+import com.lx.tools.ToolDocIndex;
 import com.lx.tools.ToolDate;
 import com.lx.tools.ToolIndexTime;
 
@@ -24,7 +24,7 @@ public class SystemConfigController {
 	private static Logger logger = Logger.getLogger(SystemConfigController.class);
 	
 	@Autowired
-	private ToolCreateDocIndex createDocIndex;
+	private ToolDocIndex createDocIndex;
 
 	// 备份
 	@RequestMapping("/backup")

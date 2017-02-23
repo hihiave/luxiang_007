@@ -26,7 +26,7 @@ import com.lx.service.FileInfoService;
 import net.paoding.analysis.analyzer.PaodingAnalyzer;
 
 @Component
-public class ToolCreateDocIndex {
+public class ToolDocIndex {
 
 	@Autowired
 	private FileInfoService fileInfoService;
