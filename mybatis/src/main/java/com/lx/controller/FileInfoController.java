@@ -23,6 +23,8 @@ import com.lx.macrofiles.MacroEnum.KFileVisibleType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.tools.Page;
+import com.lx.tools.ToolDeleteDoc;
+import com.lx.tools.ToolDocIndex;
 import com.lx.tools.ToolFileTransfer;
 import com.lx.tools.ToolOffice2PDF;
 import com.lx.tools.ToolString;
@@ -35,6 +37,8 @@ public class FileInfoController {
 
 	@Autowired
 	FileInfoService fileInfoService;
+	@Autowired
+	private ToolDocIndex docIndex;
 
 	@RequestMapping("/fy")
 	public String showFileInfo(HttpServletRequest request) {
@@ -230,25 +234,25 @@ public class FileInfoController {
 		return map;
 	}
 
-	// 用户删除文件,删除垃圾箱
+	// 用户删除文件,删除垃圾箱,待审核,未通过
 	@RequestMapping(value = "/delete_file", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> delete_file(Integer[] delete_array) {
+	public Map<String, Object> delete_file(Integer[] delete_array, HttpServletRequest request) {
 		logger.info("=================delete_file==================");
 
-		for (Integer integer : delete_array) {
-			logger.info("=================integer==================" + integer);
+		Map<String, Object> map = new HashMap<>();
+		boolean result = fileInfoService.delFilesById(delete_array);
+		if (result) {
+			List<FileInfo> fileInfos = fileInfoService.getFileByFileId(delete_array);
+			result = ToolDeleteDoc.deletePreviewFile(fileInfos, request);
+			if (result) {
+				result = ToolDeleteDoc.deleteResourceFile(fileInfos);
+				for (int i = 0; i < delete_array.length; i++) {
+					result = docIndex.deletePDFIndex(delete_array[i] + "");
+				}
+			}
 		}
 
-		// TODO
-		/* 用户删除已通过了的文件 */
-		logger.info("================用户删除已通过了的文件============");
-
-		/* 用户删除待审核的文件 */
-		logger.info("================用户删除待审核的文件============");
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		boolean result = fileInfoService.delFilesById(delete_array);
 		map.put("flag", result);
 		return map;
 	}
@@ -522,31 +526,9 @@ public class FileInfoController {
 		if (flag) {
 			List<FileInfo> fileInfos = fileInfoService.getFileByFileId(notpass_array);
 
-			String basePath = request.getSession().getServletContext().getRealPath("");
-			String filePath = "";
-
-			File file = null;
-			for (int i = 0; i < fileInfos.size(); i++) {
-				filePath = basePath + fileInfos.get(i).getFileUrl();
-				file = new File(filePath);
-				if (file.exists() && file.isFile()) {
-					flag = file.delete(); // 删除tomcat里的用来预览的PDF文件
-				}
-			}
-
-			// TODO 
-			int kkkk = 0;
-			for (int i = 0; i < fileInfos.size(); i++) {
-				switch (fileInfos.get(i).getFileStatus()) {
-				case 1:
-					
-					break;
-
-				default:
-					break;
-				}
-				
-				
+			flag = ToolDeleteDoc.deletePreviewFile(fileInfos, request);
+			if (flag) {
+				flag = ToolDeleteDoc.deleteResourceFile(fileInfos);
 			}
 		}
 
