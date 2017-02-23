@@ -138,7 +138,7 @@
 					<h3 class="panel-title">系统配置</h3>
 				</div>
 				<div class="panel-body">
-					<div >
+					<!-- <div >
 						<button class="btn btn-info" data-toggle="modal" 					
 							data-target="#backup" >数据备份
 						</button>
@@ -150,7 +150,7 @@
 							data-target="#restore">数据还原
 						</button>
 						<span style="display:inline;font-size:16px">&nbsp;按钮功能：在数据丢失或损坏时，将数据还原到上一备份的时刻，保证数据的安全性。</span>
-					</div>
+					</div> -->
 					
 					<div style="margin-top:10px;">
 						<button class="btn btn-info" data-toggle="modal" 
