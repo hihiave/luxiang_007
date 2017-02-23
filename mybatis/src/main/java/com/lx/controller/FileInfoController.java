@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.lx.macrofiles.MacroConstant;
 import com.lx.macrofiles.MacroEnum.KCheckType;
 import com.lx.macrofiles.MacroEnum.KFileFormatType;
@@ -241,18 +242,19 @@ public class FileInfoController {
 		logger.info("=================delete_file==================");
 
 		Map<String, Object> map = new HashMap<>();
-		boolean result = fileInfoService.delFilesById(delete_array);
+
+		List<FileInfo> fileInfos = fileInfoService.getFileByFileId(delete_array);
+		boolean result = ToolDeleteDoc.deletePreviewFile(fileInfos, request);
 		if (result) {
-			List<FileInfo> fileInfos = fileInfoService.getFileByFileId(delete_array);
-			result = ToolDeleteDoc.deletePreviewFile(fileInfos, request);
+			result = ToolDeleteDoc.deleteResourceFile(fileInfos);
+			for (int i = 0; i < delete_array.length; i++) {
+				result = docIndex.deletePDFIndex(delete_array[i] + "");
+			}
 			if (result) {
-				result = ToolDeleteDoc.deleteResourceFile(fileInfos);
-				for (int i = 0; i < delete_array.length; i++) {
-					result = docIndex.deletePDFIndex(delete_array[i] + "");
-				}
+				result = fileInfoService.delFilesById(delete_array);
 			}
 		}
-		
+
 		map.put("flag", result);
 		return map;
 	}
