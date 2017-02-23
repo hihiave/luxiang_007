@@ -34,7 +34,7 @@ public class FileDownloadController {
 		response.setCharacterEncoding("UTF-8");
 
 		String filePath = ""; // 下载文件的地址
-		FileInfo fileInfo = fileInfoService.getFileByFileId(Integer.parseInt(request.getParameter("fileid")));
+		FileInfo fileInfo = fileInfoService.getFileByFileId(Integer.parseInt(request.getParameter("fileid"))).get(0);
 		int fileUploadTime = fileInfo.getFileUploadTime();
 		switch (fileInfo.getFileStatus()) {
 		case MacroConstant.PDF:

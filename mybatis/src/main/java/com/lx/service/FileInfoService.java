@@ -29,7 +29,7 @@ public interface FileInfoService {
 	 * @param fileId 文件id
 	 * @return FileInfo
 	 */
-	public FileInfo getFileByFileId(Integer fileId);
+	public List<FileInfo> getFileByFileId(Integer... fileIds);
 
 	/** 通过文件id更新文件
 	 * @author luxiang

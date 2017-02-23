@@ -36,8 +36,8 @@ public class FileInfoServiceImpl implements FileInfoService {
 	}
 
 	@Override
-	public FileInfo getFileByFileId(Integer fileId) {
-		return fileInfoMapper.selectByPrimaryKey(fileId);
+	public List<FileInfo> getFileByFileId(Integer... fileIds) {
+		return fileInfoMapper.getFilesById(fileIds);
 	}
 
 	@Override

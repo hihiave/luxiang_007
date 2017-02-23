@@ -43,6 +43,12 @@
 			#{fileId}
 		</foreach>
   </delete>
+  <select id="getFilesById" resultMap="BaseResultMap">
+  	select * from File where file_id in
+  		<foreach collection="fileIds" item="fileId" index="index" open="(" close=")" separator=",">
+			#{fileId}
+		</foreach>
+  </select>
   <update id="updateFileCategory">
   	update File set file_category = #{newFileCategory}
 	where file_category = #{oldFileCategory}
@@ -73,7 +79,7 @@
   		ORDER BY file_upload_time DESC
   		limit #{page.startPos}, #{page.pageSize}
   </select>
-  
+
   <select id="selectFileByConditionCount" resultType="java.lang.Integer">
   	select count(*) from File 
   	<where>

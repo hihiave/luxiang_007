@@ -230,7 +230,7 @@ public class FileInfoController {
 		return map;
 	}
 
-	// 用户删除文件
+	// 用户删除文件,删除垃圾箱
 	@RequestMapping(value = "/delete_file", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> delete_file(Integer[] delete_array) {
@@ -239,6 +239,13 @@ public class FileInfoController {
 		for (Integer integer : delete_array) {
 			logger.info("=================integer==================" + integer);
 		}
+
+		// TODO
+		/* 用户删除已通过了的文件 */
+		logger.info("================用户删除已通过了的文件============");
+
+		/* 用户删除待审核的文件 */
+		logger.info("================用户删除待审核的文件============");
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		boolean result = fileInfoService.delFilesById(delete_array);
@@ -460,7 +467,7 @@ public class FileInfoController {
 	public Map<String, Object> down_check_file(Integer fileid) {
 		logger.info("=================down_check_file==================");
 		Map<String, Object> map = new HashMap<String, Object>();
-		FileInfo fileInfo = fileInfoService.getFileByFileId(fileid);
+		FileInfo fileInfo = fileInfoService.getFileByFileId(fileid).get(0);
 
 		int downloadCount = fileInfo.getFileDownloadCount() + 1; // 获取url
 		fileInfo.setFileDownloadCount(downloadCount);
@@ -496,7 +503,7 @@ public class FileInfoController {
 	@ResponseBody
 	public Map<String, Object> pass_file(Integer[] pass_array) {
 		logger.info("=================pass_file==================");
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 
 		boolean result = fileInfoService.batchFilesIsPass(KCheckType.pass, pass_array);
 		map.put("flag", result);
@@ -506,10 +513,44 @@ public class FileInfoController {
 	// 审核不通过
 	@RequestMapping(value = "/notpass_file", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> notpass_file(Integer[] notpass_array) {
+	public Map<String, Object> notpass_file(Integer[] notpass_array, HttpServletRequest request) {
 		logger.info("=================notpass_file==================");
 		Map<String, Object> map = new HashMap<>();
 		boolean flag = fileInfoService.batchFilesIsPass(KCheckType.notPass, notpass_array);
+
+		// 审核不通过成功
+		if (flag) {
+			List<FileInfo> fileInfos = fileInfoService.getFileByFileId(notpass_array);
+
+			String basePath = request.getSession().getServletContext().getRealPath("");
+			String filePath = "";
+
+			File file = null;
+			for (int i = 0; i < fileInfos.size(); i++) {
+				filePath = basePath + fileInfos.get(i).getFileUrl();
+				file = new File(filePath);
+				if (file.exists() && file.isFile()) {
+					flag = file.delete(); // 删除tomcat里的用来预览的PDF文件
+				}
+			}
+
+			// TODO 
+			int kkkk = 0;
+			for (int i = 0; i < fileInfos.size(); i++) {
+				switch (fileInfos.get(i).getFileStatus()) {
+				case 1:
+					
+					break;
+
+				default:
+					break;
+				}
+				
+				
+			}
+		}
+
+		// 审核不通过失败
 		map.put("flag", flag);
 		return map;
 	}
@@ -520,7 +561,7 @@ public class FileInfoController {
 	public Map<String, Object> get_file_msg(Integer fileid) {
 		logger.info("=================get_file_msg==================");
 		Map<String, Object> map = new HashMap<String, Object>();
-		FileInfo fileInfo = fileInfoService.getFileByFileId(fileid);
+		FileInfo fileInfo = fileInfoService.getFileByFileId(fileid).get(0);
 		map.put("keyWord", fileInfo.getFileKeywords());
 		map.put("fileDes", fileInfo.getFileDesc());
 		map.put("filecate", fileInfo.getFileCategory());

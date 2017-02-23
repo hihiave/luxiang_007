@@ -28,27 +28,26 @@ public class TestIndex {
 
 	@Test
 	public void ddd() throws Exception {
-		IndexWriter writer = getIndexWriter();
-		writer.deleteDocuments(new Term("fileName", "Web数据挖掘综述"));
-
-		writer.commit();
-		// Query query = new QueryParser(Version.LUCENE_44, contents, new
-		// PaodingAnalyzer()).Query("id");
-
+		 IndexWriter writer = getIndexWriter();
+		 writer.deleteDocuments(new Term("id", "430"));
+		 writer.commit();
+		 writer.close();
+		
 		IndexSearcher indexSearcher = getIndexSearcher();
 		Query query = getQuery("数据");
 		ScoreDoc[] scoreDocs = indexSearcher.search(query, 100).scoreDocs;
 
 		for (int i = 0; i < scoreDocs.length; i++) {
-			System.out.println("======" + scoreDocs[i]);
+			System.out.println("====1111111==" + scoreDocs[i]);
 		}
+		Document document = null;
+		for (int i = 0; i < scoreDocs.length; i++) {
+			document = indexSearcher.doc(scoreDocs[i].doc);
 
-		Document document = indexSearcher.doc(scoreDocs[0].doc);
-
-		System.out.println("========fff=====" + scoreDocs[0].doc);
-		System.out.println("=======id=====" + document.get("id"));
-		System.out.println("=======type=====" + document.get("type"));
-		System.out.println("=======fileName=====" + document.get("fileName"));
+			System.out.println("=======id=====" + document.get("id"));
+			System.out.println("=======type=====" + document.get("type"));
+			System.out.println("=======fileName=====" + document.get("fileName"));
+		}
 
 		// 创建
 		// Document document = new Document();

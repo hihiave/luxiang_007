@@ -11,6 +11,7 @@ import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
@@ -104,9 +105,40 @@ public class ToolCreateDocIndex {
 					}
 				}
 				flag = true;
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (writer != null) {
+						writer.close();
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return flag;
+	}
+
+	// 根据document id 删除PDF索引
+	public boolean deletePDFIndex(String id) {
+		IndexWriter writer = getIndexWriter();
+		if (writer == null)
+			return false;
+
+		boolean flag = false;
+		try {
+			writer.deleteDocuments(new Term("id", id));
+			writer.commit();
+			flag = true;
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
 				writer.close();
 			} catch (IOException e) {
 				e.printStackTrace();
+				flag = false;
 			}
 		}
 		return flag;

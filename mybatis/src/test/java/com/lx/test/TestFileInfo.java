@@ -62,7 +62,7 @@ public class TestFileInfo {
 	@Test
 	public void getFileByFileIdTest() {
 		logger.info("===============getFileByFileIdTest=============");
-		FileInfo fileInfo = fileInfoService.getFileByFileId(1);
+		FileInfo fileInfo = fileInfoService.getFileByFileId(1).get(0);
 		logger.info("=========通过文件id查询文件======" + JSON.toJSONString(fileInfo));
 	}
 
