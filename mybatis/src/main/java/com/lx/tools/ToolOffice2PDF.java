@@ -44,7 +44,7 @@ public class ToolOffice2PDF {
 	// 连接OpenOffice.org 并且启动OpenOffice.org
 	public OfficeManager getOfficeManager() {
 		DefaultOfficeManagerConfiguration config = new DefaultOfficeManagerConfiguration();
-		config.setOfficeHome(MacroConstant.officeHome);
+		config.setOfficeHome(MacroConstant.OFFICE_Home);
 		// 启动OpenOffice的服务
 		OfficeManager officeManager = config.buildOfficeManager();
 		officeManager.start();

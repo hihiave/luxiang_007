@@ -37,17 +37,17 @@ public class ToolDocIndex {
 
 		if (flag) {
 			// 删除所有索引
-			File[] files = new File(MacroConstant.INDEXDIR).listFiles();
+			File[] files = new File(MacroConstant.INDEX_DIR).listFiles();
 			for (File file : files) {
 				file.delete();
 			}
-			flag = flag && createPDFIndex(request);
+			flag = flag && createDocIndex(request);
 		}
 		return flag;
 	}
 
 	// 创建PDF索引
-	public boolean createPDFIndex(HttpServletRequest request) {
+	public boolean createDocIndex(HttpServletRequest request) {
 		boolean flag = false;
 		String basePath = request.getSession().getServletContext().getRealPath("");
 
@@ -70,34 +70,44 @@ public class ToolDocIndex {
 									.getFileByUploadTime(Integer.valueOf(ToolString.getFilename(files[i].getName())));
 
 							document = new Document();
-							document.add(new StringField("fileUrl", fileInfo.getFileUrl(), Field.Store.YES));
-							document.add(new StringField("id", fileInfo.getFileId() + "", Field.Store.YES));
-							document.add(new StringField("fileName", fileInfo.getFileName(), Field.Store.YES));
+
+							document.add(
+									new StringField(MacroConstant.DOC_ID, fileInfo.getFileId() + "", Field.Store.YES));
+							document.add(
+									new StringField(MacroConstant.DOC_NAME, fileInfo.getFileName(), Field.Store.YES));
 
 							switch (fileInfo.getFileStatus()) {
 							case MacroConstant.PDF:
-								document.add(new StringField("type", KFileFormatType.pdf.toString(), Field.Store.YES));
+								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.pdf.toString(),
+										Field.Store.YES));
 								break;
 							case MacroConstant.DOC:
-								document.add(new StringField("type", KFileFormatType.doc.toString(), Field.Store.YES));
+								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.doc.toString(),
+										Field.Store.YES));
 								break;
 							case MacroConstant.DOCX:
-								document.add(new StringField("type", KFileFormatType.docx.toString(), Field.Store.YES));
+								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.docx.toString(),
+										Field.Store.YES));
 								break;
 							case MacroConstant.PPT:
-								document.add(new StringField("type", KFileFormatType.ppt.toString(), Field.Store.YES));
+								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.ppt.toString(),
+										Field.Store.YES));
 								break;
 							case MacroConstant.PPTX:
-								document.add(new StringField("type", KFileFormatType.pptx.toString(), Field.Store.YES));
+								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.pptx.toString(),
+										Field.Store.YES));
 								break;
 							case MacroConstant.XLSX:
-								document.add(new StringField("type", KFileFormatType.xlsx.toString(), Field.Store.YES));
+								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.xlsx.toString(),
+										Field.Store.YES));
 								break;
 							default:
 								break;
 							}
 
-							document.add(new TextField("contents", contents, Field.Store.YES));
+							document.add(
+									new StringField(MacroConstant.DOC_URL, fileInfo.getFileUrl(), Field.Store.YES));
+							document.add(new TextField(MacroConstant.DOC_CONTENTS, contents, Field.Store.YES));
 							System.out.println("=========writer===========" + writer);
 							writer.addDocument(document);
 						} else {
@@ -122,14 +132,14 @@ public class ToolDocIndex {
 	}
 
 	// 根据document id 删除PDF索引
-	public boolean deletePDFIndex(String id) {
+	public boolean deleteDocIndex(int id) {
 		IndexWriter writer = getIndexWriter();
 		if (writer == null)
 			return false;
 
 		boolean flag = false;
 		try {
-			writer.deleteDocuments(new Term("id", id));
+			writer.deleteDocuments(new Term(MacroConstant.DOC_ID, id + ""));
 			writer.commit();
 			flag = true;
 		} catch (IOException e) {
@@ -148,7 +158,7 @@ public class ToolDocIndex {
 	private static IndexWriter getIndexWriter() {
 		IndexWriter writer = null;
 		try {
-			Directory directory = FSDirectory.open(new File(MacroConstant.INDEXDIR));
+			Directory directory = FSDirectory.open(new File(MacroConstant.INDEX_DIR));
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_44, new PaodingAnalyzer());
 			/* 会创建write.lock文件 */
 			writer = new IndexWriter(directory, iwc);

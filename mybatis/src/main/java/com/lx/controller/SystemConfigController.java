@@ -88,7 +88,7 @@ public class SystemConfigController {
 			map.put("flag", "waitforcheck");
 			return map;
 		}
-		if (docIndex.createPDFIndex(request)) {
+		if (docIndex.createDocIndex(request)) {
 			logger.info("===============createPDFIndex================");
 			if (ToolIndexTime.setLatestIndexTime(ToolDate.getCurrentTimestamp() + "", MacroConstant.TIME)) {
 				logger.info("===============setLatestIndexTime================");

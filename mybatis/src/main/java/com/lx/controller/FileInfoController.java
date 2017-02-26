@@ -24,7 +24,7 @@ import com.lx.macrofiles.MacroEnum.KFileVisibleType;
 import com.lx.model.FileInfo;
 import com.lx.service.FileInfoService;
 import com.lx.tools.Page;
-import com.lx.tools.ToolDeleteDoc;
+import com.lx.tools.ToolDoc;
 import com.lx.tools.ToolDocIndex;
 import com.lx.tools.ToolFileTransfer;
 import com.lx.tools.ToolOffice2PDF;
@@ -244,11 +244,11 @@ public class FileInfoController {
 		Map<String, Object> map = new HashMap<>();
 
 		List<FileInfo> fileInfos = fileInfoService.getFileByFileId(delete_array);
-		boolean result = ToolDeleteDoc.deletePreviewFile(fileInfos, request);
+		boolean result = ToolDoc.deletePreviewFile(fileInfos, request);
 		if (result) {
-			result = ToolDeleteDoc.deleteResourceFile(fileInfos);
+			result = ToolDoc.deleteResourceFile(fileInfos);
 			for (int i = 0; i < delete_array.length; i++) {
-				result = docIndex.deletePDFIndex(delete_array[i] + "");
+				result = docIndex.deleteDocIndex(delete_array[i]);
 			}
 			if (result) {
 				result = fileInfoService.delFilesById(delete_array);
@@ -528,9 +528,9 @@ public class FileInfoController {
 		if (flag) {
 			List<FileInfo> fileInfos = fileInfoService.getFileByFileId(notpass_array);
 
-			flag = ToolDeleteDoc.deletePreviewFile(fileInfos, request);
+			flag = ToolDoc.deletePreviewFile(fileInfos, request);
 			if (flag) {
-				flag = ToolDeleteDoc.deleteResourceFile(fileInfos);
+				flag = ToolDoc.deleteResourceFile(fileInfos);
 			}
 		}
 

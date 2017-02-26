@@ -9,7 +9,7 @@ import com.lx.macrofiles.MacroConstant;
 import com.lx.macrofiles.MacroEnum.KFileFormatType;
 import com.lx.model.FileInfo;
 
-public class ToolDeleteDoc {
+public class ToolDoc {
 
 	// 删除预览文件
 	public static boolean deletePreviewFile(List<FileInfo> fileInfos, HttpServletRequest request) {

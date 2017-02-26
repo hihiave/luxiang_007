@@ -36,11 +36,7 @@ import com.lx.model.DocumentEntity;
 import net.paoding.analysis.analyzer.PaodingAnalyzer;
 
 public class ToolSearchDocIndex {
-	// doc中的属性
-	private static final String type = "type"; // <id:1><type:pdf>
-	private static final String fileName = "fileName";// <fileName:一种N层体系结构下的Web挖掘应用>
-	private static final String contents = "contents"; // <contents:~>
-	private static final int keyContextNum = 2500; // 关键词文本的数量
+
 
 	// 获得索引结果
 	public static List<DocumentEntity> getSearchResult(String queryStr, String searchType, String filetype, int topNum,
@@ -55,7 +51,7 @@ public class ToolSearchDocIndex {
 		Highlighter highlighter = new Highlighter(simpleHTMLFormatter, new QueryScorer(query));
 		Highlighter highlighterTitle = new Highlighter(formatTitle, new QueryScorer(query));
 		/* 这个keyContextNum是指定关键字字符串的context的长度，你可以自己设定，因为不可能返回整篇正文内容 */
-		highlighter.setTextFragmenter(new SimpleFragmenter(keyContextNum));
+		highlighter.setTextFragmenter(new SimpleFragmenter(MacroConstant.DOC_CONTEXT_NUM));
 
 		IndexSearcher searcher = getIndexSearcher();
 
@@ -79,12 +75,12 @@ public class ToolSearchDocIndex {
 
 					// 高亮出显示文本
 					PaodingAnalyzer analyzer1 = new PaodingAnalyzer();
-					TokenStream tokenStream = analyzer1.tokenStream("contents", new StringReader(doc.get(contents)));
-					docEntity.setContents(highlighter.getBestFragment(tokenStream, doc.get(contents)));
+					TokenStream tokenStream = analyzer1.tokenStream("contents", new StringReader(doc.get(MacroConstant.DOC_CONTENTS)));
+					docEntity.setContents(highlighter.getBestFragment(tokenStream, doc.get(MacroConstant.DOC_CONTENTS)));
 
 					// 高亮出显示标题
 					PaodingAnalyzer analyzer2 = new PaodingAnalyzer();
-					filename = doc.get(fileName);
+					filename = doc.get(MacroConstant.DOC_NAME);
 					tokenStream = analyzer2.tokenStream("fileName", new StringReader(filename));
 					// 需要注意：在处理时如果文本检索结果中不包含对应的关键字返回一个null
 					formatT = highlighterTitle.getBestFragment(tokenStream, filename);
@@ -92,8 +88,7 @@ public class ToolSearchDocIndex {
 						formatT = filename;
 
 					docEntity.setFilename(formatT);
-
-					docEntity.setType(doc.get(type));
+					docEntity.setType(doc.get(MacroConstant.DOC_TYPE));
 					docEntity.setId(doc.get("id"));
 					docEntity.setFileUrl(doc.get("fileUrl"));
 
@@ -118,7 +113,7 @@ public class ToolSearchDocIndex {
 		switch (KSearchType.valueOf(searchType)) {
 		case accurate:
 			try {
-				query = new QueryParser(Version.LUCENE_44, contents, new PaodingAnalyzer()).parse(queryStr);
+				query = new QueryParser(Version.LUCENE_44, MacroConstant.DOC_CONTENTS, new PaodingAnalyzer()).parse(queryStr);
 			} catch (ParseException e) {
 				e.printStackTrace();
 				MacroEnum.ErrMessage = "获取查询错误!";
@@ -126,10 +121,10 @@ public class ToolSearchDocIndex {
 			}
 			break;
 		case fuzzy:
-			query = new FuzzyQuery(new Term(contents, queryStr));
+			query = new FuzzyQuery(new Term(MacroConstant.DOC_CONTENTS, queryStr));
 			break;
 		case prefix:
-			query = new PrefixQuery(new Term(contents, queryStr));
+			query = new PrefixQuery(new Term(MacroConstant.DOC_CONTENTS, queryStr));
 			break;
 		default:
 			break;
@@ -146,7 +141,7 @@ public class ToolSearchDocIndex {
 	// 获取索引搜索
 	private static IndexSearcher getIndexSearcher() {
 		try {
-			Directory directory = FSDirectory.open(new File(MacroConstant.INDEXDIR));
+			Directory directory = FSDirectory.open(new File(MacroConstant.INDEX_DIR));
 			DirectoryReader directoryReader = DirectoryReader.open(directory);
 			return new IndexSearcher(directoryReader);
 		} catch (IOException e) {
