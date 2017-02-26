@@ -93,25 +93,10 @@ public class ToolSearchDocIndex {
 
 					docEntity.setFilename(formatT);
 
-					String filenameExtension = doc.get(type);
-					docEntity.setType(filenameExtension);
+					docEntity.setType(doc.get(type));
 					docEntity.setId(doc.get("id"));
+					docEntity.setFileUrl(doc.get("fileUrl"));
 
-					/*
-					 * 
-					 * 
-					 * */
-//					if (filenameExtension.equalsIgnoreCase("pdf")) {
-//						docEntity.setFileUrl(MacroConstant.PDFDIR + filename + "." + filenameExtension);
-//					} else if (filenameExtension.equalsIgnoreCase("doc")) {
-//						docEntity.setFileUrl(MacroConstant.DOCDIR + filename + "." + filenameExtension);
-//					}
-
-					
-					// TODO ddddddddddddddd
-					
-					
-					
 					list.add(docEntity);
 					analyzer1.close();
 					analyzer2.close();

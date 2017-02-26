@@ -202,7 +202,11 @@ public class UserInfoController {
 	@ResponseBody
 	public Map<String, Object> user_delete(String select_username) {
 		logger.info("=================del_user==================");
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
+		if (select_username.trim().equals("admin")) {
+			map.put("flag", "noaccess");
+			return map;
+		}
 		boolean result = userInfoService.delUsersByUserName(select_username);
 		map.put("flag", result);
 		return map;

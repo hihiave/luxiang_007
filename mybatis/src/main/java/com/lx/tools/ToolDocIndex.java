@@ -70,6 +70,7 @@ public class ToolDocIndex {
 									.getFileByUploadTime(Integer.valueOf(ToolString.getFilename(files[i].getName())));
 
 							document = new Document();
+							document.add(new StringField("fileUrl", fileInfo.getFileUrl(), Field.Store.YES));
 							document.add(new StringField("id", fileInfo.getFileId() + "", Field.Store.YES));
 							document.add(new StringField("fileName", fileInfo.getFileName(), Field.Store.YES));
 
