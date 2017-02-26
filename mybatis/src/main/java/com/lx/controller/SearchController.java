@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.lx.model.DocumentEntity;
 import com.lx.tools.Page;
 import com.lx.tools.PageNumBean;
-import com.lx.tools.ToolSearchDocIndex;
+import com.lx.tools.ToolDocIndex;
 
 /**
  * 索引文档搜索
@@ -40,8 +40,8 @@ public class SearchController {
 
 		Page page = new Page(pageNow, pageSize);
 
-		List<DocumentEntity> documentEntities = ToolSearchDocIndex.getSearchResult(queryStr, searchType, filetype,
-				topNum, page);
+		List<DocumentEntity> documentEntities = ToolDocIndex.searchDocIndex(queryStr, searchType, filetype, topNum,
+				page);
 
 		// 得到总的记录数
 		int totalCount = page.getTotalCount();

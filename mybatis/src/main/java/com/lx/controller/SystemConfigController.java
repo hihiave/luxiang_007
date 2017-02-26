@@ -68,7 +68,7 @@ public class SystemConfigController {
 			map.put("flag", "waitforcheck");
 			return map;
 		}
-		if (docIndex.init(request)) {
+		if (docIndex.initDocIndex(request)) {
 			map.put("flag", "chenggong");
 			return map;
 		}

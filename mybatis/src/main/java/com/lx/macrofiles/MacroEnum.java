@@ -40,8 +40,8 @@ public class MacroEnum {
 		success, // 登录成功
 		fail, // 登录失败（用户名或密码错误）
 		checkNotPass, // 审核未通过
-		exists, // 存在
-		nonExists // 不存在
+		exist, // 存在
+		nonExist // 不存在
 	}
 
 	/**

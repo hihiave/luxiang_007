@@ -9,9 +9,9 @@ public class DocumentEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String filename;
-	private String contents;
 	private String type;
 	private String fileUrl;
+	private String contents;
 
 	// get & set
 	public String getId() {

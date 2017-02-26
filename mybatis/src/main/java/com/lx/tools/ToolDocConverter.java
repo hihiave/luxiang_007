@@ -11,22 +11,24 @@ import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeException;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
-import com.lx.macrofiles.MacroConstant;
 import com.lx.macrofiles.MacroEnum;
 
 /**
- * 文件转换器
+ * 文件转换器，没用了
  */
 public class ToolDocConverter {
 	private static File docFile;
 	private static File pdfFile;
 	private static File swfFile;
 
-	/** 转换主方法 Converter
-	 * @author luxiang
-	 * @param filePath 文件路径,例:D:/SWFTools/1479709800.doc
-	 * @return boolean,成功true;失败false
-	 */
+	// **********工具目录常量**********
+	private static final String openOfficeHome = "C:/Program Files (x86)/OpenOffice 4/program/";
+	// public static final String openOfficeHome = "C:/Program Files/OpenOffice
+	// 4/program/";
+	private static final String openOfficeHomeCmd = "soffice.exe -headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\" -nofirststartwizard";
+
+	// 转换主方法 Converter
+	// filePath 文件路径,例:D:/SWFTools/1479709800.doc
 	public static boolean converter(String filePath) {
 		String temp = filePath.substring(0, filePath.lastIndexOf("."));
 		swfFile = new File(temp + ".swf");
@@ -57,12 +59,13 @@ public class ToolDocConverter {
 
 	// docPath : "C:\\temp\\1483359477.doc"
 	// pdfDir : "D:\\temp\\"
-	public static boolean docToPdfQQQ(String docPath, String pdfDir) {
+	public static boolean docToPdf(String docPath, String pdfDir) {
 		boolean flag = false;
 		File docFile = new File(docPath);
 		File pdfFile = new File(pdfDir + ToolString.getFilename(ToolString.getFilenameFull(docPath)) + ".pdf");
 		if (docFile.exists()) {
-			//String command = MacroConstant.openOfficeHome + MacroConstant.openOfficeHomeCmd;
+			// String command = MacroConstant.openOfficeHome +
+			// MacroConstant.openOfficeHomeCmd;
 			String command = "";
 			try {
 				Process process = Runtime.getRuntime().exec(command);
@@ -85,7 +88,8 @@ public class ToolDocConverter {
 
 	private static boolean doc2pdf() {
 		boolean flag = true;
-		// String command = MacroConstant.openOfficeHome + MacroConstant.openOfficeHomeCmd;
+		// String command = MacroConstant.openOfficeHome +
+		// MacroConstant.openOfficeHomeCmd;
 		String command = "";
 		try {
 			Process process = Runtime.getRuntime().exec(command);
