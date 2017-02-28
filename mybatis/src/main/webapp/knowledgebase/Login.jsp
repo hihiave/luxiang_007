@@ -87,41 +87,7 @@
         }
     </style>
 
-    <%--<script type="text/javascript">--%>
-        <%--window.onload = function () {--%>
-            <%--var usernameobj = document.getElementById("username");--%>
-            <%--var passwordobj = document.getElementById("password");--%>
-            <%--passwordobj.onblur = checkpassword;--%>
-            <%--usernameobj.onblur = checkusername;--%>
-            <%--function checkusername() {--%>
-                <%--if (usernameobj.value.length == 0) {--%>
-                    <%--var msg = "<font color='red' size='2px'>用户名不能为空!</font>";--%>
-                <%--}--%>
-                <%--else {--%>
-                    <%--var msg = "";--%>
-                <%--}--%>
-                <%--var span = document.getElementById("spanusername");--%>
-                <%--span.innerHTML = msg;--%>
-                <%--return;--%>
-            <%--}--%>
-
-            <%--function checkpassword() {--%>
-                <%--if (passwordobj.value.length == 0) {--%>
-                    <%--var msg = "<font color='red' size='2px'>密码不能为空!</font>";--%>
-                <%--}--%>
-                <%--else if (passwordobj.value.length < 6 && passwordobj.value.length > 0) {--%>
-                    <%--var msg = "<font color='red' size='2px'>密码应大于六位数！</font>";--%>
-                <%--}--%>
-                <%--else {--%>
-                    <%--var msg = "";--%>
-                <%--}--%>
-                <%--var span = document.getElementById("spanpassword");--%>
-                <%--span.innerHTML = msg;--%>
-                <%--return;--%>
-            <%--}--%>
-
-        <%--}--%>
-    <%--</script>--%>
+  
    <script type="text/javascript">
    function keylogin(){
 	   if(event.keyCode==13){
@@ -148,7 +114,8 @@
            		 <span style="color:#FFFFFF;">密码：</span> <input type="password" name="password" id="password" placeholder="请输入密码">
                 </div>
                 <div id="spanpassword" style="height:16px"></div>
-
+				<div style="float:right"><a style="color:#ffffff;text-decoration:none;" id="forget_psw" href="#">忘记密码？</a></div>
+				<div style="clear:both;"></div>
                 <div class="button-group" style="margin-top:5px;margin-bottom:5px;">
                     <input type="button" class="btn btn-primary" id="denglu" value="登录">
                     <input type="button" class="btn btn-primary" value="注册" style="float:right;"
@@ -161,6 +128,9 @@
 <div class="footer"><span class="footerText">Copyright © 1956-2016 电子科技大学</span></div>
 <script type="text/javascript">
     $(function(){
+    	$("#forget_psw").click(function(){
+    		alert("请联系管理员，管理员邮箱***")
+    	})
         $("#denglu").click(function(){
             var username = $("#username").val();
             var password = $("#password").val();
