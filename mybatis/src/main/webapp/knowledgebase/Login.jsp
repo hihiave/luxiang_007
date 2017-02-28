@@ -113,6 +113,7 @@
                 <div class="loginform loginpassword" style="margin-top:5px;margin-bottom:5px;">
            		 <span style="color:#FFFFFF;">密码：</span> <input type="password" name="password" id="password" placeholder="请输入密码">
                 </div>
+                
                 <div id="spanpassword" style="height:16px"></div>
 				<div style="float:right"><a style="color:#ffffff;text-decoration:none;" id="forget_psw" href="#">忘记密码？</a></div>
 				<div style="clear:both;"></div>
