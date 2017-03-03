@@ -31,15 +31,16 @@ public class SystemConfigController {
 	@ResponseBody
 	public Map<String, Object> backup(HttpServletRequest request) {
 		logger.info("=================backup==================");
-		Map<String, Object> map = new HashMap<>();
-
-		if (true) {
-			map.put("flag", "chenggong");
-			return map;
-		}
-
-		map.put("flag", "shibai");
-		return map;
+//		Map<String, Object> map = new HashMap<>();
+//
+//		if (true) {
+//			map.put("flag", "chenggong");
+//			return map;
+//		}
+//
+//		map.put("flag", "shibai");
+//		return map;
+		return null;
 	}
 
 	// 还原
