@@ -34,11 +34,11 @@ public interface MacroConstant {
 	public static final String DOC_TYPE = "type"; // <id:1><type:pdf>
 	public static final String DOC_URL = "fileUrl"; // <contents:~>
 	public static final String DOC_CONTENTS = "contents"; // <contents:~>
-	public static final int DOC_CONTEXT_NUM = 2500; // 关键词文本的数量
+	public static final int DOC_CONTEXT_NUM = 5000; // 关键词文本的数量
 
 	// **********管理员ID常量**********
 	public static final int ADMIN = 1;
-	
+
 	// **********文件类别常量**********
 	public static final String level0_category = "1482422400"; // 0级类别,用来索引1级类别
 

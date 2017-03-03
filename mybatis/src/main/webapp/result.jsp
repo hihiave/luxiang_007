@@ -72,7 +72,7 @@
 	<c:forEach items="${documentEntities}" var="DocumentEntity">
 		<table cellspacing="10" cellpadding="0" border="0" width="100%">
 		<tr>
-			<td class="f EC_PP">
+			<td class="f EC_PP"> <!-- class="f EC_PP" -->
 			<a href="${DocumentEntity.fileUrl}" target=_blank>${DocumentEntity.filename} </a>
 			<BR>${DocumentEntity.contents}<BR>
 			</td>

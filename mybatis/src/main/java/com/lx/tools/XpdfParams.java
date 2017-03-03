@@ -66,7 +66,7 @@ public class XpdfParams {
 	}
 
 	public String getCommand() {
-		return convertor + " " + encoding + " " + source + " " + target;
+		return convertor + " " + layout + " " + encoding + " " + source + " " + target;
 	}
 
 }

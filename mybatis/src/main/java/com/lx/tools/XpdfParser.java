@@ -38,6 +38,7 @@ public class XpdfParser {
 		// xparam.setLayout("-layout");
 		xparam.setConvertor(MacroConstant.ConvertorPATH);
 		xparam.setEncoding("-enc UTF-8");
+		xparam.setLayout("-layout");// 保持原来的格式
 		xparam.setSource(filePath);
 		xparam.setTarget(MacroConstant.TEMP + "temp.txt");
 		String command = xparam.getCommand();
@@ -61,10 +62,9 @@ public class XpdfParser {
 					new InputStreamReader(new FileInputStream(txtCanonicalPath), "UTF-8"));
 			line = reader.readLine();
 			while (line != null) {
-				if (line.length() > 0) {
-					stringBuffer.append(line.trim());
-					// strBuffer.append("\n");
-				}
+				stringBuffer.append(line).append("\r\n");
+//				if (line.length() > 0) {}
+				
 				line = reader.readLine();
 			}
 			reader.close();

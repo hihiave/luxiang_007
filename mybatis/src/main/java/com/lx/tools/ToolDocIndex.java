@@ -226,10 +226,10 @@ public class ToolDocIndex {
 
 					// 高亮出显示文本
 					PaodingAnalyzer analyzer1 = new PaodingAnalyzer();
-					TokenStream tokenStream = analyzer1.tokenStream("contents",
-							new StringReader(doc.get(MacroConstant.DOC_CONTENTS)));
-					docEntity
-							.setContents(highlighter.getBestFragment(tokenStream, doc.get(MacroConstant.DOC_CONTENTS)));
+					TokenStream tokenStream = analyzer1.tokenStream("contents", new StringReader(
+							doc.get(MacroConstant.DOC_CONTENTS).replace("\r\n", "<br>").replace(" ", "&nbsp;")));
+					docEntity.setContents(highlighter.getBestFragment(tokenStream,
+							doc.get(MacroConstant.DOC_CONTENTS).replace("\r\n", "<br>").replace(" ", "&nbsp;")));
 
 					// 高亮出显示标题
 					PaodingAnalyzer analyzer2 = new PaodingAnalyzer();

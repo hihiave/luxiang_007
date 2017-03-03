@@ -31,7 +31,7 @@
 					<select name="searchType">
 							<option value="accurate" selected="selected">精确
 							<option value="fuzzy">模糊
-							<option value="Prefix">前缀
+							<option value="prefix">前缀
 					</select>
 					<input type="text" name="queryStr" size="42" maxlength="100" />
 					<input type="button" value="搜索" onclick="check()" />
