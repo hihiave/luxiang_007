@@ -67,7 +67,8 @@ public class MacroEnum {
 	 * 支持上传的文件格式
 	 */
 	public enum KFileFormatType {
-		doc, docx, ppt, pptx, xlsx, pdf
+		doc, docx, ppt, pptx, xlsx, pdf,
+		wps, dps, et
 	}
 
 	/**

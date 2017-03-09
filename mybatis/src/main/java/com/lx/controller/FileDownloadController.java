@@ -55,6 +55,15 @@ public class FileDownloadController {
 		case MacroConstant.XLSX:
 			filePath = MacroConstant.EXCEL_DIR + fileUploadTime + "." + KFileFormatType.xlsx;
 			break;
+		case MacroConstant.WPS:
+			filePath = MacroConstant.WPS_DIR + fileUploadTime + "." + KFileFormatType.wps;
+			break;
+		case MacroConstant.DPS:
+			filePath = MacroConstant.WPS_DIR + fileUploadTime + "." + KFileFormatType.dps;
+			break;
+		case MacroConstant.ET:
+			filePath = MacroConstant.WPS_DIR + fileUploadTime + "." + KFileFormatType.et;
+			break;
 		default:
 			break;
 		}

@@ -10,6 +10,7 @@ public interface MacroConstant {
 	public static final String WORD_DIR = "C:\\lucene\\datadir\\worddir\\"; // word目录
 	public static final String PPT_DIR = "C:\\lucene\\datadir\\pptdir\\"; // ppt目录
 	public static final String EXCEL_DIR = "C:\\lucene\\datadir\\exceldir\\"; // excel目录
+	public static final String WPS_DIR = "C:\\lucene\\datadir\\wpsdir\\"; // wps目录
 
 	public static final String INDEX_DIR = "C:\\lucene\\luceneindex\\"; // 索引目录
 
@@ -27,6 +28,9 @@ public interface MacroConstant {
 	public static final int PPT = 4; // DOC file_status = 4
 	public static final int PPTX = 5; // DOC file_status = 5
 	public static final int XLSX = 6; // DOC file_status = 6
+	public static final int WPS = 7; // DOC file_status = 7
+	public static final int DPS = 8; // DOC file_status = 8
+	public static final int ET = 9; // DOC file_status = 9
 
 	// **********Document中的field域**********
 	public static final String DOC_ID = "id";

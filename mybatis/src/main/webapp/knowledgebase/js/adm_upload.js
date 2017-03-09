@@ -119,7 +119,8 @@ function changeFile(obj) {
 	var realname_arr = filename.split('.');
 	var file_last = realname_arr[realname_arr.length - 1];
 	if (file_last != "pdf" && file_last != "doc" && file_last != "docx"
-			&& file_last != "xlsx" && file_last != "ppt" && file_last != "pptx") {
+			&& file_last != "xlsx" && file_last != "ppt" && file_last != "pptx"
+			&& file_last != "wps" && file_last != "dps" && file_last != "et") {
 		alert("不支持选中的文件格式！");
 		$(obj).val("");
 		return;

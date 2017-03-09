@@ -292,6 +292,18 @@ public class FileInfoController {
 			fileInfo.setFileStatus(MacroConstant.XLSX);
 			flag = copyFile(filePath, desFilePath, MacroConstant.EXCEL_DIR);
 			break;
+		case wps:
+			fileInfo.setFileStatus(MacroConstant.WPS);
+			flag = copyFile(filePath, desFilePath, MacroConstant.WPS_DIR);
+			break;
+		case dps:
+			fileInfo.setFileStatus(MacroConstant.DPS);
+			flag = copyFile(filePath, desFilePath, MacroConstant.WPS_DIR);
+			break;
+		case et:
+			fileInfo.setFileStatus(MacroConstant.ET);
+			flag = copyFile(filePath, desFilePath, MacroConstant.WPS_DIR);
+			break;
 		default:
 			break;
 		}
