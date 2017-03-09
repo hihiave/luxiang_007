@@ -84,7 +84,7 @@ public class ToolDocIndex {
 			try {
 				for (int i = 0; i < files.length; i++) {
 					if (files[i].lastModified() / 1000 > latestIndexTime) {
-						System.out.println("==========jiu========================");
+						System.out.println("==========jiu===================");
 						contents = XpdfParser.getPDFFileContents(files[i].getCanonicalPath());
 						if (contents != null) {
 
@@ -103,21 +103,21 @@ public class ToolDocIndex {
 								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.pdf.toString(),
 										Field.Store.YES));
 								break;
-								
+
 							case MacroConstant.DOC:
 							case MacroConstant.DOCX:
 							case MacroConstant.WPS:
 								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.doc.toString(),
 										Field.Store.YES));
 								break;
-								
+
 							case MacroConstant.PPT:
 							case MacroConstant.PPTX:
 							case MacroConstant.DPS:
 								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.ppt.toString(),
 										Field.Store.YES));
 								break;
-								
+
 							case MacroConstant.XLSX:
 							case MacroConstant.ET:
 								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.xlsx.toString(),
