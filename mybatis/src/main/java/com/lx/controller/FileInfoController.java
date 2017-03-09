@@ -398,7 +398,7 @@ public class FileInfoController {
 			}
 
 			// 设置文件上传时间
-			String filePath = request.getParameter("filepath1"); // C:\\temp\\1479709800.doc
+			String filePath = request.getParameter("filepath2"); // C:\\temp\\1479709800.doc
 			String filenameFull = ToolString.getFilenameFull(filePath); // 1479709800.doc
 			String Filename = ToolString.getFilename(filenameFull); // 1479709800
 			fileInfo2.setFileUploadTime(Integer.valueOf(Filename));
@@ -408,7 +408,7 @@ public class FileInfoController {
 
 			boolean flag = false;
 			// 设置文件可见类型
-			String filevisible1 = request.getParameter("pro1");
+			String filevisible1 = request.getParameter("pro2");
 			fileInfo2.setFileIsVisible(filevisible1);
 			if (filevisible1.equals("私有")) {
 				temp = MacroConstant.PRIVATE_DIR + Filename + "." + KFileFormatType.pdf;
@@ -446,7 +446,7 @@ public class FileInfoController {
 			}
 
 			// 设置文件上传时间
-			String filePath = request.getParameter("filepath1"); // C:\\temp\\1479709800.doc
+			String filePath = request.getParameter("filepath3"); // C:\\temp\\1479709800.doc
 			String filenameFull = ToolString.getFilenameFull(filePath); // 1479709800.doc
 			String Filename = ToolString.getFilename(filenameFull); // 1479709800
 			fileInfo3.setFileUploadTime(Integer.valueOf(Filename));
@@ -456,7 +456,7 @@ public class FileInfoController {
 
 			boolean flag = false;
 			// 设置文件可见类型
-			String filevisible1 = request.getParameter("pro1");
+			String filevisible1 = request.getParameter("pro3");
 			fileInfo3.setFileIsVisible(filevisible1);
 			if (filevisible1.equals("私有")) {
 				temp = MacroConstant.PRIVATE_DIR + Filename + "." + KFileFormatType.pdf;

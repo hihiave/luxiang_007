@@ -61,24 +61,25 @@
 	<TABLE class=bi cellSpacing=0 cellPadding=0 width="100%" align=center
 		border=0>
 		<TBODY>
-			<TR>
-				<TD noWrap align="left">&nbsp;&nbsp;搜到相关文档约
-					&nbsp;${totalCount}&nbsp;篇&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-			</TR>
+			<tr>
+				<td noWrap align="left" style="font-size: small;">&nbsp;&nbsp;搜到相关文档约
+					&nbsp;${totalCount}&nbsp;篇&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			</tr>
 		</TBODY>
 	</TABLE>
 	<!--开始填充检索到的文档documentEntities -->
 	<BR>
 	<c:forEach items="${documentEntities}" var="DocumentEntity">
-		<table cellspacing="10" cellpadding="0" border="0" width="100%">
+		<table cellspacing="0" cellpadding="0" border="0" width="100%">
 		<tr>
-			<td class="f EC_PP"> <!-- class="f EC_PP" -->
-			<a href="${DocumentEntity.fileUrl}" target=_blank>${DocumentEntity.filename} </a>
-			<BR>${DocumentEntity.contents}<BR>
+			<td class="f EC_PP">
+			<a href="${DocumentEntity.fileUrl}" target=_blank >${DocumentEntity.filename} </a>
+			<br>${DocumentEntity.contents}
 			</td>
 		</tr>
 			<!-- <TBODY></TBODY> -->
 		</table>
+		<hr width="100%" size="0.1">
 	</c:forEach>
 	<BR>
 	<c:choose>
