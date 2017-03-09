@@ -103,22 +103,22 @@ public class ToolDocIndex {
 								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.pdf.toString(),
 										Field.Store.YES));
 								break;
+								
 							case MacroConstant.DOC:
+							case MacroConstant.DOCX:
+							case MacroConstant.WPS:
 								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.doc.toString(),
 										Field.Store.YES));
 								break;
-							case MacroConstant.DOCX:
-								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.docx.toString(),
-										Field.Store.YES));
-								break;
+								
 							case MacroConstant.PPT:
+							case MacroConstant.PPTX:
+							case MacroConstant.DPS:
 								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.ppt.toString(),
 										Field.Store.YES));
 								break;
-							case MacroConstant.PPTX:
-								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.pptx.toString(),
-										Field.Store.YES));
-								break;
+								
+								
 							case MacroConstant.XLSX:
 								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.xlsx.toString(),
 										Field.Store.YES));
