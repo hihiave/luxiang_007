@@ -130,7 +130,18 @@
 <script type="text/javascript">
     $(function(){
     	$("#forget_psw").click(function(){
-    		alert("请联系管理员，管理员邮箱***")
+    		$.ajax(
+    	            {
+    	                type:'post',
+    	                url:"/mybatis/UserInfoController/get_admin_email.do",
+    	                dataType:'json',
+    	                success:function(data){
+    	                	var email=data["email"];
+    	                	alert("请联系管理员，管理员邮箱"+email);
+    	                }
+    	            }
+    	        )
+    		
     	})
         $("#denglu").click(function(){
             var username = $("#username").val();

@@ -60,7 +60,18 @@ public class UserInfoController {
 			return map;
 		}
 	}
-
+	//获取管理员邮箱
+	@RequestMapping(value = "/get_admin_email", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> get_admin_email(HttpSession httpSession) {
+		logger.info("=================logout==================");
+		Map<String, Object> map = new HashMap<String, Object>();
+		UserInfo admin=userInfoService.selectUserByUserName("admin");
+		String email=admin.getUserEmail();
+		map.put("email", email);
+		return map;
+	}
+	
 	// 登出
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	@ResponseBody
