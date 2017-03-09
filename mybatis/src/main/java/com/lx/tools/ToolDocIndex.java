@@ -118,8 +118,8 @@ public class ToolDocIndex {
 										Field.Store.YES));
 								break;
 								
-								
 							case MacroConstant.XLSX:
+							case MacroConstant.ET:
 								document.add(new StringField(MacroConstant.DOC_TYPE, KFileFormatType.xlsx.toString(),
 										Field.Store.YES));
 								break;

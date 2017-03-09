@@ -71,7 +71,7 @@
 							<option value="pdf">PDF文档
 							<option value="doc">Word文档
 							<option value="ppt">PPT文档
-							<option value="xls">Excel文档
+							<option value="xlsx">Excel文档
 					</select>
 					</td>
 				</tr>
