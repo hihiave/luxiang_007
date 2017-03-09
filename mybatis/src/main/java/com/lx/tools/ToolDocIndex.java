@@ -84,7 +84,7 @@ public class ToolDocIndex {
 			try {
 				for (int i = 0; i < files.length; i++) {
 					if (files[i].lastModified() / 1000 > latestIndexTime) {
-						System.out.println("==========jiu==================");
+						System.out.println("==========jiu===============");
 						contents = XpdfParser.getPDFFileContents(files[i].getCanonicalPath());
 						if (contents != null) {
 
