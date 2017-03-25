@@ -5,6 +5,7 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>lu xiang</display-name>
 	<context-param>
+
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:lx/applicationContext.xml</param-value>
 	</context-param>
