@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mp.dao.ImageInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.mp.model.ImageInfo" >
+    <id column="image_id" property="imageId" jdbcType="INTEGER" />
+    <result column="image_kakou" property="imageKakou" jdbcType="VARCHAR" />
+    <result column="image_date" property="imageDate" jdbcType="VARCHAR" />
+    <result column="image_disc" property="imageDisc" jdbcType="VARCHAR" />
+    <result column="image_status" property="imageStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    image_id, image_kakou, image_date, image_disc, image_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Image
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Image
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mp.model.ImageInfo" >
+    insert into Image (image_id, image_kakou, image_date, 
+      image_disc, image_status)
+    values (#{imageId,jdbcType=INTEGER}, #{imageKakou,jdbcType=VARCHAR}, #{imageDate,jdbcType=VARCHAR}, 
+      #{imageDisc,jdbcType=VARCHAR}, #{imageStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mp.model.ImageInfo" >
+    insert into Image
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="imageId != null" >
+        image_id,
+      </if>
+      <if test="imageKakou != null" >
+        image_kakou,
+      </if>
+      <if test="imageDate != null" >
+        image_date,
+      </if>
+      <if test="imageDisc != null" >
+        image_disc,
+      </if>
+      <if test="imageStatus != null" >
+        image_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="imageId != null" >
+        #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="imageKakou != null" >
+        #{imageKakou,jdbcType=VARCHAR},
+      </if>
+      <if test="imageDate != null" >
+        #{imageDate,jdbcType=VARCHAR},
+      </if>
+      <if test="imageDisc != null" >
+        #{imageDisc,jdbcType=VARCHAR},
+      </if>
+      <if test="imageStatus != null" >
+        #{imageStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mp.model.ImageInfo" >
+    update Image
+    <set >
+      <if test="imageKakou != null" >
+        image_kakou = #{imageKakou,jdbcType=VARCHAR},
+      </if>
+      <if test="imageDate != null" >
+        image_date = #{imageDate,jdbcType=VARCHAR},
+      </if>
+      <if test="imageDisc != null" >
+        image_disc = #{imageDisc,jdbcType=VARCHAR},
+      </if>
+      <if test="imageStatus != null" >
+        image_status = #{imageStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mp.model.ImageInfo" >
+    update Image
+    set image_kakou = #{imageKakou,jdbcType=VARCHAR},
+      image_date = #{imageDate,jdbcType=VARCHAR},
+      image_disc = #{imageDisc,jdbcType=VARCHAR},
+      image_status = #{imageStatus,jdbcType=INTEGER}
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </update>
+    <!--查找分页显示-->
+    <select id="findAllImageInfoPerPage" resultMap="BaseResultMap">
+        SELECT * FROM Image
+        ORDER BY image_id DESC
+        limit #{begin},#{size}
+    </select>
+    <select id="findAllImageInfoNum" resultType="java.lang.Integer">
+        SELECT count(*) FROM Image
+        order by image_id DESC
+    </select>
+    <!--查找状态为1的记录-->
+    <select id="findAvailableRecord" resultMap="BaseResultMap">
+        SELECT *
+        FROM Image
+        WHERE image_status = 1
+        ORDER BY image_id DESC
+        limit #{begin},#{size}
+    </select>
+    <select id="findAvailableRecordNum" resultType="java.lang.Integer">
+        SELECT count(*) FROM Image
+        WHERE image_status = 1
+        order by image_id DESC
+    </select>
+</mapper>
