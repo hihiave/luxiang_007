@@ -2,7 +2,7 @@
  * Created by 95 on 2016/11/3.
  */
 $(function() {
-	get_category_select();
+//	get_category_select();
 	
 	/*
 	 * get_file_points(); $("#file_search_input").oninput(function(){ var
@@ -67,8 +67,8 @@ function myfunction() {
  * ("#file_search_input").autocomplete() }
  */
 function get_child_category_selected(){
-	var category=document.getElementById("category_select");
-	var obj=document.getElementById('second_category');
+	var category=document.getElementById("cate_select_checked");
+	var obj=document.getElementById('second_cate_checked');
 	obj.options.length=0;
 	var userid=1;
 	$.ajax({
@@ -83,13 +83,13 @@ function get_child_category_selected(){
 			var category=data["category"];
 			if(category.length==0){
 				var op="<option value=''>请选择</option>";
-				$("#second_category").append(op);
+				$("#second_cate_checked").append(op);
 			}else{
 			for(var i=0 ; i < category.length ;i++){
 				 var op = "<option value='"
 					+ category[i].categoryName + "'>"
 					+ category[i].categoryName + "</option>";
-			$("#second_category").append(op);
+			$("#second_cate_checked").append(op);
 			}
 			}
 /*			if($("#category_select").val()=="专利"){
@@ -126,29 +126,29 @@ function get_child_category_selected(){
 }
 
 
-function get_category_select() {
-	//var userid=document.getElementById("userid");
-	var userid=1;
-	$.ajax({
-		type : 'post',
-		url : "/mybatis/CategoryController/get_category.do",
-		data:{"userid":userid},
-		dataType : "json",
-		success : function(data) {
-			// var _select = $("#category_select>option");
-			// _select.remove();
-			var all_select_category = data["category"];
-			// console.log(all_select_category.length);
-			for (var i = 0; i < all_select_category.length; i++) {
-				var op = "<option value='"
-						+ all_select_category[i].categoryName + "'>"
-						+ all_select_category[i].categoryName + "</option>";
-				$("#category_select").append(op);
-				// console.log(all_select_category[i].categoryName);
-			}
-		}
-	})
-}
+//function get_category_select() {
+//	//var userid=document.getElementById("userid");
+//	var userid=1;
+//	$.ajax({
+//		type : 'post',
+//		url : "/mybatis/CategoryController/get_category.do",
+//		data:{"userid":userid},
+//		dataType : "json",
+//		success : function(data) {
+//			// var _select = $("#category_select>option");
+//			// _select.remove();
+//			var all_select_category = data["category"];
+//			// console.log(all_select_category.length);
+//			for (var i = 0; i < all_select_category.length; i++) {
+//				var op = "<option value='"
+//						+ all_select_category[i].categoryName + "'>"
+//						+ all_select_category[i].categoryName + "</option>";
+//				$("#category_select").append(op);
+//				// console.log(all_select_category[i].categoryName);
+//			}
+//		}
+//	})
+//}
 
 function send_search_info() {
 	var _category = $.trim($("#category_select").val());
@@ -179,7 +179,7 @@ function get_all_search_file_table(data) {
 		var tr_end = "</tr>";
 		var td_0 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAllfile' " +
 				" value="+all_pub_file[i].fileId+"></td>";
-		var td_1 = "<td style='padding-top:15px;'><a href='../"+all_pub_file[i].fileUrl+"' >"
+		var td_1 = "<td style='padding-top:15px;' id="+all_pub_file[i].fileId+"><a href='../"+all_pub_file[i].fileUrl+"' target='_blank' >"
 				+ all_pub_file[i].fileName
 				+ "</a></td>";
 		var td_2 = "<td style='padding-top:15px;text-align:center'>"+ all_pub_file[i].fileAuthor + "</td>";
@@ -192,9 +192,11 @@ function get_all_search_file_table(data) {
 		var td_5="<td style='padding-top:15px;text-align:center'>"+ all_pub_file[i].fileKeywords + "</td>";
 		var td_6 = "<td style='padding-top:15px;text-align:center'>"
 				+ all_pub_file[i].fileDownloadCount + "</td>"
+		var td_7 = "<td style='text-align:center;'><button class='button button-action" +
+        		" button-rounded button-small changefilemsg' onclick='alterFileInfo(this)'>修改信息</button></td>";
 		var userid = document.getElementById("userid").value;
 		if (userid==1){
-			var content = tr_begin + td_0 + td_1 + td_5 + td_2 + td_3 + td_4 + td_6 + tr_end;
+			var content = tr_begin + td_0 + td_1 + td_5 + td_2 + td_3 + td_7 + td_4 + td_6 + tr_end;
 		}else{
 			var content = tr_begin + td_1 + td_5 + td_2 + td_3 + td_4 + td_6 + tr_end;
 		}
@@ -271,5 +273,92 @@ function delete_selected_pubfile(){
         }
     });
     deleteFile(delete_array);
+}
+function alterFileInfo(obj){
+	//var filename = $(obj).parent().siblings()[1].innerHTML;
+	$(obj).attr({"data-toggle":"modal","data-target":"#alterfileinfo"});
+	var filename = $($(obj).parent().siblings()[1]).attr("id");
+	 $("#fileid_checked").removeClass();
+	 $("#fileid_checked").addClass(filename);
+	//alert(filename);
+	var cate_select=document.getElementById("cate_select_checked");
+	cate_select.options.length=0;
+	var op="<option value=''>请选择</option>";
+	$("#cate_select_checked").append(op);
+	var userid=1;
+	$.ajax({
+		type : 'post',
+		url : "/mybatis/CategoryController/get_category.do",
+		data:{"userid":userid},
+		dataType : "json",
+		success : function(data) {
+			// var _select = $("#category_select>option");
+			// _select.remove();
+			var all_select_category = data["category"];
+			// console.log(all_select_category.length);
+			for (var i = 0; i < all_select_category.length; i++) {
+				var op = "<option value='"
+						+ all_select_category[i].categoryName + "'>"
+						+ all_select_category[i].categoryName + "</option>";
+				$("#cate_select_checked").append(op);
+				// console.log(all_select_category[i].categoryName);
+			}
+		}
+	})
+	
+		$.ajax({
+		type: 'post',
+		url : "/mybatis/FileInfoController/get_file_msg.do",
+		data:{"fileid":filename},
+		dataType : "json",
+		success : function(data){	
+			var keyword=data["keyWord"]+"";
+			var filedes=data["fileDes"]+"";
+			var filecate=data["filecate"];
+			if(filecate=="")
+				document.getElementById("usercate_checked").placeholder="用户没有对文件分类";
+			else
+				document.getElementById("usercate_checked").value=filecate;
+			document.getElementById("fileword_checked").value=keyword;
+			document.getElementById("filearea_checked").value=filedes;
+	
+			}
+	})
+}
+
+
+function updateFileChecked(obj){
+	var filecate;
+	//var fileid = $($(".changefilemsg").parent().siblings()[1]).attr("id");
+	var fileid = $("#fileid_checked").attr("class");
+	//alert(fileid);
+	var cate=$("#cate_select_checked").val();
+	var second_cate=$("#second_cate_checked").val();
+	var usercate=$("#usercate_checked").val();
+	var keyword=$("#fileword_checked").val();
+	var filedesc=$("#filearea_checked").val();
+	if((cate=="")&&(second_cate==""))
+		filecate=usercate;
+	else if((cate!="")&&(second_cate!=""))
+		filecate=second_cate;
+	else
+		filecate=cate;
+	$.ajax({
+		type: 'post',
+		url : "/mybatis/FileInfoController/alter_file_msg.do",
+		data:{"fileid":fileid,"filecate":filecate,
+			"keyword":keyword,"filedesc":filedesc},
+		dataType : "json",
+		success : function(data){	
+		     var result = data["flag"];
+             if(result){
+             	$("#result_msg_checked").html("修改信息成功!");
+                 $("#result_checked").modal('show');
+             }else{
+             	$("#result_msg_checked").html("修改信息失败!");
+                 $("#result_checked").modal('show');
+             }
+			}
+		})
 }
 

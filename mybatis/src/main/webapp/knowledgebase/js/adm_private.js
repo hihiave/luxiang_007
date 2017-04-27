@@ -23,7 +23,7 @@ function get_all_private_file_table(data) {
 		var td_1 = "<td style='padding-top:15px;'><input type='checkbox' name='checkAll' value="
 				+ all_pri_file[i].fileId + "></td>"
 		var td_2 = "<td style='padding-top:15px;' id=" + all_pri_file[i].fileId
-				+ "><a href='../" + all_pri_file[i].fileUrl + "' >"
+				+ "><a href='../" + all_pri_file[i].fileUrl + "' target='_blank' >"
 				+ all_pri_file[i].fileName + "</a></td>";
 		var td_3 = "<td style='padding-top:15px;text-align:center'>"
 				+ all_pri_file[i].fileIsVisible + "</td>";

@@ -18,7 +18,7 @@ function get_all_public_file_table(data){
         var tr_begin = "<tr>";
         var tr_end = "</tr>";
        // var td_1 = "<td style='padding-top:15px;'><a href='##' onclick='ReadOnLine(this)' path='"+all_pub_file[i].fileUrl+"'>"+all_pub_file[i].fileName+"</a></td>";
-        var td_1 = "<td style='padding-top:15px;'><a href='../"+all_pub_file[i].fileUrl+"' >"+all_pub_file[i].fileName+"</a></td>";
+        var td_1 = "<td style='padding-top:15px;'><a href='../"+all_pub_file[i].fileUrl+"' target='_blank' >"+all_pub_file[i].fileName+"</a></td>";
         var td_2 = "<td style='padding-top:15px;text-align:center'>"+all_pub_file[i].fileAuthor+"</td>";
         var td_3 = "<td style='padding-top:15px;text-align:center'>"+timeStampFormatDay(all_pub_file[i].fileUploadTime*1000)+"</td>";
         var td_4 = "<td style='text-align:center'><button class='button button-primary button-rounded button-small' did='public' bid='"+all_pub_file[i].fileId+"'  onclick='download(this)' path='"+all_pub_file[i].fileUrl+"'>下载</button></td>";

@@ -22,7 +22,7 @@ function get_my_download_table(obj){
         var tr_begin = "<tr>";
         var tr_end = "</tr>";
         var td_0 = "<td><input type='checkbox' name='checkAll' value="+all_download_file[i].myDownloadId+"></td>";
-        var td_1 = "<td><a href='../"+all_download_file[i].fileUrl+"' >"+all_download_file[i].fileName+"</a></td>";
+        var td_1 = "<td><a href='../"+all_download_file[i].fileUrl+"' target='_blank'>"+all_download_file[i].fileName+"</a></td>";
         var td_2 = "<td style='text-align:center;'>"+all_download_file[i].fileAuthor+"</td>";
         var td_3 = "<td style='text-align:center;'>"+timeStampFormatDay(all_download_file[i].myDownloadTime*1000)+"</td>";
         var content = tr_begin  + td_0 + td_1 + td_2 + td_3 + tr_end;
