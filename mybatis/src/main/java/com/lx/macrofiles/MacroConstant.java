@@ -33,13 +33,15 @@ public interface MacroConstant {
 	public static final int ET = 9; // DOC file_status = 9
 
 	// **********Document中的field域**********
-	public static final String DOC_ID = "id";
+	public static final String DOC_ID = "id"; // <id:~>
 	public static final String DOC_NAME = "fileName";// <fileName:一种N层体系结构下的Web挖掘应用>
 	public static final String DOC_TYPE = "type"; // <id:1><type:pdf>
-	public static final String DOC_URL = "fileUrl"; // <contents:~>
+	public static final String DOC_URL = "fileUrl"; // <url:~>
+	public static final String DOC_KEYWORDS = "fileKeywords"; // <fileKeywords:~>
+	public static final String DOC_DESC = "fileDesc"; // <fileCategory:~>
 	public static final String DOC_CONTENTS = "contents"; // <contents:~>
 	public static final int DOC_CONTEXT_NUM = 5000; // 关键词文本的数量
-
+	
 	// **********管理员ID常量**********
 	public static final int ADMIN = 1;
 
@@ -51,6 +53,6 @@ public interface MacroConstant {
 
 	// **********工具目录常量**********
 	public static final String OFFICE_Home = "C:/Program Files (x86)/OpenOffice 4";
-	// public static final String officeHome = "C:/Program Files/OpenOffice 4";
+	// public static final String OFFICE_Home = "C:/Program Files/OpenOffice 4";
 
 }

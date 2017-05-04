@@ -11,7 +11,13 @@ public class DocumentEntity implements Serializable {
 	private String filename;
 	private String type;
 	private String fileUrl;
+	private String fileKeywords;
+	private String fileDesc;
 	private String contents;
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	// get & set
 	public String getId() {
@@ -30,14 +36,6 @@ public class DocumentEntity implements Serializable {
 		this.filename = filename;
 	}
 
-	public String getContents() {
-		return contents;
-	}
-
-	public void setContents(String contents) {
-		this.contents = contents;
-	}
-
 	public String getType() {
 		return type;
 	}
@@ -54,8 +52,28 @@ public class DocumentEntity implements Serializable {
 		this.fileUrl = fileUrl;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getFileKeywords() {
+		return fileKeywords;
+	}
+
+	public void setFileKeywords(String fileKeywords) {
+		this.fileKeywords = fileKeywords;
+	}
+
+	public String getFileDesc() {
+		return fileDesc;
+	}
+
+	public void setFileDesc(String fileDesc) {
+		this.fileDesc = fileDesc;
+	}
+
+	public String getContents() {
+		return contents;
+	}
+
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 
 }

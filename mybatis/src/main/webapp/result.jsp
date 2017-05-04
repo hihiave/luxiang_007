@@ -74,7 +74,8 @@
 		<tr>
 			<td class="f EC_PP">
 			<a href="${DocumentEntity.fileUrl}" target=_blank >${DocumentEntity.filename} </a>
-			<br>${DocumentEntity.contents}
+			<br>关键词 ：${DocumentEntity.fileKeywords}
+			<br>摘要：${DocumentEntity.fileDesc}
 			</td>
 		</tr>
 			<!-- <TBODY></TBODY> -->

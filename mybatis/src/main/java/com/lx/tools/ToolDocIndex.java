@@ -129,6 +129,10 @@ public class ToolDocIndex {
 
 							document.add(
 									new StringField(MacroConstant.DOC_URL, fileInfo.getFileUrl(), Field.Store.YES));
+							document.add(
+									new StringField(MacroConstant.DOC_KEYWORDS, fileInfo.getFileKeywords(), Field.Store.YES));
+							document.add(
+									new StringField(MacroConstant.DOC_DESC, fileInfo.getFileDesc(), Field.Store.YES));
 							document.add(new TextField(MacroConstant.DOC_CONTENTS, contents, Field.Store.YES));
 							writer.addDocument(document);
 						} else {
@@ -244,6 +248,8 @@ public class ToolDocIndex {
 					docEntity.setId(doc.get(MacroConstant.DOC_ID));
 					docEntity.setType(doc.get(MacroConstant.DOC_TYPE));
 					docEntity.setFileUrl(doc.get(MacroConstant.DOC_URL));
+					docEntity.setFileKeywords(doc.get(MacroConstant.DOC_KEYWORDS));
+					docEntity.setFileDesc(doc.get(MacroConstant.DOC_DESC));
 
 					list.add(docEntity);
 					analyzer1.close();
