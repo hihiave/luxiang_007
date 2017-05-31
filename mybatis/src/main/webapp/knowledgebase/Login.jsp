@@ -99,7 +99,8 @@
 <body onkeydown="keylogin();">
 <div class="login">
     <div class="login-top">
-        <img src="img/zhishiku_2.png">
+    	<br/>
+        <img src="img/3.png" width="260px">
     </div>
     <div class="login-mid">
 
