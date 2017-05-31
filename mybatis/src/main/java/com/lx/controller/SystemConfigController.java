@@ -75,7 +75,6 @@ public class SystemConfigController {
 		}
 		map.put("flag", "shibai");
 		return map;
-
 	}
 
 	// 创建PDF索引
