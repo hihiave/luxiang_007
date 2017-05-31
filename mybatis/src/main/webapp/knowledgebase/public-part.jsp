@@ -59,7 +59,7 @@
 	</div>
 	<div class="col-xs-10" style="margin-top: 0.74%;padding:0 1% 0 1.94%;">
 		<div style="float: left; margin-right: 0px;">
-			<select class="form-control" onchange="get_child_category_selected(this)" id="category_select"
+			<select class="form-control" onchange="get_child_category_selected_public(this)" id="category_select"
 				style="width: 95px;padding:6px;">
 				<option value='类别'>类别</option>
 			</select>
